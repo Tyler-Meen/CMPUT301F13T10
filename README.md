@@ -6,5 +6,4 @@ This is a android app that will be used to both edit and read choose your own ad
 
 
 Project Code Standard:
-	Format:
-		All code submited to this project should be formated using the eclipse format file ECE301ProjectFormat.xml that can also be found in this depot.
+	https://github.com/Tyler-Meen/CMPUT301F13T10/wiki/Coding-Standard
