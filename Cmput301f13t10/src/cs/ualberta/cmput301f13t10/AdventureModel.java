@@ -8,8 +8,9 @@ public class AdventureModel {
 	private ArrayList<SectionModel> mSections;
 	private SectionModel mStartSection;
 
-	public AdventureModel() {
-		mStartSection = new SectionModel();
+	public AdventureModel(String title) {
+		mTitle = title;
+		mStartSection = new SectionModel(AppConstants.START);
 	}
 	
 	public void setTitle(String title) {

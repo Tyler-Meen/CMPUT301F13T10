@@ -41,9 +41,9 @@ public class SearcherTest {
 	public void setUp() throws Exception {
 		mAdventures = new ArrayList<AdventureModel>();
 		
-		mFullMatch = new AdventureModel();
-		mPartMatch = new AdventureModel();
-		mNoMatch = new AdventureModel();
+		mFullMatch = new AdventureModel("FullMatch");
+		mPartMatch = new AdventureModel("PartMatch");
+		mNoMatch = new AdventureModel("NoMatch");
 		
 		mFullMatch.setTitle("bcd");
 		mPartMatch.setTitle("abcdef");
