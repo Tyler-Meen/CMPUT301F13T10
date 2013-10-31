@@ -38,19 +38,19 @@ public class Searcher {
 	 *            adventures to query. Valid inputs are mTITLE.
 	 * @return A list of Adventures that meet the search criteria.
 	 */
-	public static ArrayList<Adventure> searchBy(List<Adventure> adventures,
+	public static ArrayList<AdventureModel> searchBy(List<AdventureModel> adventures,
 			String query, String searchType) throws InvalidSearchTypeException {
 
-		ArrayList<Adventure> returnAdventures = new ArrayList<Adventure>();
+		ArrayList<AdventureModel> returnAdventures = new ArrayList<AdventureModel>();
 
 		if (searchType != sTITLE)
 			throw new InvalidSearchTypeException(searchType
 					+ " is not a valid searchType for searchBy()");
 
-		for (ListIterator<Adventure> i = adventures.listIterator(); i.hasNext();) {
+		for (ListIterator<AdventureModel> i = adventures.listIterator(); i.hasNext();) {
 
 			String value = "";
-			Adventure currentAdventure = i.next();
+			AdventureModel currentAdventure = i.next();
 			if (searchType == sTITLE)
 				value = currentAdventure.getTitle();
 			if (value.toLowerCase(Locale.CANADA).contains(query.toLowerCase()))
