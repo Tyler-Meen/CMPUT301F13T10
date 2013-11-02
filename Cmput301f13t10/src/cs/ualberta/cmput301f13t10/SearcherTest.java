@@ -21,8 +21,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SearcherTest {
-	
+public class SearcherTest
+{
+
 	private ArrayList<Adventure> mAdventures;
 	private Adventure mFullMatch;
 	private Adventure mPartMatch;
@@ -30,62 +31,73 @@ public class SearcherTest {
 	private List<Adventure> mResults;
 	private Exception mThrown;
 
-	public SearcherTest() {
+	public SearcherTest()
+	{
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		mAdventures = new ArrayList<Adventure>();
-		
+
 		mFullMatch = new Adventure();
 		mPartMatch = new Adventure();
 		mNoMatch = new Adventure();
-		
-		mFullMatch.setTitle("bcd");
-		mPartMatch.setTitle("abcdef");
-		mNoMatch.setTitle("cd");
-		
-		mAdventures.add(mFullMatch);
-		mAdventures.add(mPartMatch);
-		mAdventures.add(mNoMatch);
+
+		mFullMatch.setTitle( "bcd" );
+		mPartMatch.setTitle( "abcdef" );
+		mNoMatch.setTitle( "cd" );
+
+		mAdventures.add( mFullMatch );
+		mAdventures.add( mPartMatch );
+		mAdventures.add( mNoMatch );
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 	}
 
 	/**
-	 * testSearchByTitle
-	 * Can the searcher return a list of adventures matching a title pattern?
+	 * testSearchByTitle Can the searcher return a list of adventures matching a
+	 * title pattern?
 	 */
 	@Test
-	public void testSearchByTitle() {
-		
-		try{
-			mResults = Searcher.searchBy(mAdventures, "bcd", Searcher.sTITLE);
-		} catch (InvalidSearchTypeException e) {
+	public void testSearchByTitle()
+	{
+
+		try
+		{
+			mResults = Searcher.searchBy( mAdventures, "bcd", Searcher.sTITLE );
+		}
+		catch( InvalidSearchTypeException e )
+		{
 			mThrown = e;
 		}
-		
-		org.junit.Assert.assertNull(mThrown);
-		assertEquals(mResults.size(), 2);
-		assertTrue(mResults.contains(mFullMatch));
-		assertTrue(mResults.contains(mPartMatch));
-		assertFalse(mResults.contains(mNoMatch));
+
+		org.junit.Assert.assertNull( mThrown );
+		assertEquals( mResults.size(), 2 );
+		assertTrue( mResults.contains( mFullMatch ) );
+		assertTrue( mResults.contains( mPartMatch ) );
+		assertFalse( mResults.contains( mNoMatch ) );
 	}
-	
+
 	/**
-	 * testBadSearchType
-	 * Can the searcher give a valid error if the search type does not exist?
+	 * testBadSearchType Can the searcher give a valid error if the search type
+	 * does not exist?
 	 */
 	@Test
-	public void testBadSearchType() {
-		try{
-			mResults = Searcher.searchBy(mAdventures, "bcd", "invalid");
-		} catch (InvalidSearchTypeException e) {
+	public void testBadSearchType()
+	{
+		try
+		{
+			mResults = Searcher.searchBy( mAdventures, "bcd", "invalid" );
+		}
+		catch( InvalidSearchTypeException e )
+		{
 			mThrown = e;
 		}
-		org.junit.Assert.assertNotNull(mThrown);
+		org.junit.Assert.assertNotNull( mThrown );
 	}
 
 }

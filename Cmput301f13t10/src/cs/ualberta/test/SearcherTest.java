@@ -25,8 +25,9 @@ import cs.ualberta.cmput301f13t10.AdventureModel;
 import cs.ualberta.cmput301f13t10.InvalidSearchTypeException;
 import cs.ualberta.cmput301f13t10.Searcher;
 
-public class SearcherTest {
-	
+public class SearcherTest
+{
+
 	private ArrayList<AdventureModel> mAdventures;
 	private AdventureModel mFullMatch;
 	private AdventureModel mPartMatch;
@@ -34,62 +35,73 @@ public class SearcherTest {
 	private List<AdventureModel> mResults;
 	private Exception mThrown;
 
-	public SearcherTest() {
+	public SearcherTest()
+	{
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		mAdventures = new ArrayList<AdventureModel>();
-		
-		mFullMatch = new AdventureModel("FullMatch");
-		mPartMatch = new AdventureModel("PartMatch");
-		mNoMatch = new AdventureModel("NoMatch");
-		
-		mFullMatch.setTitle("bcd");
-		mPartMatch.setTitle("abcdef");
-		mNoMatch.setTitle("cd");
-		
-		mAdventures.add(mFullMatch);
-		mAdventures.add(mPartMatch);
-		mAdventures.add(mNoMatch);
+
+		mFullMatch = new AdventureModel( "FullMatch" );
+		mPartMatch = new AdventureModel( "PartMatch" );
+		mNoMatch = new AdventureModel( "NoMatch" );
+
+		mFullMatch.setTitle( "bcd" );
+		mPartMatch.setTitle( "abcdef" );
+		mNoMatch.setTitle( "cd" );
+
+		mAdventures.add( mFullMatch );
+		mAdventures.add( mPartMatch );
+		mAdventures.add( mNoMatch );
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 	}
 
 	/**
-	 * testSearchByTitle
-	 * Can the searcher return a list of adventures matching a title pattern?
+	 * testSearchByTitle Can the searcher return a list of adventures matching a
+	 * title pattern?
 	 */
 	@Test
-	public void testSearchByTitle() {
-		
-		try{
-			mResults = Searcher.searchBy(mAdventures, "bcd", Searcher.sTITLE);
-		} catch (InvalidSearchTypeException e) {
+	public void testSearchByTitle()
+	{
+
+		try
+		{
+			mResults = Searcher.searchBy( mAdventures, "bcd", Searcher.sTITLE );
+		}
+		catch( InvalidSearchTypeException e )
+		{
 			mThrown = e;
 		}
-		
-		org.junit.Assert.assertNull(mThrown);
-		assertEquals(mResults.size(), 2);
-		assertTrue(mResults.contains(mFullMatch));
-		assertTrue(mResults.contains(mPartMatch));
-		assertFalse(mResults.contains(mNoMatch));
+
+		org.junit.Assert.assertNull( mThrown );
+		assertEquals( mResults.size(), 2 );
+		assertTrue( mResults.contains( mFullMatch ) );
+		assertTrue( mResults.contains( mPartMatch ) );
+		assertFalse( mResults.contains( mNoMatch ) );
 	}
-	
+
 	/**
-	 * testBadSearchType
-	 * Can the searcher give a valid error if the search type does not exist?
+	 * testBadSearchType Can the searcher give a valid error if the search type
+	 * does not exist?
 	 */
 	@Test
-	public void testBadSearchType() {
-		try{
-			mResults = Searcher.searchBy(mAdventures, "bcd", "invalid");
-		} catch (InvalidSearchTypeException e) {
+	public void testBadSearchType()
+	{
+		try
+		{
+			mResults = Searcher.searchBy( mAdventures, "bcd", "invalid" );
+		}
+		catch( InvalidSearchTypeException e )
+		{
 			mThrown = e;
 		}
-		org.junit.Assert.assertNotNull(mThrown);
+		org.junit.Assert.assertNotNull( mThrown );
 	}
 
 }

@@ -11,30 +11,35 @@ import org.junit.Test;
 import cs.ualberta.cmput301f13t10.AdventurePresenter;
 import cs.ualberta.cmput301f13t10.SectionModel;
 
-public class AdventurePresenterTest {
-	
+public class AdventurePresenterTest
+{
+
 	MockMVPView mMvp;
 	AdventurePresenter mPresenter;
 	SectionModel mSection;
 
-	public AdventurePresenterTest() {
+	public AdventurePresenterTest()
+	{
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		mMvp = new MockMVPView();
-		mPresenter = new AdventurePresenter(mMvp);
-		
-		mPresenter.setCurrentSection(mSection);
+		mPresenter = new AdventurePresenter( mMvp );
+
+		mPresenter.setCurrentSection( mSection );
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 	}
-	
+
 	@Test
-	public void testGetCurrentSectionView() {
-		
+	public void testGetCurrentSectionView()
+	{
+
 	}
 
 }

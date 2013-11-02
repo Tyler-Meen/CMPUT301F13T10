@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 
-public class Searcher {
+public class Searcher
+{
 
 	/**
 	 * {@value TITLE}
@@ -38,23 +39,23 @@ public class Searcher {
 	 *            adventures to query. Valid inputs are mTITLE.
 	 * @return A list of Adventures that meet the search criteria.
 	 */
-	public static ArrayList<AdventureModel> searchBy(List<AdventureModel> adventures,
-			String query, String searchType) throws InvalidSearchTypeException {
+	public static ArrayList<AdventureModel> searchBy( List<AdventureModel> adventures, String query, String searchType ) throws InvalidSearchTypeException
+	{
 
 		ArrayList<AdventureModel> returnAdventures = new ArrayList<AdventureModel>();
 
-		if (searchType != sTITLE)
-			throw new InvalidSearchTypeException(searchType
-					+ " is not a valid searchType for searchBy()");
+		if( searchType != sTITLE )
+			throw new InvalidSearchTypeException( searchType + " is not a valid searchType for searchBy()" );
 
-		for (ListIterator<AdventureModel> i = adventures.listIterator(); i.hasNext();) {
+		for( ListIterator<AdventureModel> i = adventures.listIterator(); i.hasNext(); )
+		{
 
 			String value = "";
 			AdventureModel currentAdventure = i.next();
-			if (searchType == sTITLE)
+			if( searchType == sTITLE )
 				value = currentAdventure.getTitle();
-			if (value.toLowerCase(Locale.CANADA).contains(query.toLowerCase()))
-				returnAdventures.add(currentAdventure);
+			if( value.toLowerCase( Locale.CANADA ).contains( query.toLowerCase() ) )
+				returnAdventures.add( currentAdventure );
 		}
 
 		return returnAdventures;

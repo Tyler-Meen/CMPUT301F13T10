@@ -1,18 +1,22 @@
 package cs.ualberta.cmput301f13t10;
 
-public class Adventure {
+public class Adventure
+{
 
 	private String mTitle;
 
-	public Adventure() {
-		
+	public Adventure()
+	{
+
 	}
-	
-	public void setTitle(String title) {
+
+	public void setTitle( String title )
+	{
 		mTitle = title;
 	}
 
-	public String getTitle() {
+	public String getTitle()
+	{
 		return mTitle;
 	}
 

@@ -4,12 +4,13 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
-public class ContinueDialogFragment extends DialogFragment {
-	
+public class ContinueDialogFragment extends DialogFragment
+{
 
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return null; //temporary
+	public Dialog onCreateDialog( Bundle savedInstanceState )
+	{
+		return null; // temporary
 	}
 
 }
