@@ -73,7 +73,7 @@ public class SectionModelTest
 
 		try
 		{
-			mSection.move( 1, 1 );
+			mSection.moveMedia( 1, 1 );
 		}
 		catch( IndexOutOfBoundsException e )
 		{
@@ -97,7 +97,7 @@ public class SectionModelTest
 
 		try
 		{
-			mSection.move( 1, -1 );
+			mSection.moveMedia( 1, -1 );
 		}
 		catch( IndexOutOfBoundsException e )
 		{
@@ -121,7 +121,7 @@ public class SectionModelTest
 
 		try
 		{
-			mSection.move( 1, 2 );
+			mSection.moveMedia( 1, 2 );
 		}
 		catch( IndexOutOfBoundsException e )
 		{
@@ -145,7 +145,7 @@ public class SectionModelTest
 
 		try
 		{
-			mSection.move( 1, -2 );
+			mSection.moveMedia( 1, -2 );
 		}
 		catch( IndexOutOfBoundsException e )
 		{
@@ -169,7 +169,7 @@ public class SectionModelTest
 
 		try
 		{
-			mSection.move( 1, 0 );
+			mSection.moveMedia( 1, 0 );
 		}
 		catch( IndexOutOfBoundsException e )
 		{
