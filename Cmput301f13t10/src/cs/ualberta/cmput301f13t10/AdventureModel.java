@@ -38,6 +38,7 @@ public class AdventureModel implements Serializable
 	{
 		mTitle = title;
 		mStartSection = new SectionModel( AppConstants.START, true );
+		mSections = new ArrayList<SectionModel>();
 	}
 
 	/**
@@ -91,6 +92,14 @@ public class AdventureModel implements Serializable
 	public void setSections( ArrayList<SectionModel> sections )
 	{
 		mSections = sections;
+	}
+	
+	/**
+	 * Add a section to the current list of sections
+	 * @param section The section to add
+	 */
+	public void addSection(SectionModel section) {
+		mSections.add( section);
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * View that allows the user to read and navigate an adventure.
@@ -13,7 +14,7 @@ import android.view.View;
  */
 public class AdventureReadView extends AdventureView
 {
-
+	
 	/**
 	 * Handler for the continue button of the view. Displays a dialog box which
 	 * gives the user options as to how to continue with the story.

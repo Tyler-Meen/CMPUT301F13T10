@@ -19,7 +19,7 @@ public class AdventurePresenter implements Presenter
 	/**
 	 * The view that created the presenter
 	 */
-	private Activity mView;
+	private AdventureView mView;
 	/**
 	 * The current section that the reader is viewing
 	 */
@@ -35,7 +35,7 @@ public class AdventurePresenter implements Presenter
 	 * @param view
 	 *            The view that created this presenter
 	 */
-	public AdventurePresenter( Activity view )
+	public AdventurePresenter( AdventureView view )
 	{
 		mView = view;
 	}
@@ -49,6 +49,7 @@ public class AdventurePresenter implements Presenter
 	public void setCurrentSection( SectionModel section )
 	{
 		mCurrentSection = section;
+		mView.updateAdventureSection();
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class AdventurePresenter implements Presenter
 	 */
 	public void setCurrentSectionId( int sectionId )
 	{
-		mCurrentSection = mCurrentSection.getChoices().get( sectionId );
+		setCurrentSection( mCurrentSection.getChoices().get( sectionId ) );
 	}
 
 	/**

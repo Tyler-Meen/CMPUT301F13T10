@@ -136,6 +136,14 @@ public class SectionModel implements Serializable
 	{
 		mChoices = choices;
 	}
+	
+	/**
+	 * Set add a new choice for this section
+	 * @param choice The new choice to add
+	 */
+	public void addChoice(SectionModel choice) {
+		mChoices.add(choice);
+	}
 
 	/**
 	 * Get a list of choices that the section connects to.

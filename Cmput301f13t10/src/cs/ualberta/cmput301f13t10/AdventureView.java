@@ -5,8 +5,8 @@ import java.io.Serializable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 /**
  * View that displays adventures to the user.
@@ -28,6 +28,9 @@ public abstract class AdventureView extends Activity implements Serializable
 
 		mPresenter = new AdventurePresenter( this );
 
+		setContentView( R.layout.read_view );
+		
+
 		try
 		{
 			Intent intent = getIntent();
@@ -40,20 +43,31 @@ public abstract class AdventureView extends Activity implements Serializable
 			Logger.log( "Invalid AdventureReadView instantiation bundle", e );
 			return;
 		}
-
-		setContentView( R.layout.read_view );
-		updateAdventureSection();
+		
+		//updateAdventureSection();
 
 	}
 
 	/**
 	 * Reset the media displayed in the scrollable view by replacing it with
-	 * that stored in the current section of the presenter
+	 * that stored in the current section of the presenter. Also change the
+	 * button at the bottom of the screen to a "return to main menu button" if
+	 * there are no more choices.
 	 */
 	public void updateAdventureSection()
 	{
-		ScrollView scrollBox = (ScrollView) findViewById( R.id.read_items );
+		Button continueButton = (Button) findViewById(R.id.continue_button);
+		
+		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
 		mPresenter.setCurrentSectionView( scrollBox );
+		if( mPresenter.getChoices().isEmpty() )
+		{
+			continueButton.setText( "Main Menu" );
+		}
+		else
+		{
+			continueButton.setText( "Continue" );
+		}
 	}
 
 	/**
