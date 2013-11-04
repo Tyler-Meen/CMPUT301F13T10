@@ -12,7 +12,7 @@ import android.widget.Button;
  * @author Brendan Cowan
  * 
  */
-public class AdventureReadView extends AdventureView
+public class SectionReadView extends SectionView
 {
 	
 	/**

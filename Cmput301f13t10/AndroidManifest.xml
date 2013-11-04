@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cs.ualberta.cmput301f13t10.AdventureReadView"
+            android:name="cs.ualberta.cmput301f13t10.SectionReadView"
             android:label="@string/app_name"
             android:parentActivityName="cs.ualberta.cmput301f13t10.MainActivity" >
             <meta-data

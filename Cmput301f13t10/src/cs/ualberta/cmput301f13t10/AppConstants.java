@@ -12,4 +12,5 @@ public class AppConstants
 	public static final String START = "Start";
 	public static final String ADVENTURE_READ_VIEW = "adventure_read_view";
 	public static final String CURRENT_ADVENTURE = "current_adventure";
+	public static final float PAGE_TURN_VELOCITY = 1;
 }

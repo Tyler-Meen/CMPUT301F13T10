@@ -13,13 +13,13 @@ import android.widget.TextView;
  * @author Brendan Cowan
  * 
  */
-public class AdventurePresenter implements Presenter
+public class SectionPresenter implements Presenter
 {
 
 	/**
 	 * The view that created the presenter
 	 */
-	private AdventureView mView;
+	private SectionView mView;
 	/**
 	 * The current section that the reader is viewing
 	 */
@@ -35,7 +35,7 @@ public class AdventurePresenter implements Presenter
 	 * @param view
 	 *            The view that created this presenter
 	 */
-	public AdventurePresenter( AdventureView view )
+	public SectionPresenter( SectionView view )
 	{
 		mView = view;
 	}

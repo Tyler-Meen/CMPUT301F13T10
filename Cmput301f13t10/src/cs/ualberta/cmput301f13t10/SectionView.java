@@ -14,19 +14,19 @@ import android.widget.LinearLayout;
  * @author Brendan Cowan
  * 
  */
-public abstract class AdventureView extends Activity implements Serializable
+public abstract class SectionView extends Activity implements Serializable
 {
 	/**
 	 * The presenter for the view (as per MVP)
 	 */
-	AdventurePresenter mPresenter;
+	SectionPresenter mPresenter;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
 
-		mPresenter = new AdventurePresenter( this );
+		mPresenter = new SectionPresenter( this );
 
 		setContentView( R.layout.read_view );
 		
