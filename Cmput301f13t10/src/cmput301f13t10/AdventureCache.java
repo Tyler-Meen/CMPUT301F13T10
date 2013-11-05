@@ -3,6 +3,11 @@ package cmput301f13t10;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A storage of adventures. Whoever is writing this class should make this better.
+ * @author 
+ *
+ */
 public class AdventureCache
 {
 

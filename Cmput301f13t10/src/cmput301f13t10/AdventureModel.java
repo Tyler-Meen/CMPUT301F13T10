@@ -85,9 +85,16 @@ public class AdventureModel implements Serializable
 		mSections = sections;
 	}
 
+	/**
+	 * Set one section in the adventure. If the section does not exist, it is
+	 * added to the end. Otherwise, the section is overwritten.
+	 * 
+	 * @param section
+	 *            The section to write
+	 */
 	public void setSection( SectionModel section )
 	{
-		int index = idexOf( section );
+		int index = indexOf( section );
 		if( index == -1 )
 		{
 			mSections.set( index, section );
@@ -99,7 +106,16 @@ public class AdventureModel implements Serializable
 
 	}
 
-	public int idexOf( SectionModel section )
+	/**
+	 * Find the index of a section in the adventure, as determined by the
+	 * section's id.
+	 * 
+	 * @param section
+	 *            The section to find.
+	 * @return The index of the section, if it exists in the adventure. -1 if it
+	 *         does not.
+	 */
+	public int indexOf( SectionModel section )
 	{
 		int i = 0;
 		int id = section.getId();
@@ -124,6 +140,7 @@ public class AdventureModel implements Serializable
 	}
 
 	/**
+	 * Get the section that the adventure will start on
 	 * 
 	 * @return The start section of the adventure
 	 */
