@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="cs.ualberta.cmput301f13t10.MainActivity"
+            android:name="cmput301f13t10.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cs.ualberta.cmput301f13t10.SectionReadView"
+            android:name="cmput301f13t10.SectionReadView"
             android:label="@string/app_name"
-            android:parentActivityName="cs.ualberta.cmput301f13t10.MainActivity" >
+            android:parentActivityName="cmput301f13t10.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs.ualberta.cmput301f13t10.AdventureReadView" />
