@@ -60,7 +60,7 @@ public class SectionPresenter implements Presenter
 	 */
 	public void setCurrentSectionId( int sectionId )
 	{
-		setCurrentSection( mCurrentSection.GetChoiceSection( sectionId ) );
+		setCurrentSection( mCurrentSection.getChoiceSection( sectionId ) );
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class SectionPresenter implements Presenter
 	 */
 	public void setCurrentAdventure( int adventure )
 	{
-		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );;
+		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );
 		setCurrentSection( mCurrentAdventure.getStartSection() );
 	}
 

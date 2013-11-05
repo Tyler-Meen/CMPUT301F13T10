@@ -28,7 +28,9 @@ public class TextMedia implements Media
 
 	/**
 	 * Constructor
-	 * @param id The id of the media
+	 * 
+	 * @param id
+	 *            The id of the media
 	 */
 	public TextMedia()
 	{
@@ -37,7 +39,9 @@ public class TextMedia implements Media
 
 	/**
 	 * Set the text to be displayed for the media
-	 * @param text The text to be displayed
+	 * 
+	 * @param text
+	 *            The text to be displayed
 	 */
 	public void setText( String text )
 	{

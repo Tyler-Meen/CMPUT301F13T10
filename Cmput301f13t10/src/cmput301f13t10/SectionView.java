@@ -30,7 +30,6 @@ public abstract class SectionView extends Activity implements Serializable
 		mPresenter = new SectionPresenter( this );
 
 		setContentView( R.layout.section_read_view );
-		
 
 		try
 		{
@@ -44,8 +43,6 @@ public abstract class SectionView extends Activity implements Serializable
 			Logger.log( "Invalid AdventureReadView instantiation bundle", e );
 			return;
 		}
-		
-		//updateAdventureSection();
 
 	}
 
@@ -57,11 +54,11 @@ public abstract class SectionView extends Activity implements Serializable
 	 */
 	public void updateAdventureSection()
 	{
-		Button continueButton = (Button) findViewById(R.id.continue_button);
-		
+		Button continueButton = (Button) findViewById( R.id.continue_button );
+
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
 		mPresenter.setCurrentSectionView( scrollBox );
-		//TODO: change to mPpresenter.IsMainMenu or something
+		// TODO: change to mPpresenter.IsMainMenu or something
 		if( mPresenter.getChoices().isEmpty() )
 		{
 			continueButton.setText( "Main Menu" );

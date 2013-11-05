@@ -29,7 +29,7 @@ public class SectionModelTest
 	@Before
 	public void setUp() throws Exception
 	{
-		mSection = new SectionModel( "test");
+		mSection = new SectionModel( "test" );
 
 		mMedia1 = new MockMedia();
 		mMedia2 = new MockMedia();
@@ -38,7 +38,7 @@ public class SectionModelTest
 		mSection.add( mMedia1 );
 		mSection.add( mMedia2 );
 		mSection.add( mMedia3 );
-		
+
 		mMedia1Id = mMedia1.getId();
 		mMedia2Id = mMedia2.getId();
 		mMedia3Id = mMedia3.getId();

@@ -63,12 +63,14 @@ public class AdventureModel implements Serializable
 	{
 		return mTitle;
 	}
-	
+
 	/**
 	 * Get the id of the adventure
+	 * 
 	 * @return The id of the adventure
 	 */
-	public int getId() {
+	public int getId()
+	{
 		return mId;
 	}
 
@@ -83,6 +85,33 @@ public class AdventureModel implements Serializable
 		mSections = sections;
 	}
 
+	public void setSection( SectionModel section )
+	{
+		int index = idexOf( section );
+		if( index == -1 )
+		{
+			mSections.set( index, section );
+		}
+		else
+		{
+			mSections.add( section );
+		}
+
+	}
+
+	public int idexOf( SectionModel section )
+	{
+		int i = 0;
+		int id = section.getId();
+		for( SectionModel checkSection : mSections )
+		{
+			if( checkSection.getId() == id )
+				return i;
+			i++;
+		}
+		return -1;
+	}
+
 	/**
 	 * Add a section to the current list of sections
 	 * 
@@ -93,7 +122,7 @@ public class AdventureModel implements Serializable
 	{
 		mSections.add( section );
 	}
-	
+
 	/**
 	 * 
 	 * @return The start section of the adventure

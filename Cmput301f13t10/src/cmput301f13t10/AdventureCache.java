@@ -8,22 +8,26 @@ public class AdventureCache
 
 	private static AdventureCache ac = null;
 	private Map<Integer, AdventureModel> adventures;
-	
-	protected AdventureCache() {
+
+	protected AdventureCache()
+	{
 		adventures = new HashMap<Integer, AdventureModel>();
 	}
-	
-	public static AdventureCache getAdventureCache() {
-		if (ac == null)
+
+	public static AdventureCache getAdventureCache()
+	{
+		if( ac == null )
 			ac = new AdventureCache();
 		return ac;
 	}
-	
-	public void addAdventure(AdventureModel adventure) {
-		adventures.put( adventure.getId() , adventure );
+
+	public void addAdventure( AdventureModel adventure )
+	{
+		adventures.put( adventure.getId(), adventure );
 	}
-	
-	public AdventureModel getAdventureById(int id) {
+
+	public AdventureModel getAdventureById( int id )
+	{
 		return adventures.get( id );
 	}
 }

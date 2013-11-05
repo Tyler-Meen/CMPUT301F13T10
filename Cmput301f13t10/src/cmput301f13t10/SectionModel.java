@@ -26,6 +26,7 @@ public class SectionModel implements Serializable
 	 * A list of media contained within this section.
 	 */
 	private ArrayList<Media> mMedias;
+	private int mId;
 
 	/**
 	 * Constructor
@@ -38,6 +39,7 @@ public class SectionModel implements Serializable
 		mName = name;
 		mMedias = new ArrayList<Media>();
 		mChoices = new ArrayList<SectionChoice>();
+		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
@@ -107,7 +109,7 @@ public class SectionModel implements Serializable
 	{
 		mChoices = choices;
 	}
-	
+
 	/**
 	 * Set add a new choice for this section
 	 * 
@@ -116,13 +118,14 @@ public class SectionModel implements Serializable
 	 */
 	public void addChoice( SectionChoice choice )
 	{
-		mChoices.add(choice);
+		mChoices.add( choice );
 	}
 
 	public void removeChoice( SectionChoice choiceToRemove )
 	{
 		mChoices.remove( choiceToRemove );
 	}
+
 	/**
 	 * Get a list of choices that the section connects to.
 	 * 
@@ -143,6 +146,11 @@ public class SectionModel implements Serializable
 		return mName;
 	}
 
+	public int getId()
+	{
+		return mId;
+	}
+
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeObject( mName );
@@ -161,7 +169,7 @@ public class SectionModel implements Serializable
 	{
 	}
 
-	public SectionModel GetChoiceSection( int sectionId )
+	public SectionModel getChoiceSection( int sectionId )
 	{
 		return mChoices.get( sectionId ).getSectionModel();
 	}

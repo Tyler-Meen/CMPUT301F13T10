@@ -108,7 +108,7 @@ public class IdFactoryTest
 		assertEquals( idFactory.getNewId(), 3 );
 		assertEquals( idFactory.getNewId(), 5 );
 	}
-	
+
 	@Test
 	public void testRemoveOutOfBounds()
 	{

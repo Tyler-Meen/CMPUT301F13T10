@@ -4,9 +4,11 @@ import java.util.Observer;
 
 /**
  * A presenter of the MVP pattern
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
-public interface Presenter extends Observer {
-	
+public interface Presenter extends Observer
+{
+
 }

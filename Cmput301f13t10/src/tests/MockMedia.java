@@ -5,26 +5,26 @@ import cmput301f13t10.Media;
 import android.content.Context;
 import android.view.View;
 
-public class MockMedia implements Media 
+public class MockMedia implements Media
 {
 
 	private int mId;
-	
-	public MockMedia() 
+
+	public MockMedia()
 	{
 		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	@Override
-	public int getId() 
+	public int getId()
 	{
 		return mId;
 	}
 
 	@Override
-	public View toView(Context c) 
+	public View toView( Context c )
 	{
 		return null;
 	}
-	
+
 }

@@ -14,7 +14,7 @@ import android.widget.Button;
  */
 public class SectionReadView extends SectionView
 {
-	
+
 	/**
 	 * Handler for the continue button of the view. Displays a dialog box which
 	 * gives the user options as to how to continue with the story.
