@@ -1,4 +1,4 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 
 // I need to link the modify choices button on the edit section view to open the modify a choice

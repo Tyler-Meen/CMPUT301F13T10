@@ -8,7 +8,7 @@
  * Copyright: Brendan Cowan
  */
 
-package cs.ualberta.test;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -21,9 +21,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cs.ualberta.cmput301f13t10.AdventureModel;
-import cs.ualberta.cmput301f13t10.InvalidSearchTypeException;
-import cs.ualberta.cmput301f13t10.Searcher;
+import cmput301f13t10.AdventureModel;
+import cmput301f13t10.InvalidSearchTypeException;
+import cmput301f13t10.Searcher;
 
 public class SearcherTest
 {

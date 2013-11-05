@@ -1,4 +1,4 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 import cs.ualberta.cmput301f13t10.R;
 import android.app.AlertDialog;

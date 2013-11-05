@@ -1,47 +1,51 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
-import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 /**
- * Media for text that can be added and view in a section of an adventure.
+ * Media for pictures that can be added and viewed in a section of an adventure.
  * 
  * @author Brendan Cowan
  * 
  */
-public class TextMedia implements Media
+public class ImageMedia implements Media
 {
 
 	/**
-	 * The id of the media
+	 * The id of the media object.
 	 */
 	private int mId;
 	/**
-	 * The text to be displayed
+	 * The bitmap object associated with the media object
 	 */
-	private String mText;
+	private Bitmap mBitmap;
 
 	/**
 	 * Constructor
-	 * @param id The id of the media
+	 * 
+	 * @param id
+	 *            The image's id.
 	 */
-	public TextMedia()
+	public ImageMedia()
 	{
 		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
-	 * Set the text to be displayed for the media
-	 * @param text The text to be displayed
+	 * Set the image associated with the media object
+	 * 
+	 * @param bm
+	 *            The bitmap file to use
 	 */
-	public void setText( String text )
+	public void setImageBitmap( Bitmap bm )
 	{
-		mText = text;
+		mBitmap = bm;
 	}
 
 	@Override
@@ -53,21 +57,21 @@ public class TextMedia implements Media
 	@Override
 	public View toView( Context c )
 	{
-		TextView mc = new TextView( c );
-		mc.setText( mText );
-		return mc;
+		ImageView iv = new ImageView( c );
+		iv.setImageBitmap( mBitmap );
+		return iv;
 	}
 
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		out.writeObject( mText );
+		out.writeObject( mBitmap );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mId = (int) in.readInt();
-		mText = (String) in.readObject();
+		mBitmap = (Bitmap) in.readObject();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException

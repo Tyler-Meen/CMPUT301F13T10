@@ -1,4 +1,4 @@
-package cs.ualberta.test;
+package tests;
 
 import static org.junit.Assert.*;
 

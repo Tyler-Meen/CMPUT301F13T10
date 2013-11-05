@@ -1,4 +1,4 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 /**
  * A list of constants to be used by the app

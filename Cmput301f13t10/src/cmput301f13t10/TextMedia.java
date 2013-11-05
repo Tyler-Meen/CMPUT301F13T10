@@ -1,51 +1,47 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
+import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
- * Media for pictures that can be added and viewed in a section of an adventure.
+ * Media for text that can be added and view in a section of an adventure.
  * 
  * @author Brendan Cowan
  * 
  */
-public class ImageMedia implements Media
+public class TextMedia implements Media
 {
 
 	/**
-	 * The id of the media object.
+	 * The id of the media
 	 */
 	private int mId;
 	/**
-	 * The bitmap object associated with the media object
+	 * The text to be displayed
 	 */
-	private Bitmap mBitmap;
+	private String mText;
 
 	/**
 	 * Constructor
-	 * 
-	 * @param id
-	 *            The image's id.
+	 * @param id The id of the media
 	 */
-	public ImageMedia()
+	public TextMedia()
 	{
 		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
-	 * Set the image associated with the media object
-	 * 
-	 * @param bm
-	 *            The bitmap file to use
+	 * Set the text to be displayed for the media
+	 * @param text The text to be displayed
 	 */
-	public void setImageBitmap( Bitmap bm )
+	public void setText( String text )
 	{
-		mBitmap = bm;
+		mText = text;
 	}
 
 	@Override
@@ -57,21 +53,21 @@ public class ImageMedia implements Media
 	@Override
 	public View toView( Context c )
 	{
-		ImageView iv = new ImageView( c );
-		iv.setImageBitmap( mBitmap );
-		return iv;
+		TextView mc = new TextView( c );
+		mc.setText( mText );
+		return mc;
 	}
 
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		out.writeObject( mBitmap );
+		out.writeObject( mText );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mId = (int) in.readInt();
-		mBitmap = (Bitmap) in.readObject();
+		mText = (String) in.readObject();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException

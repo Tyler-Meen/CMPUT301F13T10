@@ -1,4 +1,4 @@
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 /**
  * A view of the MVP pattern

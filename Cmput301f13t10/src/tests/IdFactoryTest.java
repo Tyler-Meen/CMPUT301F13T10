@@ -1,4 +1,4 @@
-package cs.ualberta.test;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cs.ualberta.cmput301f13t10.IdFactory;
+import cmput301f13t10.IdFactory;
 
 public class IdFactoryTest
 {

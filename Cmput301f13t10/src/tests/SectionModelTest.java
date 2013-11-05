@@ -1,4 +1,4 @@
-package cs.ualberta.test;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cs.ualberta.cmput301f13t10.Media;
-import cs.ualberta.cmput301f13t10.SectionModel;
+import cmput301f13t10.Media;
+import cmput301f13t10.SectionModel;
 
 public class SectionModelTest
 {

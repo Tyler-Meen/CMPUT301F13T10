@@ -8,7 +8,7 @@
  * Copyright: Brendan Cowan
  */
 
-package cs.ualberta.cmput301f13t10;
+package cmput301f13t10;
 
 import java.util.ArrayList;
 import java.util.List;
