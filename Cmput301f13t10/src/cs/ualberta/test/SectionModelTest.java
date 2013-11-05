@@ -28,9 +28,9 @@ public class SectionModelTest
 	{
 		mSection = new SectionModel( "test", false );
 
-		mMedia1 = new MockMedia( 1 );
-		mMedia2 = new MockMedia( 2 );
-		mMedia3 = new MockMedia( 3 );
+		mMedia1 = new MockMedia();
+		mMedia2 = new MockMedia();
+		mMedia3 = new MockMedia();
 
 		mSection.add( mMedia1 );
 		mSection.add( mMedia2 );

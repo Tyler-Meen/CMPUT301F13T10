@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class SectionModel implements Serializable
 {
+
 	/**
 	 * If the section is the first section in a story
 	 */
@@ -25,7 +26,7 @@ public class SectionModel implements Serializable
 	/**
 	 * A list of sections that this section leads to.
 	 */
-	private ArrayList<SectionChoice> mChoices;
+	private ArrayList<SectionModel> mChoices;
 	/**
 	 * A list of media contained within this section.
 	 */
@@ -42,7 +43,7 @@ public class SectionModel implements Serializable
 		mName = name;
 		setStart( false );
 		mMedias = new ArrayList<Media>();
-		mChoices = new ArrayList<SectionChoice>();
+		mChoices = new ArrayList<SectionModel>();
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class SectionModel implements Serializable
 		mName = name;
 		setStart( isStart );
 		mMedias = new ArrayList<Media>();
-		mChoices = new ArrayList<SectionChoice>();
+		mChoices = new ArrayList<SectionModel>();
 	}
 
 	/**
@@ -104,8 +105,15 @@ public class SectionModel implements Serializable
 			return;
 
 		Media movedMedia = mMedias.get( index );
-		mMedias.remove( index );
-		mMedias.add( index + offset, movedMedia);
+		int increment = Math.abs( offset ) / offset; // are we moving forwards
+														// or
+														// backwards?
+		for( int i = index; i != offset + index; i += increment )
+		{
+			mMedias.set( i, mMedias.get( i + increment ) );
+		}
+
+		mMedias.set( index + offset, movedMedia );
 	}
 
 	/**
@@ -124,7 +132,7 @@ public class SectionModel implements Serializable
 	 * @param choices
 	 *            The choices that this section will connect to.
 	 */
-	public void setChoices( ArrayList<SectionChoice> choices )
+	public void setChoices( ArrayList<SectionModel> choices )
 	{
 		mChoices = choices;
 	}
@@ -133,7 +141,7 @@ public class SectionModel implements Serializable
 	 * Set add a new choice for this section
 	 * @param choice The new choice to add
 	 */
-	public void addChoice(SectionChoice choice) {
+	public void addChoice(SectionModel choice) {
 		mChoices.add(choice);
 	}
 
@@ -142,7 +150,7 @@ public class SectionModel implements Serializable
 	 * 
 	 * @return The choices that the section connects to.
 	 */
-	public ArrayList<SectionChoice> getChoices()
+	public ArrayList<SectionModel> getChoices()
 	{
 		return mChoices;
 	}
@@ -182,7 +190,7 @@ public class SectionModel implements Serializable
 	{
 		mIsStart = (Boolean) in.readBoolean();
 		mName = (String) in.readObject();
-		mChoices = (ArrayList<SectionChoice>) in.readObject();
+		mChoices = (ArrayList<SectionModel>) in.readObject();
 		mMedias = (ArrayList<Media>) in.readObject();
 	}
 

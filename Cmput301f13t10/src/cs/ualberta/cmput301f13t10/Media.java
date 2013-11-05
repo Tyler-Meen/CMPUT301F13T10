@@ -14,13 +14,6 @@ import android.view.View;
  */
 public interface Media extends Serializable
 {
-	/**
-	 * Set the id of the media
-	 * 
-	 * @param id
-	 *            The id to set
-	 */
-	public void setId( int id );
 
 	/**
 	 * Get the id of the media

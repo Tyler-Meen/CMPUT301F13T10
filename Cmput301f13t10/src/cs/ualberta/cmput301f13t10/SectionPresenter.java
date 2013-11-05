@@ -20,12 +20,10 @@ public class SectionPresenter implements Presenter
 	 * The view that created the presenter
 	 */
 	private SectionView mView;
-	
 	/**
 	 * The current section that the reader is viewing
 	 */
 	private SectionModel mCurrentSection;
-	
 	/**
 	 * The current adventure that the reader is viewing
 	 */
@@ -62,7 +60,7 @@ public class SectionPresenter implements Presenter
 	 */
 	public void setCurrentSectionId( int sectionId )
 	{
-		//setCurrentSection( mCurrentSection.getChoices().get( sectionId ) );
+		setCurrentSection( mCurrentSection.getChoices().get( sectionId ) );
 	}
 
 	/**
@@ -94,10 +92,10 @@ public class SectionPresenter implements Presenter
 	 * @param adventure
 	 *            The current adventure to set
 	 */
-	public void setCurrentAdventure( AdventureModel adventure )
+	public void setCurrentAdventure( int adventure )
 	{
-		mCurrentAdventure = adventure;
-		setCurrentSection( adventure.getStartSection() );
+		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );;
+		setCurrentSection( mCurrentAdventure.getStartSection() );
 	}
 
 	/**
@@ -110,11 +108,11 @@ public class SectionPresenter implements Presenter
 		ArrayList<String> stringChoices = null;
 		try
 		{
-			ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
+			ArrayList<SectionModel> sectionChoices = mCurrentSection.getChoices();
 			stringChoices = new ArrayList<String>();
-			for( SectionChoice s : sectionChoices )
+			for( SectionModel s : sectionChoices )
 			{
-				stringChoices.add( s.getUserChoice() );
+				stringChoices.add( s.getName() );
 			}
 		}
 		catch( NullPointerException e )

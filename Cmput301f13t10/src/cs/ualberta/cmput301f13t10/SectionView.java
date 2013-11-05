@@ -35,7 +35,7 @@ public abstract class SectionView extends Activity implements Serializable
 		{
 			Intent intent = getIntent();
 			Bundle intentBundle = intent.getBundleExtra( AppConstants.CURRENT_ADVENTURE );
-			AdventureModel adventure = (AdventureModel) intentBundle.getSerializable( AppConstants.CURRENT_ADVENTURE );
+			int adventure = intentBundle.getInt( AppConstants.CURRENT_ADVENTURE );
 			mPresenter.setCurrentAdventure( adventure );
 		}
 		catch( Exception e )

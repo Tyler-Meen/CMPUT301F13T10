@@ -32,9 +32,9 @@ public class ImageMedia implements Media
 	 * @param id
 	 *            The image's id.
 	 */
-	public ImageMedia( int id )
+	public ImageMedia()
 	{
-		mId = id;
+		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
@@ -46,12 +46,6 @@ public class ImageMedia implements Media
 	public void setImageBitmap( Bitmap bm )
 	{
 		mBitmap = bm;
-	}
-
-	@Override
-	public void setId( int id )
-	{
-		mId = id;
 	}
 
 	@Override

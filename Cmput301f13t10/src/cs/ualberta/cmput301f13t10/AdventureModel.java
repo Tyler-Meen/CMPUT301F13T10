@@ -16,6 +16,10 @@ public class AdventureModel implements Serializable
 {
 
 	/**
+	 * The id of the adventure
+	 */
+	private int mId;
+	/**
 	 * The adventure's title
 	 */
 	private String mTitle;
@@ -36,6 +40,7 @@ public class AdventureModel implements Serializable
 	 */
 	public AdventureModel( String title )
 	{
+		mId = IdFactory.getIdFactory().getNewId();
 		mTitle = title;
 		mStartSection = new SectionModel( AppConstants.START, true );
 		mSections = new ArrayList<SectionModel>();
@@ -60,6 +65,14 @@ public class AdventureModel implements Serializable
 	public String getTitle()
 	{
 		return mTitle;
+	}
+	
+	/**
+	 * Get the id of the adventure
+	 * @return The id of the adventure
+	 */
+	public int getId() {
+		return mId;
 	}
 
 	/**

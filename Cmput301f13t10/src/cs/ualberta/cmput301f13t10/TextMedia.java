@@ -30,9 +30,9 @@ public class TextMedia implements Media
 	 * Constructor
 	 * @param id The id of the media
 	 */
-	public TextMedia( int id )
+	public TextMedia()
 	{
-		mId = id;
+		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
@@ -42,12 +42,6 @@ public class TextMedia implements Media
 	public void setText( String text )
 	{
 		mText = text;
-	}
-
-	@Override
-	public void setId( int id )
-	{
-		mId = id;
 	}
 
 	@Override

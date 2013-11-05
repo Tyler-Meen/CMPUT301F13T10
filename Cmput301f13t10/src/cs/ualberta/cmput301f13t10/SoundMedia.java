@@ -32,9 +32,9 @@ public class SoundMedia implements Media
 	 * @param id
 	 *            The id of the media
 	 */
-	public SoundMedia( int id )
+	public SoundMedia()
 	{
-		mId = id;
+		mId = IdFactory.getIdFactory().getNewId();
 	}
 
 	/**
@@ -46,12 +46,6 @@ public class SoundMedia implements Media
 	public void setSound( String path )
 	{
 		mPath = path;
-	}
-
-	@Override
-	public void setId( int id )
-	{
-		mId = id;
 	}
 
 	@Override
