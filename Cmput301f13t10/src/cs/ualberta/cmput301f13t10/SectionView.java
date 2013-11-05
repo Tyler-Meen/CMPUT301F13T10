@@ -2,6 +2,7 @@ package cs.ualberta.cmput301f13t10;
 
 import java.io.Serializable;
 
+import cs.ualberta.cmput301f13t10.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public abstract class SectionView extends Activity implements Serializable
 
 		mPresenter = new SectionPresenter( this );
 
-		setContentView( R.layout.read_view );
+		setContentView( R.layout.section_read_view );
 		
 
 		try
@@ -60,6 +61,7 @@ public abstract class SectionView extends Activity implements Serializable
 		
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
 		mPresenter.setCurrentSectionView( scrollBox );
+		//TODO: change to mPpresenter.IsMainMenu or something
 		if( mPresenter.getChoices().isEmpty() )
 		{
 			continueButton.setText( "Main Menu" );

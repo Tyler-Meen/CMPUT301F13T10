@@ -1,5 +1,6 @@
 package cs.ualberta.cmput301f13t10;
 
+import cs.ualberta.cmput301f13t10.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

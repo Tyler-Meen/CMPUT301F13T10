@@ -27,10 +27,6 @@ public class AdventureModel implements Serializable
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
-	/**
-	 * The first section in the adventure
-	 */
-	private SectionModel mStartSection;
 
 	/**
 	 * Constructor
@@ -42,8 +38,9 @@ public class AdventureModel implements Serializable
 	{
 		mId = IdFactory.getIdFactory().getNewId();
 		mTitle = title;
-		mStartSection = new SectionModel( AppConstants.START, true );
+		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
+		mSections.add( startSection );
 	}
 
 	/**
@@ -76,27 +73,6 @@ public class AdventureModel implements Serializable
 	}
 
 	/**
-	 * Set the starting section of the adventure
-	 * 
-	 * @param startSection
-	 *            The section to start at
-	 */
-	public void setStartSection( SectionModel startSection )
-	{
-		mStartSection = startSection;
-	}
-
-	/**
-	 * Get the starting section of the adventure
-	 * 
-	 * @return The section the adventure starts at
-	 */
-	public SectionModel getStartSection()
-	{
-		return mStartSection;
-	}
-
-	/**
 	 * Set all of the sections contained within the adventure
 	 * 
 	 * @param sections
@@ -106,13 +82,25 @@ public class AdventureModel implements Serializable
 	{
 		mSections = sections;
 	}
-	
+
 	/**
 	 * Add a section to the current list of sections
-	 * @param section The section to add
+	 * 
+	 * @param section
+	 *            The section to add
 	 */
-	public void addSection(SectionModel section) {
-		mSections.add( section);
+	public void addSection( SectionModel section )
+	{
+		mSections.add( section );
+	}
+	
+	/**
+	 * 
+	 * @return The start section of the adventure
+	 */
+	public SectionModel getStartSection()
+	{
+		return mSections.get( 0 );
 	}
 
 	/**
@@ -129,14 +117,12 @@ public class AdventureModel implements Serializable
 	{
 		out.writeObject( mTitle );
 		out.writeObject( mSections );
-		out.writeObject( mStartSection );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mTitle = (String) in.readObject();
 		mSections = (ArrayList<SectionModel>) in.readObject();
-		mStartSection = (SectionModel) in.readObject();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException

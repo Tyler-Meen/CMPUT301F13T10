@@ -14,11 +14,6 @@ import java.util.ArrayList;
  */
 public class SectionModel implements Serializable
 {
-
-	/**
-	 * If the section is the first section in a story
-	 */
-	private boolean mIsStart;
 	/**
 	 * The title of the section
 	 */
@@ -26,7 +21,7 @@ public class SectionModel implements Serializable
 	/**
 	 * A list of sections that this section leads to.
 	 */
-	private ArrayList<SectionModel> mChoices;
+	private ArrayList<SectionChoice> mChoices;
 	/**
 	 * A list of media contained within this section.
 	 */
@@ -41,25 +36,8 @@ public class SectionModel implements Serializable
 	public SectionModel( String name )
 	{
 		mName = name;
-		setStart( false );
 		mMedias = new ArrayList<Media>();
-		mChoices = new ArrayList<SectionModel>();
-	}
-
-	/**
-	 * Constructor
-	 * 
-	 * @param name
-	 *            The title of the section
-	 * @param isStart
-	 *            If the section is the first section in a story.
-	 */
-	public SectionModel( String name, boolean isStart )
-	{
-		mName = name;
-		setStart( isStart );
-		mMedias = new ArrayList<Media>();
-		mChoices = new ArrayList<SectionModel>();
+		mChoices = new ArrayList<SectionChoice>();
 	}
 
 	/**
@@ -105,15 +83,8 @@ public class SectionModel implements Serializable
 			return;
 
 		Media movedMedia = mMedias.get( index );
-		int increment = Math.abs( offset ) / offset; // are we moving forwards
-														// or
-														// backwards?
-		for( int i = index; i != offset + index; i += increment )
-		{
-			mMedias.set( i, mMedias.get( i + increment ) );
-		}
-
-		mMedias.set( index + offset, movedMedia );
+		mMedias.remove( index );
+		mMedias.add( index + offset, movedMedia );
 	}
 
 	/**
@@ -132,25 +103,32 @@ public class SectionModel implements Serializable
 	 * @param choices
 	 *            The choices that this section will connect to.
 	 */
-	public void setChoices( ArrayList<SectionModel> choices )
+	public void setChoices( ArrayList<SectionChoice> choices )
 	{
 		mChoices = choices;
 	}
 	
 	/**
 	 * Set add a new choice for this section
-	 * @param choice The new choice to add
+	 * 
+	 * @param choice
+	 *            The new choice to add
 	 */
-	public void addChoice(SectionModel choice) {
+	public void addChoice( SectionChoice choice )
+	{
 		mChoices.add(choice);
 	}
 
+	public void removeChoice( SectionChoice choiceToRemove )
+	{
+		mChoices.remove( choiceToRemove );
+	}
 	/**
 	 * Get a list of choices that the section connects to.
 	 * 
 	 * @return The choices that the section connects to.
 	 */
-	public ArrayList<SectionModel> getChoices()
+	public ArrayList<SectionChoice> getChoices()
 	{
 		return mChoices;
 	}
@@ -165,22 +143,8 @@ public class SectionModel implements Serializable
 		return mName;
 	}
 
-	/**
-	 * Set whether or not the section is meant to be at the start of an
-	 * adventure.
-	 * 
-	 * @param isStart
-	 *            True if the section is meant to be at the start of an
-	 *            adventure, False otherwise
-	 */
-	private void setStart( boolean isStart )
-	{
-		mIsStart = isStart;
-	}
-
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
-		out.writeBoolean( mIsStart );
 		out.writeObject( mName );
 		out.writeObject( mChoices );
 		out.writeObject( mMedias );
@@ -188,9 +152,8 @@ public class SectionModel implements Serializable
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
-		mIsStart = (Boolean) in.readBoolean();
 		mName = (String) in.readObject();
-		mChoices = (ArrayList<SectionModel>) in.readObject();
+		mChoices = (ArrayList<SectionChoice>) in.readObject();
 		mMedias = (ArrayList<Media>) in.readObject();
 	}
 

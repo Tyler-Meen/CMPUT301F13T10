@@ -26,7 +26,7 @@ public class SectionModelTest
 	@Before
 	public void setUp() throws Exception
 	{
-		mSection = new SectionModel( "test", false );
+		mSection = new SectionModel( "test");
 
 		mMedia1 = new MockMedia();
 		mMedia2 = new MockMedia();

@@ -1,5 +1,6 @@
 package cs.ualberta.cmput301f13t10;
 
+import cs.ualberta.cmput301f13t10.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
