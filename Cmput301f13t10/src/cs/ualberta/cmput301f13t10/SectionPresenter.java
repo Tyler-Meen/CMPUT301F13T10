@@ -60,7 +60,7 @@ public class SectionPresenter implements Presenter
 	 */
 	public void setCurrentSectionId( int sectionId )
 	{
-		setCurrentSection( mCurrentSection.getChoices().get( sectionId ) );
+		setCurrentSection( mCurrentSection.GetChoiceSection( sectionId ) );
 	}
 
 	/**
@@ -108,11 +108,11 @@ public class SectionPresenter implements Presenter
 		ArrayList<String> stringChoices = null;
 		try
 		{
-			ArrayList<SectionModel> sectionChoices = mCurrentSection.getChoices();
+			ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
 			stringChoices = new ArrayList<String>();
-			for( SectionModel s : sectionChoices )
+			for( SectionChoice s : sectionChoices )
 			{
-				stringChoices.add( s.getName() );
+				stringChoices.add( s.getUserChoice() );
 			}
 		}
 		catch( NullPointerException e )

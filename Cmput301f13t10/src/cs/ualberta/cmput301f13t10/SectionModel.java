@@ -160,4 +160,9 @@ public class SectionModel implements Serializable
 	private void readObjectNoData() throws ObjectStreamException
 	{
 	}
+
+	public SectionModel GetChoiceSection( int sectionId )
+	{
+		return mChoices.get( sectionId ).getSectionModel();
+	}
 }

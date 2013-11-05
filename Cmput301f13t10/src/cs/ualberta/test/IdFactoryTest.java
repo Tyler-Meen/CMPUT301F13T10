@@ -22,13 +22,13 @@ public class IdFactoryTest
 	@Before
 	public void setUp() throws Exception
 	{
+		IdFactory.getIdFactory().removeAll();
 		mThrown = null;
 	}
 
 	@After
 	public void tearDown() throws Exception
 	{
-		IdFactory.getIdFactory().removeAll();
 	}
 
 	@Test

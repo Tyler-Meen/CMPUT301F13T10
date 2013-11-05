@@ -15,9 +15,12 @@ public class SectionModelTest
 {
 
 	private SectionModel mSection;
-	MockMedia mMedia1;
-	MockMedia mMedia2;
-	MockMedia mMedia3;
+	private MockMedia mMedia1;
+	private int mMedia1Id;
+	private MockMedia mMedia2;
+	private int mMedia2Id;
+	private MockMedia mMedia3;
+	private int mMedia3Id;
 
 	public SectionModelTest()
 	{
@@ -35,6 +38,10 @@ public class SectionModelTest
 		mSection.add( mMedia1 );
 		mSection.add( mMedia2 );
 		mSection.add( mMedia3 );
+		
+		mMedia1Id = mMedia1.getId();
+		mMedia2Id = mMedia2.getId();
+		mMedia3Id = mMedia3.getId();
 	}
 
 	@After
@@ -48,9 +55,9 @@ public class SectionModelTest
 		ArrayList<Media> medias = mSection.getMedia();
 
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 2 );
-		assertEquals( medias.get( 2 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia2Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
 	@Test
@@ -61,8 +68,8 @@ public class SectionModelTest
 		ArrayList<Media> medias = mSection.getMedia();
 
 		assertEquals( medias.size(), 2 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia3Id );
 	}
 
 	@Test
@@ -84,9 +91,9 @@ public class SectionModelTest
 
 		assertNull( ex );
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 3 );
-		assertEquals( medias.get( 2 ).getId(), 2 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia3Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia2Id );
 	}
 
 	@Test
@@ -108,9 +115,9 @@ public class SectionModelTest
 
 		assertNull( ex );
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 2 );
-		assertEquals( medias.get( 1 ).getId(), 1 );
-		assertEquals( medias.get( 2 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia2Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
 	@Test
@@ -132,9 +139,9 @@ public class SectionModelTest
 
 		assertNotNull( ex );
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 2 );
-		assertEquals( medias.get( 2 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia2Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
 	@Test
@@ -156,9 +163,9 @@ public class SectionModelTest
 
 		assertNotNull( ex );
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 2 );
-		assertEquals( medias.get( 2 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia2Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
 	@Test
@@ -180,9 +187,9 @@ public class SectionModelTest
 
 		assertNull( ex );
 		assertEquals( medias.size(), 3 );
-		assertEquals( medias.get( 0 ).getId(), 1 );
-		assertEquals( medias.get( 1 ).getId(), 2 );
-		assertEquals( medias.get( 2 ).getId(), 3 );
+		assertEquals( medias.get( 0 ).getId(), mMedia1Id );
+		assertEquals( medias.get( 1 ).getId(), mMedia2Id );
+		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
 }
