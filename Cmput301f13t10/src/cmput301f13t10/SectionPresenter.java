@@ -1,23 +1,19 @@
 package cmput301f13t10;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
  * Presenter for the Adventure group of classes, as per the MVP pattern.
  * 
- * @author Brendan Cowan
+ * @author Brendan Cowan, Steven Gerdes
  * 
  */
-public class SectionPresenter implements Presenter
+public class SectionPresenter
 {
 
 	/**
@@ -44,11 +40,6 @@ public class SectionPresenter implements Presenter
 		mView = view;
 	}
 
-	public SectionPresenter( SectionEditView sectionEditView )
-	{
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Set the current section that the user is viewing
 	 * 
@@ -58,6 +49,7 @@ public class SectionPresenter implements Presenter
 	public void setCurrentSection( SectionModel section )
 	{
 		mCurrentSection = section;
+		mCurrentAdventure.setSection( mCurrentSection );
 		mView.updateSectionView();
 	}
 
@@ -67,32 +59,12 @@ public class SectionPresenter implements Presenter
 	 * @param sectionId
 	 *            The id of the section to set
 	 */
-	public void setCurrentSectionId( int sectionId )
+	public void setCurrentSectionById( Integer sectionId )
 	{
-		setCurrentSection( mCurrentSection.getChoiceSection( sectionId ) );
-	}
-
-	/**
-	 * Set the input view group to contain all media in the current section.
-	 * 
-	 * @param vg
-	 *            The view group that is to contain the media.
-	 */
-	public void setCurrentSectionView( ViewGroup vg )
-	{
-		try
-		{
-			ArrayList<Media> medias = mCurrentSection.getMedia();
-			vg.removeAllViews();
-			for( Media m : medias )
-			{
-				vg.addView( m.toView( mView.getContext() ) );
-			}
-		}
-		catch( NullPointerException e )
-		{
-			Logger.log( "No current section", e );
-		}
+		if( sectionId == null )
+			setCurrentSection( new SectionModel( AppConstants.SECTION_TITLE ) );
+		else
+			setCurrentSection( mCurrentAdventure.getSection( sectionId ) );
 	}
 
 	/**
@@ -104,7 +76,7 @@ public class SectionPresenter implements Presenter
 	public void setCurrentAdventure( int adventure )
 	{
 		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );
-		setCurrentSection( mCurrentAdventure.getStartSection() );
+		setCurrentSection( mCurrentAdventure.getCurrentSection() );
 	}
 
 	/**
@@ -131,42 +103,47 @@ public class SectionPresenter implements Presenter
 		return stringChoices;
 	}
 
-	public void storeImage( SectionEditView editView, Intent data )
+	public String getSectionTitle()
 	{
-		Bitmap tempBitmap = null;
-		if( data.getData() != null )
-		{
-			try
-			{
-				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
-				tempBitmap = BitmapFactory.decodeStream( stream );
-				stream.close();
-			}
-
-			catch( Exception e )
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			tempBitmap = (Bitmap) data.getExtras().get( "data" );
-		}
-
-		if( tempBitmap != null )
-		{
-			ImageMedia newImageMedia = new ImageMedia();
-
-			newImageMedia.setImageBitmap( tempBitmap );
-
-			mCurrentSection.add( newImageMedia );
-		}
+		return mCurrentSection.getName();
 	}
 
-	@Override
-	public void update( Observable arg0, Object arg1 )
+	public void UpdateSectionTitle( String sectionName )
 	{
-
+		mCurrentSection.setName( sectionName );
+		mView.updateSectionView();
 	}
 
+	public int getAdventureId()
+	{
+		return mCurrentAdventure.getId();
+	}
+
+	public int getSectionId()
+	{
+		return mCurrentSection.getId();
+	}
+
+	/**
+	 * Set the input view group to contain all media in the current section.
+	 * 
+	 * @param vg
+	 *            The view group that is to contain the media.
+	 */
+	public void setCurrentSectionView( ViewGroup vg )
+	{ // TODO: make the view do this instead of the presenter
+		try
+		{
+			ArrayList<Media> medias = mCurrentSection.getMedia();
+			vg.removeAllViews();
+			for( Media m : medias )
+			{
+				vg.addView( m.toView( mView.getContext() ) );
+			}
+		}
+		catch( NullPointerException e )
+		{
+			Logger.log( "No current section", e );
+		}
+	}
 }

@@ -17,7 +17,7 @@
     <string name="new_adventure_dialog_title">New Adventure</string>
     <string name="new_adventure_title_hint">New Adventure Name</string>
     <string name="new_section">New Section</string>
-    <string name="modify_sections">Modify sections</string>
+    <string name="modify_choices">Modify Choices</string>
     <string name="possible_choices">Possible Choices</string>
     <string name="selected_choices">Selected Choices</string>
     <string name="user_text">User text</string>
@@ -25,6 +25,6 @@
     <string name="title_activity_adventure_edit_view">AdventureEditView</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
     <string name="title_activity_section_edit_view">Section Edit View</string>
-    <string name="action_add_image_media">Add Image</string>
+    <string name="choice_description">Enter new choice description </string>
     
 </resources>

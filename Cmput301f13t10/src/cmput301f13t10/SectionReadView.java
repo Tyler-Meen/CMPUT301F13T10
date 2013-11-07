@@ -79,8 +79,9 @@ public class SectionReadView extends Activity implements SectionView
 	 */
 	public void changeSection( int sectionId )
 	{
-		mPresenter.setCurrentSectionId( sectionId );
+		mPresenter.setCurrentSectionById( sectionId );
 	}
+	
 	/**
 	 * Handler for the continue button of the view. Displays a dialog box which
 	 * gives the user options as to how to continue with the story.

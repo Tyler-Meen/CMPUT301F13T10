@@ -28,39 +28,17 @@ import cmput301f13t10.Searcher;
 public class SearcherTest
 {
 
-	/**
-	 * {@value mAdventures}
-	 */
 	private ArrayList<AdventureModel> mAdventures;
-	/**
-	 * {@value mFullMatch}
-	 */
 	private AdventureModel mFullMatch;
-	/**
-	 * {@value mPartMatch}
-	 */
 	private AdventureModel mPartMatch;
-	/**
-	 * {@value mNoMatch}
-	 */
 	private AdventureModel mNoMatch;
-	/**
-	 * {@value mResults}
-	 */
 	private List<AdventureModel> mResults;
-	/**
-	 * {@value mThrown}
-	 */
 	private Exception mThrown;
 
 	public SearcherTest()
 	{
 	}
 
-	/**
-	 * Set up the tests
-	 * @throws Exception
-	 */
 	@Before
 	public void setUp() throws Exception
 	{
@@ -79,10 +57,6 @@ public class SearcherTest
 		mAdventures.add( mNoMatch );
 	}
 
-	/**
-	 * Tear down the tests
-	 * @throws Exception
-	 */
 	@After
 	public void tearDown() throws Exception
 	{

@@ -33,15 +33,16 @@ public class AdventurePresenter
 	{
 		return mModel.getTitle();
 	}
-	
-	public void setAdventureTitle(String title) {
+
+	public void setAdventureTitle( String title )
+	{
 		mModel.setTitle( title );
 		// TODO Should save adventure when title changes.
 	}
-	
-	public void deleteSection(Integer sectionId)
+
+	public void deleteSection( Integer sectionId )
 	{
-		mModel.deleteSection(sectionId);
+		mModel.deleteSection( sectionId );
 		// TODO Should save adventure when section is deleted.
 	}
 

@@ -136,11 +136,6 @@ public class SectionModel implements Serializable
 		return mChoices;
 	}
 
-	public void setName( String name )
-	{
-		mName = name;
-	}
-
 	/**
 	 * Get the name of the section
 	 * 
@@ -149,6 +144,11 @@ public class SectionModel implements Serializable
 	public String getName()
 	{
 		return mName;
+	}
+
+	public void setName( String sectionName )
+	{
+		mName = sectionName;
 	}
 
 	public int getId()
@@ -172,10 +172,5 @@ public class SectionModel implements Serializable
 
 	private void readObjectNoData() throws ObjectStreamException
 	{
-	}
-
-	public SectionModel getChoiceSection( int sectionId )
-	{
-		return mChoices.get( sectionId ).getSectionModel();
 	}
 }

@@ -26,8 +26,24 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	private String mDisplayTitle;
 	private AdventurePresenter mPresenter;
 	private List<SectionTitle> mSectionTitles;
-	private Integer mAdventureId;
 
+	@Override
+	protected void onCreate( Bundle savedInstanceState )
+	{
+		super.onCreate( savedInstanceState );
+		setContentView( R.layout.adventure_edit_view );
+		mSetupActionBar();
+		Intent intent = getIntent();
+		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
+			mPresenter = new AdventurePresenter( this, intent.getIntExtra( AppConstants.ADVENTURE_ID, -1 ) );
+		else
+			mPresenter = new AdventurePresenter( this );
+
+		mDisplayTitle = mPresenter.getAdventureTitle();
+		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.adventure_edit_title );
+		title.setText( mDisplayTitle );
+	}
+	
 	// A listener for clicks on the list. Opens the context menu for the chosen
 	// note.
 	private OnItemClickListener mSectionClickedHandler = new OnItemClickListener()
@@ -35,15 +51,16 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		public void onItemClick( AdapterView parent, View v, int position, long id )
 		{
 			SectionTitle selectedSection = (SectionTitle) parent.getItemAtPosition( position );
-			startSectionEdit( selectedSection );
+			startSectionEdit( selectedSection.getId() );
 		}
 	};
 
-	private void startSectionEdit( SectionTitle selectedSection )
+	private void startSectionEdit( Integer sectionId )
 	{
 		Intent intent = new Intent( this, SectionEditView.class );
-		intent.putExtra( AppConstants.ADVENTURE_ID, mAdventureId );
-		intent.putExtra( AppConstants.SECTION_ID, selectedSection.getId() );
+		intent.putExtra( AppConstants.ADVENTURE_ID, mPresenter.getAdventureId() );
+		if( sectionId != null )
+			intent.putExtra( AppConstants.SECTION_ID, sectionId.intValue() );
 		startActivity( intent );
 	}
 
@@ -59,29 +76,6 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		listView.setAdapter( adapter );
 
 		listView.setOnItemClickListener( mSectionClickedHandler );
-	}
-
-	@Override
-	protected void onCreate( Bundle savedInstanceState )
-	{
-		super.onCreate( savedInstanceState );
-		setContentView( R.layout.adventure_edit_view );
-		mSetupActionBar();
-		Intent intent = getIntent();
-		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
-		{
-			mAdventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, -1 );
-			mPresenter = new AdventurePresenter( this, mAdventureId );
-		}
-		else
-		{
-			mPresenter = new AdventurePresenter( this );
-			mAdventureId = mPresenter.getAdventureId();
-		}
-
-		mDisplayTitle = mPresenter.getAdventureTitle();
-		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.adventure_edit_title );
-		title.setText( mDisplayTitle );
 	}
 
 	@Override
@@ -175,5 +169,10 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 			actionBar.setDisplayShowCustomEnabled( true );
 			actionBar.setDisplayHomeAsUpEnabled( true );
 		}
+	}
+
+	public void launchSectionEditView( View view )
+	{
+		startSectionEdit( null );
 	}
 }

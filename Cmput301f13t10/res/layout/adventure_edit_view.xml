@@ -30,6 +30,7 @@
         android:id="@+id/AddNoteButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:onClick="launchSectionEditView"
         android:text="@string/new_section" >
     </Button>
 
