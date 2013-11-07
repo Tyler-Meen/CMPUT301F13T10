@@ -21,17 +21,55 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import cs.ualberta.cmput301f13t10.R;
 
+/**
+ * A view that displays an adventure's sections, allows the adventure title to
+ * be changed, allows sections to be deleted and created, and provides
+ * navigation to the adventures different sections.
+ * 
+ * @author Braeden Soetaert
+ * 
+ */
 public class AdventureEditView extends Activity implements DeleteSectionDialogFragment.DeleteSectionDialogListener
 {
+	/**
+	 * The title of the adventure to be displayed.
+	 */
 	private String mDisplayTitle;
+
+	/**
+	 * The presenter for the data that will be displayed in the view.
+	 */
 	private AdventurePresenter mPresenter;
+
+	/**
+	 * The list of all section titles present in the current adventure.
+	 */
 	private List<SectionTitle> mSectionTitles;
+
+	/**
+	 * The id of the adventure currently displayed in the view.
+	 */
 	private Integer mAdventureId;
 
-	// A listener for clicks on the list. Opens the context menu for the chosen
-	// note.
+	/**
+	 * A handler for when a section in the list is clicked. It starts a new view
+	 * to allow for the section to be edited.
+	 */
 	private OnItemClickListener mSectionClickedHandler = new OnItemClickListener()
 	{
+		/**
+		 * A handler for when a section in the list is clicked. It starts a new
+		 * view to allow for the section to be edited.
+		 * 
+		 * @param parent
+		 *            the AdapterView that was clicked.
+		 * @param v
+		 *            the view within the AdapterView that was clicked.
+		 * @param position
+		 *            the position of the view in the adapter.
+		 * @param id
+		 *            the row id of the item that was clicked.
+		 */
 		public void onItemClick( AdapterView parent, View v, int position, long id )
 		{
 			SectionTitle selectedSection = (SectionTitle) parent.getItemAtPosition( position );
@@ -39,6 +77,14 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		}
 	};
 
+	/**
+	 * Start a section edit view that corresponds for the given section id for
+	 * the current adventure. If section id is null then do not pass a section
+	 * id so a new section will be created.
+	 * 
+	 * @param sectionId
+	 *            the id of the section to start.
+	 */
 	private void startSectionEdit( SectionTitle selectedSection )
 	{
 		Intent intent = new Intent( this, SectionEditView.class );
@@ -47,8 +93,8 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		startActivity( intent );
 	}
 
-	/*
-	 * Load all notes from the list into the list view.
+	/**
+	 * Load all sections from the presenter into the list view display.
 	 */
 	private void mLoadSections()
 	{
@@ -127,6 +173,13 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		mLoadSections();
 	}
 
+	/**
+	 * Generate a prompt and display it to ask if the user wants to delete a
+	 * section.
+	 * 
+	 * @param view
+	 *            the view that was clicked to open the delete prompt.
+	 */
 	public void deletePrompt( View view )
 	{
 		Bundle choicesBundle = new Bundle();
@@ -139,15 +192,30 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		dialog.show( getFragmentManager(), "" );
 	}
 
+	/**
+	 * If the user accepted the delete action, delete the section from the
+	 * current adventure and reload the sections.
+	 * 
+	 * @param dialog
+	 *            the dialog fragment that the delete confirmation was accepted
+	 *            on.
+	 */
 	public void onDeleteConfirm( DialogFragment dialog )
 	{
 		mPresenter.deleteSection( dialog.getArguments().getInt( AppConstants.SECTION_ID ) );
 		mLoadSections();
 	}
 
+	/**
+	 * If the user canceled the delete action, do nothing.
+	 * 
+	 * @param dialog
+	 *            the dialog fragment that the delete confirmation was cancelled
+	 *            on.
+	 */
 	public void onDeleteCancel( DialogFragment dialog )
 	{
-		
+
 	}
 
 	/**

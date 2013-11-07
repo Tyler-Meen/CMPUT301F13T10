@@ -5,6 +5,8 @@ package cmput301f13t10;
  * 
  * @author Brendan Cowan
  * 
+ * @author Braeden Soetaert
+ * 
  */
 public class AppConstants
 {

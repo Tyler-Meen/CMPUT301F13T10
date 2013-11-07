@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * 
  * @author Brendan Cowan
  * 
+ * @author Braeden Soetaert
+ * 
  */
 public class AdventureModel implements Serializable
 {
@@ -19,15 +21,20 @@ public class AdventureModel implements Serializable
 	 * The id of the adventure
 	 */
 	private int mId;
+	
 	/**
 	 * The adventure's title
 	 */
 	private String mTitle;
+	
 	/**
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
 	
+	/**
+	 * Constructor
+	 */
 	public AdventureModel()
 	{
 		this("");
@@ -48,6 +55,11 @@ public class AdventureModel implements Serializable
 		mSections.add( startSection );
 	}
 	
+	/**
+	 * Deletes the section corresponding to the given section id. If the section id
+	 * is not in the list of sections, it is not deleted.
+	 * @param sectionId
+	 */
 	public void deleteSection(Integer sectionId)
 	{
 		for( int i = 0; i < mSections.size(); i++ )
