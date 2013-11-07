@@ -124,6 +124,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	protected void onResume()
 	{
 		super.onResume();
+		mSectionTitles = mPresenter.getSectionTitles();
 		mLoadSections();
 	}
 
@@ -147,7 +148,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 
 	public void onDeleteCancel( DialogFragment dialog )
 	{
-		
+
 	}
 
 	/**
@@ -164,7 +165,6 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 			EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.adventure_edit_title );
 			title.setOnEditorActionListener( new OnEditorActionListener()
 			{
-
 				@Override
 				public boolean onEditorAction( TextView v, int actionId, KeyEvent event )
 				{

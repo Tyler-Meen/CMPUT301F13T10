@@ -82,7 +82,6 @@ public class AdventureModel implements Serializable
 
 	/**
 	 * Get the id of the adventure
-	 * 
 	 * @return The id of the adventure
 	 */
 	public int getId()

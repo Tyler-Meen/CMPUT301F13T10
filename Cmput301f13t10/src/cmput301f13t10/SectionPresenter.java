@@ -40,6 +40,11 @@ public class SectionPresenter implements Presenter
 		mView = view;
 	}
 
+	public SectionPresenter(SectionEditView sectionEditView) 
+	{
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Set the current section that the user is viewing
 	 * 
@@ -49,7 +54,7 @@ public class SectionPresenter implements Presenter
 	public void setCurrentSection( SectionModel section )
 	{
 		mCurrentSection = section;
-		mView.updateAdventureSection();
+		mView.updateSectionView();
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class SectionPresenter implements Presenter
 			vg.removeAllViews();
 			for( Media m : medias )
 			{
-				vg.addView( m.toView( mView ) );
+				vg.addView( m.toView( mView.getContext() ) );
 			}
 		}
 		catch( NullPointerException e )

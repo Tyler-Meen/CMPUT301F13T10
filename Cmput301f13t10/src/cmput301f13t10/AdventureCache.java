@@ -8,9 +8,8 @@ import java.util.Map;
  * @author 
  *
  */
-public class AdventureCache
+public class AdventureCache implements AdventureInteractor
 {
-
 	private static AdventureCache ac = null;
 	private Map<Integer, AdventureModel> adventures;
 
@@ -26,11 +25,13 @@ public class AdventureCache
 		return ac;
 	}
 
+	@Override 
 	public void addAdventure( AdventureModel adventure )
 	{
 		adventures.put( adventure.getId(), adventure );
 	}
 
+	@Override
 	public AdventureModel getAdventureById( int id )
 	{
 		return adventures.get( id );
