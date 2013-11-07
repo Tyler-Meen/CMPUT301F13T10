@@ -1,9 +1,13 @@
 package cmput301f13t10;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -40,7 +44,7 @@ public class SectionPresenter implements Presenter
 		mView = view;
 	}
 
-	public SectionPresenter(SectionEditView sectionEditView) 
+	public SectionPresenter( SectionEditView sectionEditView )
 	{
 		// TODO Auto-generated constructor stub
 	}
@@ -125,6 +129,38 @@ public class SectionPresenter implements Presenter
 			Logger.log( "No current section", e );
 		}
 		return stringChoices;
+	}
+
+	public void storeImage( SectionEditView editView, Intent data )
+	{
+		Bitmap tempBitmap = null;
+		if( data.getData() != null )
+		{
+			try
+			{
+				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
+				tempBitmap = BitmapFactory.decodeStream( stream );
+				stream.close();
+			}
+
+			catch( Exception e )
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			tempBitmap = (Bitmap) data.getExtras().get( "data" );
+		}
+
+		if( tempBitmap != null )
+		{
+			ImageMedia newImageMedia = new ImageMedia();
+
+			newImageMedia.setImageBitmap( tempBitmap );
+
+			mCurrentSection.add( newImageMedia );
+		}
 	}
 
 	@Override

@@ -25,5 +25,6 @@
     <string name="title_activity_adventure_edit_view">AdventureEditView</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
     <string name="title_activity_section_edit_view">Section Edit View</string>
+    <string name="action_add_image_media">Add Image</string>
     
 </resources>
