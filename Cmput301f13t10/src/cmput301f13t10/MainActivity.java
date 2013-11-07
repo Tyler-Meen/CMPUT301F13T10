@@ -23,7 +23,7 @@ public class MainActivity extends Activity
 	 */
 	public void editAdventures( View view )
 	{
-		Intent intent = new Intent( this, AdventureEditView.class );
+		Intent intent = new Intent( this, LibraryEditView.class );
 		startActivity( intent );
 	}
 
@@ -61,8 +61,8 @@ public class MainActivity extends Activity
 	 */
 	public void readAdventures( View view )
 	{
-		// Intent intent = new Intent(this, ReadLibraryView.class);
-		// startActivity(intent);
+		 Intent intent = new Intent(this, LibraryView.class);
+		 startActivity(intent);
 	}
 
 	/**
