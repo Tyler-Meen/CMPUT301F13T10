@@ -13,12 +13,20 @@ import cmput301f13t10.IdFactory;
 public class IdFactoryTest
 {
 
+	/**
+	 * {@value mThrown}
+	 */
 	Exception mThrown;
 
 	public IdFactoryTest()
 	{
 	}
 
+	/**
+	 * Set up the tests
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
@@ -26,11 +34,19 @@ public class IdFactoryTest
 		mThrown = null;
 	}
 
+	/**
+	 * Tear down the tests
+	 * 
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception
 	{
 	}
 
+	/**
+	 * Test that each time the id factory is called, it returns a new id.
+	 */
 	@Test
 	public void testUniqueId()
 	{
@@ -40,6 +56,9 @@ public class IdFactoryTest
 		assertEquals( idFactory.getNewId(), 2 );
 	}
 
+	/**
+	 * Test that different calls to getIdFactory returns the same factory
+	 */
 	@Test
 	public void testSingleton()
 	{
@@ -47,6 +66,9 @@ public class IdFactoryTest
 		assertEquals( IdFactory.getIdFactory().getNewId(), 1 );
 	}
 
+	/**
+	 * Test that when you remove an id from the factory, it gets reused
+	 */
 	@Test
 	public void testRemoveId()
 	{
@@ -66,6 +88,10 @@ public class IdFactoryTest
 		assertEquals( idFactory.getNewId(), 3 );
 	}
 
+	/**
+	 * Test that when an Id is removed from the end, that new ids are added
+	 * starting from the earliest usable id
+	 */
 	@Test
 	public void testRemoveIdFromEnd()
 	{
@@ -89,6 +115,10 @@ public class IdFactoryTest
 		assertEquals( idFactory.getNewId(), 5 );
 	}
 
+	/**
+	 * Test that an ArrayindexOutOfBoundsException is thrown when you try to
+	 * remove an id that has already been removed
+	 */
 	@Test
 	public void testRemoveNonExistant()
 	{
@@ -109,6 +139,10 @@ public class IdFactoryTest
 		assertEquals( idFactory.getNewId(), 5 );
 	}
 
+	/**
+	 * Test that an ArrayindexOutOfBoundsException is thrown when you try to
+	 * remove an id that is not in use
+	 */
 	@Test
 	public void testRemoveOutOfBounds()
 	{

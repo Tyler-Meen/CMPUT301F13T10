@@ -112,11 +112,11 @@ public class AdventureModel implements Serializable
 		int index = indexOf( section );
 		if( index == -1 )
 		{
-			mSections.set( index, section );
+			mSections.add( section );
 		}
 		else
 		{
-			mSections.add( section );
+			mSections.set( index, section );
 		}
 
 	}

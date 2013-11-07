@@ -136,6 +136,11 @@ public class SectionModel implements Serializable
 		return mChoices;
 	}
 
+	public void setName( String name )
+	{
+		mName = name;
+	}
+
 	/**
 	 * Get the name of the section
 	 * 

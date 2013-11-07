@@ -14,18 +14,44 @@ import cmput301f13t10.SectionModel;
 public class SectionModelTest
 {
 
+	/**
+	 * {@value mSection}
+	 */
 	private SectionModel mSection;
+	/**
+	 * {@value mMedia1}
+	 */
 	private MockMedia mMedia1;
+	/**
+	 * {@value mMedia1Id}
+	 */
 	private int mMedia1Id;
+	/**
+	 * {@value mMedia2}
+	 */
 	private MockMedia mMedia2;
+	/**
+	 * {@value mMedia2Id}
+	 */
 	private int mMedia2Id;
+	/**
+	 * {@value mMedia3}
+	 */
 	private MockMedia mMedia3;
+	/**
+	 * {@value mMedia3Id}
+	 */
 	private int mMedia3Id;
 
 	public SectionModelTest()
 	{
 	}
 
+	/**
+	 * Set up the tests
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
@@ -44,11 +70,20 @@ public class SectionModelTest
 		mMedia3Id = mMedia3.getId();
 	}
 
+	/**
+	 * Tear down the tests
+	 * 
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception
 	{
 	}
 
+	/**
+	 * Test that, when media are added to a section, they are inserted in the
+	 * same order they are added in
+	 */
 	@Test
 	public void testAddMedia()
 	{
@@ -60,6 +95,10 @@ public class SectionModelTest
 		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
+	/**
+	 * test that when a media is removed for a section, it no longer appears in
+	 * the section, and the gap it would have created is filled.
+	 */
 	@Test
 	public void testRemoveMedia()
 	{
@@ -72,6 +111,10 @@ public class SectionModelTest
 		assertEquals( medias.get( 1 ).getId(), mMedia3Id );
 	}
 
+	/**
+	 * Test that if a media is moved in the positive direction, it appears in
+	 * the position indicated.
+	 */
 	@Test
 	public void testMoveMediaPositive()
 	{
@@ -96,6 +139,10 @@ public class SectionModelTest
 		assertEquals( medias.get( 2 ).getId(), mMedia2Id );
 	}
 
+	/**
+	 * Test that if a media is moved in the negative direction, it appears in
+	 * the position indicated.
+	 */
 	@Test
 	public void testMoveMediaNegative()
 	{
@@ -120,6 +167,10 @@ public class SectionModelTest
 		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
+	/**
+	 * Test that if you try to move a media in the positive direction, and it
+	 * will go out of bounds if you do, that an IndexOutOfBoundsException.
+	 */
 	@Test
 	public void testMoveInvalidOffsetPositive()
 	{
@@ -144,6 +195,10 @@ public class SectionModelTest
 		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
+	/**
+	 * Test that if you try to move a media in the negative direction, and it
+	 * will go out of bounds if you do, that an IndexOutOfBoundsException.
+	 */
 	@Test
 	public void testMoveInvalidOffsetNegative()
 	{
@@ -168,6 +223,9 @@ public class SectionModelTest
 		assertEquals( medias.get( 2 ).getId(), mMedia3Id );
 	}
 
+	/**
+	 * Test that if you try to move a media by zero, it does not move.
+	 */
 	@Test
 	public void testMoveZero()
 	{
