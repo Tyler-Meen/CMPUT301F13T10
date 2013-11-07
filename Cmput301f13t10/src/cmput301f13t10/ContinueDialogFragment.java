@@ -25,7 +25,7 @@ public class ContinueDialogFragment extends DialogFragment
 	/**
 	 * The view that created this dialog box.
 	 */
-	private SectionView mView;
+	private SectionReadView mView;
 
 	@Override
 	public Dialog onCreateDialog( Bundle savedInstanceState )
@@ -38,7 +38,7 @@ public class ContinueDialogFragment extends DialogFragment
 
 		builder.setView( view );
 
-		mView = (SectionView) getArguments().getSerializable( AppConstants.ADVENTURE_READ_VIEW );
+		mView = (SectionReadView) getArguments().getSerializable( AppConstants.ADVENTURE_READ_VIEW );
 
 		CancelButtonListener cancelListener = new CancelButtonListener();
 		Button btn = (Button) view.findViewById( R.id.cancel_continue_button );

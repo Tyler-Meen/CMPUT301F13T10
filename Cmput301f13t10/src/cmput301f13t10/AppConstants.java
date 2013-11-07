@@ -13,6 +13,7 @@ public class AppConstants
 	public static final String CHOICES_BUNDLE = "choices_bundle";
 	public static final String START = "Start";
 	public static final String ADVENTURE_READ_VIEW = "adventure_read_view";
+	public static final String ADVENTURE_EDIT_VIEW = "adventure_edit_view";
 	public static final String CURRENT_ADVENTURE = "current_adventure";
 	public static final float PAGE_TURN_VELOCITY = 1;
 	public static final String ADVENTURE_ID = "adventure_id";

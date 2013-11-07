@@ -2,18 +2,18 @@ package cmput301f13t10;
 
 public class SectionChoice
 {
-	private SectionModel mSectionModel;
+	private SectionTitle mSectionTitle;
 	private String mUserChoice;
 
-	public SectionChoice( SectionModel sectionModel, String userChoice )
+	public SectionChoice( SectionTitle sectionTitle, String userChoice )
 	{
-		mSectionModel = sectionModel;
+		mSectionTitle = sectionTitle;
 		mUserChoice = userChoice;
 	}
 
-	public SectionModel getSectionModel()
+	public SectionTitle getSectionModel()
 	{
-		return mSectionModel;
+		return mSectionTitle;
 	}
 
 	public String getUserChoice()

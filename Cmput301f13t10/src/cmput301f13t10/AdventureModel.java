@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Contains information about an adventure that the user can read, navigate
  * through, and edit.
  * 
- * @author Brendan Cowan
+ * @author Brendan Cowan, Steven Gerdes
  * 
  * @author Braeden Soetaert
  * 
@@ -31,13 +31,13 @@ public class AdventureModel implements Serializable
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
-	
+
 	/**
 	 * Constructor
 	 */
 	public AdventureModel()
 	{
-		this("");
+		this( "" );
 	}
 
 	/**
@@ -54,17 +54,18 @@ public class AdventureModel implements Serializable
 		mSections = new ArrayList<SectionModel>();
 		mSections.add( startSection );
 	}
+
 	
 	/**
 	 * Deletes the section corresponding to the given section id. If the section id
 	 * is not in the list of sections, it is not deleted.
 	 * @param sectionId
 	 */
-	public void deleteSection(Integer sectionId)
+	public void deleteSection( Integer sectionId )
 	{
 		for( int i = 0; i < mSections.size(); i++ )
 		{
-			if( mSections.get( i ).getId() == sectionId)
+			if( mSections.get( i ).getId() == sectionId )
 			{
 				mSections.remove( i );
 			}
@@ -122,18 +123,29 @@ public class AdventureModel implements Serializable
 	 */
 	public void setSection( SectionModel section )
 	{
-		int index = indexOf( section );
-		if( index == -1 )
+		try
 		{
-			mSections.set( index, section );
+			mSections.set( indexOf( section ), section );
 		}
-		else
+		catch( SectionNotFoundException e )
 		{
 			mSections.add( section );
 		}
 
 	}
 
+	public SectionModel getSection( Integer sectionId )
+	{
+		try
+		{
+			return mSections.get( indexOf( sectionId ) );
+		}
+		catch( SectionNotFoundException e )
+		{
+			return null;
+		}
+	}
+	
 	/**
 	 * Find the index of a section in the adventure, as determined by the
 	 * section's id.
@@ -143,17 +155,22 @@ public class AdventureModel implements Serializable
 	 * @return The index of the section, if it exists in the adventure. -1 if it
 	 *         does not.
 	 */
-	public int indexOf( SectionModel section )
+	public int indexOf( SectionModel section ) throws SectionNotFoundException
+	{
+		int id = section.getId();
+		return indexOf( id );
+	}
+
+	private int indexOf( int id ) throws SectionNotFoundException
 	{
 		int i = 0;
-		int id = section.getId();
 		for( SectionModel checkSection : mSections )
 		{
 			if( checkSection.getId() == id )
 				return i;
 			i++;
 		}
-		return -1;
+		throw new SectionNotFoundException();
 	}
 
 	/**
@@ -175,6 +192,13 @@ public class AdventureModel implements Serializable
 	public SectionModel getStartSection()
 	{
 		return mSections.get( 0 );
+	}
+	
+	public SectionModel getCurrentSection()
+	{
+		// TODO make it so it keeps track of current section and returns it
+		// currently it returns start section
+		return getStartSection();
 	}
 
 	/**
@@ -202,5 +226,8 @@ public class AdventureModel implements Serializable
 	private void readObjectNoData() throws ObjectStreamException
 	{
 	}
+
+
+
 
 }
