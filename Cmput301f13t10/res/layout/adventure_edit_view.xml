@@ -19,7 +19,7 @@
         android:layout_weight="1" >
 
         <ListView
-            android:id="@+id/sectionList"
+            android:id="@+id/adventure_edit_list"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#ffffff" >

@@ -27,6 +27,11 @@ public class AdventureModel implements Serializable
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
+	
+	public AdventureModel()
+	{
+		this("");
+	}
 
 	/**
 	 * Constructor
@@ -41,6 +46,17 @@ public class AdventureModel implements Serializable
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
 		mSections.add( startSection );
+	}
+	
+	public void deleteSection(Integer sectionId)
+	{
+		for( int i = 0; i < mSections.size(); i++ )
+		{
+			if( mSections.get( i ).getId() == sectionId)
+			{
+				mSections.remove( i );
+			}
+		}
 	}
 
 	/**
