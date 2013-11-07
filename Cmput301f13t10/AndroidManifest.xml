@@ -32,12 +32,12 @@
         </activity>
         <activity
             android:name="cmput301f13t10.AdventureEditView"
-            android:label="@string/title_activity_adventure_edit_view" 
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName="cmput301f13t10.MainActivity" >
+            android:label="@string/title_activity_adventure_edit_view"
+            android:parentActivityName="cmput301f13t10.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.MainActivity" /> 
+                android:value="cs.ualberta.cmput301f13t10.MainActivity" />
         </activity>
         <activity
             android:name="cmput301f13t10.SectionEditView"

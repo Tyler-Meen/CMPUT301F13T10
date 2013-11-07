@@ -23,6 +23,7 @@
     <string name="user_text">User text</string>
     <string name="section_title">Section Title</string>
     <string name="title_activity_adventure_edit_view">AdventureEditView</string>
-
-
+    <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
+    <string name="title_activity_section_edit_view">Section Edit View</string>
+    
 </resources>
