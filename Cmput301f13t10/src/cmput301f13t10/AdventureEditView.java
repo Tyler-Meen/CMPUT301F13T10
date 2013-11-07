@@ -52,6 +52,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	 */
 	private void mLoadSections()
 	{
+		mSectionTitles = mPresenter.getSectionTitles();
 		SectionArrayAdapter adapter = new SectionArrayAdapter( this, mSectionTitles );
 
 		ListView listView = (ListView) findViewById( R.id.adventure_edit_list );
@@ -123,7 +124,6 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	protected void onResume()
 	{
 		super.onResume();
-		mSectionTitles = mPresenter.getSectionTitles();
 		mLoadSections();
 	}
 
@@ -147,7 +147,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 
 	public void onDeleteCancel( DialogFragment dialog )
 	{
-
+		
 	}
 
 	/**

@@ -62,8 +62,7 @@ public class DeleteSectionDialogFragment extends DialogFragment
 	{
 		// Build the dialog and set up the button click handlers
 		AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
-		String sectionTitle = savedInstanceState.getString( AppConstants.SECTION_TITLE );
-		Integer sectionId = savedInstanceState.getInt( AppConstants.SECTION_ID );
+		String sectionTitle = getArguments().getString( AppConstants.SECTION_TITLE );
 		String titleString = "Section: " + sectionTitle;
 		builder.setTitle( titleString ).setMessage( R.string.delete_section_prompt )
 				.setPositiveButton( R.string.delete_section_accept, new DialogInterface.OnClickListener()
