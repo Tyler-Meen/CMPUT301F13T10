@@ -58,8 +58,8 @@ import android.widget.TextView.OnEditorActionListener;
  * 
  * @author Braeden Soetaert
  * @author Tyler Meen
- * @author Steven Gerdes 
- * @author Aly-khan Jamal 
+ * @author Steven Gerdes
+ * @author Aly-khan Jamal
  * 
  */
 public class SectionEditView extends Activity implements SectionView
@@ -67,12 +67,7 @@ public class SectionEditView extends Activity implements SectionView
 	private SectionPresenter mPresenter;
 
 	private String mDisplayTitle;
-	private EditText mBodyText;
 	private ArrayList<Media> mMedia;
-	/**
-	 * Whether or not we are currently using the camera.
-	 */
-	private Boolean mCameraMode = false;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -86,24 +81,17 @@ public class SectionEditView extends Activity implements SectionView
 		int defaultVal = -1;
 		Integer adventureId;
 		Integer sectionId;
+		Intent intent = getIntent();
 
-		if( savedInstanceState != null && !savedInstanceState.isEmpty() )
-		{
-			adventureId = savedInstanceState.getInt( AppConstants.ADVENTURE_ID );
-			sectionId = savedInstanceState.getInt( AppConstants.SECTION_ID );
-		}
+		adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
+		if( intent.hasExtra( AppConstants.SECTION_ID ) )
+			sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
 		else
-		{
-			Intent intent = getIntent();
-			adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
-			if( intent.hasExtra( AppConstants.SECTION_ID ) )
-				sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
-			else
-				sectionId = null;
-		}
+			sectionId = null;
 
 		mPresenter.setCurrentAdventure( adventureId );
 		mPresenter.setCurrentSectionById( sectionId );
+		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
 
 		mDisplayTitle = mPresenter.getSectionTitle();
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.section_edit_title );
@@ -225,7 +213,6 @@ public class SectionEditView extends Activity implements SectionView
 	private void addImage()
 	{
 		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
-		mCameraMode = true;
 		startActivityForResult( intent, 0 );
 	}
 
@@ -235,28 +222,10 @@ public class SectionEditView extends Activity implements SectionView
 	 */
 	protected void onActivityResult( int requestCode, int resultCode, Intent data )
 	{
-		mCameraMode = false;
 		if( requestCode == 0 && resultCode == Activity.RESULT_OK )
 		{
 			mPresenter.storeImage( this, data );
 			loadMedia();
-		}
-
-	}
-
-	@Override
-	protected void onSaveInstanceState( Bundle savedInstanceState )
-	{
-		super.onSaveInstanceState( savedInstanceState );
-		if( mCameraMode )
-		{
-			savedInstanceState.putInt( AppConstants.ADVENTURE_ID, mPresenter.getAdventureId() );
-			savedInstanceState.putInt( AppConstants.SECTION_ID, mPresenter.getSectionId() );
-		}
-		if( !mCameraMode )
-		{
-			savedInstanceState.remove( AppConstants.ADVENTURE_ID );
-			savedInstanceState.remove( AppConstants.SECTION_ID );
 		}
 	}
 
