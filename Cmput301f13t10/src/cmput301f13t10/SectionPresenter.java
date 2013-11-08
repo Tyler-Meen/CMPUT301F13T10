@@ -1,11 +1,12 @@
 package cmput301f13t10;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Observable;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * Presenter for the Adventure group of classes, as per the MVP pattern.
@@ -144,6 +145,34 @@ public class SectionPresenter
 		catch( NullPointerException e )
 		{
 			Logger.log( "No current section", e );
+		}
+	}
+
+	public void storeImage( SectionEditView editView, Intent data )
+	{
+		Bitmap tempBitmap = null;
+		if( data.getData() != null )
+		{
+			try
+			{
+				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
+				tempBitmap = BitmapFactory.decodeStream( stream );
+				stream.close();
+			}
+			catch( Exception e )
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			tempBitmap = (Bitmap) data.getExtras().get( "data" );
+		}
+		if( tempBitmap != null )
+		{
+			ImageMedia newImageMedia = new ImageMedia();
+			newImageMedia.setImageBitmap( tempBitmap );
+			mCurrentSection.add( newImageMedia );
 		}
 	}
 }

@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +19,7 @@ import android.widget.TextView.OnEditorActionListener;
 public class SectionEditView extends Activity implements SectionView
 {
 	private SectionPresenter mPresenter;
-	
+
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
@@ -30,7 +32,7 @@ public class SectionEditView extends Activity implements SectionView
 
 		Intent intent = getIntent();
 		int defaultVal = -1;
-		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )			
+		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
 			mPresenter.setCurrentAdventure( intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal ) );
 		if( intent.hasExtra( AppConstants.SECTION_ID ) )
 			mPresenter.setCurrentSectionById( intent.getIntExtra( AppConstants.SECTION_ID, defaultVal ) );
@@ -55,13 +57,13 @@ public class SectionEditView extends Activity implements SectionView
 
 		return super.onCreateOptionsMenu( menu );
 	}
-	
+
 	@Override
 	public Context getContext()
 	{
 		return this;
 	}
-	
+
 	public void launchModifyChoicesAction( View view )
 	{
 		Intent intent = new Intent( this, SectionModifyChoicesView.class );
@@ -69,7 +71,7 @@ public class SectionEditView extends Activity implements SectionView
 		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
 		startActivity( intent );
 	}
-	
+
 	public void setUpActionBar()
 	{
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB )
@@ -83,7 +85,7 @@ public class SectionEditView extends Activity implements SectionView
 				@Override
 				public boolean onEditorAction( TextView v, int actionId, KeyEvent event )
 				{
-					mPresenter.UpdateSectionTitle(v.getText().toString());
+					mPresenter.UpdateSectionTitle( v.getText().toString() );
 					return false;
 				}
 			} );
@@ -91,9 +93,39 @@ public class SectionEditView extends Activity implements SectionView
 			actionBar.setDisplayHomeAsUpEnabled( true );
 		}
 	}
+
+	public boolean onOptionsItemSelected( MenuItem item )
+	{
+		switch( item.getItemId() )
+		{
+		case R.id.action_add_media:
+			addImage();
+			return true;
+		default:
+
+			return super.onOptionsItemSelected( item );
+
+		}
+
+	}
+
+	public void addImage()
+
+	{
+
+		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
+
+		startActivityForResult( intent, 0 );
+
+	}
+
+	protected void onActivityResult( int requestCode, int resultCode, Intent data )
+	{
+		if( requestCode == 0 && resultCode == Activity.RESULT_OK )
+		{
+			mPresenter.storeImage( this, data );
+		}
+
+	}
+
 }
-
-
-
-
-
