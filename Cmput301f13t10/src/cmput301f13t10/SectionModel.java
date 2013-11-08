@@ -26,6 +26,9 @@ public class SectionModel implements Serializable
 	 * A list of media contained within this section.
 	 */
 	private ArrayList<Media> mMedias;
+	/**
+	 * The id of the section.
+	 */
 	private int mId;
 
 	/**
@@ -121,6 +124,12 @@ public class SectionModel implements Serializable
 		mChoices.add( choice );
 	}
 
+	/**
+	 * Remove a choice from the section
+	 * 
+	 * @param choiceToRemove
+	 *            The choice to remove
+	 */
 	public void removeChoice( SectionChoice choiceToRemove )
 	{
 		mChoices.remove( choiceToRemove );
@@ -146,11 +155,22 @@ public class SectionModel implements Serializable
 		return mName;
 	}
 
+	/**
+	 * Set the name of the section
+	 * 
+	 * @param sectionName
+	 *            The new name of the section
+	 */
 	public void setName( String sectionName )
 	{
 		mName = sectionName;
 	}
 
+	/**
+	 * Get the id of the section
+	 * 
+	 * @return The id of the section
+	 */
 	public int getId()
 	{
 		return mId;
