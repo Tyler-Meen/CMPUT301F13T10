@@ -20,7 +20,7 @@
 
         <ListView
             android:id="@+id/adventure_read_list"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="#ffffff" >
         </ListView>

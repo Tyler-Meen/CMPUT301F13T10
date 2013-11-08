@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10;
 
 import java.io.File;
@@ -53,16 +53,13 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 /**
- * This is the view of a section it can have images or text added to it
- * it can also navigate to the modify choices menu and back to the adventure edit view
+ * This is the view of a section it can have images or text added to it it can
+ * also navigate to the modify choices menu and back to the adventure edit view
+ * 
  * @author Braeden Soetaert
  * @author Tyler Meen
- * @author Steven Gerdes
-<<<<<<< HEAD
- * @author Aly-khan Jamal
-=======
- * @author Aly-Khan
->>>>>>> Comment and license
+ * @author Steven Gerdes 
+ * @author Aly-khan Jamal 
  * 
  */
 public class SectionEditView extends Activity implements SectionView
@@ -72,6 +69,10 @@ public class SectionEditView extends Activity implements SectionView
 	private String mDisplayTitle;
 	private EditText mBodyText;
 	private ArrayList<Media> mMedia;
+	/**
+	 * Whether or not we are currently using the camera.
+	 */
+	private Boolean mCameraMode = false;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -82,15 +83,28 @@ public class SectionEditView extends Activity implements SectionView
 
 		setContentView( R.layout.section_edit_view );
 		setUpActionBar();
-
-		Intent intent = getIntent();
 		int defaultVal = -1;
-		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
-			mPresenter.setCurrentAdventure( intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal ) );
-		if( intent.hasExtra( AppConstants.SECTION_ID ) )
-			mPresenter.setCurrentSectionById( intent.getIntExtra( AppConstants.SECTION_ID, defaultVal ) );
+		Integer adventureId;
+		Integer sectionId;
+
+		if( savedInstanceState != null && !savedInstanceState.isEmpty() )
+		{
+			adventureId = savedInstanceState.getInt( AppConstants.ADVENTURE_ID );
+			sectionId = savedInstanceState.getInt( AppConstants.SECTION_ID );
+		}
 		else
-			mPresenter.setCurrentSectionById( null );
+		{
+			Intent intent = getIntent();
+			adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
+			if( intent.hasExtra( AppConstants.SECTION_ID ) )
+				sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
+			else
+				sectionId = null;
+		}
+
+		mPresenter.setCurrentAdventure( adventureId );
+		mPresenter.setCurrentSectionById( sectionId );
+
 		mDisplayTitle = mPresenter.getSectionTitle();
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.section_edit_title );
 		title.setText( mDisplayTitle );
@@ -147,7 +161,7 @@ public class SectionEditView extends Activity implements SectionView
 	public void loadMedia()
 	{
 		mMedia = mPresenter.getMedia();
-		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.titleList );
+		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.sectionList );
 		mPresenter.setCurrentSectionView( linearLayout );
 
 	}
@@ -187,8 +201,7 @@ public class SectionEditView extends Activity implements SectionView
 	}
 
 	/**
-	 * This is the result of clicking on an option 
-	 * or the home button
+	 * This is the result of clicking on an option or the home button
 	 */
 	public boolean onOptionsItemSelected( MenuItem item )
 	{
@@ -212,6 +225,7 @@ public class SectionEditView extends Activity implements SectionView
 	private void addImage()
 	{
 		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
+		mCameraMode = true;
 		startActivityForResult( intent, 0 );
 	}
 
@@ -221,11 +235,29 @@ public class SectionEditView extends Activity implements SectionView
 	 */
 	protected void onActivityResult( int requestCode, int resultCode, Intent data )
 	{
+		mCameraMode = false;
 		if( requestCode == 0 && resultCode == Activity.RESULT_OK )
 		{
 			mPresenter.storeImage( this, data );
+			loadMedia();
 		}
 
+	}
+
+	@Override
+	protected void onSaveInstanceState( Bundle savedInstanceState )
+	{
+		super.onSaveInstanceState( savedInstanceState );
+		if( mCameraMode )
+		{
+			savedInstanceState.putInt( AppConstants.ADVENTURE_ID, mPresenter.getAdventureId() );
+			savedInstanceState.putInt( AppConstants.SECTION_ID, mPresenter.getSectionId() );
+		}
+		if( !mCameraMode )
+		{
+			savedInstanceState.remove( AppConstants.ADVENTURE_ID );
+			savedInstanceState.remove( AppConstants.SECTION_ID );
+		}
 	}
 
 	@Override

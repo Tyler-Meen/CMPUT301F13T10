@@ -237,11 +237,9 @@ public class SectionPresenter
 		//tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
 	}
 	
-	public void addMedia(Uri imageUri)
+	public ArrayList<Media> getMedia()
 	{
-		ImageMedia newImageMedia = new ImageMedia();
-		newImageMedia.setImagePath( imageUri );
-		mCurrentSection.add( newImageMedia );
+		return mCurrentSection.getMedia();
 	}
 
 	/**
@@ -294,5 +292,12 @@ public class SectionPresenter
 	{
 		mCurrentSection.removeChoice( choiceToRemove );
 		mView.updateSectionView();
+	}
+
+	public void setNextSectionByIndex( int index )
+	{
+		if( mCurrentSection == null )
+			return;
+		setCurrentSection( mCurrentAdventure.getSection( mCurrentSection.getChoices().get(index).getSectionTitle().getId() ));
 	}
 }

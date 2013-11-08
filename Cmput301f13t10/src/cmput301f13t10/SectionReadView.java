@@ -28,6 +28,7 @@ either expressed or implied, of the FreeBSD Project.
 */
 package cmput301f13t10;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -45,7 +46,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Brendan Cowan
  * 
  */
-public class SectionReadView extends Activity implements SectionView
+public class SectionReadView extends Activity implements SectionView, Serializable
 {
 	/**
 	 * The presenter for the view (as per MVP)
@@ -111,7 +112,7 @@ public class SectionReadView extends Activity implements SectionView
 	 */
 	public void changeSection( int sectionId )
 	{
-		mPresenter.setCurrentSectionById( sectionId );
+		mPresenter.setNextSectionByIndex( sectionId );
 	}
 	
 
@@ -138,6 +139,8 @@ public class SectionReadView extends Activity implements SectionView
 			ArrayList<String> choices = mPresenter.getChoiceDescriptions();
 			choicesBundle.putStringArray( AppConstants.CHOICES_BUNDLE, (String[]) choices.toArray( new String[choices.size()] ) );
 
+			choicesBundle.putSerializable( AppConstants.ADVENTURE_READ_VIEW, SectionReadView.this );
+			
 			ContinueDialogFragment dialog = new ContinueDialogFragment();
 			dialog.setArguments( choicesBundle );
 			dialog.show( getFragmentManager(), "" );
