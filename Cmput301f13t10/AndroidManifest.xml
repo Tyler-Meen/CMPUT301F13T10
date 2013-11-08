@@ -25,10 +25,10 @@
         <activity
             android:name="cmput301f13t10.SectionReadView"
             android:label="@string/app_name"
-            android:parentActivityName="cmput301f13t10.AdventureReadView" >
+            android:parentActivityName="cmput301f13t10.LibraryView" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.AdventureReadView" />
+                android:value="cs.ualberta.cmput301f13t10.LibraryView" />
         </activity>
         <activity
             android:name="cmput301f13t10.AdventureEditView"
