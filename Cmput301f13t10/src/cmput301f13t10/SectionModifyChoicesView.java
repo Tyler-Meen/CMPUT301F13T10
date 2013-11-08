@@ -15,8 +15,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import cs.ualberta.cmput301f13t10.R;
 
+/**
+ * This is the activity that allows a user to change which choices the current section is linked to 
+ * @author Steven Gerdes
+ *
+ */
 public class SectionModifyChoicesView extends Activity implements SectionView, AddChoiceDialogListener
 {
+	/**
+	 * The section presenter that gives this view its correctly formatted information
+	 */
 	private SectionPresenter mPresenter;
 
 	@Override
@@ -47,6 +55,9 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		updatePossibleChoices();
 	}
 
+	/**
+	 * Updates the list of possible section to use as choices
+	 */
 	private void updatePossibleChoices()
 	{
 		ArrayList<SectionTitle> choices = mPresenter.getSectionTitles();
@@ -57,6 +68,10 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		sectionList.setOnItemClickListener( onAddSectionChoice() );
 	}
 
+	/**
+	 * When some one wants to add a section it will pop up a dialog asking for more information
+	 * @return this as a click listener
+	 */
 	private OnItemClickListener onAddSectionChoice()
 	{
 		return new OnItemClickListener()
@@ -78,6 +93,9 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		};
 	}
 
+	/**
+	 * update the currently selected choices list
+	 */
 	private void updateCurrentChoices()
 	{
 		ArrayList<SectionChoice> choices = mPresenter.getChoices();
@@ -88,6 +106,10 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		sectionList.setOnItemClickListener( onRemoveSectionChoice() );
 	}
 
+	/**
+	 * What to do when some one want to remove a section
+	 * @return this function so it can be used 
+	 */
 	private OnItemClickListener onRemoveSectionChoice()
 	{
 		return new OnItemClickListener()
@@ -95,13 +117,16 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 			@Override
 			public void onItemClick( AdapterView parent, View v, int position, long id )
 			{
-				//TODO:fix
 				SectionChoice selectedChoice = (SectionChoice) parent.getItemAtPosition( position );
 				mPresenter.removeSectionChoice( selectedChoice );
 			}
 		};
 	}
 
+	/**
+	 * Adds a new section choice dialog
+	 * @param view the view that was clicked
+	 */
 	public void newSectionChoice( View view )
 	{
 		SectionChoiceDialogFragment dialog = new SectionChoiceDialogFragment();

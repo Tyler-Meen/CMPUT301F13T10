@@ -14,16 +14,53 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cs.ualberta.cmput301f13t10.R;
 
+/**
+ * The dislog to add choice descriptions to a existing or new section
+ * 
+ * @author Steven Gerdes
+ * 
+ */
 public class SectionChoiceDialogFragment extends DialogFragment
 {
+	/**
+	 * Instance of the interface to deliver action events to.
+	 */
 	private AddChoiceDialogListener mListener;
+	/**
+	 * The section title that will be possibly edited in the section
+	 */
 	private EditText mSectionTitle;
+	/**
+	 * The choice description to be matched to the section chosen
+	 */
 	private EditText mChoiceDescription;
+	/**
+	 * The sections Id to be used to identify the selected section
+	 */
 	private int mSectionId;
 
+	/**
+	 * The activity that creates an instance of this dialog fragment must
+	 * implement this interface in order to receive event callbacks. Each method
+	 * passes the DialogFragment in case the host needs to query it.
+	 * 
+	 * @author Steven Gerdes
+	 * 
+	 */
 	public interface AddChoiceDialogListener
 	{
+		/**
+		 * Called when the user confirms the deletion of the section.
+		 * 
+		 * @param dialog
+		 *            The dialog that was displayed.
+		 */
 		public void onAddChoice( DialogFragment dialog );
+		/**
+		 * Called when the user cancels the deletion of the section.
+		 * 
+		 * @param dialog
+		 */
 		public void onCancel( DialogFragment dialog );
 	}
 
@@ -31,12 +68,12 @@ public class SectionChoiceDialogFragment extends DialogFragment
 	{
 		return mSectionTitle.getText().toString();
 	}
-	
+
 	public String getChoiceDescription()
 	{
 		return mChoiceDescription.getText().toString();
 	}
-	
+
 	@Override
 	public void onAttach( Activity activity )
 	{
@@ -66,7 +103,7 @@ public class SectionChoiceDialogFragment extends DialogFragment
 		View view = inflater.inflate( R.layout.section_choice_dialog, null );
 		mSectionTitle = (EditText) view.findViewById( R.id.choice_title_text );
 		mChoiceDescription = (EditText) view.findViewById( R.id.choice_description_text );
-		
+
 		String sectionTitle = getArguments().getString( AppConstants.SECTION_TITLE );
 		if( sectionTitle != null )
 		{
@@ -89,9 +126,9 @@ public class SectionChoiceDialogFragment extends DialogFragment
 		builder.setNegativeButton( R.string.cancel, new DialogInterface.OnClickListener()
 		{
 			public void onClick( DialogInterface dialog, int id )
-			{ 
+			{
 				// Send the negative button event back to the host
-				// activity 
+				// activity
 				mListener.onCancel( SectionChoiceDialogFragment.this );
 			}
 		} );

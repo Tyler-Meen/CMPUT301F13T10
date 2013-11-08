@@ -10,6 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import cs.ualberta.cmput301f13t10.R;
 
+/**
+ * Displays section choices in a list view
+ * @author Steven Gerdes
+ *
+ */
 public class SectionChoiceArrayAdapter extends ArrayAdapter<SectionChoice>
 {
 	/**

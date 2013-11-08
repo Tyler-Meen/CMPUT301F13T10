@@ -200,11 +200,21 @@ public class SectionPresenter
 		}
 	}
 
+	/**
+	 * 
+	 * @return if this is the last section in the chain 
+	 */
 	public boolean atLastSection()
 	{
 		return mCurrentSection.getChoices().isEmpty();
 	}
 
+	/**
+	 * This takes the separate information from the view and makes it into a choice
+	 * @param id the id of the choice to add
+	 * @param decisionText the decision the user has to make
+	 * @param sectionTitle the title of the section 
+	 */
 	public void addSectionChoice( Integer id, String decisionText, String sectionTitle )
 	{
 		SectionModel section = mCurrentAdventure.getSection( id );
@@ -218,12 +228,9 @@ public class SectionPresenter
 		mView.updateSectionView();
 	}
 
-	public void removeSectionChoice( Integer id )
-	{
-		//mCurrentSection.removeChoice( choiceToRemove );
-		mView.updateSectionView();
-	}
-
+	/**
+	 * @return just the descriptions of each choice
+	 */
 	public ArrayList<String> getChoiceDescriptions()
 	{
 		ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
@@ -235,6 +242,10 @@ public class SectionPresenter
 		return stringChoices;
 	}
 
+	/**
+	 * removes the section choice from the current section
+	 * @param choiceToRemove the choice to remove 
+	 */
 	public void removeSectionChoice( SectionChoice choiceToRemove )
 	{
 		mCurrentSection.removeChoice( choiceToRemove );
