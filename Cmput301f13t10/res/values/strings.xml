@@ -24,7 +24,7 @@
     <string name="modify_choices">Modify Choices</string>
     <string name="possible_choices">Possible Choices</string>
     <string name="selected_choices">Selected Choices</string>
-    <string name="user_text">User text</string>
+    <string name="choice_description_hint">Choice Description</string>
     <string name="section_title">Section Title</string>
     <string name="library_label">Library</string>
     <string name="no_adventures">No Adventures Yet</string>

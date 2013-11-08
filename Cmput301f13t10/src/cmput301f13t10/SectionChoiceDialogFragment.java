@@ -64,8 +64,8 @@ public class SectionChoiceDialogFragment extends DialogFragment
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 
 		View view = inflater.inflate( R.layout.section_choice_dialog, null );
-		mChoiceDescription = (EditText) view.findViewById( R.id.choice_title_text );
-		mSectionTitle = (EditText) view.findViewById( R.id.choice_description_text );
+		mSectionTitle = (EditText) view.findViewById( R.id.choice_title_text );
+		mChoiceDescription = (EditText) view.findViewById( R.id.choice_description_text );
 		
 		String sectionTitle = getArguments().getString( AppConstants.SECTION_TITLE );
 		if( sectionTitle != null )

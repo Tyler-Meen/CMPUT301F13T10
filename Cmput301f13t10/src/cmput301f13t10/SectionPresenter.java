@@ -86,23 +86,9 @@ public class SectionPresenter
 	 * 
 	 * @return An ArrayList of strings indicating possible choices
 	 */
-	public ArrayList<String> getChoices()
+	public ArrayList<SectionChoice> getChoices()
 	{
-		ArrayList<String> stringChoices = null;
-		try
-		{
-			ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
-			stringChoices = new ArrayList<String>();
-			for( SectionChoice s : sectionChoices )
-			{
-				stringChoices.add( s.getUserChoice() );
-			}
-		}
-		catch( NullPointerException e )
-		{
-			Logger.log( "No current section", e );
-		}
-		return stringChoices;
+		return mCurrentSection.getChoices();
 	}
 
 	/**
@@ -238,15 +224,21 @@ public class SectionPresenter
 		mView.updateSectionView();
 	}
 
-	public ArrayList<SectionTitle> getChoiceSectionTitles()
+	public ArrayList<String> getChoiceDescriptions()
 	{
 		ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
-		ArrayList<SectionTitle> stringChoices = new ArrayList<SectionTitle>();
+		ArrayList<String> stringChoices = new ArrayList<String>();
 		for( SectionChoice s : sectionChoices )
 		{
-			stringChoices.add( s.getSectionTitle() );
+			stringChoices.add( s.getChoiceDescription() );
 		}
 		return stringChoices;
+	}
+
+	public void removeSectionChoice( SectionChoice choiceToRemove )
+	{
+		mCurrentSection.removeChoice( choiceToRemove );
+		mView.updateSectionView();
 	}
 	
 }

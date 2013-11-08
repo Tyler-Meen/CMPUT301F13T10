@@ -2,30 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/section_title" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/user_text" />
-    </LinearLayout>
+    android:orientation="vertical" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/section_title"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="@dimen/buttonPadding"
-        android:text="X" />
+        android:hint="@string/section_title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/choice_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choice_description_hint" />
 
 </LinearLayout>

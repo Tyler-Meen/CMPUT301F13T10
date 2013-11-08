@@ -107,7 +107,7 @@ public class SectionReadView extends Activity implements SectionView
 		public void onClick( View v )
 		{
 			Bundle choicesBundle = new Bundle();
-			ArrayList<String> choices = mPresenter.getChoices();
+			ArrayList<String> choices = mPresenter.getChoiceDescriptions();
 			choicesBundle.putStringArray( AppConstants.CHOICES_BUNDLE, (String[]) choices.toArray( new String[choices.size()] ) );
 
 			ContinueDialogFragment dialog = new ContinueDialogFragment();

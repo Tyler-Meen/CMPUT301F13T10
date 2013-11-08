@@ -41,7 +41,7 @@ public class SectionChoice
 	 * Get the user choice
 	 * @return the user choice
 	 */
-	public String getUserChoice()
+	public String getChoiceDescription()
 	{
 		return mUserChoice;
 	}

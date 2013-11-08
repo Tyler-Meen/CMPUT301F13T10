@@ -52,7 +52,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		ArrayList<SectionTitle> choices = mPresenter.getSectionTitles();
 
 		ListView sectionList = (ListView) findViewById( R.id.complete_section_list );
-		sectionList.setAdapter( new SectionArrayAdapter( this, choices ) );
+		sectionList.setAdapter( new SimpleSectionArrayAdapter( this, choices ) );
 
 		sectionList.setOnItemClickListener( onAddSectionChoice() );
 	}
@@ -80,14 +80,14 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 
 	private void updateCurrentChoices()
 	{
-		ArrayList<SectionTitle> choices = mPresenter.getChoiceSectionTitles();
+		ArrayList<SectionChoice> choices = mPresenter.getChoices();
 
 		ListView sectionList = (ListView) findViewById( R.id.selected_section_list );
-		sectionList.setAdapter( new SectionArrayAdapter( this, choices ) );
+		sectionList.setAdapter( new SectionChoiceArrayAdapter( this, choices ) );
 
 		sectionList.setOnItemClickListener( onRemoveSectionChoice() );
 	}
-	
+
 	private OnItemClickListener onRemoveSectionChoice()
 	{
 		return new OnItemClickListener()
@@ -95,9 +95,9 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 			@Override
 			public void onItemClick( AdapterView parent, View v, int position, long id )
 			{
-
-				SectionTitle selectedSection = (SectionTitle) parent.getItemAtPosition( position );
-				mPresenter.removeSectionChoice( selectedSection.getId() );
+				//TODO:fix
+				SectionChoice selectedChoice = (SectionChoice) parent.getItemAtPosition( position );
+				mPresenter.removeSectionChoice( selectedChoice );
 			}
 		};
 	}
@@ -121,8 +121,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 	@Override
 	public void onCancel( DialogFragment dialog )
 	{
-		// TODO Auto-generated method stub
-
+		// do nothing
 	}
 
 }
