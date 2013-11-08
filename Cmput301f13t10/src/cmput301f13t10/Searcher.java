@@ -55,7 +55,9 @@ public class Searcher
 			if( searchType == sTITLE )
 				value = currentAdventure.getTitle();
 			if( value.toLowerCase( Locale.CANADA ).contains( query.toLowerCase() ) )
-				returnAdventures.add( currentAdventure );
+				returnAdventures.add( 0, currentAdventure );
+			else
+				returnAdventures.add(currentAdventure);
 		}
 
 		return returnAdventures;
