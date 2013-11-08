@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/choice_title_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="@string/section_title"
+        android:layout_margin="@dimen/dialog_text_field_padding" />
+
+    <EditText
+        android:id="@+id/choice_description_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="@string/choice_description"
+        android:inputType="textCapSentences|textMultiLine"
+        android:layout_margin="@dimen/dialog_text_field_padding" />
+
+</LinearLayout>
