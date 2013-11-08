@@ -35,5 +35,6 @@
     <string name="choice_description">Enter new choice description </string>
     <string name="action_add_image_media">Add image media</string>
     <string name="new_adventure">New Adventure</string>
+	<string name="insert_text">Insert Text</string>
 
 </resources>
