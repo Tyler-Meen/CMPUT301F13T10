@@ -30,4 +30,12 @@ public interface AdventureInteractor
 	 *         cache.
 	 */
 	public AdventureModel getAdventureById( int id );
+
+	/**
+	 * Delete the specified adventure
+	 * 
+	 * @param adventure
+	 *            The adventure to delete
+	 */
+	public void deleteAdventure( AdventureModel adventure );
 }

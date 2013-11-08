@@ -23,13 +23,28 @@ public class AdventureCache implements AdventureInteractor
 	 * The map of stored adventures.
 	 */
 	private Map<Integer, AdventureModel> adventures;
+	
+	/**
+	 * The interactor that this cache looks to if it does not contain the requested adventures
+	 */
+	private AdventureInteractor mInteractor;
 
 	/**
-	 * Constructor
+	 * Constructor with dependency injection
+	 */
+	public AdventureCache(AdventureInteractor interactor)
+	{
+		adventures = new HashMap<Integer, AdventureModel>();
+		mInteractor = interactor;
+	}
+	
+	/**
+	 * Constructor with dependency injection
 	 */
 	public AdventureCache()
 	{
 		adventures = new HashMap<Integer, AdventureModel>();
+		mInteractor = null;
 	}
 
 	/**
@@ -80,5 +95,12 @@ public class AdventureCache implements AdventureInteractor
 
 		return alladventures;
 
+	}
+
+	@Override
+	public void deleteAdventure( AdventureModel adventure )
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
