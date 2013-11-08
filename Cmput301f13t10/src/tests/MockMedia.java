@@ -1,5 +1,6 @@
 package tests;
 
+import cmput301f13t10.AppConstants;
 import cmput301f13t10.IdFactory;
 import cmput301f13t10.Media;
 import android.content.Context;
@@ -12,7 +13,7 @@ public class MockMedia implements Media
 
 	public MockMedia()
 	{
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_MEDIA_ID ).getNewId();
 	}
 
 	@Override

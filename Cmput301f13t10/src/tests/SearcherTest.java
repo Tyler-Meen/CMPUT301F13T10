@@ -80,10 +80,10 @@ public class SearcherTest
 		}
 
 		org.junit.Assert.assertNull( mThrown );
-		assertEquals( mResults.size(), 2 );
-		assertTrue( mResults.contains( mFullMatch ) );
-		assertTrue( mResults.contains( mPartMatch ) );
-		assertFalse( mResults.contains( mNoMatch ) );
+		assertEquals( mResults.size(), 3 );
+		assertTrue( mResults.get( 0 ).equals( mFullMatch ) || mResults.get( 0 ).equals( mPartMatch ) );
+		assertTrue( mResults.get( 1 ).equals( mFullMatch ) || mResults.get( 1 ).equals( mPartMatch ) );
+		assertTrue( mResults.contains( mNoMatch ) );
 	}
 
 	/**

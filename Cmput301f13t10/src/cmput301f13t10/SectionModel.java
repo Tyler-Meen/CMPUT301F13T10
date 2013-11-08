@@ -42,7 +42,7 @@ public class SectionModel implements Serializable
 		mName = name;
 		mMedias = new ArrayList<Media>();
 		mChoices = new ArrayList<SectionChoice>();
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_SECTION_ID ).getNewId();
 	}
 
 	/**
