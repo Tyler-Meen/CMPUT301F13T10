@@ -85,7 +85,7 @@ public class AdventurePresenter
 	public void setAdventureTitle( String title )
 	{
 		mModel.setTitle( title );
-		// TODO Should save adventure when title changes.
+		// TODO Should save adventure after title change
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class AdventurePresenter
 	public void deleteSection( Integer sectionId )
 	{
 		mModel.deleteSection( sectionId );
-		// TODO Should save adventure when section is deleted.
+		// TODO Should save adventure after section deleted.
 	}
 
 	/**

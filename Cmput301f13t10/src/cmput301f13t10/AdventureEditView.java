@@ -9,7 +9,8 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -62,7 +61,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.adventure_edit_title );
 		title.setText( mDisplayTitle );
 	}
-	
+
 	/**
 	 * A handler for when a section in the list is clicked. It starts a new view
 	 * to allow for the section to be edited.
@@ -221,13 +220,19 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 			// add the custom view to the action bar
 			actionBar.setCustomView( R.layout.adventure_edit_action_bar );
 			EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.adventure_edit_title );
-			title.setOnEditorActionListener( new OnEditorActionListener()
+			title.addTextChangedListener( new TextWatcher()
 			{
-				@Override
-				public boolean onEditorAction( TextView v, int actionId, KeyEvent event )
+				public void afterTextChanged( Editable s )
 				{
-					mDisplayTitle = v.getText().toString();
-					return false;
+					mDisplayTitle = s.toString();
+				}
+
+				public void beforeTextChanged( CharSequence s, int start, int count, int after )
+				{
+				}
+
+				public void onTextChanged( CharSequence s, int start, int before, int count )
+				{
 				}
 			} );
 			actionBar.setDisplayShowCustomEnabled( true );

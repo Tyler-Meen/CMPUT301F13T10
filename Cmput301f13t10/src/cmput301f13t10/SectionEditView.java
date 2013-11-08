@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,13 +82,19 @@ public class SectionEditView extends Activity implements SectionView
 			// add the custom view to the action bar
 			actionBar.setCustomView( R.layout.adventure_edit_action_bar );
 			EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.adventure_edit_title );
-			title.setOnEditorActionListener( new OnEditorActionListener()
+			title.addTextChangedListener( new TextWatcher()
 			{
-				@Override
-				public boolean onEditorAction( TextView v, int actionId, KeyEvent event )
+				public void afterTextChanged( Editable s )
 				{
-					mPresenter.UpdateSectionTitle( v.getText().toString() );
-					return false;
+					mPresenter.UpdateSectionTitle( s.toString() );
+				}
+
+				public void beforeTextChanged( CharSequence s, int start, int count, int after )
+				{
+				}
+
+				public void onTextChanged( CharSequence s, int start, int before, int count )
+				{
 				}
 			} );
 			actionBar.setDisplayShowCustomEnabled( true );
