@@ -9,7 +9,9 @@ import java.util.ArrayList;
  * Contains information about an adventure that the user can read, navigate
  * through, and edit.
  * 
- * @author Brendan Cowan, Steven Gerdes
+ * @author Brendan Cowan
+ * 
+ * @author Steven Gerdes
  * 
  * @author Braeden Soetaert
  * 
@@ -21,12 +23,12 @@ public class AdventureModel implements Serializable
 	 * The id of the adventure
 	 */
 	private int mId;
-	
+
 	/**
 	 * The adventure's title
 	 */
 	private String mTitle;
-	
+
 	/**
 	 * Sections contained within the adventure
 	 */
@@ -55,10 +57,10 @@ public class AdventureModel implements Serializable
 		mSections.add( startSection );
 	}
 
-	
 	/**
-	 * Deletes the section corresponding to the given section id. If the section id
-	 * is not in the list of sections, it is not deleted.
+	 * Deletes the section corresponding to the given section id. If the section
+	 * id is not in the list of sections, it is not deleted.
+	 * 
 	 * @param sectionId
 	 */
 	public void deleteSection( Integer sectionId )
@@ -134,6 +136,13 @@ public class AdventureModel implements Serializable
 
 	}
 
+	/**
+	 * Get the specified section by id.
+	 * 
+	 * @param sectionId
+	 *            The id of the section to return
+	 * @return The specified section, or null if it does not exist.
+	 */
 	public SectionModel getSection( Integer sectionId )
 	{
 		try
@@ -145,7 +154,7 @@ public class AdventureModel implements Serializable
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Find the index of a section in the adventure, as determined by the
 	 * section's id.
@@ -161,6 +170,15 @@ public class AdventureModel implements Serializable
 		return indexOf( id );
 	}
 
+	/**
+	 * Get the index of a given section in the adventures list of sections
+	 * 
+	 * @param id
+	 *            The id of the section to find
+	 * @return The index of the section
+	 * @throws SectionNotFoundException
+	 *             if the section does not exist.
+	 */
 	private int indexOf( int id ) throws SectionNotFoundException
 	{
 		int i = 0;
@@ -193,7 +211,13 @@ public class AdventureModel implements Serializable
 	{
 		return mSections.get( 0 );
 	}
-	
+
+	/**
+	 * Get the current section the adventure is on. Currently just returns the
+	 * start section.
+	 * 
+	 * @return The current section the adventure is on.
+	 */
 	public SectionModel getCurrentSection()
 	{
 		// TODO make it so it keeps track of current section and returns it
@@ -226,8 +250,5 @@ public class AdventureModel implements Serializable
 	private void readObjectNoData() throws ObjectStreamException
 	{
 	}
-
-
-
 
 }
