@@ -64,9 +64,19 @@ import android.widget.TextView.OnEditorActionListener;
  */
 public class SectionEditView extends Activity implements SectionView
 {
+	/**
+	 * The presenter for the view to get data from.
+	 */
 	private SectionPresenter mPresenter;
 
+	/**
+	 * The title for the section that is displayed.
+	 */
 	private String mDisplayTitle;
+	
+	/**
+	 * The list of all media in the section.
+	 */
 	private ArrayList<Media> mMedia;
 
 	@Override
@@ -140,12 +150,20 @@ public class SectionEditView extends Activity implements SectionView
 		startActivity( intent );
 	}
 
+	/**
+	 * Create a new text media and update the display.
+	 * 
+	 * @param view The view that was clicked.
+	 */
 	public void launchInsertTextAction( View view )
 	{
 		mMedia.add( new TextMedia() );
 		loadMedia();
 	}
 
+	/**
+	 * Load all media and update the display.
+	 */
 	public void loadMedia()
 	{
 		mMedia = mPresenter.getMedia();
