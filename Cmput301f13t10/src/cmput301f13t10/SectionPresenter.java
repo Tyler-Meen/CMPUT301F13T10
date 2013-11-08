@@ -94,7 +94,7 @@ public class SectionPresenter
 	public void setCurrentSectionById( Integer sectionId )
 	{
 		if( sectionId == null )
-			setCurrentSection( new SectionModel( AppConstants.SECTION_TITLE ) );
+			setCurrentSection( new SectionModel( "" ) );
 		else
 			setCurrentSection( mCurrentAdventure.getSection( sectionId ) );
 	}
