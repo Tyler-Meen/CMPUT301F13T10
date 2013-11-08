@@ -2,7 +2,6 @@ package cmput301f13t10;
 
 import java.util.ArrayList;
 
-import cs.ualberta.cmput301f13t10.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * View that allows the user to read and navigate an adventure.
@@ -63,10 +63,14 @@ public class SectionReadView extends Activity implements SectionView
 		// TODO: change to mPpresenter.IsMainMenu or something
 		if( mPresenter.getChoices().isEmpty() )
 		{
+			MainMenuButtonListener mainMenuListener = new MainMenuButtonListener();
+			continueButton.setOnClickListener( mainMenuListener );
 			continueButton.setText( "Main Menu" );
 		}
 		else
 		{
+			ContinueButtonListener continueListener = new ContinueButtonListener();
+			continueButton.setOnClickListener( continueListener );
 			continueButton.setText( "Continue" );
 		}
 	}
@@ -82,27 +86,55 @@ public class SectionReadView extends Activity implements SectionView
 		mPresenter.setCurrentSectionById( sectionId );
 	}
 	
-	/**
-	 * Handler for the continue button of the view. Displays a dialog box which
-	 * gives the user options as to how to continue with the story.
-	 * 
-	 * @param view
-	 */
-	public void continueButton( View view )
-	{
-		Bundle choicesBundle = new Bundle();
-		ArrayList<String> choices = mPresenter.getChoices();
-		choicesBundle.putStringArray( AppConstants.CHOICES_BUNDLE, (String[]) choices.toArray( new String[choices.size()] ) );
-
-		ContinueDialogFragment dialog = new ContinueDialogFragment();
-		dialog.setArguments( choicesBundle );
-		dialog.show( getFragmentManager(), "" );
-	}
 
 	@Override
 	public Context getContext()
 	{
 		return this;
+	}
+
+	/**
+	 * Handler for the continue button of the view. Displays a dialog box which
+	 * gives the user options as to how to continue with the story.
+	 * 
+	 * @author Brendan Cowan
+	 * 
+	 */
+	private class ContinueButtonListener implements View.OnClickListener
+	{
+
+		@Override
+		public void onClick( View v )
+		{
+			Bundle choicesBundle = new Bundle();
+			ArrayList<String> choices = mPresenter.getChoices();
+			choicesBundle.putStringArray( AppConstants.CHOICES_BUNDLE, (String[]) choices.toArray( new String[choices.size()] ) );
+
+			ContinueDialogFragment dialog = new ContinueDialogFragment();
+			dialog.setArguments( choicesBundle );
+			dialog.show( getFragmentManager(), "" );
+		}
+
+	}
+	
+	/**
+	 * Handler for the main menu button of the view. Sends the user back to the main menu.
+	 * 
+	 * @author Brendan Cowan
+	 * 
+	 */
+	private class MainMenuButtonListener implements View.OnClickListener
+	{
+
+		@Override
+		public void onClick( View v )
+		{
+			Intent intent = new Intent(getContext(), MainActivity.class);
+			intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+			intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+			startActivity(intent);
+		}
+
 	}
 
 }
