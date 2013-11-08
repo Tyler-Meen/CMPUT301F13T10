@@ -1,7 +1,9 @@
 package cmput301f13t10;
 
-import cs.ualberta.cmput301f13t10.R;
+import java.util.ArrayList;
+
 import android.app.ActionBar;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,26 +12,28 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.LinearLayout;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * 
  * @author Braeden Soetaert
  * @author Tyler Meen
  * @author Steven Gerdes
+ * @author Aly-khan Jamal
  * 
  */
 public class SectionEditView extends Activity implements SectionView
 {
 	private SectionPresenter mPresenter;
-	
+
 	private String mDisplayTitle;
+	private EditText mBodyText;
+	private ArrayList<Media> mMedia;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -52,6 +56,7 @@ public class SectionEditView extends Activity implements SectionView
 		mDisplayTitle = mPresenter.getSectionTitle();
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.section_edit_title );
 		title.setText( mDisplayTitle );
+		loadMedia();
 	}
 
 	@Override
@@ -90,6 +95,20 @@ public class SectionEditView extends Activity implements SectionView
 		intent.putExtra( AppConstants.ADVENTURE_ID, mPresenter.getAdventureId() );
 		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
 		startActivity( intent );
+	}
+
+	public void launchInsertTextAction( View view )
+	{
+		mMedia.add( new TextMedia() );
+		loadMedia();
+	}
+
+	public void loadMedia()
+	{
+		mMedia = mPresenter.getMedia();
+		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.titleList );
+		mPresenter.setCurrentSectionView( linearLayout );
+
 	}
 
 	/**
@@ -160,7 +179,7 @@ public class SectionEditView extends Activity implements SectionView
 			mPresenter.storeImage( this, data );
 		}
 	}
-	
+
 	@Override
 	protected void onPause()
 	{

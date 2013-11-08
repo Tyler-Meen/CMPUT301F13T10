@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -58,8 +59,10 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
+//		AdventureModel fake = new AdventureModel("test");
 		cache = AdventureCache.getAdventureCache();
 
+//		cache.addAdventure( fake );
 		adventure = new ArrayList<AdventureModel>();
 
 		super.onCreate( savedInstanceState );
@@ -69,8 +72,8 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		adventure = cache.getAllAdventures();
 		populateList();
 		addListenerOnButton();
-
-		adventureListView.setOnItemClickListener( new AdapterView.OnItemClickListener()
+		
+		adventureListView.setOnItemClickListener(new OnItemClickListener()
 		{
 
 			public void onItemClick( AdapterView<?> parentAdapter, View view, int position, long id )

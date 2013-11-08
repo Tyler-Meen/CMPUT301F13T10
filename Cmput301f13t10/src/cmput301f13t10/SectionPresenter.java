@@ -252,4 +252,9 @@ public class SectionPresenter
 		mView.updateSectionView();
 	}
 	
+	
+	public ArrayList<Media> getMedia()
+	{
+		return mCurrentSection.getMedia();
+	}
 }

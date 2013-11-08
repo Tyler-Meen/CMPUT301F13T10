@@ -2,11 +2,15 @@ package cmput301f13t10;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
-import java.util.ArrayList;
 
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * Media for text that can be added and view in a section of an adventure.
@@ -34,6 +38,7 @@ public class TextMedia implements Media
 	 */
 	public TextMedia()
 	{
+		mText = "";
 		mId = IdFactory.getIdManager( AppConstants.GENERATE_MEDIA_ID ).getNewId();
 	}
 
@@ -48,6 +53,11 @@ public class TextMedia implements Media
 		mText = text;
 	}
 
+	public String getText()
+	{
+		return mText;
+	}
+
 	@Override
 	public int getId()
 	{
@@ -57,9 +67,27 @@ public class TextMedia implements Media
 	@Override
 	public View toView( Context c )
 	{
-		TextView mc = new TextView( c );
-		mc.setText( mText );
-		return mc;
+		EditText addText = new EditText( c );
+		addText.setId( getId() );
+		LayoutParams params = new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1 );
+		addText.setLayoutParams( params );
+		addText.setText( getText() );
+		addText.addTextChangedListener( new TextWatcher()
+		{
+			public void afterTextChanged( Editable s )
+			{
+				setText( s.toString() );
+			}
+
+			public void beforeTextChanged( CharSequence s, int start, int count, int after )
+			{
+			}
+
+			public void onTextChanged( CharSequence s, int start, int before, int count )
+			{
+			}
+		} );
+		return addText;
 	}
 
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
