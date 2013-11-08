@@ -21,7 +21,9 @@ import android.widget.TextView.OnEditorActionListener;
 /**
  * 
  * @author Braeden Soetaert
- *
+ * @author Tyler Meen
+ * @author Steven Gerdes
+ * 
  */
 public class SectionEditView extends Activity implements SectionView
 {
@@ -71,6 +73,13 @@ public class SectionEditView extends Activity implements SectionView
 		return this;
 	}
 
+	/**
+	 * Listener for the modify choices button. Start the
+	 * SectionModifyChoicesView with the current section and adventure
+	 * 
+	 * @param view
+	 *            The view of the button that was clicked
+	 */
 	public void launchModifyChoicesAction( View view )
 	{
 		Intent intent = new Intent( this, SectionModifyChoicesView.class );
@@ -79,6 +88,9 @@ public class SectionEditView extends Activity implements SectionView
 		startActivity( intent );
 	}
 
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
 	public void setUpActionBar()
 	{
 		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB )
@@ -123,6 +135,9 @@ public class SectionEditView extends Activity implements SectionView
 
 	}
 
+	/**
+	 * Opens the camera.
+	 */
 	private void addImage()
 
 	{
@@ -133,6 +148,10 @@ public class SectionEditView extends Activity implements SectionView
 
 	}
 
+	/**
+	 * receives the result from the camera, and passes the result to the
+	 * presenter to add the image to the model.
+	 */
 	protected void onActivityResult( int requestCode, int resultCode, Intent data )
 	{
 		if( requestCode == 0 && resultCode == Activity.RESULT_OK )
