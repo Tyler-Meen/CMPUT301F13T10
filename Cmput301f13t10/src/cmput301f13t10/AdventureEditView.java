@@ -240,6 +240,13 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 		}
 	}
 
+	/**
+	 * Listener for the new section button. Starts the edit section view with no
+	 * section.
+	 * 
+	 * @param view
+	 *            The view that the button is a part of
+	 */
 	public void launchSectionEditView( View view )
 	{
 		startSectionEdit( null );
