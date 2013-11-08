@@ -34,7 +34,7 @@ public class SoundMedia implements Media
 	 */
 	public SoundMedia()
 	{
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_MEDIA_ID ).getNewId();
 	}
 
 	/**

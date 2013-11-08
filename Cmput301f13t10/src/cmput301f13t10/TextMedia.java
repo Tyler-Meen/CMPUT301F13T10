@@ -34,7 +34,7 @@ public class TextMedia implements Media
 	 */
 	public TextMedia()
 	{
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_MEDIA_ID ).getNewId();
 	}
 
 	/**

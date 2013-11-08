@@ -50,4 +50,23 @@ public class AppConstants
 	 */
 	public static final String SECTION_TITLE = "section_title";
 	public static final String CHOICE_DESCRIPTION = "choice_description";
+	/**
+	 * Tag. Input into factory to generate an id for a choice.
+	 */
+	public static final String GENERATE_CHOICE_ID = "choice_id";
+	
+	/**
+	 * Tag. Input into factory to generate an id for a section.
+	 */
+	public static final String GENERATE_SECTION_ID = "section_id";
+	
+	/**
+	 * Tag. Input into factory to generate an id for an adventure.
+	 */
+	public static final String GENERATE_ADVENTURE_ID = "adventure_id";
+	
+	/**
+	 * Tag. Input into factory to generate an id for a media.
+	 */
+	public static final String GENERATE_MEDIA_ID = "media_id";
 }

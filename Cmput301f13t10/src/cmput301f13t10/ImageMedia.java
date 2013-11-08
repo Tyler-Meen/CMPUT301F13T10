@@ -21,7 +21,7 @@ public class ImageMedia implements Media
 	 * The id of the media object.
 	 */
 	private int mId;
-	
+
 	/**
 	 * The bitmap object associated with the media object
 	 */
@@ -35,7 +35,7 @@ public class ImageMedia implements Media
 	 */
 	public ImageMedia()
 	{
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_MEDIA_ID ).getNewId();
 	}
 
 	/**

@@ -50,7 +50,7 @@ public class AdventureModel implements Serializable
 	 */
 	public AdventureModel( String title )
 	{
-		mId = IdFactory.getIdFactory().getNewId();
+		mId = IdFactory.getIdManager( AppConstants.GENERATE_ADVENTURE_ID ).getNewId();
 		mTitle = title;
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
