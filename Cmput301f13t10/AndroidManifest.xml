@@ -42,7 +42,6 @@
         <activity
             android:name="cmput301f13t10.SectionEditView"
             android:label="@string/title_activity_section_edit_view"
-            android:parentActivityName="cmput301f13t10.AdventureEditView"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
