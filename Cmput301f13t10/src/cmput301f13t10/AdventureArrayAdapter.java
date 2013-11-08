@@ -12,18 +12,39 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Adapter for the library
+ * 
+ * @author Aly-Khan Jamal
+ * 
+ */
 public class AdventureArrayAdapter extends ArrayAdapter<AdventureModel>
 {
+	/**
+	 * The context of the adapter
+	 */
 	private final Context mContext;
+
+	/**
+	 * The adventures being displayed in the library
+	 */
 	private final ArrayList<AdventureModel> mAdventure;
-	
-	public AdventureArrayAdapter(Context context, ArrayList<AdventureModel> adventure) 
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 *            The context of the ArrayAdapter
+	 * @param adventure
+	 *            The adventures to display in the library
+	 */
+	public AdventureArrayAdapter( Context context, ArrayList<AdventureModel> adventure )
 	{
-		super(context, R.layout.list_view_row, adventure );
+		super( context, R.layout.list_view_row, adventure );
 		mContext = context;
-		mAdventure = adventure;	
+		mAdventure = adventure;
 	}
-	
+
 	@Override
 	public View getView( int position, View convertView, ViewGroup parent )
 	{
