@@ -45,7 +45,7 @@ public class SectionEditView extends Activity implements SectionView
 	{
 		String sectionTitle = mPresenter.getSectionTitle();
 		ActionBar actionBar = getActionBar();
-		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.adventure_edit_title );
+		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
 		title.setText( sectionTitle );
 	}
 
@@ -53,7 +53,7 @@ public class SectionEditView extends Activity implements SectionView
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate( R.menu.adventure_edit_view, menu );
+		getMenuInflater().inflate( R.menu.section_edit_view, menu );
 
 		return super.onCreateOptionsMenu( menu );
 	}
@@ -78,10 +78,11 @@ public class SectionEditView extends Activity implements SectionView
 		{
 			ActionBar actionBar = getActionBar();
 			// add the custom view to the action bar
-			actionBar.setCustomView( R.layout.adventure_edit_action_bar );
-			EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.adventure_edit_title );
+			actionBar.setCustomView( R.layout.section_edit_action_bar );
+			EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
 			title.setOnEditorActionListener( new OnEditorActionListener()
 			{
+
 				@Override
 				public boolean onEditorAction( TextView v, int actionId, KeyEvent event )
 				{
@@ -109,7 +110,7 @@ public class SectionEditView extends Activity implements SectionView
 
 	}
 
-	public void addImage()
+	private void addImage()
 
 	{
 
