@@ -26,11 +26,9 @@ public class LibraryView extends Activity implements Serializable
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
-//		AdventureModel fakeAdventure = new AdventureModel("testing");
+		
 		cache = AdventureCache.getAdventureCache();
-//		cache.addAdventure(fakeAdventure);
-//		fakeAdventure = new AdventureModel("testing222");
-//		cache.addAdventure(fakeAdventure);
+
 		adventure = new ArrayList<AdventureModel>();
 		
 		super.onCreate( savedInstanceState );
