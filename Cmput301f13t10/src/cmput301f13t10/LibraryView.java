@@ -18,19 +18,32 @@ import android.widget.SearchView;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
+ * This is an activity that displays a list of adventures to the user. They can
+ * select an adventure to view, which will launch the SectionReadView.
  * 
- * 
- * @author Aly-khan Jamal
- * 
+ * @author Aly-Khan Jamal
  * @author Braeden Soetaert
- *
  */
 public class LibraryView extends Activity implements Serializable, SearchView.OnQueryTextListener
 {
+	/**
+	 * The adventures to display
+	 */
 	ArrayList<AdventureModel> adventure;
-	// ArrayAdapter<AdventureModel> adapter;
+
+	/**
+	 * The cache from which to grab the adventures
+	 */
 	AdventureCache cache;
+
+	/**
+	 * The list view that will display all of the adventures
+	 */
 	private ListView adventureListView;
+
+	/**
+	 * The adventure that was selected by the user.
+	 */
 	int AdventureId;
 	private MenuItem mSearchItem;
 
@@ -60,11 +73,11 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		} );
 	}
 
+	/**
+	 * Start the section read view with the start section of the start adventure
+	 */
 	private void startSectionReadView()
 	{
-		// String a;
-		// a = Integer.toString(AdventureId);
-		// Log.v("second", a);
 		Intent intent = new Intent( this, SectionReadView.class );
 		Bundle b = new Bundle();
 		b.putSerializable( AppConstants.CURRENT_ADVENTURE, AdventureId );
@@ -80,6 +93,9 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		populateList();
 	}
 
+	/**
+	 * Start the section read view with the start section of the start adventure
+	 */
 	private void populateList()
 	{
 		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
