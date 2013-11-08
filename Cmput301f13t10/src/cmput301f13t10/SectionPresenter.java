@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10;
 
 import java.io.InputStream;
@@ -117,8 +117,24 @@ public class SectionPresenter
 	 * @return An ArrayList of strings indicating possible choices
 	 */
 	public ArrayList<SectionChoice> getChoices()
-	{
-		return mCurrentSection.getChoices();
+	{// TODO: change this hack to something nicer
+		ArrayList<SectionChoice> choices = mCurrentSection.getChoices();
+		ArrayList<SectionModel> sections = mCurrentAdventure.getSections();
+		for( SectionChoice choice : choices )
+		{
+			boolean sectionExists = false;
+			for( SectionModel section : sections )
+			{
+				if( choice.getSectionTitle().getId() == section.getId() )
+				{
+					choice.getSectionTitle().setTitle( section.getName() );
+					sectionExists = true;
+				}
+			}
+			if( !sectionExists )
+				choices.remove( choice );	
+		}
+		return choices;
 	}
 
 	/**
@@ -157,6 +173,7 @@ public class SectionPresenter
 
 	/**
 	 * Get the id of the current adventure
+	 * 
 	 * @return The id of the current adventure
 	 */
 	public int getAdventureId()
@@ -166,6 +183,7 @@ public class SectionPresenter
 
 	/**
 	 * Get the id of the current section
+	 * 
 	 * @return The id of the current section
 	 */
 	public int getSectionId()
@@ -196,24 +214,27 @@ public class SectionPresenter
 		}
 	}
 
-
 	/**
-	 * Takes a bitmap (which is store in the intent) and adds it as a Media to the current section.
-	 * @param editView The current SectionEditView
-	 * @param data The data taken from the camera
+	 * Takes a bitmap (which is store in the intent) and adds it as a Media to
+	 * the current section.
+	 * 
+	 * @param editView
+	 *            The current SectionEditView
+	 * @param data
+	 *            The data taken from the camera
 	 */
 	public void storeImage( SectionEditView editView, Intent data )
-	{		
+	{
 		Bitmap tempBitmap = null;
-		
+
 		if( data.getData() != null )
 		{
 			try
 			{
-				//TODO Decouple the editView from the data.
+				// TODO Decouple the editView from the data.
 				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
-				
-				tempBitmap = BitmapFactory.decodeStream(stream);
+
+				tempBitmap = BitmapFactory.decodeStream( stream );
 				stream.close();
 			}
 			catch( Exception e )
@@ -228,15 +249,15 @@ public class SectionPresenter
 		if( tempBitmap != null )
 		{
 			tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 670, 670, true );
-			
+
 			ImageMedia newImageMedia = new ImageMedia();
 			newImageMedia.setImageBitmap( tempBitmap );
 			mCurrentSection.add( newImageMedia );
 		}
-		
-		//tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
+
+		// tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
 	}
-	
+
 	public ArrayList<Media> getMedia()
 	{
 		return mCurrentSection.getMedia();
@@ -244,7 +265,7 @@ public class SectionPresenter
 
 	/**
 	 * 
-	 * @return if this is the last section in the chain 
+	 * @return if this is the last section in the chain
 	 */
 	public boolean atLastSection()
 	{
@@ -252,10 +273,15 @@ public class SectionPresenter
 	}
 
 	/**
-	 * This takes the separate information from the view and makes it into a choice
-	 * @param id the id of the choice to add
-	 * @param decisionText the decision the user has to make
-	 * @param sectionTitle the title of the section 
+	 * This takes the separate information from the view and makes it into a
+	 * choice
+	 * 
+	 * @param id
+	 *            the id of the choice to add
+	 * @param decisionText
+	 *            the decision the user has to make
+	 * @param sectionTitle
+	 *            the title of the section
 	 */
 	public void addSectionChoice( Integer id, String decisionText, String sectionTitle )
 	{
@@ -286,7 +312,9 @@ public class SectionPresenter
 
 	/**
 	 * removes the section choice from the current section
-	 * @param choiceToRemove the choice to remove 
+	 * 
+	 * @param choiceToRemove
+	 *            the choice to remove
 	 */
 	public void removeSectionChoice( SectionChoice choiceToRemove )
 	{
@@ -298,6 +326,6 @@ public class SectionPresenter
 	{
 		if( mCurrentSection == null )
 			return;
-		setCurrentSection( mCurrentAdventure.getSection( mCurrentSection.getChoices().get(index).getSectionTitle().getId() ));
+		setCurrentSection( mCurrentAdventure.getSection( mCurrentSection.getChoices().get( index ).getSectionTitle().getId() ) );
 	}
 }
