@@ -29,14 +29,18 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10;
 
 import java.io.File;
+
 import cs.ualberta.cmput301f13t10.R;
+
 import java.util.ArrayList;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -73,7 +77,7 @@ public class SectionEditView extends Activity implements SectionView
 	 * The title for the section that is displayed.
 	 */
 	private String mDisplayTitle;
-	
+
 	/**
 	 * The list of all media in the section.
 	 */
@@ -106,6 +110,11 @@ public class SectionEditView extends Activity implements SectionView
 		mDisplayTitle = mPresenter.getSectionTitle();
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.section_edit_title );
 		title.setText( mDisplayTitle );
+		if( mDisplayTitle.equals( AppConstants.START ) )
+		{
+			title.setFocusable( false );
+			title.setBackgroundColor(Color.TRANSPARENT);
+		}
 		loadMedia();
 	}
 
@@ -153,7 +162,8 @@ public class SectionEditView extends Activity implements SectionView
 	/**
 	 * Create a new text media and update the display.
 	 * 
-	 * @param view The view that was clicked.
+	 * @param view
+	 *            The view that was clicked.
 	 */
 	public void launchInsertTextAction( View view )
 	{
