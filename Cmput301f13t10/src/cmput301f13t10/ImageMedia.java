@@ -21,6 +21,7 @@ public class ImageMedia implements Media
 	 * The id of the media object.
 	 */
 	private int mId;
+	
 	/**
 	 * The bitmap object associated with the media object
 	 */
