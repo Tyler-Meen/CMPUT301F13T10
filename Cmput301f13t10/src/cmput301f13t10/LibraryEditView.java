@@ -53,9 +53,7 @@ public class LibraryEditView extends Activity implements Serializable {
 	private void startAdventureEditViewId()
 	{
 		Intent intent = new Intent(this, AdventureEditView.class);
-		Bundle b = new Bundle();
-		b.putSerializable(AppConstants.CURRENT_ADVENTURE, AdventureId);
-		intent.putExtra(AppConstants.CURRENT_ADVENTURE, b);
+		intent.putExtra( AppConstants.ADVENTURE_ID, AdventureId );
 		startActivity(intent);
 	}
 		@Override
