@@ -5,7 +5,7 @@
     <string name="app_name">Cmput301f13t10</string>
 	<string name="action_help">Help</string>
     <string name="action_settings">Settings</string>
-    <string name="adventure_title_hint">Enter a title</string>
+    <string name="adventure_title_hint">Enter an Adventure title</string>
     <string name="button_edit">Edit</string>
     <string name="button_help">Help</string>
     <string name="button_read">Read</string>
@@ -25,6 +25,7 @@
     <string name="section_title">Section Title</string>
     <string name="library_label">Library</string>
     <string name="no_adventures">No Adventures Yet</string>
+    <string name="section_title_hint">Enter a Section title</string>
     <string name="title_activity_adventure_edit_view">AdventureEditView</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
     <string name="title_activity_section_edit_view">Section Edit View</string>
