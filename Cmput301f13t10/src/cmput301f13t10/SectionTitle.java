@@ -1,17 +1,62 @@
 package cmput301f13t10;
 
+/**
+ * A data container that holds the id, and title of a section. As well as an
+ * identifier of whether it is that start section for an adventure.
+ * 
+ * @author Braeden Soetaert
+ * 
+ */
 public class SectionTitle
 {
+	/**
+	 * The title of the section.
+	 */
 	private String mTitle;
+
+	/**
+	 * The id of the section.
+	 */
 	private Integer mId;
-	
-	public SectionTitle(String title, Integer id) {
-		setTitle( title );
-		setId( id );
+
+	/**
+	 * Whether this section is that start section or not.
+	 */
+	private Boolean mIsStartSection;
+
+	/**
+	 * Constructor. Sets the start section indicator to false.
+	 * 
+	 * @param title
+	 *            The title of the section.
+	 * @param id
+	 *            The id of the section.
+	 */
+	public SectionTitle( String title, Integer id )
+	{
+		mTitle = title;
+		mId = id;
+		mIsStartSection = false;
 	}
 
 	/**
-	 * @return the mId
+	 * Constructor.
+	 * 
+	 * @param title
+	 *            The title of the section.
+	 * @param id
+	 *            The id of the section.
+	 * @param isStartSection
+	 *            Whether this section is the start section.
+	 */
+	public SectionTitle( String title, Integer id, Boolean isStartSection )
+	{
+		this( title, id );
+		mIsStartSection = true;
+	}
+
+	/**
+	 * @return the section id
 	 */
 	public Integer getId()
 	{
@@ -19,15 +64,24 @@ public class SectionTitle
 	}
 
 	/**
-	 * @param mId the mId to set
+	 * @return true if this section is a start section, false otherwise.
 	 */
-	public void setId( Integer mId )
+	public Boolean isStartSection()
 	{
-		this.mId = mId;
+		return mIsStartSection;
 	}
 
 	/**
-	 * @return the mTitle
+	 * @param id
+	 *            the new id of the section
+	 */
+	public void setId( Integer id )
+	{
+		mId = id;
+	}
+
+	/**
+	 * @return the section title
 	 */
 	public String getTitle()
 	{
@@ -35,10 +89,11 @@ public class SectionTitle
 	}
 
 	/**
-	 * @param mTitle the mTitle to set
+	 * @param title
+	 *            the new title of the section
 	 */
-	public void setTitle( String mTitle )
+	public void setTitle( String title )
 	{
-		this.mTitle = mTitle;
+		mTitle = title;
 	}
 }
