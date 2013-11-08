@@ -11,7 +11,7 @@ public class SectionChoice
 		mUserChoice = userChoice;
 	}
 
-	public SectionTitle getSectionModel()
+	public SectionTitle getSectionTitle()
 	{
 		return mSectionTitle;
 	}
