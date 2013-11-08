@@ -49,4 +49,5 @@ public class AppConstants
 	 * Tag. Indicates that this is a section title.
 	 */
 	public static final String SECTION_TITLE = "section_title";
+	public static final String CHOICE_DESCRIPTION = "choice_description";
 }

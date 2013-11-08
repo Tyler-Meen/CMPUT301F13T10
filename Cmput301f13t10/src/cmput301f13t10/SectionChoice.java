@@ -32,7 +32,7 @@ public class SectionChoice
 	 * Get the section title
 	 * @return The section title
 	 */
-	public SectionTitle getSectionModel()
+	public SectionTitle getSectionTitle()
 	{
 		return mSectionTitle;
 	}

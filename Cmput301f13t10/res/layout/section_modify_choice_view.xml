@@ -8,64 +8,58 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView 
-        android:text="@string/selected_choices"
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        />
+        android:text="@string/selected_choices" />
+
     <LinearLayout
         android:id="@+id/selectedSectionListBorder"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
         android:background="#0000ff"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/borderThickness"
-        android:paddingLeft="@dimen/borderThickness"
-        android:paddingRight="@dimen/borderThickness"
-        android:paddingTop="@dimen/borderThickness"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1" >
+        android:padding="@dimen/borderThickness" >
 
         <ListView
-            android:id="@+id/selectedSectionList"
+            android:id="@+id/selected_section_list"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#ffffff" >
         </ListView>
     </LinearLayout>
 
-    <TextView 
-        android:text="@string/possible_choices"
+    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:text="@string/possible_choices" />
+
+    <LinearLayout
         android:id="@+id/completeSectionListBorder"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
         android:background="#0000ff"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/borderThickness"
-        android:paddingLeft="@dimen/borderThickness"
-        android:paddingRight="@dimen/borderThickness"
-        android:paddingTop="@dimen/borderThickness"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1" >
+        android:padding="@dimen/borderThickness" >
 
         <ListView
-            android:id="@+id/completeSectionList"
+            android:id="@+id/complete_section_list"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:background="#ffffff" >
         </ListView>
     </LinearLayout>
-    
+
     <Button
-        android:id="@+id/AddNoteButton"
+        android:id="@+id/add_new_section_choice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_section"
+        android:layout_weight="0"
         android:onClick="newSectionChoice"
-        android:layout_weight="0" >
-    </Button>
+        android:text="@string/new_section_choice" />
 
 </LinearLayout>

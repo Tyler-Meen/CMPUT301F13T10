@@ -9,7 +9,7 @@ import android.os.Bundle;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
- * A dialog box that allows the user to confirm deletion of a section. 
+ * A dialog box that allows the user to confirm deletion of a section.
  * 
  * @author Braeden Soetaert
  * 
@@ -76,7 +76,7 @@ public class DeleteSectionDialogFragment extends DialogFragment
 		String titleString = "Section: " + sectionTitle;
 
 		builder.setTitle( titleString ).setMessage( R.string.delete_section_prompt )
-				.setPositiveButton( R.string.delete_section_accept, new DialogInterface.OnClickListener()
+			.setPositiveButton( R.string.accept, new DialogInterface.OnClickListener()
 				{
 					public void onClick( DialogInterface dialog, int id )
 					{
@@ -84,7 +84,7 @@ public class DeleteSectionDialogFragment extends DialogFragment
 						// activity
 						mListener.onDeleteConfirm( DeleteSectionDialogFragment.this );
 					}
-				} ).setNegativeButton( R.string.delete_section_cancel, new DialogInterface.OnClickListener()
+				} ).setNegativeButton( R.string.cancel, new DialogInterface.OnClickListener()
 				{
 					public void onClick( DialogInterface dialog, int id )
 					{

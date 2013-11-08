@@ -60,7 +60,7 @@ public class SectionReadView extends Activity implements SectionView
 
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
 		mPresenter.setCurrentSectionView( scrollBox );
-		// TODO: change to mPpresenter.IsMainMenu or something
+
 		if( mPresenter.atLastSection() )
 		{
 			MainMenuButtonListener mainMenuListener = new MainMenuButtonListener();

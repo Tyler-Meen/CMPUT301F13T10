@@ -117,6 +117,7 @@ public class SectionEditView extends Activity implements SectionView
 
 				public void onTextChanged( CharSequence s, int start, int before, int count )
 				{
+
 				}
 			} );
 			actionBar.setDisplayShowCustomEnabled( true );
@@ -132,9 +133,7 @@ public class SectionEditView extends Activity implements SectionView
 			addImage();
 			return true;
 		default:
-
 			return super.onOptionsItemSelected( item );
-
 		}
 
 	}
@@ -143,9 +142,7 @@ public class SectionEditView extends Activity implements SectionView
 	 * Opens the camera.
 	 */
 	private void addImage()
-
 	{
-
 		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
 
 		startActivityForResult( intent, 0 );
@@ -162,7 +159,6 @@ public class SectionEditView extends Activity implements SectionView
 		{
 			mPresenter.storeImage( this, data );
 		}
-
 	}
 	
 	@Override

@@ -4,5 +4,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="buttonPadding">3dp</dimen>
+    <dimen name="dialog_text_field_padding">3dp</dimen>
 	<dimen name="borderThickness">1dp</dimen>
 </resources>

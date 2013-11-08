@@ -110,6 +110,17 @@ public class SectionPresenter
 	 * 
 	 * @return The title of the current section
 	 */
+	public ArrayList<SectionTitle> getSectionTitles()
+	{
+		ArrayList<SectionModel> sectionChoices = mCurrentAdventure.getSections();
+		ArrayList<SectionTitle> sectionTitles = new ArrayList<SectionTitle>();
+
+		for( SectionModel s : sectionChoices )
+			sectionTitles.add( new SectionTitle( s.getName(), s.getId() ) );
+
+		return sectionTitles;
+	}
+
 	public String getSectionTitle()
 	{
 		return mCurrentSection.getName();
@@ -207,4 +218,35 @@ public class SectionPresenter
 	{
 		return mCurrentSection.getChoices().isEmpty();
 	}
+
+	public void addSectionChoice( Integer id, String decisionText, String sectionTitle )
+	{
+		SectionModel section = mCurrentAdventure.getSection( id );
+		if( section == null )
+		{
+			section = new SectionModel( sectionTitle );
+			mCurrentAdventure.addSection( section );
+		}
+
+		mCurrentSection.addChoice( new SectionChoice( new SectionTitle( section.getName(), section.getId() ), decisionText ) );
+		mView.updateSectionView();
+	}
+
+	public void removeSectionChoice( Integer id )
+	{
+		//mCurrentSection.removeChoice( choiceToRemove );
+		mView.updateSectionView();
+	}
+
+	public ArrayList<SectionTitle> getChoiceSectionTitles()
+	{
+		ArrayList<SectionChoice> sectionChoices = mCurrentSection.getChoices();
+		ArrayList<SectionTitle> stringChoices = new ArrayList<SectionTitle>();
+		for( SectionChoice s : sectionChoices )
+		{
+			stringChoices.add( s.getSectionTitle() );
+		}
+		return stringChoices;
+	}
+	
 }

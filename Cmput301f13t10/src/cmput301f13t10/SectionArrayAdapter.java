@@ -69,7 +69,6 @@ public class SectionArrayAdapter extends ArrayAdapter<SectionTitle>
 			cancelButton.setTag( mValues.get( position ) );
 			cancelButton.setOnClickListener( new OnClickListener()
 			{
-
 				@Override
 				public void onClick( View view )
 				{
