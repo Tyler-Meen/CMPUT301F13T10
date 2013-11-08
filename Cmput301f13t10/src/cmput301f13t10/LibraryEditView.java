@@ -20,20 +20,38 @@ import android.widget.SearchView;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
+ * This is an activity that displays a list of adventures to the user. They can
+ * select an adventure to edit, which will launch the adventureEditView.
  * 
- * 
- * @author Aly-khan Jamal
- * 
+ * @author Aly-Khan Jamal
  * @author Braeden Soetaert
- *
  */
 public class LibraryEditView extends Activity implements Serializable, SearchView.OnQueryTextListener
 {
 
+	/**
+	 * A list of adventures to display
+	 */
 	ArrayList<AdventureModel> adventure;
+
+	/**
+	 * The cache of adventures from which to pull adventures.
+	 */
 	AdventureCache cache;
+
+	/**
+	 * The list view that will display all of the adventures
+	 */
 	private ListView adventureListView;
+
+	/**
+	 * The adventure that was selected by the user.
+	 */
 	int AdventureId;
+
+	/**
+	 * The create adventure button.
+	 */
 	private Button btnCreateAdventure;
 	private MenuItem mSearchItem;
 
@@ -64,6 +82,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 
 	}
 
+	/**
+	 * Starts the adventureEditView, using the adventureId previously declaired.
+	 */
 	private void startAdventureEditViewId()
 	{
 		Intent intent = new Intent( this, AdventureEditView.class );
@@ -79,6 +100,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		populateList();
 	}
 
+	/**
+	 * Populate the list of adventures with the adventures in adventure
+	 */
 	private void populateList()
 	{
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
@@ -86,6 +110,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		adventureListView.setAdapter( adapter );
 	}
 
+	/**
+	 * Add the onCreateAdventure button
+	 */
 	public void addListenerOnButton()
 	{
 
@@ -103,6 +130,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		} );
 	}
 
+	/**
+	 * Start the AdventureEditView with a blank new adventure.
+	 */
 	private void startAdventureEditView()
 	{
 		Intent intent = new Intent( this, AdventureEditView.class );
