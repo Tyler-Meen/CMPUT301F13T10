@@ -34,8 +34,10 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
 
 /**
@@ -197,15 +199,20 @@ public class SectionPresenter
 	 * @param vg
 	 *            The view group that is to contain the media.
 	 */
-	public void setCurrentSectionView( ViewGroup vg )
+	public void setCurrentSectionView( ViewGroup vg, boolean isEditView )
 	{ // TODO: make the view do this instead of the presenter
+		// also take out the boolean and make it more OO
 		try
 		{
 			ArrayList<Media> medias = mCurrentSection.getMedia();
 			vg.removeAllViews();
 			for( Media m : medias )
 			{
-				vg.addView( m.toView( mView.getContext() ) );
+				View view = m.toView( mView.getContext() );
+				view.setFocusable( isEditView );
+				if( !isEditView )
+					view.setBackgroundColor( Color.TRANSPARENT );
+				vg.addView(  view );
 			}
 		}
 		catch( NullPointerException e )

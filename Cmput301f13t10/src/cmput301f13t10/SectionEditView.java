@@ -125,7 +125,7 @@ public class SectionEditView extends Activity implements SectionView
 		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
 
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.sectionList );
-		mPresenter.setCurrentSectionView( scrollBox );
+		mPresenter.setCurrentSectionView( scrollBox, true );
 		title.setText( mDisplayTitle );
 	}
 
@@ -178,7 +178,7 @@ public class SectionEditView extends Activity implements SectionView
 	{
 		mMedia = mPresenter.getMedia();
 		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.sectionList );
-		mPresenter.setCurrentSectionView( linearLayout );
+		mPresenter.setCurrentSectionView( linearLayout, true );
 
 	}
 

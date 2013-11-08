@@ -88,7 +88,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 		Button continueButton = (Button) findViewById( R.id.continue_button );
 
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
-		mPresenter.setCurrentSectionView( scrollBox );
+		mPresenter.setCurrentSectionView( scrollBox, false );
 
 		if( mPresenter.atLastSection() )
 		{
