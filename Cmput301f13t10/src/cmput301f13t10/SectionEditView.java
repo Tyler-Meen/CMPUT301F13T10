@@ -28,6 +28,8 @@ import android.widget.TextView.OnEditorActionListener;
 public class SectionEditView extends Activity implements SectionView
 {
 	private SectionPresenter mPresenter;
+	
+	private String mDisplayTitle;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -47,15 +49,17 @@ public class SectionEditView extends Activity implements SectionView
 			mPresenter.setCurrentSectionById( intent.getIntExtra( AppConstants.SECTION_ID, defaultVal ) );
 		else
 			mPresenter.setCurrentSectionById( null );
+		mDisplayTitle = mPresenter.getSectionTitle();
+		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.section_edit_title );
+		title.setText( mDisplayTitle );
 	}
 
 	@Override
 	public void updateSectionView()
 	{
-		String sectionTitle = mPresenter.getSectionTitle();
 		ActionBar actionBar = getActionBar();
 		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
-		title.setText( sectionTitle );
+		title.setText( mDisplayTitle );
 	}
 
 	@Override
@@ -104,7 +108,7 @@ public class SectionEditView extends Activity implements SectionView
 			{
 				public void afterTextChanged( Editable s )
 				{
-					mPresenter.UpdateSectionTitle( s.toString() );
+					mDisplayTitle = s.toString();
 				}
 
 				public void beforeTextChanged( CharSequence s, int start, int count, int after )
@@ -159,6 +163,13 @@ public class SectionEditView extends Activity implements SectionView
 			mPresenter.storeImage( this, data );
 		}
 
+	}
+	
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		mPresenter.UpdateSectionTitle( mDisplayTitle );
 	}
 
 }
