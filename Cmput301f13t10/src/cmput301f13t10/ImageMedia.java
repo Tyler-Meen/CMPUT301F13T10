@@ -5,6 +5,8 @@ import java.io.ObjectStreamException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -25,7 +27,9 @@ public class ImageMedia implements Media
 	/**
 	 * The bitmap object associated with the media object
 	 */
-	private Bitmap mBitmap;
+	private Uri mImagePath;
+	
+	private Bitmap mImageBitmap;
 
 	/**
 	 * Constructor
@@ -44,9 +48,14 @@ public class ImageMedia implements Media
 	 * @param bm
 	 *            The bitmap file to use
 	 */
+	public void setImagePath( Uri ip )
+	{
+		mImagePath = ip;
+	}
+	
 	public void setImageBitmap( Bitmap bm )
 	{
-		mBitmap = bm;
+		mImageBitmap = bm;
 	}
 
 	@Override
@@ -59,20 +68,21 @@ public class ImageMedia implements Media
 	public View toView( Context c )
 	{
 		ImageView iv = new ImageView( c );
-		iv.setImageBitmap( mBitmap );
+		iv.setImageBitmap( mImageBitmap );
+		//iv.setImageDrawable( Drawable.createFromPath( mImagePath.getPath() ) );
 		return iv;
 	}
 
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		out.writeObject( mBitmap );
+		out.writeObject( mImagePath );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mId = (int) in.readInt();
-		mBitmap = (Bitmap) in.readObject();
+		mImagePath = (Uri) in.readObject();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException

@@ -1,14 +1,17 @@
 package cmput301f13t10;
 
+import java.io.File;
+import cs.ualberta.cmput301f13t10.R;
 import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import cs.ualberta.cmput301f13t10.R;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 /**
  * 
@@ -64,6 +68,9 @@ public class SectionEditView extends Activity implements SectionView
 	{
 		ActionBar actionBar = getActionBar();
 		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
+
+		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.sectionList );
+		mPresenter.setCurrentSectionView( scrollBox );
 		title.setText( mDisplayTitle );
 	}
 
@@ -71,7 +78,7 @@ public class SectionEditView extends Activity implements SectionView
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate( R.menu.section_edit_view, menu );
+		getMenuInflater().inflate( R.menu.section_edit_menu, menu );
 
 		return super.onCreateOptionsMenu( menu );
 	}
@@ -163,9 +170,7 @@ public class SectionEditView extends Activity implements SectionView
 	private void addImage()
 	{
 		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
-
 		startActivityForResult( intent, 0 );
-
 	}
 
 	/**
@@ -178,6 +183,7 @@ public class SectionEditView extends Activity implements SectionView
 		{
 			mPresenter.storeImage( this, data );
 		}
+
 	}
 
 	@Override

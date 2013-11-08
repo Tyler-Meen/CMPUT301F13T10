@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.view.ViewGroup;
 
 /**
@@ -166,21 +168,24 @@ public class SectionPresenter
 		}
 	}
 
+
 	/**
 	 * Takes a bitmap (which is store in the intent) and adds it as a Media to the current section.
 	 * @param editView The current SectionEditView
 	 * @param data The data taken from the camera
 	 */
 	public void storeImage( SectionEditView editView, Intent data )
-	{
+	{		
 		Bitmap tempBitmap = null;
+		
 		if( data.getData() != null )
 		{
 			try
 			{
 				//TODO Decouple the editView from the data.
 				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
-				tempBitmap = BitmapFactory.decodeStream( stream );
+				
+				tempBitmap = BitmapFactory.decodeStream(stream);
 				stream.close();
 			}
 			catch( Exception e )
@@ -194,10 +199,21 @@ public class SectionPresenter
 		}
 		if( tempBitmap != null )
 		{
+			tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 670, 670, true );
+			
 			ImageMedia newImageMedia = new ImageMedia();
 			newImageMedia.setImageBitmap( tempBitmap );
 			mCurrentSection.add( newImageMedia );
 		}
+		
+		//tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
+	}
+	
+	public void addMedia(Uri imageUri)
+	{
+		ImageMedia newImageMedia = new ImageMedia();
+		newImageMedia.setImagePath( imageUri );
+		mCurrentSection.add( newImageMedia );
 	}
 
 	/**
@@ -250,11 +266,5 @@ public class SectionPresenter
 	{
 		mCurrentSection.removeChoice( choiceToRemove );
 		mView.updateSectionView();
-	}
-	
-	
-	public ArrayList<Media> getMedia()
-	{
-		return mCurrentSection.getMedia();
 	}
 }
