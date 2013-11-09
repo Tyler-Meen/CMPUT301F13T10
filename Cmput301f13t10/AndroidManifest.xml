@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="cmput301f13t10.MainActivity"
+            android:name="cmput301f13t10.view.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,53 +23,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cmput301f13t10.SectionReadView"
+            android:name="cmput301f13t10.view.SectionReadView"
             android:label="@string/app_name"
-            android:parentActivityName="cmput301f13t10.LibraryView" >
+            android:parentActivityName="cmput301f13t10.view.LibraryView" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.LibraryView" />
+                android:value="cs.ualberta.cmput301f13t10.view.LibraryView" />
         </activity>
         <activity
-            android:name="cmput301f13t10.AdventureEditView"
+            android:name="cmput301f13t10.view.AdventureEditView"
             android:label="@string/title_activity_adventure_edit_view"
-            android:parentActivityName="cmput301f13t10.LibraryEditView"
+            android:parentActivityName="cmput301f13t10.view.LibraryEditView"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.LibraryEditView" />
+                android:value="cs.ualberta.cmput301f13t10.view.LibraryEditView" />
         </activity>
         <activity
-            android:name="cmput301f13t10.SectionEditView"
+            android:name="cmput301f13t10.view.SectionEditView"
             android:label="@string/title_activity_section_edit_view"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.AdventureEditView" />
+                android:value="cs.ualberta.cmput301f13t10.view.AdventureEditView" />
         </activity>
         <activity
-            android:name="cmput301f13t10.SectionModifyChoicesView"
+            android:name="cmput301f13t10.view.SectionModifyChoicesView"
             android:label="@string/title_activity_modify_Section_Choices_view"
-            android:parentActivityName="cmput301f13t10.SectionEditView" >
+            android:parentActivityName="cmput301f13t10.view.SectionEditView" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.SectionEditView" />
+                android:value="cs.ualberta.cmput301f13t10.view.SectionEditView" />
         </activity>
         <activity
-            android:name="cmput301f13t10.LibraryView"
+            android:name="cmput301f13t10.view.LibraryView"
             android:label="@string/library_label"
-            android:parentActivityName="cmput301f13t10.MainActivity" >
+            android:parentActivityName="cmput301f13t10.view.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.MainActivity" />
+                android:value="cs.ualberta.cmput301f13t10.view.MainActivity" />
         </activity>
         <activity
-            android:name="cmput301f13t10.LibraryEditView"
+            android:name="cmput301f13t10.view.LibraryEditView"
             android:label="@string/library_label"
-            android:parentActivityName="cmput301f13t10.MainActivity" >
+            android:parentActivityName="cmput301f13t10.view.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cs.ualberta.cmput301f13t10.MainActivity" />
+                android:value="cs.ualberta.cmput301f13t10.view.MainActivity" />
         </activity>
     </application>
 
