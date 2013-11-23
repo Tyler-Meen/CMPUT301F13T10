@@ -3,3 +3,5 @@
 R.java
 BuildConfig.java
 *.jar
+bin/
+.metadata/
