@@ -5,3 +5,4 @@ BuildConfig.java
 *.jar
 bin/
 .metadata/
+gen/
