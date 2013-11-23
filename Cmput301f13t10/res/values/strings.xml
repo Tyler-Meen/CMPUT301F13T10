@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello_world">Hello world!</string>
+<!-- Please don't make redundant single word entries into the string resource. If at some point you need to change
+something that references a single word string just make a new one no point in having a million of the same strings
+also try to keep it alphabetical to help identify redundant strings and to find strings that need to be changed -->
     <string name="app_name">Cmput301f13t10</string>
-	<string name="action_help">Help</string>
-	<string name="action_search">Search</string>
-    <string name="action_settings">Settings</string>
     <string name="adventure_title_hint">Enter an Adventure title</string>
-    <string name="button_edit">Edit</string>
-    <string name="button_help">Help</string>
-    <string name="button_read">Read</string>
-    <string name="button_settings">Settings</string>
-    <string name="cancel_string">Cancel</string>
-    <string name="continue_string">Continue</string>
+    <string name="add_choice_prompt">Enter choice information</string>
+    <string name="action_add_image_media">Add image media</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="Continue">Continue</string>
+    <string name="choice_description">Enter new choice description </string>
+    <string name="choice_description_hint">Choice Description</string>
     <string name="delete_section_prompt">Are you sure you wish to delete this section?</string>
-    <string name="add_choice_prompt">Enter choice information</string>
+    <string name="edit">Edit</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="help">Help</string>
+	<string name="im_feeling_lucky">I\'m feeling lucky</string>
+    <string name="insert_text">Insert Text</string>
+    <string name="library">Library</string>
+    <string name="modify_choices">Modify Choices</string>
+    <string name="new_adventure">New Adventure</string>
+    <string name="no_adventures">No Adventures Yet</string>
     <string name="new_adventure_dialog_title">New Adventure</string>
     <string name="new_adventure_title_hint">New Adventure Name</string>
     <string name="new_section">New Section</string>
     <string name="new_section_choice">New Section Choice</string>
-    <string name="modify_choices">Modify Choices</string>
     <string name="possible_choices">Possible Choices</string>
+    <string name="random">Random</string>
+    <string name="read">Read</string>
     <string name="selected_choices">Selected Choices</string>
-    <string name="choice_description_hint">Choice Description</string>
+	<string name="search">Search</string>
+    <string name="settings">Settings</string>
     <string name="section_title">Section Title</string>
-    <string name="library_label">Library</string>
-    <string name="no_adventures">No Adventures Yet</string>
     <string name="section_title_hint">Enter a Section title</string>
-    <string name="title_activity_adventure_edit_view">AdventureEditView</string>
+    <string name="title_activity_adventure_edit_view">Adventure Edit View</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
     <string name="title_activity_section_edit_view">Section Edit View</string>
-    <string name="choice_description">Enter new choice description </string>
-    <string name="action_add_image_media">Add image media</string>
-    <string name="new_adventure">New Adventure</string>
-    <string name="insert_text">Insert Text</string>
 
 </resources>

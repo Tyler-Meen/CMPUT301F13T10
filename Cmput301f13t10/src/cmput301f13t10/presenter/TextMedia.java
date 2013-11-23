@@ -31,16 +31,13 @@ package cmput301f13t10.presenter;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 
-import cmput301f13t10.model.IdFactory;
-
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import cs.ualberta.cmput301f13t10.R;
+import cmput301f13t10.model.IdFactory;
 
 /**
  * Media for text that can be added and view in a section of an adventure.

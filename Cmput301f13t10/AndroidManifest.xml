@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name="cmput301f13t10.view.LibraryView"
-            android:label="@string/library_label"
+            android:label="@string/library"
             android:parentActivityName="cmput301f13t10.view.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name="cmput301f13t10.view.LibraryEditView"
-            android:label="@string/library_label"
+            android:label="@string/library"
             android:parentActivityName="cmput301f13t10.view.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

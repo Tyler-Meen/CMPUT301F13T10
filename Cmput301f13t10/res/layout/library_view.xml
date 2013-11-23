@@ -12,11 +12,11 @@
         android:id="@+id/sectionListBorder"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
         android:background="#0000ff"
         android:orientation="vertical"
-        android:padding="@dimen/borderThickness"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1" >
+        android:padding="@dimen/borderThickness" >
 
         <ListView
             android:id="@+id/adventure_read_list"
@@ -25,5 +25,12 @@
             android:background="#ffffff" >
         </ListView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/random_choice_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/im_feeling_lucky" />
 
 </LinearLayout>
