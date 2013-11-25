@@ -30,13 +30,13 @@ package cmput301f13t10.presenter;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.view.SectionEditView;
 import cmput301f13t10.view.SectionView;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -340,5 +340,11 @@ public class SectionPresenter
 		if( mCurrentSection == null )
 			return;
 		setCurrentSection( mCurrentAdventure.getSection( mCurrentSection.getChoices().get( index ).getSectionTitle().getId() ) );
+	}
+
+	public void setRandomAdventure()
+	{
+		Random rand = new Random();		
+		setNextSectionByIndex( rand.nextInt( mCurrentSection.getChoices().size() ) );
 	}
 }

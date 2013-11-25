@@ -114,9 +114,14 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 	 * @param sectionId
 	 *            The id of the new section to view
 	 */
-	public void changeSection( int sectionId )
+	public void changeToSection( int sectionId )
 	{
 		mPresenter.setNextSectionByIndex( sectionId );
+	}
+
+	public void changeToRandomSection()
+	{
+		mPresenter.setRandomAdventure();
 	}
 	
 

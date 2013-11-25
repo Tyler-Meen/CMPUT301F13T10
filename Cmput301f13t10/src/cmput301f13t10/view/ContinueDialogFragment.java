@@ -70,13 +70,14 @@ public class ContinueDialogFragment extends DialogFragment
 
 		mView = (SectionReadView) getArguments().getSerializable( AppConstants.ADVENTURE_READ_VIEW );
 
-		CancelButtonListener cancelListener = new CancelButtonListener();
-		Button btn = (Button) view.findViewById( R.id.cancel_continue_button );
-		btn.setOnClickListener( cancelListener );
-
-		ListItemListener itemListener = new ListItemListener();
+		Button cancelBtn = (Button) view.findViewById( R.id.cancel_continue_button );
+		cancelBtn.setOnClickListener( new CancelButtonListener() );
+		
+		Button randomBtn = (Button) view.findViewById( R.id.random_choice_button );
+		randomBtn.setOnClickListener( new RandomButtonListener() );
+		
 		ListView listView = (ListView) view.findViewById( android.R.id.list );
-		listView.setOnItemClickListener( itemListener );
+		listView.setOnItemClickListener( new ListItemListener() );
 
 		populateList( listView );
 
@@ -110,7 +111,7 @@ public class ContinueDialogFragment extends DialogFragment
 		@Override
 		public void onItemClick( AdapterView<?> parent, View view, int position, long id )
 		{
-			mView.changeSection( position );
+			mView.changeToSection( position );
 			dismiss();
 		}
 	}
@@ -130,6 +131,21 @@ public class ContinueDialogFragment extends DialogFragment
 			dismiss();
 		}
 
+	}
+	
+	/**
+	 * 
+	 * @author Steven Gerdes
+	 *
+	 */
+	private class RandomButtonListener implements View.OnClickListener
+	{
+		@Override
+		public void onClick( View v)
+		{
+			mView.changeToRandomSection();
+			dismiss();
+		}
 	}
 
 }
