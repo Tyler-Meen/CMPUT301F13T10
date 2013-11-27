@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import java.io.Serializable;
@@ -33,13 +33,15 @@ import java.util.ArrayList;
 
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Media;
 import cmput301f13t10.presenter.SectionPresenter;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import cs.ualberta.cmput301f13t10.R;
@@ -92,7 +94,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 		Button continueButton = (Button) findViewById( R.id.continue_button );
 
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.read_items_linear );
-		mPresenter.setCurrentSectionView( scrollBox, false );
+		setCurrentSectionView( scrollBox );
 
 		if( mPresenter.atLastSection() )
 		{
@@ -105,6 +107,31 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 			ContinueButtonListener continueListener = new ContinueButtonListener();
 			continueButton.setOnClickListener( continueListener );
 			continueButton.setText( "Continue" );
+		}
+	}
+
+	/**
+	 * Set the input view group to contain all media in the current section.
+	 * 
+	 * @param vg
+	 *            The view group that is to contain the media.
+	 */
+	private void setCurrentSectionView( ViewGroup vg )
+	{
+		try
+		{
+			ArrayList<Media> medias = mPresenter.getMedia();
+			vg.removeAllViews();
+			for( Media m : medias )
+			{
+				View view = m.toView( this.getContext() );
+				view.setBackgroundColor( Color.TRANSPARENT );
+				vg.addView( view );
+			}
+		}
+		catch( NullPointerException e )
+		{
+			Logger.log( "No current section", e );
 		}
 	}
 
@@ -123,7 +150,6 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 	{
 		mPresenter.setRandomAdventure();
 	}
-	
 
 	@Override
 	public Context getContext()
@@ -149,16 +175,17 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 			choicesBundle.putStringArray( AppConstants.CHOICES_BUNDLE, (String[]) choices.toArray( new String[choices.size()] ) );
 
 			choicesBundle.putSerializable( AppConstants.ADVENTURE_READ_VIEW, SectionReadView.this );
-			
+
 			ContinueDialogFragment dialog = new ContinueDialogFragment();
 			dialog.setArguments( choicesBundle );
 			dialog.show( getFragmentManager(), "" );
 		}
 
 	}
-	
+
 	/**
-	 * Handler for the main menu button of the view. Sends the user back to the main menu.
+	 * Handler for the main menu button of the view. Sends the user back to the
+	 * main menu.
 	 * 
 	 * @author Brendan Cowan
 	 * 
@@ -169,10 +196,10 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 		@Override
 		public void onClick( View v )
 		{
-			Intent intent = new Intent(getContext(), MainActivity.class);
+			Intent intent = new Intent( getContext(), MainActivity.class );
 			intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
 			intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
-			startActivity(intent);
+			startActivity( intent );
 		}
 
 	}

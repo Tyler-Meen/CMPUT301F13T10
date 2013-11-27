@@ -28,38 +28,36 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.view;
 
-import java.io.File;
-
-import cs.ualberta.cmput301f13t10.R;
-
 import java.util.ArrayList;
-
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Media;
-import cmput301f13t10.presenter.SectionPresenter;
-import cmput301f13t10.presenter.TextMedia;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.ImageMedia;
+import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Media;
+import cmput301f13t10.presenter.SectionPresenter;
+import cmput301f13t10.presenter.TextMedia;
+import cmput301f13t10.view.ChangeImageSizeDialogFragment.ChangeImageSizeDialogListener;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * This is the view of a section it can have images or text added to it it can
@@ -71,7 +69,7 @@ import android.widget.TextView.OnEditorActionListener;
  * @author Aly-khan Jamal
  * 
  */
-public class SectionEditView extends Activity implements SectionView
+public class SectionEditView extends FragmentActivity implements SectionView, ChangeImageSizeDialogListener
 {
 	/**
 	 * The presenter for the view to get data from.
@@ -118,7 +116,7 @@ public class SectionEditView extends Activity implements SectionView
 		if( mDisplayTitle.equals( AppConstants.START ) )
 		{
 			title.setFocusable( false );
-			title.setBackgroundColor(Color.TRANSPARENT);
+			title.setBackgroundColor( Color.TRANSPARENT );
 		}
 		loadMedia();
 	}
@@ -130,7 +128,7 @@ public class SectionEditView extends Activity implements SectionView
 		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
 
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.sectionList );
-		mPresenter.setCurrentSectionView( scrollBox, true );
+		setCurrentSectionView( scrollBox );
 		title.setText( mDisplayTitle );
 	}
 
@@ -183,8 +181,57 @@ public class SectionEditView extends Activity implements SectionView
 	{
 		mMedia = mPresenter.getMedia();
 		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.sectionList );
-		mPresenter.setCurrentSectionView( linearLayout, true );
+		setCurrentSectionView( linearLayout );
 
+	}
+
+	/**
+	 * Set the input view group to contain all media in the current section.
+	 * 
+	 * @param vg
+	 *            The view group that is to contain the media.
+	 */
+	private void setCurrentSectionView( ViewGroup vg )
+	{
+		try
+		{
+			ArrayList<Media> medias = mMedia;
+			vg.removeAllViews();
+			for( int i = 0; i < medias.size(); i++ )
+			{
+				View view = medias.get( i ).toView( this.getContext() );
+				view.setFocusable( true );
+				view.setId( i );
+				/*
+				 * this is used as a long click listener so that under most
+				 * circumstances it will not be displayed when a TextMedia is
+				 * selected.
+				 */
+				/*
+				 * TODO: There should be another way to do this so that even if
+				 * a TextMedia is long clicked the dialog is not displayed. If
+				 * this happens app will crash if a number is entered.
+				 */
+				view.setOnLongClickListener( new OnLongClickListener()
+				{
+
+					@Override
+					public boolean onLongClick( View v )
+					{
+						ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
+						dialog.setMediaIndex( v.getId() );
+						dialog.show( getSupportFragmentManager(), "ImageResize" );
+						return true;
+					}
+
+				} );
+				vg.addView( view );
+			}
+		}
+		catch( NullPointerException e )
+		{
+			Logger.log( "No current section", e );
+		}
 	}
 
 	/**
@@ -209,6 +256,7 @@ public class SectionEditView extends Activity implements SectionView
 
 				public void beforeTextChanged( CharSequence s, int start, int count, int after )
 				{
+
 				}
 
 				public void onTextChanged( CharSequence s, int start, int before, int count )
@@ -267,6 +315,33 @@ public class SectionEditView extends Activity implements SectionView
 	{
 		super.onPause();
 		mPresenter.UpdateSectionTitle( mDisplayTitle );
+	}
+
+	@Override
+	public void onImageResize( android.support.v4.app.DialogFragment dialog )
+	{
+		ChangeImageSizeDialogFragment imageResizeFragment = (ChangeImageSizeDialogFragment) dialog;
+		int mediaIndex = imageResizeFragment.getMediaIndex();
+		Bitmap oldBitmap = ( (ImageMedia) mMedia.get( mediaIndex ) ).getImageBitmap();
+		int mediaSize = imageResizeFragment.getNewMediaSize();
+
+		if( mediaSize < imageResizeFragment.getMinSize() )
+			mediaSize = imageResizeFragment.getMinSize();
+		else if( mediaSize > imageResizeFragment.getMaxSize() )
+			mediaSize = imageResizeFragment.getMaxSize();
+
+		Bitmap newBitmap = Bitmap.createScaledBitmap( oldBitmap, mediaSize, mediaSize, true );
+
+		mPresenter.resizeBitmap( newBitmap, mediaIndex );
+
+		loadMedia();
+
+	}
+
+	@Override
+	public void onCancel( android.support.v4.app.DialogFragment dialog )
+	{
+		// do nothing
 	}
 
 }

@@ -40,11 +40,6 @@ import cmput301f13t10.view.SectionView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.net.Uri;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Presenter for the Adventure group of classes, as per the MVP pattern.
@@ -140,7 +135,7 @@ public class SectionPresenter
 				}
 			}
 			if( !sectionExists )
-				choices.remove( choice );	
+				choices.remove( choice );
 		}
 		return choices;
 	}
@@ -200,34 +195,6 @@ public class SectionPresenter
 	}
 
 	/**
-	 * Set the input view group to contain all media in the current section.
-	 * 
-	 * @param vg
-	 *            The view group that is to contain the media.
-	 */
-	public void setCurrentSectionView( ViewGroup vg, boolean isEditView )
-	{ // TODO: make the view do this instead of the presenter
-		// also take out the boolean and make it more OO
-		try
-		{
-			ArrayList<Media> medias = mCurrentSection.getMedia();
-			vg.removeAllViews();
-			for( Media m : medias )
-			{
-				View view = m.toView( mView.getContext() );
-				view.setFocusable( isEditView );
-				if( !isEditView )
-					view.setBackgroundColor( Color.TRANSPARENT );
-				vg.addView(  view );
-			}
-		}
-		catch( NullPointerException e )
-		{
-			Logger.log( "No current section", e );
-		}
-	}
-
-	/**
 	 * Takes a bitmap (which is store in the intent) and adds it as a Media to
 	 * the current section.
 	 * 
@@ -267,8 +234,20 @@ public class SectionPresenter
 			newImageMedia.setImageBitmap( tempBitmap );
 			mCurrentSection.add( newImageMedia );
 		}
+	}
 
-		// tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
+	/**
+	 * This takes a new bitmap and the position of the media in the current
+	 * sections media list and sets the new bitmap
+	 * 
+	 * @param newBitmap
+	 *            New bitmap to get set
+	 * @param mediaPos
+	 *            Position in media array list
+	 */
+	public void resizeBitmap( Bitmap newBitmap, int mediaPos )
+	{
+		( (ImageMedia) mCurrentSection.getMedia().get( mediaPos ) ).setImageBitmap( newBitmap );
 	}
 
 	public ArrayList<Media> getMedia()
@@ -344,7 +323,7 @@ public class SectionPresenter
 
 	public void setRandomAdventure()
 	{
-		Random rand = new Random();		
+		Random rand = new Random();
 		setNextSectionByIndex( rand.nextInt( mCurrentSection.getChoices().size() ) );
 	}
 }

@@ -10,17 +10,8 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
-
-        <LinearLayout
-            android:id="@+id/sectionListBorder"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_weight="1"
-            android:background="#0000ff"
-            android:orientation="vertical"
-            android:padding="@dimen/borderThickness" >
+        android:layout_weight="1"
+        android:clickable="true" >
 
             <LinearLayout
                 android:id="@+id/sectionList"
@@ -29,7 +20,6 @@
                 android:background="#ffffff"
                 android:orientation="vertical" >
             </LinearLayout>
-        </LinearLayout>
     </ScrollView>
 
     <Button

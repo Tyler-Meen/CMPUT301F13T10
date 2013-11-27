@@ -114,6 +114,7 @@ public class TextMedia implements Media
 			{
 			}
 		} );
+		
 		return addText;
 	}
 
