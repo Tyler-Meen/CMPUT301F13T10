@@ -44,7 +44,7 @@ public class CacheTest
 	{
 		AdventureModel adventure = new AdventureModel();
 		mCache.addAdventure( adventure );
-		assertTrue( mCache.getAllAdventures().contains( adventure ) );
+		assertTrue( mCache.getAllAdventuresSynchrounous().contains( adventure ) );
 		assertTrue( mInteractor.getAddedAdventures().contains( adventure ) );
 	}
 
@@ -58,7 +58,7 @@ public class CacheTest
 		AdventureModel adventure = new AdventureModel();
 		mCache.addAdventure( adventure );
 		mCache.deleteAdventure( adventure );
-		assertFalse( mCache.getAllAdventures().contains( adventure ) );
+		assertFalse( mCache.getAllAdventuresSynchrounous().contains( adventure ) );
 		assertFalse( mInteractor.getAddedAdventures().contains( adventure ) );
 	}
 
@@ -72,7 +72,7 @@ public class CacheTest
 		AdventureModel adventure = new AdventureModel();
 		adventure.setTitle( "yeah" );
 		mCache.addAdventure( adventure );
-		AdventureModel loadedAdventure = mCache.getAdventureById( adventure.getId() );
+		AdventureModel loadedAdventure = mCache.getAdventureByIdSynchrounous( adventure.getLocalId() );
 		assertEquals( loadedAdventure.getTitle(), "yeah" );
 	}
 
@@ -83,7 +83,7 @@ public class CacheTest
 	@Test
 	public void testGetAdventureNotInCache()
 	{
-		AdventureModel adventure = mCache.getAdventureById( 9999999 );
+		AdventureModel adventure = mCache.getAdventureByIdSynchrounous( 9999999 );
 		assertEquals( adventure.getTitle(), "Test" );
 	}
 

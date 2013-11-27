@@ -53,13 +53,17 @@ public interface AdventureInteractor
 	 * 
 	 * @return a list of all adventures in the cache.
 	 */
-	public ArrayList<AdventureModel> getAllAdventures();
+	public void getAllAdventures( Callback callback );
+	
+	public ArrayList<AdventureModel> getAllAdventuresSynchrounous();
 
 	/**
 	 * @return the adventure with the given id or null if the key is not in the
 	 *         cache.
 	 */
-	public AdventureModel getAdventureById( int id );
+	public void getAdventureById( int id, Callback callback );
+	
+	public AdventureModel getAdventureByIdSynchrounous( int id );
 
 	/**
 	 * Delete the specified adventure

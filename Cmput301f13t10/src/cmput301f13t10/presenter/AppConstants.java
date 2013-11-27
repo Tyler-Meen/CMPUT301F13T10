@@ -98,4 +98,25 @@ public class AppConstants
 	 * Tag. Input into factory to generate an id for a media.
 	 */
 	public static final String GENERATE_MEDIA_ID = "media_id";
+	
+	/**
+	 * The URL of the elasticsearch page
+	 */
+	public static final String ES_URL = "http://cmput301.softwareprocess.es:8080/cmput301f13t10/";
+	
+	/**
+	 * The url extention for adventures
+	 */
+	public static final String ES_ADVENTURE = "adventures/";
+	
+	/**
+	 * The url extention for the list of all ids
+	 */
+	public static final String ES_IDS = "ids/1";
+	
+	/**
+	 * Name of the file where adventures are saved locally
+	 */
+	public static final String FILE_NAME = "Adventures.sav";
+	
 }

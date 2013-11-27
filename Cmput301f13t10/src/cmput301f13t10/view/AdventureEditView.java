@@ -30,10 +30,6 @@ package cmput301f13t10.view;
 
 import java.util.List;
 
-import cmput301f13t10.presenter.AdventurePresenter;
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.SectionTitle;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -50,6 +46,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import cmput301f13t10.model.Callback;
+import cmput301f13t10.presenter.AdventurePresenter;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.SectionTitle;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -285,5 +285,44 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	public void launchSectionEditView( View view )
 	{
 		startSectionEdit( null );
+	}
+	
+	public void onUploadClick( View view )
+	{
+		mPresenter.commitAdventure();
+	}
+	
+	public void onDeleteClick( View view )
+	{
+		mPresenter.deleteAdventure();
+	}
+	
+	public void onDeleteLocalClick( View view )
+	{
+		mPresenter.deleteLocalAdventure();
+	}
+	
+	public void onDownloadClick( View view )
+	{
+		mPresenter.saveLocalAdventure();
+	}
+	
+	public void onSaveLocalClick( View view )
+	{
+		mPresenter.saveLocalAdventure();
+	}
+	
+	public void onGetOnline( View view )
+	{
+		Callback callback = new Callback() {
+
+			@Override
+			public void callBack( Object arg )
+			{
+				mLoadSections();
+			}
+			
+		};
+		mPresenter.getOnlineAdventure(callback);
 	}
 }

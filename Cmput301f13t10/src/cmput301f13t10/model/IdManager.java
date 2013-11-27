@@ -30,6 +30,8 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Manages the creation and deletion of ids
@@ -46,14 +48,29 @@ public class IdManager
 	/**
 	 * A list of ids that have been used and later deleted. They can be reused.
 	 */
-	private ArrayList<Integer> mReusableIds;
+	private Set<Integer> mReusableIds;
 
 	/**
 	 * Constructor
 	 */
 	public IdManager()
 	{
-		mReusableIds = new ArrayList<Integer>();
+		mReusableIds = new HashSet<Integer>();
+	}
+	
+	public void setUsedIds( ArrayList<Integer> ids ) {
+		//mReusableIds.clear();
+		Integer max = mNextId;
+		for( Integer id : ids ) {
+			if( id > max )
+				max = id;
+		}
+		
+		for( Integer i = 0; i < ids.size(); i++ ) {
+			//if( !ids.contains( i ))
+			mReusableIds.add( i );
+		}
+		mNextId = max+1;
 	}
 
 	/**
@@ -65,7 +82,11 @@ public class IdManager
 	{
 		if( mReusableIds.isEmpty() )
 			return mNextId++;
-		return mReusableIds.remove( mReusableIds.size() - 1 );
+		
+		Integer[] asArray = (Integer[]) mReusableIds.toArray();
+		Integer ret = asArray[asArray.length-1];
+		mReusableIds.remove( ret );
+		return ret;
 	}
 
 	/**

@@ -38,5 +38,11 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="title_activity_adventure_edit_view">Adventure Edit View</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
     <string name="title_activity_section_edit_view">Section Edit View</string>
+    <string name="upload">Upload</string>
+    <string name="delete">Delete</string>
+    <string name="deleteLocal">Delete Local</string>
+    <string name="saveLocal">Save Local</string>
+    <string name="download">Downlaod</string>
+    <string name="getOnline">Get online version</string>
 
 </resources>

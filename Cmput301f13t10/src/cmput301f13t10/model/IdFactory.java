@@ -112,4 +112,13 @@ public class IdFactory
 		return null;
 
 	}
+
+	public void assignLocalId( AdventureModel adventure )
+	{
+		for( SectionModel section : adventure.getSections()) {
+			section.setId( mSectionIdManager.getNewId() );
+		}
+		adventure.setLocalId( mAdventureIdManager.getNewId() );
+		
+	}
 }

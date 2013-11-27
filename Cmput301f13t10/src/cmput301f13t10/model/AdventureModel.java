@@ -33,8 +33,12 @@ import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observer;
 
+import android.util.Log;
 import cmput301f13t10.presenter.AppConstants;
+
+import com.google.gson.Gson;
 
 /**
  * Contains information about an adventure that the user can read, navigate
@@ -47,13 +51,15 @@ import cmput301f13t10.presenter.AppConstants;
  * @author Braeden Soetaert
  * 
  */
-public class AdventureModel implements Serializable
+public class AdventureModel implements Serializable, ContainsObservable
 {
 
 	/**
 	 * The id of the adventure
 	 */
-	private int mId;
+	private int mLocalId;
+	
+	private int mRemoteId;
 
 	/**
 	 * The adventure's title
@@ -64,6 +70,16 @@ public class AdventureModel implements Serializable
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
+	
+	/**
+	 * Delagator for the Observer pattern
+	 */
+	private DelegatedObservable mObservable;
+	
+	/**
+	 * 
+	 */
+	private Boolean mToSave;
 
 	/**
 	 * Constructor
@@ -81,11 +97,14 @@ public class AdventureModel implements Serializable
 	 */
 	public AdventureModel( String title )
 	{
-		mId = IdFactory.getIdManager( AppConstants.GENERATE_ADVENTURE_ID ).getNewId();
+		mLocalId = IdFactory.getIdManager( AppConstants.GENERATE_ADVENTURE_ID ).getNewId();
+		mRemoteId = -1;
 		mTitle = title;
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
 		mSections.add( startSection );
+		mObservable = new DelegatedObservable();
+		mToSave = false;
 	}
 
 	/**
@@ -131,9 +150,21 @@ public class AdventureModel implements Serializable
 	 * 
 	 * @return The id of the adventure
 	 */
-	public int getId()
+	public int getLocalId()
 	{
-		return mId;
+		return mLocalId;
+	}
+	
+	public void setLocalId( int id ) {
+		mLocalId = id;
+	}
+	
+	public int getRemoteId() {
+		return mRemoteId;
+	}
+	
+	public void setRemoteId( int id ) {
+		mRemoteId = id;
 	}
 
 	/**
@@ -231,6 +262,9 @@ public class AdventureModel implements Serializable
 	public void addSection( SectionModel section )
 	{
 		mSections.add( section );
+		Gson gson = new Gson();
+		String stuff = gson.toJson( this );
+		Log.d("debug", gson.toJson( this ));
 	}
 
 	/**
@@ -270,16 +304,40 @@ public class AdventureModel implements Serializable
 	{
 		out.writeObject( mTitle );
 		out.writeObject( mSections );
+		out.writeInt( mRemoteId );
+		out.writeInt( mLocalId );
+		out.writeBoolean( mToSave );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mTitle = (String) in.readObject();
 		mSections = (ArrayList<SectionModel>) in.readObject();
+		mRemoteId = in.readInt();
+		mLocalId = in.readInt();
+		mToSave = in.readBoolean();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException
 	{
+	}
+	
+	private void notifyObservers(Object arg) {
+		mObservable.notifyObservers(arg);
+	}
+	
+	public Boolean toSave() {
+		return mToSave;
+	}
+	
+	public void setSave( Boolean save ) {
+		mToSave = save;
+	}
+
+	@Override
+	public void addObserver( Observer observer )
+	{
+		mObservable.addObserver( observer );
 	}
 
 }

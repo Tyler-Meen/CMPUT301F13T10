@@ -29,9 +29,14 @@ either expressed or implied, of the FreeBSD Project.
 */
 package cmput301f13t10.model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.view.MainActivity;
 
 
 /**
@@ -66,16 +71,28 @@ public class AdventureCache implements AdventureInteractor
 	public AdventureCache(AdventureInteractor interactor)
 	{
 		adventures = new HashMap<Integer, AdventureModel>();
+		FileInputStream fileInputStream = null;
+		try
+		{
+			fileInputStream = MainActivity.getContext().openFileInput(AppConstants.FILE_NAME);
+		}
+		catch( FileNotFoundException e )
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<AdventureModel> advList = FileInteractor.loadAdventures( fileInputStream );//new HashMap<Integer, AdventureModel>();
+		for( AdventureModel adv : advList )
+			adventures.put( adv.getLocalId(), adv );
 		mInteractor = interactor;
 	}
 	
 	/**
-	 * Constructor with dependency injection
+	 * Constructor without dependency injection
 	 */
 	public AdventureCache()
 	{
-		adventures = new HashMap<Integer, AdventureModel>();
-		mInteractor = null;
+		this(null);
 	}
 
 	/**
@@ -96,15 +113,14 @@ public class AdventureCache implements AdventureInteractor
 	@Override
 	public void addAdventure( AdventureModel adventure )
 	{
-		adventures.put( adventure.getId(), adventure );
+		adventures.put( adventure.getLocalId(), adventure );
 	}
 
 	/**
 	 * @return the adventure with the given id or null if the key is not in the
 	 *         cache.
 	 */
-	@Override
-	public AdventureModel getAdventureById( int id )
+	public AdventureModel getAdventureByIdSynchrounous( int id )
 	{
 		return adventures.get( id );
 	}
@@ -115,7 +131,20 @@ public class AdventureCache implements AdventureInteractor
 	 * @return a list of all adventures in the cache.
 	 */
 	@Override
-	public ArrayList<AdventureModel> getAllAdventures()
+	public void getAllAdventures( Callback callback )
+	{
+		/*ArrayList<AdventureModel> alladventures = new ArrayList<AdventureModel>();
+
+		for( Integer key : adventures.keySet() )
+		{
+			alladventures.add( adventures.get( key ) );
+		}
+
+		return alladventures;*/
+
+	}
+	
+	public ArrayList<AdventureModel> getAllAdventuresSynchrounous()
 	{
 		ArrayList<AdventureModel> alladventures = new ArrayList<AdventureModel>();
 
@@ -127,9 +156,29 @@ public class AdventureCache implements AdventureInteractor
 		return alladventures;
 
 	}
+	
+	public boolean containsLocal( AdventureModel adventure ) {
+		return adventures.containsKey( adventure.getLocalId() );
+	}
+	
+	public boolean containsRemote( AdventureModel adventure ) {
+		for( Integer id : adventures.keySet() ) {
+			if( adventures.get( id ).getRemoteId() == adventure.getRemoteId() )
+				return true;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public void deleteAdventure( AdventureModel adventure )
+	{
+		adventures.remove( adventure.getLocalId() );
+		
+	}
+
+	@Override
+	public void getAdventureById( int id, Callback callback )
 	{
 		// TODO Auto-generated method stub
 		

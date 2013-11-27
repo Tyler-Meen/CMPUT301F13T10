@@ -51,6 +51,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import cmput301f13t10.model.AdventureCache;
+import cmput301f13t10.model.AdventureModel;
+import cmput301f13t10.model.Callback;
+import cmput301f13t10.model.DatabaseInteractor;
+import cmput301f13t10.model.InvalidSearchTypeException;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Searcher;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -95,7 +103,8 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 
 		setContentView( R.layout.library_view );
 
-		adventure = cache.getAllAdventures();
+		//adventure = cache.getAllAdventures();
+		
 		populateList();
 
 		Button feelingLuckyButton = (Button) findViewById( R.id.random_choice_button );
@@ -125,7 +134,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 
 			public void onItemClick( AdapterView<?> parentAdapter, View view, int position, long id )
 			{
-				AdventureId = ( (AdventureModel) parentAdapter.getItemAtPosition( position ) ).getId();
+				AdventureId = ( (AdventureModel) parentAdapter.getItemAtPosition( position ) ).getLocalId();
 				startSectionReadView();
 			}
 		} );
@@ -148,7 +157,6 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	protected void onResume()
 	{
 		super.onResume();
-		adventure = cache.getAllAdventures();
 		populateList();
 	}
 
@@ -157,8 +165,32 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	 */
 	private void populateList()
 	{
-		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
+		Callback getAdventureCallback = new Callback() {
 
+			@Override
+			public void callBack( Object adventureList )
+			{
+				try {
+					adventure = (ArrayList<AdventureModel>) adventureList;
+				} catch (ClassCastException e) {
+					Logger.log( "bad!", e );
+				}
+			}
+			
+		};
+		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
+		updateList();
+
+	}
+	
+	private void updateList() {
+		// we should always see local adventures
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous()) {
+			if(!adventure.contains( adv ))
+				adventure.add( adv );
+		}
+		
+		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
 		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, adventure );
 		adventureListView.setAdapter( adapter );
 	}
@@ -173,7 +205,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		catch( InvalidSearchTypeException e )
 		{
 			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			adventure = cache.getAllAdventures();
+			adventure = cache.getAllAdventuresSynchrounous();
 		}
 		populateList();
 		return true;

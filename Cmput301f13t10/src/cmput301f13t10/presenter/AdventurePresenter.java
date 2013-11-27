@@ -34,6 +34,9 @@ import java.util.List;
 
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
+import cmput301f13t10.model.Callback;
+import cmput301f13t10.model.DatabaseInteractor;
+import cmput301f13t10.model.ESGetCommand;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.view.AdventureEditView;
 
@@ -87,7 +90,7 @@ public class AdventurePresenter
 	{
 		mView = view;
 		mCache = AdventureCache.getAdventureCache();
-		mModel = mCache.getAdventureById( id );
+		mModel = mCache.getAdventureByIdSynchrounous( id );
 	}
 
 	/**
@@ -97,7 +100,7 @@ public class AdventurePresenter
 	 */
 	public Integer getAdventureId()
 	{
-		return mModel.getId();
+		return mModel.getLocalId();
 	}
 
 	/**
@@ -162,5 +165,47 @@ public class AdventurePresenter
 
 		}
 		return sectionTitles;
+	}
+	
+	public void commitAdventure() {
+		DatabaseInteractor.getDatabaseInteractor().addAdventure( mModel );
+	}
+
+	public void deleteAdventure()
+	{
+		DatabaseInteractor.getDatabaseInteractor().deleteAdventure( mModel );
+	}
+	
+	public void deleteLocalAdventure()
+	{
+			mModel.setSave( false );
+			AdventureCache.getAdventureCache().deleteAdventure( mModel );
+	}
+	
+	public void saveLocalAdventure()
+	{
+		mModel.setSave( true );
+	}
+
+	public void getOnlineAdventure( Callback externalCallback )
+	{
+		Callback presenterCallback = new Callback( externalCallback ) {
+
+			@Override
+			public void callBack( Object arg )
+			{
+				Callback c = (Callback) mCallbackArg;
+				AdventureCache.getAdventureCache().deleteAdventure( mModel );
+				mModel = (AdventureModel) arg;
+				AdventureCache.getAdventureCache().addAdventure( mModel );
+				if( c != null)
+					c.callBack( null );
+			}
+			
+		};
+		
+		ESGetCommand getCommand = new ESGetCommand(mModel.getRemoteId(), presenterCallback);
+		getCommand.execute( null, null );
+		
 	}
 }

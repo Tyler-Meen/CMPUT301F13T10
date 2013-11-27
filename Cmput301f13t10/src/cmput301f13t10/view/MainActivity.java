@@ -29,12 +29,19 @@ either expressed or implied, of the FreeBSD Project.
 */
 package cmput301f13t10.view;
 
-import cs.ualberta.cmput301f13t10.R;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import cmput301f13t10.model.AdventureCache;
+import cmput301f13t10.model.FileInteractor;
+import cmput301f13t10.presenter.AppConstants;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * The main menu of the app. Navigates to the library views, the help view and
@@ -45,6 +52,8 @@ import android.view.View;
  */
 public class MainActivity extends Activity
 {
+	private static Context mContext;
+	
 	/**
 	 * Starts up the library for editing adventures on edit button click.
 	 * 
@@ -71,6 +80,8 @@ public class MainActivity extends Activity
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate(savedInstanceState);
+		mContext = this;
+		
 		setContentView(R.layout.activity_main);
 
 	}
@@ -103,6 +114,10 @@ public class MainActivity extends Activity
 	{
 		// Intent intent = new Intent(this, SettingsView.class);
 		// startActivity(intent);
+	}
+	
+	public static Context getContext() {
+		return mContext;
 	}
 
 }

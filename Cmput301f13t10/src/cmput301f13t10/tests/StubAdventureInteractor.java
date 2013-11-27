@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cmput301f13t10.model.AdventureInteractor;
 import cmput301f13t10.model.AdventureModel;
+import cmput301f13t10.model.Callback;
 
 /**
  * Simple stubbed Adventure Interactor. Functions just well enough that you can
@@ -43,7 +44,7 @@ public class StubAdventureInteractor implements AdventureInteractor
 	}
 
 	@Override
-	public ArrayList<AdventureModel> getAllAdventures()
+	public ArrayList<AdventureModel> getAllAdventuresSynchrounous()
 	{
 		ArrayList<AdventureModel> onlineAdventures = new ArrayList<AdventureModel>();
 		onlineAdventures.add( new AdventureModel() );
@@ -51,7 +52,7 @@ public class StubAdventureInteractor implements AdventureInteractor
 	}
 
 	@Override
-	public AdventureModel getAdventureById( int id )
+	public AdventureModel getAdventureByIdSynchrounous( int id )
 	{
 		AdventureModel adventure = new AdventureModel();
 		adventure.setTitle( "Test" );
@@ -62,6 +63,20 @@ public class StubAdventureInteractor implements AdventureInteractor
 	public void deleteAdventure( AdventureModel adventure )
 	{
 		mAddedAdventures.remove( adventure );
+	}
+
+	@Override
+	public void getAllAdventures( Callback callback )
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAdventureById( int id, Callback callback )
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }
