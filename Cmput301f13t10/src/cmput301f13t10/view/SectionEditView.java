@@ -202,29 +202,36 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 				View view = medias.get( i ).toView( this.getContext() );
 				view.setFocusable( true );
 				view.setId( i );
-				/*
-				 * this is used as a long click listener so that under most
-				 * circumstances it will not be displayed when a TextMedia is
-				 * selected.
-				 */
-				/*
-				 * TODO: There should be another way to do this so that even if
-				 * a TextMedia is long clicked the dialog is not displayed. If
-				 * this happens app will crash if a number is entered.
-				 */
-				view.setOnLongClickListener( new OnLongClickListener()
+
+				boolean isImageMedia = true;
+
+				try
 				{
-
-					@Override
-					public boolean onLongClick( View v )
+					@SuppressWarnings("unused")
+					ImageMedia typeCheck = (ImageMedia) medias.get( i );
+				}
+				catch( ClassCastException e )
+				{
+					isImageMedia = false;
+				}
+				
+				if( isImageMedia )
+				{
+					view.setOnLongClickListener( new OnLongClickListener()
 					{
-						ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
-						dialog.setMediaIndex( v.getId() );
-						dialog.show( getSupportFragmentManager(), "ImageResize" );
-						return true;
-					}
 
-				} );
+						@Override
+						public boolean onLongClick( View v )
+						{
+							ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
+							dialog.setMediaIndex( v.getId() );
+							dialog.show( getSupportFragmentManager(), "ImageResize" );
+							return true;
+						}
+
+					} );
+				}
+
 				vg.addView( view );
 			}
 		}
