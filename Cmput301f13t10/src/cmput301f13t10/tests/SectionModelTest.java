@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.tests;
 
 import static org.junit.Assert.*;
@@ -39,12 +39,11 @@ import org.junit.Test;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.presenter.Media;
 
-
 /**
  * Test the SectionModel
  * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class SectionModelTest
 {

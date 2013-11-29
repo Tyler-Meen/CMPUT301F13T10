@@ -1,32 +1,31 @@
-
 /*
-Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
-All rights reserved.
+ Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
+ All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met: 
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer. 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution. 
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer. 
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution. 
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-The views and conclusions contained in the software and documentation are those
-of the authors and should not be interpreted as representing official policies, 
-either expressed or implied, of the FreeBSD Project.
-*/
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies, 
+ either expressed or implied, of the FreeBSD Project.
+ */
 package cmput301f13t10.view;
 
 import java.io.FileNotFoundException;
@@ -98,28 +97,28 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	 */
 	private Button btnCreateAdventure;
 	private MenuItem mSearchItem;
-	
+
 	private AdventureInteractor mAdventureInteractor;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
-//		AdventureModel fake = new AdventureModel("test");
+		// AdventureModel fake = new AdventureModel("test");
 		cache = AdventureCache.getAdventureCache();
 
-//		cache.addAdventure( fake );
+		// cache.addAdventure( fake );
 		mAdventure = new ArrayList<AdventureModel>();
 
 		super.onCreate( savedInstanceState );
 
 		setContentView( R.layout.library_edit );
 
-		//adventure = cache.getAllAdventuresSynchrounous();
-		
+		// adventure = cache.getAllAdventuresSynchrounous();
+
 		populateList();
 		addListenerOnButton();
-		
-		adventureListView.setOnItemClickListener(new OnItemClickListener()
+
+		adventureListView.setOnItemClickListener( new OnItemClickListener()
 		{
 
 			public void onItemClick( AdapterView<?> parentAdapter, View view, int position, long id )
@@ -148,14 +147,15 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		mAdventure = cache.getAllAdventuresSynchrounous();
 		populateList();
 	}
-	
+
 	@Override
-	public void onPause() {
+	public void onPause()
+	{
 		super.onPause();
 		FileOutputStream fileOutputStream = null;
 		try
 		{
-			fileOutputStream = openFileOutput(AppConstants.FILE_NAME, 0);
+			fileOutputStream = openFileOutput( AppConstants.FILE_NAME, 0 );
 		}
 		catch( FileNotFoundException e )
 		{
@@ -170,33 +170,38 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	 */
 	private void populateList()
 	{
-		Callback getAdventureCallback = new Callback() {
+		Callback getAdventureCallback = new Callback()
+		{
 			@Override
 			public void callBack( Object adventureList )
 			{
-				try {
+				try
+				{
 					mAdventure = (ArrayList<AdventureModel>) adventureList;
 					updateList();
-				} catch (ClassCastException e) {
+				}
+				catch( ClassCastException e )
+				{
 					Logger.log( "bad!", e );
 				}
 			}
-			
+
 		};
 		mAdventure.clear();
 		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
 		updateList();
-		
+
 	}
-	
+
 	private void updateList()
 	{
 		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous()) {
-			if(!libContains( adv ))
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		{
+			if( !libContains( adv ) )
 				mAdventure.add( adv );
 		}
-		
+
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
 		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, mAdventure );
 		adventureListView.setAdapter( adapter );
@@ -230,7 +235,6 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		Intent intent = new Intent( this, AdventureEditView.class );
 		startActivity( intent );
 	}
-	
 
 	@Override
 	public boolean onQueryTextChange( String searchText )
@@ -239,9 +243,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		{
 			mAdventure = Searcher.searchBy( mAdventure, searchText, Searcher.sTITLE );
 		}
-		catch(InvalidSearchTypeException e)
+		catch( InvalidSearchTypeException e )
 		{
-			Log.v("Library Search Error", Searcher.sTITLE + " not a valid search type");
+			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
 			mAdventure = cache.getAllAdventuresSynchrounous();
 		}
 		populateList();
@@ -251,12 +255,12 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	@Override
 	public boolean onQueryTextSubmit( String arg0 )
 	{
-        if (mSearchItem != null) {
-            mSearchItem.collapseActionView();
-        }
+		if( mSearchItem != null )
+		{
+			mSearchItem.collapseActionView();
+		}
 		return false;
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu( Menu menu )
@@ -279,17 +283,20 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		} );
 		return super.onCreateOptionsMenu( menu );
 	}
-	
-	private boolean libContains( AdventureModel adv ) {
-		for( AdventureModel thisAdv : mAdventure ) {
-			if( thisAdv.getLocalId() == adv.getLocalId())
+
+	private boolean libContains( AdventureModel adv )
+	{
+		for( AdventureModel thisAdv : mAdventure )
+		{
+			if( thisAdv.getLocalId() == adv.getLocalId() )
 				return true;
 		}
 		return false;
 	}
-	
-	public void onUploadClick( View v ) {
-		
+
+	public void onUploadClick( View v )
+	{
+
 	}
 
 }

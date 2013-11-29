@@ -16,43 +16,46 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Media;
 
 public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 {
-	
+
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
-	private Gson mGson = new Gson();
-	
-	//public void insertAdventure( AdventureModel adventure ) throws IllegalStateException, IOException
-	//{
+	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 
-		
-	//}
-	
+
+	// public void insertAdventure( AdventureModel adventure ) throws
+	// IllegalStateException, IOException
+	// {
+
+	// }
+
 	private AdventureModel mAdventure;
-	
+
 	private Callback mCallback;
-	
-	public ESInsertCommand( AdventureModel adventure, Callback callback ) {
+
+	public ESInsertCommand( AdventureModel adventure, Callback callback )
+	{
 		mAdventure = adventure;
 		mCallback = callback;
 	}
 
-	//@Override
-	//public Object execute()
+	// @Override
+	// public Object execute()
 	//
 
-
-	//}
+	// }
 
 	@Override
 	protected Void doInBackground( Void... params )
 	{
-		
+
 		// first one for the adventure itself
 		HttpPost httpPost = new HttpPost( AppConstants.ES_URL + AppConstants.ES_ADVENTURE + mAdventure.getRemoteId() );
 		StringEntity stringEntity = null;
@@ -114,31 +117,27 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 			e.printStackTrace();
 		}
 		String status = response.getStatusLine().toString();
-		
-		
-		
-		//String status = response.getStatusLine().toString();
 
-		//HttpEntity entity = response.getEntity();
-		//BufferedReader br = new BufferedReader( new InputStreamReader( entity.getContent() ) );
-		//String output;
+		// String status = response.getStatusLine().toString();
 
-		/*try
-		{
-			
-			EntityUtils.consume( entity );
-		}
-		catch( IOException e )
-		{
-			Logger.log( "", e );
-		}
-		httpPost.releaseConnection();*/
+		// HttpEntity entity = response.getEntity();
+		// BufferedReader br = new BufferedReader( new InputStreamReader(
+		// entity.getContent() ) );
+		// String output;
+
+		/*
+		 * try {
+		 * 
+		 * EntityUtils.consume( entity ); } catch( IOException e ) { Logger.log(
+		 * "", e ); } httpPost.releaseConnection();
+		 */
 		return null;
 	}
-	
+
 	@Override
-	protected void onPostExecute( Void result ) {
-		if(mCallback != null)
+	protected void onPostExecute( Void result )
+	{
+		if( mCallback != null )
 			mCallback.callBack( null );
 	}
 

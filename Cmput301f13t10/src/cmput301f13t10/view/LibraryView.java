@@ -30,13 +30,7 @@ package cmput301f13t10.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
-import cmput301f13t10.model.AdventureCache;
-import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.InvalidSearchTypeException;
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Searcher;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,10 +39,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import cmput301f13t10.model.AdventureCache;
@@ -73,12 +65,12 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	/**
 	 * The adventures to display
 	 */
-	private ArrayList<AdventureModel> adventure;
+	ArrayList<AdventureModel> adventure;
 
 	/**
 	 * The cache from which to grab the adventures
 	 */
-	private AdventureCache cache;
+	AdventureCache cache;
 
 	/**
 	 * The list view that will display all of the adventures
@@ -103,31 +95,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 
 		setContentView( R.layout.library_view );
 
-		//adventure = cache.getAllAdventures();
-		
 		populateList();
-
-		Button feelingLuckyButton = (Button) findViewById( R.id.random_choice_button );
-		feelingLuckyButton.setOnClickListener( new OnClickListener()
-		{
-
-			@Override
-			public void onClick( View arg0 )
-			{
-				try
-				{
-					Random rand = new Random();
-					int choiceNumber = rand.nextInt( adventureListView.getLastVisiblePosition() );
-					AdventureId = ( (AdventureModel) adventureListView.getItemAtPosition( choiceNumber ) ).getId();
-					startSectionReadView();
-				}
-				catch( IllegalArgumentException e )
-				{
-					//If there are no items in the list do nothing
-				}
-			}
-
-		} );
 
 		adventureListView.setOnItemClickListener( new AdapterView.OnItemClickListener()
 		{
@@ -138,7 +106,6 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 				startSectionReadView();
 			}
 		} );
-
 	}
 
 	/**
@@ -165,34 +132,51 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	 */
 	private void populateList()
 	{
-		Callback getAdventureCallback = new Callback() {
+		Callback getAdventureCallback = new Callback()
+		{
 
 			@Override
 			public void callBack( Object adventureList )
 			{
-				try {
+				try
+				{
 					adventure = (ArrayList<AdventureModel>) adventureList;
-				} catch (ClassCastException e) {
+					updateList();
+				}
+				catch( ClassCastException e )
+				{
 					Logger.log( "bad!", e );
 				}
 			}
-			
+
 		};
 		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
 		updateList();
 
 	}
-	
-	private void updateList() {
+
+	private void updateList()
+	{
 		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous()) {
-			if(!adventure.contains( adv ))
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		{
+			if( !libContains( adv ) )
 				adventure.add( adv );
 		}
-		
+
 		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
 		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, adventure );
 		adventureListView.setAdapter( adapter );
+	}
+	
+	private boolean libContains( AdventureModel adv )
+	{
+		for( AdventureModel thisAdv : adventure )
+		{
+			if( thisAdv.getLocalId() == adv.getLocalId() )
+				return true;
+		}
+		return false;
 	}
 
 	@Override

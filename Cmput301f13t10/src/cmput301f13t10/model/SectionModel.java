@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.model;
 
 import java.io.IOException;
@@ -216,8 +216,9 @@ public class SectionModel extends Observable implements Serializable
 		out.writeObject( mMedias );
 		out.writeInt( mId );
 	}
-	
-	public void setId( int id ) {
+
+	public void setId( int id )
+	{
 		mId = id;
 	}
 

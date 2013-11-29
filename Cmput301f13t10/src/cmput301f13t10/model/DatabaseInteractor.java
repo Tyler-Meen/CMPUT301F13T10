@@ -92,12 +92,14 @@ public class DatabaseInteractor implements AdventureInteractor
 					{
 						AdventureModel adventure = (AdventureModel) arg;
 						mCount++;
-						if( !AdventureCache.getAdventureCache().containsRemote( adventure )) {
+						if( !AdventureCache.getAdventureCache().containsRemote( adventure ) )
+						{
 							IdFactory.getIdFactory().assignLocalId( adventure );
 							AdventureCache.getAdventureCache().addAdventure( adventure );
 							mAdventures.add( adventure );
 						}
-						if( mCount >= mNumber ) {
+						if( mCount >= mNumber )
+						{
 							mCallback.callBack( mAdventures );
 						}
 					}

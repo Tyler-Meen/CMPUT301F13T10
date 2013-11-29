@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import java.util.List;
@@ -42,8 +42,9 @@ import cs.ualberta.cmput301f13t10.R;
 
 /**
  * Simply displays sections titles
+ * 
  * @author Steven Gerdes
- *
+ * 
  */
 public class SimpleSectionArrayAdapter extends ArrayAdapter<SectionTitle>
 {
@@ -81,7 +82,7 @@ public class SimpleSectionArrayAdapter extends ArrayAdapter<SectionTitle>
 		// Set the text view to have the section's title
 		TextView sectionTitleText = (TextView) rowView.findViewById( R.id.section_title );
 		sectionTitleText.setText( mValues.get( position ).getTitle() );
-		
+
 		return rowView;
 	}
 }

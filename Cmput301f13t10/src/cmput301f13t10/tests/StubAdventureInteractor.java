@@ -36,6 +36,7 @@ public class StubAdventureInteractor implements AdventureInteractor
 
 	/**
 	 * get all adventures that were added with addAdventure
+	 * 
 	 * @return The adventures
 	 */
 	public ArrayList<AdventureModel> getAddedAdventures()
@@ -69,14 +70,14 @@ public class StubAdventureInteractor implements AdventureInteractor
 	public void getAllAdventures( Callback callback )
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void getAdventureById( int id, Callback callback )
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

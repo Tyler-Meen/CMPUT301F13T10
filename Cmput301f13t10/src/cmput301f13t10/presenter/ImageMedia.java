@@ -28,16 +28,18 @@
  */
 package cmput301f13t10.presenter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 
-import cmput301f13t10.model.IdFactory;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import cmput301f13t10.model.IdFactory;
 
 /**
  * Media for pictures that can be added and viewed in a section of an adventure.
@@ -56,9 +58,9 @@ public class ImageMedia implements Media
 	/**
 	 * The bitmap object associated with the media object
 	 */
-	private Uri mImagePath;
+	private transient Bitmap mImageBitmap = null;
 
-	private Bitmap mImageBitmap;
+	private String mBase64String;
 
 	/**
 	 * Constructor
@@ -80,14 +82,8 @@ public class ImageMedia implements Media
 	public void setImageBitmap( Bitmap bm )
 	{
 		mImageBitmap = bm;
-	}
-
-	/**
-	 * Returns the image associated with the media object
-	 */
-	public Bitmap getImageBitmap()
-	{
-		return mImageBitmap;
+		mBase64String = toBase64(bm);
+		Log.d("debug", mBase64String);
 	}
 
 	@Override
@@ -101,20 +97,60 @@ public class ImageMedia implements Media
 	{
 		ImageView iv = new ImageView( c );
 		iv.setClickable( true );
-		iv.setImageBitmap( mImageBitmap );
+		iv.setImageBitmap( getImageBitmap() );
 		return iv;
+	}
+	
+	/**
+	 * Returns the image associated with the media object
+	 */
+
+	public Bitmap getImageBitmap() {
+		if( mImageBitmap == null )
+			mImageBitmap = toBitmap( mBase64String );
+		return mImageBitmap;
 	}
 
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		out.writeObject( mImagePath );
+		Log.d("debug", mBase64String );
+		out.writeObject( mBase64String );
+		
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mId = (int) in.readInt();
-		mImagePath = (Uri) in.readObject();
+		mBase64String = (String) in.readObject();
+		mImageBitmap = toBitmap( mBase64String );
+		//String imageString = (String) in.readObject();
+	}
+	
+	private String toBase64( Bitmap image ) {
+		/*int[] pixelInts = new int[image.getHeight()*image.getWidth()];
+		image.getPixels( pixelInts, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight() );
+		ByteBuffer byteBuffer = ByteBuffer.allocate( pixelInts.length * 4 );
+		IntBuffer intBuffer = byteBuffer.asIntBuffer();
+		intBuffer.put( pixelInts );
+		byte[] pixelBytes = byteBuffer.array();*/
+		
+		Bitmap imageCopy = Bitmap.createBitmap( image );
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		imageCopy.compress( Bitmap.CompressFormat.JPEG, 100, outputStream );
+		byte[] bytes = outputStream.toByteArray();
+		
+		
+		
+
+		
+		
+		return Base64.encodeToString( bytes, Base64.DEFAULT );
+	}
+	
+	private Bitmap toBitmap( String base64String ) {
+		byte[] decodedByte = Base64.decode( base64String, Base64.DEFAULT );
+		return BitmapFactory.decodeByteArray( decodedByte, 0, decodedByte.length );
 	}
 
 	private void readObjectNoData() throws ObjectStreamException

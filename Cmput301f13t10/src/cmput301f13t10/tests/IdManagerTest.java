@@ -13,8 +13,9 @@ import cmput301f13t10.model.IdManager;
 
 /**
  * Test the IdManager
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class IdManagerTest
 {

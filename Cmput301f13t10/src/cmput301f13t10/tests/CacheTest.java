@@ -8,11 +8,11 @@ import org.junit.Test;
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 
-
 /**
  * Test the AdventureCache
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class CacheTest
 {

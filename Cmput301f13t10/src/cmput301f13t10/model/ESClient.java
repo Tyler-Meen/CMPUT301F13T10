@@ -34,13 +34,16 @@ public class ESClient implements Observer
 	@Override
 	public void update( Observable arg0, Object arg1 )
 	{
-		try {
+		try
+		{
 			Command command = (Command) arg1;
 			command.execute();
-		} catch (Exception e) {
+		}
+		catch( Exception e )
+		{
 			Logger.log( "not a command parameter", e );
 		}
-		
+
 	}
 
 }

@@ -286,43 +286,44 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	{
 		startSectionEdit( null );
 	}
-	
+
 	public void onUploadClick( View view )
 	{
 		mPresenter.commitAdventure();
 	}
-	
+
 	public void onDeleteClick( View view )
 	{
 		mPresenter.deleteAdventure();
 	}
-	
+
 	public void onDeleteLocalClick( View view )
 	{
 		mPresenter.deleteLocalAdventure();
 	}
-	
+
 	public void onDownloadClick( View view )
 	{
 		mPresenter.saveLocalAdventure();
 	}
-	
+
 	public void onSaveLocalClick( View view )
 	{
 		mPresenter.saveLocalAdventure();
 	}
-	
+
 	public void onGetOnline( View view )
 	{
-		Callback callback = new Callback() {
+		Callback callback = new Callback()
+		{
 
 			@Override
 			public void callBack( Object arg )
 			{
 				mLoadSections();
 			}
-			
+
 		};
-		mPresenter.getOnlineAdventure(callback);
+		mPresenter.getOnlineAdventure( callback );
 	}
 }

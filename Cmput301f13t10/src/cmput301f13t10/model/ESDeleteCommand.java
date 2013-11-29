@@ -15,51 +15,52 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.Media;
 
 import com.google.gson.Gson;
-
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Logger;
+import com.google.gson.GsonBuilder;
 
 public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 {
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
-	private Gson mGson = new Gson();
+	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 	/**
 	 * delete an entry specified by the id
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
 	 */
-	//public void deleteAdventure() throws IOException {
+	// public void deleteAdventure() throws IOException {
 
-	//}
+	// }
 	private int mId;
 	private Callback mCallback;
-	
-	public ESDeleteCommand( int id, Callback callback ) {
+
+	public ESDeleteCommand( int id, Callback callback )
+	{
 		mId = id;
 		mCallback = callback;
 	}
 
-	//@Override
-	//public Object execute() throws ClientProtocolException, IOException
-	//{
+	// @Override
+	// public Object execute() throws ClientProtocolException, IOException
+	// {
 
-
-	//}
+	// }
 
 	@Override
 	protected Void doInBackground( Void... params )
 	{
-		
-		HttpDelete httpDelete = new HttpDelete(AppConstants.ES_URL + AppConstants.ES_ADVENTURE + mId);
-		httpDelete.addHeader("Accept","application/json");
+
+		HttpDelete httpDelete = new HttpDelete( AppConstants.ES_URL + AppConstants.ES_ADVENTURE + mId );
+		httpDelete.addHeader( "Accept", "application/json" );
 
 		HttpResponse response = null;
 		try
 		{
-			response = mHttpClient.execute(httpDelete);
+			response = mHttpClient.execute( httpDelete );
 		}
 		catch( ClientProtocolException e2 )
 		{
@@ -78,7 +79,7 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		BufferedReader br = null;
 		try
 		{
-			br = new BufferedReader(new InputStreamReader(entity.getContent()));
+			br = new BufferedReader( new InputStreamReader( entity.getContent() ) );
 		}
 		catch( IllegalStateException e2 )
 		{
@@ -94,8 +95,9 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 
 		try
 		{
-			while ((output = br.readLine()) != null) {
-			//	System.err.println(output);
+			while( ( output = br.readLine() ) != null )
+			{
+				// System.err.println(output);
 			}
 		}
 		catch( IOException e2 )
@@ -103,11 +105,10 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		//EntityUtils.consume(entity);
+		// EntityUtils.consume(entity);
 
-		//httpDelete.releaseConnection();
-		
-		
+		// httpDelete.releaseConnection();
+
 		// second one for the id
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
 		String query = "{\"script\" : \"ctx._source.mIds.remove(" + mId + ")\"}";
@@ -122,7 +123,7 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 			e1.printStackTrace();
 		}
 		updateRequest.setHeader( "Accept", "application/json" );
- 
+
 		updateRequest.setEntity( stringentity );
 		try
 		{
@@ -141,11 +142,12 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		status = response.getStatusLine().toString();
 		return null;
 	}
-	
+
 	@Override
-	protected void onPostExecute(Void result) {
-		if(mCallback != null)
+	protected void onPostExecute( Void result )
+	{
+		if( mCallback != null )
 			mCallback.callBack( null );
-    }
+	}
 
 }

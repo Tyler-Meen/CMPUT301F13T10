@@ -14,8 +14,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.Media;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 public class ESUpdateCommand extends AsyncTask<Void, Void, Void>
@@ -23,7 +25,8 @@ public class ESUpdateCommand extends AsyncTask<Void, Void, Void>
 
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
-	private static Gson mGson = new Gson();
+	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
+
 
 	private int mId;
 	private String mUpdate;
@@ -41,13 +44,11 @@ public class ESUpdateCommand extends AsyncTask<Void, Void, Void>
 		mCallback = callback;
 	}
 
-	//@Override
-	//public Object execute() throws ClientProtocolException, IOException
-	//{
+	// @Override
+	// public Object execute() throws ClientProtocolException, IOException
+	// {
 
-
-
-	//}
+	// }
 
 	@Override
 	protected Void doInBackground( Void... params )
@@ -67,7 +68,7 @@ public class ESUpdateCommand extends AsyncTask<Void, Void, Void>
 
 		updateRequest.setHeader( "Accept", "application/json" );
 		updateRequest.setEntity( stringentity );
-		
+
 		HttpResponse response = null;
 		try
 		{
@@ -91,21 +92,23 @@ public class ESUpdateCommand extends AsyncTask<Void, Void, Void>
 		return null;
 	}
 
-	/*public static String AdventureDiffToJsonString( AdventureModel oldAdventure, AdventureModel newAdventure )
-	{
-		JsonElement oldAdventureElement = mGson.toJsonTree(oldAdventure);
-		JsonElement newAdventureElement = mGson.toJsonTree(oldAdventure);
-		
-		Set<Map.Entry<String, JsonElement>> oldSet = oldAdventureElement.getAsJsonObject().entrySet();
-		Set<Map.Entry<String, JsonElement>> newSet = newAdventureElement.getAsJsonObject().entrySet();
-	}*/
-	
+	/*
+	 * public static String AdventureDiffToJsonString( AdventureModel
+	 * oldAdventure, AdventureModel newAdventure ) { JsonElement
+	 * oldAdventureElement = mGson.toJsonTree(oldAdventure); JsonElement
+	 * newAdventureElement = mGson.toJsonTree(oldAdventure);
+	 * 
+	 * Set<Map.Entry<String, JsonElement>> oldSet =
+	 * oldAdventureElement.getAsJsonObject().entrySet(); Set<Map.Entry<String,
+	 * JsonElement>> newSet = newAdventureElement.getAsJsonObject().entrySet();
+	 * }
+	 */
+
 	@Override
-	protected void onPostExecute( Void result ) {
-		if(mCallback != null)
+	protected void onPostExecute( Void result )
+	{
+		if( mCallback != null )
 			mCallback.callBack( null );
 	}
 
 }
-
-

@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.tests;
 
 import cmput301f13t10.model.IdFactory;
@@ -36,8 +36,9 @@ import android.view.View;
 
 /**
  * A simple media used in the tests
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class MockMedia implements Media
 {

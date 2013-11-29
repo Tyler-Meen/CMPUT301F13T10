@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import java.util.List;
@@ -42,8 +42,9 @@ import cs.ualberta.cmput301f13t10.R;
 
 /**
  * Displays section choices in a list view
+ * 
  * @author Steven Gerdes
- *
+ * 
  */
 public class SectionChoiceArrayAdapter extends ArrayAdapter<SectionChoice>
 {
@@ -85,7 +86,7 @@ public class SectionChoiceArrayAdapter extends ArrayAdapter<SectionChoice>
 		// Set the text view to have the section's title
 		TextView choiceDecisionText = (TextView) rowView.findViewById( R.id.choice_description );
 		choiceDecisionText.setText( mValues.get( position ).getChoiceDescription() );
-		
+
 		return rowView;
 	}
 }

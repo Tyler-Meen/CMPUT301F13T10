@@ -25,14 +25,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.presenter;
-
 
 /**
  * Maps a Choice Description to a section title
+ * 
  * @author Steven Gerdes
- *
+ * 
  */
 public class SectionChoice
 {
@@ -40,7 +40,7 @@ public class SectionChoice
 	 * The section title.
 	 */
 	private SectionTitle mSectionTitle;
-	
+
 	/**
 	 * The title of the choice
 	 */
@@ -48,8 +48,11 @@ public class SectionChoice
 
 	/**
 	 * Constructor
-	 * @param sectionTitle The section title
-	 * @param userChoice The title of the choice
+	 * 
+	 * @param sectionTitle
+	 *            The section title
+	 * @param userChoice
+	 *            The title of the choice
 	 */
 	public SectionChoice( SectionTitle sectionTitle, String userChoice )
 	{
@@ -59,6 +62,7 @@ public class SectionChoice
 
 	/**
 	 * Get the section title
+	 * 
 	 * @return The section title
 	 */
 	public SectionTitle getSectionTitle()
@@ -68,6 +72,7 @@ public class SectionChoice
 
 	/**
 	 * Get the user choice
+	 * 
 	 * @return the user choice
 	 */
 	public String getChoiceDescription()

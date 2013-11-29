@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import java.util.ArrayList;
@@ -55,14 +55,17 @@ import android.widget.ListView;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
- * This is the activity that allows a user to change which choices the current section is linked to 
+ * This is the activity that allows a user to change which choices the current
+ * section is linked to
+ * 
  * @author Steven Gerdes
- *
+ * 
  */
 public class SectionModifyChoicesView extends Activity implements SectionView, AddChoiceDialogListener
 {
 	/**
-	 * The section presenter that gives this view its correctly formatted information
+	 * The section presenter that gives this view its correctly formatted
+	 * information
 	 */
 	private SectionPresenter mPresenter;
 
@@ -108,7 +111,9 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 	}
 
 	/**
-	 * When some one wants to add a section it will pop up a dialog asking for more information
+	 * When some one wants to add a section it will pop up a dialog asking for
+	 * more information
+	 * 
 	 * @return this as a click listener
 	 */
 	private OnItemClickListener onAddSectionChoice()
@@ -147,7 +152,8 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 
 	/**
 	 * What to do when some one want to remove a section
-	 * @return this function so it can be used 
+	 * 
+	 * @return this function so it can be used
 	 */
 	private OnItemClickListener onRemoveSectionChoice()
 	{
@@ -164,7 +170,9 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 
 	/**
 	 * Adds a new section choice dialog
-	 * @param view the view that was clicked
+	 * 
+	 * @param view
+	 *            the view that was clicked
 	 */
 	public void newSectionChoice( View view )
 	{
@@ -187,6 +195,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 	{
 		// do nothing
 	}
+
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
@@ -197,7 +206,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 		{
 			ActionBar actionBar = getActionBar();
 			// add the custom view to the action bar
-		
+
 			actionBar.setDisplayHomeAsUpEnabled( true );
 		}
 	}
