@@ -125,6 +125,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 			for( Media m : medias )
 			{
 				View view = m.toView( this.getContext() );
+				view.setFocusable( false );
 				view.setBackgroundColor( Color.TRANSPARENT );
 				vg.addView( view );
 			}

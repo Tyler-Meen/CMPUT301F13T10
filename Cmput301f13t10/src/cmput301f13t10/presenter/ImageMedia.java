@@ -82,8 +82,8 @@ public class ImageMedia implements Media
 	public void setImageBitmap( Bitmap bm )
 	{
 		mImageBitmap = bm;
-		mBase64String = toBase64(bm);
-		Log.d("debug", mBase64String);
+		mBase64String = toBase64( bm );
+		Log.d( "debug", mBase64String );
 	}
 
 	@Override
@@ -100,12 +100,13 @@ public class ImageMedia implements Media
 		iv.setImageBitmap( getImageBitmap() );
 		return iv;
 	}
-	
+
 	/**
 	 * Returns the image associated with the media object
 	 */
 
-	public Bitmap getImageBitmap() {
+	public Bitmap getImageBitmap()
+	{
 		if( mImageBitmap == null )
 			mImageBitmap = toBitmap( mBase64String );
 		return mImageBitmap;
@@ -114,9 +115,8 @@ public class ImageMedia implements Media
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		Log.d("debug", mBase64String );
+		Log.d( "debug", mBase64String );
 		out.writeObject( mBase64String );
-		
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
@@ -124,37 +124,21 @@ public class ImageMedia implements Media
 		mId = (int) in.readInt();
 		mBase64String = (String) in.readObject();
 		mImageBitmap = toBitmap( mBase64String );
-		//String imageString = (String) in.readObject();
 	}
-	
-	private String toBase64( Bitmap image ) {
-		/*int[] pixelInts = new int[image.getHeight()*image.getWidth()];
-		image.getPixels( pixelInts, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight() );
-		ByteBuffer byteBuffer = ByteBuffer.allocate( pixelInts.length * 4 );
-		IntBuffer intBuffer = byteBuffer.asIntBuffer();
-		intBuffer.put( pixelInts );
-		byte[] pixelBytes = byteBuffer.array();*/
-		
+
+	private String toBase64( Bitmap image )
+	{
 		Bitmap imageCopy = Bitmap.createBitmap( image );
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		imageCopy.compress( Bitmap.CompressFormat.JPEG, 100, outputStream );
 		byte[] bytes = outputStream.toByteArray();
-		
-		
-		
 
-		
-		
 		return Base64.encodeToString( bytes, Base64.DEFAULT );
 	}
-	
-	private Bitmap toBitmap( String base64String ) {
+
+	private Bitmap toBitmap( String base64String )
+	{
 		byte[] decodedByte = Base64.decode( base64String, Base64.DEFAULT );
 		return BitmapFactory.decodeByteArray( decodedByte, 0, decodedByte.length );
 	}
-
-	private void readObjectNoData() throws ObjectStreamException
-	{
-	}
-
 }
