@@ -63,8 +63,8 @@ public class MainActivity extends Activity
 	 */
 	public void help( View view )
 	{
-		// Intent intent = new Intent(this, HelpView.class);
-		// startActivity(intent);
+		Intent intent = new Intent(this, HelpView.class);
+		startActivity(intent);
 	}
 
 	@Override

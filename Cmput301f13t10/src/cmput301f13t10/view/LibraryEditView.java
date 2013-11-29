@@ -1,32 +1,31 @@
-
 /*
-Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
-All rights reserved.
+ Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
+ All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met: 
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer. 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution. 
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer. 
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution. 
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-The views and conclusions contained in the software and documentation are those
-of the authors and should not be interpreted as representing official policies, 
-either expressed or implied, of the FreeBSD Project.
-*/
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies, 
+ either expressed or implied, of the FreeBSD Project.
+ */
 package cmput301f13t10.view;
 
 import java.io.Serializable;
@@ -94,10 +93,10 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
-//		AdventureModel fake = new AdventureModel("test");
+		// AdventureModel fake = new AdventureModel("test");
 		cache = AdventureCache.getAdventureCache();
 
-//		cache.addAdventure( fake );
+		// cache.addAdventure( fake );
 		adventure = new ArrayList<AdventureModel>();
 
 		super.onCreate( savedInstanceState );
@@ -107,10 +106,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		adventure = cache.getAllAdventures();
 		populateList();
 		addListenerOnButton();
-		
-		adventureListView.setOnItemClickListener(new OnItemClickListener()
-		{
 
+		adventureListView.setOnItemClickListener( new OnItemClickListener()
+		{
 			public void onItemClick( AdapterView<?> parentAdapter, View view, int position, long id )
 			{
 				AdventureId = ( (AdventureModel) parentAdapter.getItemAtPosition( position ) ).getId();
@@ -176,7 +174,6 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		Intent intent = new Intent( this, AdventureEditView.class );
 		startActivity( intent );
 	}
-	
 
 	@Override
 	public boolean onQueryTextChange( String searchText )
@@ -185,9 +182,9 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		{
 			adventure = Searcher.searchBy( adventure, searchText, Searcher.sTITLE );
 		}
-		catch(InvalidSearchTypeException e)
+		catch( InvalidSearchTypeException e )
 		{
-			Log.v("Library Search Error", Searcher.sTITLE + " not a valid search type");
+			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
 			adventure = cache.getAllAdventures();
 		}
 		populateList();
@@ -197,12 +194,12 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	@Override
 	public boolean onQueryTextSubmit( String arg0 )
 	{
-        if (mSearchItem != null) {
-            mSearchItem.collapseActionView();
-        }
+		if( mSearchItem != null )
+		{
+			mSearchItem.collapseActionView();
+		}
 		return false;
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu( Menu menu )

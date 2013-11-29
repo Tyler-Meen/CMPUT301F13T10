@@ -71,6 +71,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs.ualberta.cmput301f13t10.view.MainActivity" />
         </activity>
+        <activity
+            android:name="cmput301f13t10.view.HelpView"
+            android:label="@string/title_help_view"
+            android:parentActivityName="cmput301f13t10.view.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cs.ualberta.cmput301f13t10.view.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

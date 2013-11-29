@@ -114,7 +114,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 				}
 				catch( IllegalArgumentException e )
 				{
-					//If there are no items in the list do nothing
+					// If there are no items in the list do nothing
 				}
 			}
 

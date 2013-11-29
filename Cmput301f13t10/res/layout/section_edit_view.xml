@@ -30,12 +30,4 @@
         android:text="@string/modify_choices" >
     </Button>
 
-    <Button
-        android:id="@+id/AddNoteButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="launchInsertTextAction"
-        android:text="@string/insert_text" >
-    </Button>
-
 </LinearLayout>

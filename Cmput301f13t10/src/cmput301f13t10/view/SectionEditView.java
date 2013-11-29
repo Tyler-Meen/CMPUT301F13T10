@@ -161,14 +161,8 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
 		startActivity( intent );
 	}
-
-	/**
-	 * Create a new text media and update the display.
-	 * 
-	 * @param view
-	 *            The view that was clicked.
-	 */
-	public void launchInsertTextAction( View view )
+	
+	public void addText()
 	{
 		mMedia.add( new TextMedia() );
 		loadMedia();
@@ -278,6 +272,9 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 		{
 		case R.id.action_add_media:
 			addImage();
+			return true;
+		case R.id.action_add_text:
+			addText();
 			return true;
 		case android.R.id.home:
 			this.finish();
