@@ -28,14 +28,10 @@
  */
 package cmput301f13t10.view;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import cmput301f13t10.model.AdventureCache;
-import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.InvalidSearchTypeException;
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Searcher;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,8 +46,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import cmput301f13t10.model.AdventureCache;
+import cmput301f13t10.model.AdventureInteractor;
+import cmput301f13t10.model.AdventureModel;
+import cmput301f13t10.model.Callback;
+import cmput301f13t10.model.DatabaseInteractor;
+import cmput301f13t10.model.FileInteractor;
+import cmput301f13t10.model.InvalidSearchTypeException;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Searcher;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -67,7 +75,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	/**
 	 * A list of adventures to display
 	 */
-	ArrayList<AdventureModel> adventure;
+	ArrayList<AdventureModel> mAdventure = new ArrayList<AdventureModel>();
 
 	/**
 	 * The cache of adventures from which to pull adventures.
@@ -90,20 +98,22 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	private Button btnCreateAdventure;
 	private MenuItem mSearchItem;
 
+	private AdventureInteractor mAdventureInteractor;
+
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		// AdventureModel fake = new AdventureModel("test");
 		cache = AdventureCache.getAdventureCache();
 
-		// cache.addAdventure( fake );
-		adventure = new ArrayList<AdventureModel>();
+		mAdventure = new ArrayList<AdventureModel>();
 
 		super.onCreate( savedInstanceState );
 
 		setContentView( R.layout.library_edit );
 
-		adventure = cache.getAllAdventures();
+		// adventure = cache.getAllAdventuresSynchrounous();
+
 		populateList();
 		addListenerOnButton();
 
@@ -111,7 +121,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		{
 			public void onItemClick( AdapterView<?> parentAdapter, View view, int position, long id )
 			{
-				AdventureId = ( (AdventureModel) parentAdapter.getItemAtPosition( position ) ).getId();
+				AdventureId = ( (AdventureModel) parentAdapter.getItemAtPosition( position ) ).getLocalId();
 				startAdventureEditViewId();
 			}
 		} );
@@ -132,8 +142,25 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	protected void onResume()
 	{
 		super.onResume();
-		adventure = cache.getAllAdventures();
+		mAdventure = cache.getAllAdventuresSynchrounous();
 		populateList();
+	}
+
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		FileOutputStream fileOutputStream = null;
+		try
+		{
+			fileOutputStream = openFileOutput( AppConstants.FILE_NAME, 0 );
+		}
+		catch( FileNotFoundException e )
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventuresSynchrounous(), fileOutputStream );
 	}
 
 	/**
@@ -141,8 +168,40 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	 */
 	private void populateList()
 	{
+		Callback getAdventureCallback = new Callback()
+		{
+			@Override
+			public void callBack( Object adventureList )
+			{
+				try
+				{
+					mAdventure = (ArrayList<AdventureModel>) adventureList;
+					updateList();
+				}
+				catch( ClassCastException e )
+				{
+					Logger.log( "bad!", e );
+				}
+			}
+
+		};
+		mAdventure.clear();
+		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
+		updateList();
+
+	}
+
+	private void updateList()
+	{
+		// we should always see local adventures
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		{
+			if( !libContains( adv ) )
+				mAdventure.add( adv );
+		}
+
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
-		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, adventure );
+		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, mAdventure );
 		adventureListView.setAdapter( adapter );
 	}
 
@@ -180,12 +239,12 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	{
 		try
 		{
-			adventure = Searcher.searchBy( adventure, searchText, Searcher.sTITLE );
+			mAdventure = Searcher.searchBy( mAdventure, searchText, Searcher.sTITLE );
 		}
 		catch( InvalidSearchTypeException e )
 		{
 			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			adventure = cache.getAllAdventures();
+			mAdventure = cache.getAllAdventuresSynchrounous();
 		}
 		populateList();
 		return true;
@@ -221,6 +280,21 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 			}
 		} );
 		return super.onCreateOptionsMenu( menu );
+	}
+
+	private boolean libContains( AdventureModel adv )
+	{
+		for( AdventureModel thisAdv : mAdventure )
+		{
+			if( thisAdv.getLocalId() == adv.getLocalId() )
+				return true;
+		}
+		return false;
+	}
+
+	public void onUploadClick( View v )
+	{
+
 	}
 
 }

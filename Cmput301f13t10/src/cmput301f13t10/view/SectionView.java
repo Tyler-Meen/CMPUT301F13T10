@@ -25,15 +25,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import android.content.Context;
 
 /**
- * Interface for section views. Can update the view, and get the context of the view.
+ * Interface for section views. Can update the view, and get the context of the
+ * view.
+ * 
  * @author Steven Gerdes
- *
+ * 
  */
 public interface SectionView
 {
@@ -41,8 +43,10 @@ public interface SectionView
 	 * Update the section view with new data.
 	 */
 	public void updateSectionView();
+
 	/**
 	 * Get the context of the section view
+	 * 
 	 * @return The context of the section view.
 	 */
 	public Context getContext();

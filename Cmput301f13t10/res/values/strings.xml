@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
@@ -89,4 +90,10 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_Definitions14">User: A person who uses the app to read Adventures.</string>
     <string name="h_Definitions15">Writer: A user that is editing an Adventure to add a Section, or a Section to add Media. Writers can also add new Adventures.</string>
 
+    <string name="upload">Upload</string>
+    <string name="delete">Delete</string>
+    <string name="deleteLocal">Delete Local</string>
+    <string name="saveLocal">Save Local</string>
+    <string name="download">Downlaod</string>
+    <string name="getOnline">Get online version</string>
 </resources>

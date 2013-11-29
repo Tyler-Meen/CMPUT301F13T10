@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.view;
 
 import cmput301f13t10.presenter.AppConstants;
@@ -85,6 +85,7 @@ public class SectionChoiceDialogFragment extends DialogFragment
 		 *            The dialog that was displayed.
 		 */
 		public void onAddChoice( DialogFragment dialog );
+
 		/**
 		 * Called when the user cancels the deletion of the section.
 		 * 

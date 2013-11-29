@@ -1,39 +1,41 @@
 
-
 /*
-Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
-All rights reserved.
+ Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
+ All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met: 
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer. 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution. 
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer. 
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution. 
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-The views and conclusions contained in the software and documentation are those
-of the authors and should not be interpreted as representing official policies, 
-either expressed or implied, of the FreeBSD Project.
-*/package cmput301f13t10.presenter;
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies, 
+ either expressed or implied, of the FreeBSD Project.
+ */package cmput301f13t10.presenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
+import cmput301f13t10.model.Callback;
+import cmput301f13t10.model.DatabaseInteractor;
+import cmput301f13t10.model.ESGetCommand;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.view.AdventureEditView;
 
@@ -87,7 +89,7 @@ public class AdventurePresenter
 	{
 		mView = view;
 		mCache = AdventureCache.getAdventureCache();
-		mModel = mCache.getAdventureById( id );
+		mModel = mCache.getAdventureByIdSynchrounous( id );
 	}
 
 	/**
@@ -97,7 +99,7 @@ public class AdventurePresenter
 	 */
 	public Integer getAdventureId()
 	{
-		return mModel.getId();
+		return mModel.getLocalId();
 	}
 
 	/**
@@ -162,5 +164,49 @@ public class AdventurePresenter
 
 		}
 		return sectionTitles;
+	}
+
+	public void commitAdventure()
+	{
+		DatabaseInteractor.getDatabaseInteractor().addAdventure( mModel );
+	}
+
+	public void deleteAdventure()
+	{
+		DatabaseInteractor.getDatabaseInteractor().deleteAdventure( mModel );
+	}
+
+	public void deleteLocalAdventure()
+	{
+		mModel.setSave( false );
+		AdventureCache.getAdventureCache().deleteAdventure( mModel );
+	}
+
+	public void saveLocalAdventure()
+	{
+		mModel.setSave( true );
+	}
+
+	public void getOnlineAdventure( Callback externalCallback )
+	{
+		Callback presenterCallback = new Callback( externalCallback )
+		{
+
+			@Override
+			public void callBack( Object arg )
+			{
+				Callback c = (Callback) mCallbackArg;
+				AdventureCache.getAdventureCache().deleteAdventure( mModel );
+				mModel = (AdventureModel) arg;
+				AdventureCache.getAdventureCache().addAdventure( mModel );
+				if( c != null )
+					c.callBack( null );
+			}
+
+		};
+
+		ESGetCommand getCommand = new ESGetCommand( mModel.getRemoteId(), presenterCallback );
+		getCommand.execute( null, null );
+
 	}
 }

@@ -1,40 +1,43 @@
-
 /*
-Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
-All rights reserved.
+ Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
+ All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met: 
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer. 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution. 
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer. 
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution. 
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-The views and conclusions contained in the software and documentation are those
-of the authors and should not be interpreted as representing official policies, 
-either expressed or implied, of the FreeBSD Project.
-*/
+ The views and conclusions contained in the software and documentation are those
+ of the authors and should not be interpreted as representing official policies, 
+ either expressed or implied, of the FreeBSD Project.
+ */
 package cmput301f13t10.model;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observer;
 
+import android.util.Log;
 import cmput301f13t10.presenter.AppConstants;
+
+import com.google.gson.Gson;
 
 /**
  * Contains information about an adventure that the user can read, navigate
@@ -47,13 +50,15 @@ import cmput301f13t10.presenter.AppConstants;
  * @author Braeden Soetaert
  * 
  */
-public class AdventureModel implements Serializable
+public class AdventureModel implements Serializable, ContainsObservable
 {
 
 	/**
 	 * The id of the adventure
 	 */
-	private int mId;
+	private int mLocalId;
+
+	private int mRemoteId;
 
 	/**
 	 * The adventure's title
@@ -64,6 +69,16 @@ public class AdventureModel implements Serializable
 	 * Sections contained within the adventure
 	 */
 	private ArrayList<SectionModel> mSections;
+
+	/**
+	 * Delagator for the Observer pattern
+	 */
+	private DelegatedObservable mObservable;
+
+	/**
+	 * 
+	 */
+	private Boolean mToSave;
 
 	/**
 	 * Constructor
@@ -81,11 +96,14 @@ public class AdventureModel implements Serializable
 	 */
 	public AdventureModel( String title )
 	{
-		mId = IdFactory.getIdManager( AppConstants.GENERATE_ADVENTURE_ID ).getNewId();
+		mLocalId = IdFactory.getIdManager( AppConstants.GENERATE_ADVENTURE_ID ).getNewId();
+		mRemoteId = -1;
 		mTitle = title;
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
 		mSections.add( startSection );
+		mObservable = new DelegatedObservable();
+		mToSave = false;
 	}
 
 	/**
@@ -131,9 +149,24 @@ public class AdventureModel implements Serializable
 	 * 
 	 * @return The id of the adventure
 	 */
-	public int getId()
+	public int getLocalId()
 	{
-		return mId;
+		return mLocalId;
+	}
+
+	public void setLocalId( int id )
+	{
+		mLocalId = id;
+	}
+
+	public int getRemoteId()
+	{
+		return mRemoteId;
+	}
+
+	public void setRemoteId( int id )
+	{
+		mRemoteId = id;
 	}
 
 	/**
@@ -231,6 +264,9 @@ public class AdventureModel implements Serializable
 	public void addSection( SectionModel section )
 	{
 		mSections.add( section );
+		Gson gson = new Gson();
+		String stuff = gson.toJson( this );
+		Log.d( "debug", gson.toJson( this ) );
 	}
 
 	/**
@@ -270,16 +306,43 @@ public class AdventureModel implements Serializable
 	{
 		out.writeObject( mTitle );
 		out.writeObject( mSections );
+		out.writeInt( mRemoteId );
+		out.writeInt( mLocalId );
+		out.writeBoolean( mToSave );
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mTitle = (String) in.readObject();
 		mSections = (ArrayList<SectionModel>) in.readObject();
+		mRemoteId = in.readInt();
+		mLocalId = in.readInt();
+		mToSave = in.readBoolean();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException
 	{
+	}
+
+	private void notifyObservers( Object arg )
+	{
+		mObservable.notifyObservers( arg );
+	}
+
+	public Boolean toSave()
+	{
+		return mToSave;
+	}
+
+	public void setSave( Boolean save )
+	{
+		mToSave = save;
+	}
+
+	@Override
+	public void addObserver( Observer observer )
+	{
+		mObservable.addObserver( observer );
 	}
 
 }

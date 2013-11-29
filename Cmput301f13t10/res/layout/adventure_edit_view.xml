@@ -27,6 +27,54 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/GetOnlineVersionButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onGetOnline"
+        android:text="@string/getOnline" >
+    </Button>
+    
+    <Button
+        android:id="@+id/TempDeleteLocalButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onDeleteLocalClick"
+        android:text="@string/deleteLocal" >
+    </Button>
+    
+    <Button
+        android:id="@+id/TempSaveLocalButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onSaveLocalClick"
+        android:text="@string/saveLocal" >
+    </Button>
+    
+    <Button
+        android:id="@+id/TempDownloadButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onUploadClick"
+        android:text="@string/download" >
+    </Button>
+    
+    <Button
+        android:id="@+id/TempUploadButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onUploadClick"
+        android:text="@string/upload" >
+    </Button>
+    
+    <Button
+        android:id="@+id/TempDeleteButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onDeleteClick"
+        android:text="@string/delete" >
+    </Button>
+    
+    <Button
         android:id="@+id/AddNoteButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

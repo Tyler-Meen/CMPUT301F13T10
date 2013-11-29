@@ -25,13 +25,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
-*/
+ */
 package cmput301f13t10.model;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Media;
@@ -44,7 +45,7 @@ import cmput301f13t10.presenter.SectionChoice;
  * @author Brendan Cowan
  * 
  */
-public class SectionModel implements Serializable
+public class SectionModel extends Observable implements Serializable
 {
 	/**
 	 * The title of the section
@@ -213,6 +214,12 @@ public class SectionModel implements Serializable
 		out.writeObject( mName );
 		out.writeObject( mChoices );
 		out.writeObject( mMedias );
+		out.writeInt( mId );
+	}
+
+	public void setId( int id )
+	{
+		mId = id;
 	}
 
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
@@ -220,6 +227,7 @@ public class SectionModel implements Serializable
 		mName = (String) in.readObject();
 		mChoices = (ArrayList<SectionChoice>) in.readObject();
 		mMedias = (ArrayList<Media>) in.readObject();
+		mId = in.readInt();
 	}
 
 	private void readObjectNoData() throws ObjectStreamException
