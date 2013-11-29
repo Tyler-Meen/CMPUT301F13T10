@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
@@ -71,7 +70,7 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditChoices3">3. The New section Choices button</string>
     <string name="h_EditChoices3a">3. a) This will create a new blank section that can be edited later</string>
     <string name="h_EditChoices3b">3. b) The section title is only viewable by the editor.</string>
-    <string name="h_EditChoices3c">3. c) The choices description is the reader visable text they will see when trying to decide which chocie to take</string>
+    <string name="h_EditChoices3c">3. c) The choices description is the reader visible text they will see when trying to decide which chocie to take</string>
     <string name="h_Upload">Uploading an Adventure</string>
     <string name="h_Definitions">Application Definitions</string>
     <string name="h_Definitions1">Adventure: A choose your own Adventure story that can consist of Sections. A user can read or edit an Adventure.</string>
@@ -89,11 +88,11 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_Definitions13">Section: A self contained part of an Adventure, it ends with a choice that will take the User to another Section. In the user requirements this is referred to as a fragment. The word fragment isn\'t used due to possible confusion with android fragments.</string>
     <string name="h_Definitions14">User: A person who uses the app to read Adventures.</string>
     <string name="h_Definitions15">Writer: A user that is editing an Adventure to add a Section, or a Section to add Media. Writers can also add new Adventures.</string>
-
     <string name="upload">Upload</string>
     <string name="delete">Delete</string>
     <string name="deleteLocal">Delete Local</string>
     <string name="saveLocal">Save Local</string>
     <string name="download">Downlaod</string>
     <string name="getOnline">Get online version</string>
+
 </resources>

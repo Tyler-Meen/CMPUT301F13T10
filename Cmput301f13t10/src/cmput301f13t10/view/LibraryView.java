@@ -30,6 +30,7 @@ package cmput301f13t10.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,8 +40,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import cmput301f13t10.model.AdventureCache;
@@ -108,7 +111,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 				{
 					Random rand = new Random();
 					int choiceNumber = rand.nextInt( adventureListView.getLastVisiblePosition() );
-					AdventureId = ( (AdventureModel) adventureListView.getItemAtPosition( choiceNumber ) ).getId();
+					AdventureId = ( (AdventureModel) adventureListView.getItemAtPosition( choiceNumber ) ).getLocalId();
 					startSectionReadView();
 				}
 				catch( IllegalArgumentException e )

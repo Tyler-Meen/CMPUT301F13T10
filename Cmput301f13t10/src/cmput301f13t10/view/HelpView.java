@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import cmput301f13t10.model.HelpItem;
-import cmput301f13t10.presenter.HelpPresenter;
 import cs.ualberta.cmput301f13t10.R;
 
 public class HelpView extends Activity
