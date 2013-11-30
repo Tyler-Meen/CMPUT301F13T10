@@ -39,7 +39,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -71,10 +73,10 @@ public class MainActivity extends Activity
 	 * @param view
 	 *            the view that was clicked
 	 */
-	public void help( View view )
+	public void help( MenuItem menu )
 	{
-		Intent intent = new Intent(this, HelpView.class);
-		startActivity(intent);
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 
 	@Override
@@ -91,7 +93,8 @@ public class MainActivity extends Activity
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate( R.menu.main, menu );
+		getMenuInflater().inflate( R.menu.help_menu, menu );
+
 		return true;
 	}
 
@@ -105,18 +108,6 @@ public class MainActivity extends Activity
 	{
 		Intent intent = new Intent( this, LibraryView.class );
 		startActivity( intent );
-	}
-
-	/**
-	 * Starts up the settings view on settings button click.
-	 * 
-	 * @param view
-	 *            the view that was clicked
-	 */
-	public void settings( View view )
-	{
-		// Intent intent = new Intent(this, SettingsView.class);
-		// startActivity(intent);
 	}
 
 	public static Context getContext()

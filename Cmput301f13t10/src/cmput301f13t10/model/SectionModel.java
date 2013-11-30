@@ -209,6 +209,11 @@ public class SectionModel extends Observable implements Serializable
 		return mId;
 	}
 
+	/**
+	 * Write the serializable object
+	 * @param out The objectOutputStream to write the output stream
+	 * @throws IOException
+	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeObject( mName );
@@ -217,20 +222,26 @@ public class SectionModel extends Observable implements Serializable
 		out.writeInt( mId );
 	}
 
+	/**
+	 * Set the id of the section
+	 * @param id The id to set
+	 */
 	public void setId( int id )
 	{
 		mId = id;
 	}
 
+	/**
+	 * Read the serializable object
+	 * @param in The inputStream to read the object from
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mName = (String) in.readObject();
 		mChoices = (ArrayList<SectionChoice>) in.readObject();
 		mMedias = (ArrayList<Media>) in.readObject();
 		mId = in.readInt();
-	}
-
-	private void readObjectNoData() throws ObjectStreamException
-	{
 	}
 }

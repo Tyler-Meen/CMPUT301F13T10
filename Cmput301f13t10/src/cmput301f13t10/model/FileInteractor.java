@@ -8,17 +8,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Helper class used to assist with saving and loading from file
+ * @author Brendan Cowan
+ *
+ */
 public class FileInteractor
 {
+	/**
+	 * Save the given adventures to file. This method overwrites what is in the file with the new data.
+	 * @param adventures The list of adventures to save to file
+	 * @param fileOutputStream The file output stream for the data
+	 */
 	public static void saveAdventures( ArrayList<AdventureModel> adventures, FileOutputStream fileOutputStream )
 	{
 		try
 		{
-
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream( fileOutputStream );
-
-			// ArrayList<AdventureModel> adventuresToSave = new
-			// ArrayList<AdventureModel>();
 
 			for( AdventureModel adv : adventures )
 			{
@@ -28,76 +34,54 @@ public class FileInteractor
 					adv.setSave( false );
 				}
 			}
-
-			// objectOutputStream.writeObject(adventuresToSave);
-			// objectOutputStream.close();
 			fileOutputStream.close();
 		}
 		catch( FileNotFoundException e )
 		{
-			//
+			e.printStackTrace();
 		}
 		catch( IOException e )
 		{
 			e.printStackTrace();
-			//
 		}
 		catch( NullPointerException e )
 		{
-			//
+			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * public static void deleteAdventure( AdventureModel adventure,
-	 * FileOutputStream fileOutputStream, FileInputStream fileInputStream ) {
-	 * try { ArrayList<AdventureModel> allAdventures =
-	 * loadAdventures(fileInputStream); allAdventures.remove( adventure );
-	 * ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-	 * fileOutputStream);
-	 * 
-	 * for( AdventureModel adv : allAdventures )
-	 * objectOutputStream.writeObject(adv);
-	 * 
-	 * objectOutputStream.close(); fileOutputStream.close(); } catch
-	 * (FileNotFoundException e) { // } catch (IOException e) { // } catch
-	 * (NullPointerException e) { // } }
+	/**
+	 * Load the adventures from the given file
+	 * @param fileInputStream The input stream to read from
+	 * @return A list of all adventures in file
 	 */
-
 	public static ArrayList<AdventureModel> loadAdventures( FileInputStream fileInputStream )
 	{
 		ArrayList<AdventureModel> cache = new ArrayList<AdventureModel>();
 		try
 		{
 			ObjectInputStream objectInputStream = new ObjectInputStream( fileInputStream );
-			// ArrayList<AdventureModel> advList = (ArrayList<AdventureModel>)
-			// objectInputStream.readObject();
 			while( true )
 			{
-				// for( AdventureModel adv : advList ) {
 				AdventureModel adv = (AdventureModel) objectInputStream.readObject();
 				cache.add( adv );
 			}
-			// objectInputStream.close();
-			// }
-
 		}
 		catch( FileNotFoundException e )
 		{
-			// MessageLogger.log(e);
+			e.printStackTrace();
 		}
 		catch( IOException e )
 		{
 			e.printStackTrace();
-			// MessageLogger.log(e);
 		}
 		catch( ClassNotFoundException e )
 		{
-			// MessageLogger.log(e);
+			e.printStackTrace();
 		}
 		catch( NullPointerException e )
 		{
-			// MessageLogger.log(e);
+			e.printStackTrace();
 		}
 		catch( ClassCastException e )
 		{

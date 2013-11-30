@@ -21,39 +21,49 @@ import cmput301f13t10.presenter.Media;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * A command to delete an adventure from the database
+ * @author Brendan Cowan
+ *
+ */
 public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 {
+	/**
+	 * The HttpClient that this command will use
+	 */
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
-	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 	/**
-	 * delete an entry specified by the id
-	 * 
-	 * @throws IOException
-	 * @throws ClientProtocolException
+	 * The Gson constructor that this class will use
 	 */
-	// public void deleteAdventure() throws IOException {
+	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 
-	// }
+	/**
+	 * The remote adventure Id that the command will delete
+	 */
 	private int mId;
+	
+	/**
+	 * Callback to be called after the command has been completed
+	 */
 	private Callback mCallback;
 
+	/**
+	 * Constructor
+	 * @param id The remote id of the adventure to delete
+	 * @param callback The callback to call after the command has been executed
+	 */
 	public ESDeleteCommand( int id, Callback callback )
 	{
 		mId = id;
 		mCallback = callback;
 	}
 
-	// @Override
-	// public Object execute() throws ClientProtocolException, IOException
-	// {
-
-	// }
-
 	@Override
 	protected Void doInBackground( Void... params )
 	{
 
+		// Delete the adventure
 		HttpDelete httpDelete = new HttpDelete( AppConstants.ES_URL + AppConstants.ES_ADVENTURE + mId );
 		httpDelete.addHeader( "Accept", "application/json" );
 
@@ -62,18 +72,14 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		{
 			response = mHttpClient.execute( httpDelete );
 		}
-		catch( ClientProtocolException e2 )
+		catch( ClientProtocolException e )
 		{
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			e.printStackTrace();
 		}
-		catch( IOException e2 )
+		catch( IOException e )
 		{
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			e.printStackTrace();
 		}
-
-		String status = response.getStatusLine().toString();
 
 		HttpEntity entity = response.getEntity();
 		BufferedReader br = null;
@@ -83,33 +89,24 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		}
 		catch( IllegalStateException e2 )
 		{
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		catch( IOException e2 )
 		{
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		String output;
 
 		try
 		{
-			while( ( output = br.readLine() ) != null )
-			{
-				// System.err.println(output);
-			}
+			while( ( output = br.readLine() ) != null ); // just keep reading until we're done
 		}
-		catch( IOException e2 )
+		catch( IOException e )
 		{
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			e.printStackTrace();
 		}
-		// EntityUtils.consume(entity);
 
-		// httpDelete.releaseConnection();
-
-		// second one for the id
+		// then delete the id
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
 		String query = "{\"script\" : \"ctx._source.mIds.remove(" + mId + ")\"}";
 		StringEntity stringentity = null;
@@ -117,10 +114,9 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		{
 			stringentity = new StringEntity( query );
 		}
-		catch( UnsupportedEncodingException e1 )
+		catch( UnsupportedEncodingException e )
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		updateRequest.setHeader( "Accept", "application/json" );
 
@@ -131,15 +127,12 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 		}
 		catch( ClientProtocolException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch( IOException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		status = response.getStatusLine().toString();
 		return null;
 	}
 

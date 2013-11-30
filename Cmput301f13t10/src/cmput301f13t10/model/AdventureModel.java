@@ -50,14 +50,17 @@ import com.google.gson.Gson;
  * @author Braeden Soetaert
  * 
  */
-public class AdventureModel implements Serializable, ContainsObservable
+public class AdventureModel implements Serializable
 {
 
 	/**
-	 * The id of the adventure
+	 * The local id of the adventure
 	 */
 	private int mLocalId;
 
+	/**
+	 * The remote id of the adventure
+	 */
 	private int mRemoteId;
 
 	/**
@@ -71,12 +74,7 @@ public class AdventureModel implements Serializable, ContainsObservable
 	private ArrayList<SectionModel> mSections;
 
 	/**
-	 * Delagator for the Observer pattern
-	 */
-	private DelegatedObservable mObservable;
-
-	/**
-	 * 
+	 * A flag to indicate if the adventure is wanted to save
 	 */
 	private Boolean mToSave;
 
@@ -102,7 +100,6 @@ public class AdventureModel implements Serializable, ContainsObservable
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSections = new ArrayList<SectionModel>();
 		mSections.add( startSection );
-		mObservable = new DelegatedObservable();
 		mToSave = false;
 	}
 
@@ -145,25 +142,42 @@ public class AdventureModel implements Serializable, ContainsObservable
 	}
 
 	/**
-	 * Get the id of the adventure
+	 * Get the local id of the adventure
 	 * 
-	 * @return The id of the adventure
+	 * @return The local id of the adventure
 	 */
 	public int getLocalId()
 	{
 		return mLocalId;
 	}
 
+	/**
+	 * Set the local id of the adventure
+	 * 
+	 * @param id
+	 *            The id to set
+	 */
 	public void setLocalId( int id )
 	{
 		mLocalId = id;
 	}
 
+	/**
+	 * Get the remote id of the adventure
+	 * 
+	 * @return the remote id
+	 */
 	public int getRemoteId()
 	{
 		return mRemoteId;
 	}
 
+	/**
+	 * Set the remote id of the adventure
+	 * 
+	 * @param id
+	 *            the id to set.
+	 */
 	public void setRemoteId( int id )
 	{
 		mRemoteId = id;
@@ -302,6 +316,14 @@ public class AdventureModel implements Serializable, ContainsObservable
 		return mSections;
 	}
 
+	/**
+	 * Write the serializable object
+	 * 
+	 * @param out
+	 *            The output stream to write to
+	 * @throws IOException
+	 *             If the write failed
+	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeObject( mTitle );
@@ -311,6 +333,15 @@ public class AdventureModel implements Serializable, ContainsObservable
 		out.writeBoolean( mToSave );
 	}
 
+	/**
+	 * read the serializable object
+	 * 
+	 * @param in
+	 *            The output stream to write to
+	 * @throws IOException
+	 *             If the read fails
+	 * @throws ClassNotFoundException
+	 */
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mTitle = (String) in.readObject();
@@ -320,29 +351,25 @@ public class AdventureModel implements Serializable, ContainsObservable
 		mToSave = in.readBoolean();
 	}
 
-	private void readObjectNoData() throws ObjectStreamException
-	{
-	}
-
-	private void notifyObservers( Object arg )
-	{
-		mObservable.notifyObservers( arg );
-	}
-
+	/**
+	 * If the adventure is to be saved
+	 * 
+	 * @return True if the adventure is to be saved, false if it isn't
+	 */
 	public Boolean toSave()
 	{
 		return mToSave;
 	}
 
+	/**
+	 * Set a flag to indicate that the adventure is to be saved or not
+	 * 
+	 * @param save
+	 *            True if the adventure is to be saved, false if it isn't
+	 */
 	public void setSave( Boolean save )
 	{
 		mToSave = save;
-	}
-
-	@Override
-	public void addObserver( Observer observer )
-	{
-		mObservable.addObserver( observer );
 	}
 
 }

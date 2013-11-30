@@ -20,44 +20,65 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Command for retrieving a given adventure from the database
+ * @author Brendan Cowan
+ *
+ */
 public class ESGetCommand extends AsyncTask<Void, Void, Void>
 {
 
+	/**
+	 * the httpClient to be used in the request
+	 */
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
+	/**
+	 * The Gson constructor that this class will use
+	 */
 	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 
-	// public AdventureModel getAdventure() {
-
-	// }
+	/**
+	 * The remote id of the adventure to get
+	 */
 	private int mId;
+	
+	/**
+	 * The callback to call after the command has been executed
+	 */
 	private Callback mCallback;
+	
+	/**
+	 * The adventure that has been retrieved
+	 */
 	private AdventureModel mAdventure;
 
+	/**
+	 * Constructor
+	 * @param id The remote id of the adventure to get
+	 * @param callback The callback to call after the command has been executed
+	 */
 	public ESGetCommand( int id, Callback callback )
 	{
 		mId = id;
 		mCallback = callback;
 	}
 
-	// @Override
-	// public Object execute()
-	// {
-
-	// }
-
-	String getEntityContent( HttpResponse response ) throws IOException
+	/**
+	 * Get the Json string from the HttpResponse
+	 * @param response The response to decode
+	 * @return The Json string
+	 * @throws IOException If reading the response fails
+	 */
+	private String getEntityContent( HttpResponse response ) throws IOException
 	{
 		BufferedReader br = new BufferedReader( new InputStreamReader( ( response.getEntity().getContent() ) ) );
 		String output;
-		// System.err.println("Output from Server -> ");
 		String json = "";
 		while( ( output = br.readLine() ) != null )
 		{
-			// System.err.println(output);
 			json += output;
 		}
-		// System.err.println("JSON:"+json);
 		return json;
 	}
 
@@ -73,29 +94,21 @@ public class ESGetCommand extends AsyncTask<Void, Void, Void>
 
 			HttpResponse response = mHttpClient.execute( getRequest );
 
-			String status = response.getStatusLine().toString();
-
 			String json = getEntityContent( response );
 
-			// We have to tell GSON what type we expect
 			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<AdventureModel>>()
 			{
 			}.getType();
-			// Now we expect to get an Adventure response
 			ElasticSearchResponse<AdventureModel> esResponse = mGson.fromJson( json, elasticSearchResponseType );
-			// We get the adventure from it!
 			mAdventure = esResponse.getSource();
 
 		}
 		catch( ClientProtocolException e )
 		{
-
 			e.printStackTrace();
-
 		}
 		catch( IOException e )
 		{
-
 			e.printStackTrace();
 		}
 		catch( Exception e )
@@ -103,7 +116,6 @@ public class ESGetCommand extends AsyncTask<Void, Void, Void>
 			e.printStackTrace();
 		}
 		return null;
-		// return adventure;
 	}
 
 	@Override

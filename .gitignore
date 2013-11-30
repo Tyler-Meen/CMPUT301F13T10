@@ -5,3 +5,4 @@ BuildConfig.java
 bin/
 .metadata/
 gen/
+.classpath

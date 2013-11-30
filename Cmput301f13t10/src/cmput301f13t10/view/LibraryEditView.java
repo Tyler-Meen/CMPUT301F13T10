@@ -26,6 +26,7 @@
  of the authors and should not be interpreted as representing official policies, 
  either expressed or implied, of the FreeBSD Project.
  */
+
 package cmput301f13t10.view;
 
 import java.io.FileNotFoundException;
@@ -39,12 +40,14 @@ import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.LibraryPresenter;
@@ -140,6 +143,34 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
+	}
+
+	/**
+	 * Populate the list of adventures with the adventures in adventure
+	 */
+	private void populateList()
+	{
+		Callback getAdventureCallback = new Callback()
+		{
+			@Override
+			public void callBack( Object adventureList )
+			{
+				try
+				{
+					mAdventure = (ArrayList<AdventureModel>) adventureList;
+					updateList();
+				}
+				catch( ClassCastException e )
+				{
+					Logger.log( "bad!", e );
+				}
+			}
+
+		};
+		mAdventure.clear();
+		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
+		updateList();
 
 	}
 
@@ -147,6 +178,7 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	public void updateView()
 	{
 		mPresenter.updateAdventures();
+
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
 		adventureListView.setAdapter( new AdventureArrayAdapter( this, mPresenter.getAdventures() ) );
 	}
@@ -203,6 +235,22 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	{
 		getMenuInflater().inflate( R.menu.library_view, menu );
 		mSearchItem = menu.findItem( R.id.action_search );
+
+		MenuItem helpMenuItem = menu.add( "Help" );
+
+		helpMenuItem.setShowAsAction( MenuItem.SHOW_AS_ACTION_NEVER );
+		helpMenuItem.setOnMenuItemClickListener( new OnMenuItemClickListener()
+		{
+
+			@Override
+			public boolean onMenuItemClick( MenuItem arg0 )
+			{
+				help();
+				return true;
+			}
+
+		} );
+
 		final SearchView searchView = (SearchView) MenuItemCompat.getActionView( mSearchItem );
 		searchView.setOnQueryTextListener( this );
 		searchView.setOnQueryTextFocusChangeListener( new View.OnFocusChangeListener()
@@ -223,6 +271,19 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	{
 
 	}
+
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help()
+	{
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
+	}
+
 
 	public void deletePrompt( View view )
 	{

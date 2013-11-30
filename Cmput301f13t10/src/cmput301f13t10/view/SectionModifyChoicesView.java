@@ -46,6 +46,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -215,6 +216,25 @@ public class SectionModifyChoicesView extends Activity implements UpdatableView,
 		default:
 			return super.onOptionsItemSelected( item );
 		}
+	}
 
+	@Override
+	public boolean onCreateOptionsMenu( Menu menu )
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate( R.menu.help_menu, menu );
+		return true;
+	}
+
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help( MenuItem item )
+	{
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 }

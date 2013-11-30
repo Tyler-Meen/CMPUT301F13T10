@@ -110,7 +110,7 @@ public class SectionPresenter
 	 */
 	public void setCurrentAdventure( int adventure )
 	{
-		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureByIdSynchrounous( adventure );
+		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );
 		setCurrentSection( mCurrentAdventure.getCurrentSection() );
 	}
 

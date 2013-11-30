@@ -60,6 +60,9 @@ public class ImageMedia implements Media
 	 */
 	private transient Bitmap mImageBitmap = null;
 
+	/**
+	 * The base 64 representation of the bitmap object
+	 */
 	private String mBase64String;
 
 	/**
@@ -112,13 +115,23 @@ public class ImageMedia implements Media
 		return mImageBitmap;
 	}
 
+	/**
+	 * Write the serializable object
+	 * @param out The output stream to write the object to
+	 * @throws IOException
+	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeInt( mId );
-		Log.d( "debug", mBase64String );
 		out.writeObject( mBase64String );
 	}
 
+	/**
+	 * Read the serializable object
+	 * @param in The input stream to read the object from
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mId = (int) in.readInt();
@@ -126,6 +139,11 @@ public class ImageMedia implements Media
 		mImageBitmap = toBitmap( mBase64String );
 	}
 
+	/**
+	 * Convert the bitmap image into a base 64 string
+	 * @param image The image to convert
+	 * @return The base 64 string representation of the string
+	 */
 	private String toBase64( Bitmap image )
 	{
 		Bitmap imageCopy = Bitmap.createBitmap( image );
@@ -136,6 +154,11 @@ public class ImageMedia implements Media
 		return Base64.encodeToString( bytes, Base64.DEFAULT );
 	}
 
+	/**
+	 * Convert the Base 64 string into a bitmap image
+	 * @param base64String The string to convert
+	 * @return The converted Bitmap image
+	 */
 	private Bitmap toBitmap( String base64String )
 	{
 		byte[] decodedByte = Base64.decode( base64String, Base64.DEFAULT );
