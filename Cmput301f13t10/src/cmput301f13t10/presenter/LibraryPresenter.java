@@ -30,18 +30,18 @@ public class LibraryPresenter
 
 	public void loadData()
 	{
-		mAdventureList = mCache.getAllAdventuresSynchrounous();
+		mAdventureList = mCache.getAllAdventures();
 	}
 
 	public void saveData(FileOutputStream fileOutputStream)
 	{
-		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventuresSynchrounous(), fileOutputStream );
+		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
 	}
 
 	public void updateAdventures()
 	{
 		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventures() )
 		{
 			if( !libContains( adv ) )
 				mAdventureList.add( adv );
@@ -95,7 +95,7 @@ public class LibraryPresenter
 		catch( InvalidSearchTypeException e )
 		{
 			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			mAdventureList = mCache.getAllAdventuresSynchrounous();
+			mAdventureList = mCache.getAllAdventures();
 		}
 	}
 

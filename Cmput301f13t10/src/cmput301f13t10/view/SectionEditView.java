@@ -156,9 +156,6 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 
 		return super.onCreateOptionsMenu( menu );
 	}
-
-<<<<<<< HEAD
-=======
 	/**
 	 * Starts up the help view on help button click.
 	 * 
@@ -171,13 +168,6 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 		startActivity( intent );
 	}
 
-	@Override
-	public Context getContext()
-	{
-		return this;
-	}
-
->>>>>>> 55e210e177056cef678ad558287441b771b8a7ee
 	/**
 	 * Listener for the modify choices button. Start the
 	 * SectionModifyChoicesView with the current section and adventure
