@@ -68,7 +68,7 @@ public class SectionChoiceArrayAdapter extends ArrayAdapter<SectionChoice>
 	 */
 	public SectionChoiceArrayAdapter( Context context, List<SectionChoice> values )
 	{
-		super( context, R.layout.section_adapter, values );
+		super( context, R.layout.list_item_main_text_delete_button, values );
 		mContext = context;
 		mValues = values;
 	}
@@ -77,14 +77,14 @@ public class SectionChoiceArrayAdapter extends ArrayAdapter<SectionChoice>
 	public View getView( int position, View convertView, ViewGroup parent )
 	{
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-		View rowView = inflater.inflate( R.layout.selected_section_list_item, parent, false );
+		View rowView = inflater.inflate( R.layout.list_item_main_text_with_sub_text, parent, false );
 
 		// Set the text view to have the section's title
-		TextView sectionTitleText = (TextView) rowView.findViewById( R.id.section_title );
+		TextView sectionTitleText = (TextView) rowView.findViewById( R.id.main_text );
 		sectionTitleText.setText( mValues.get( position ).getSectionTitle().getTitle() );
 
 		// Set the text view to have the section's title
-		TextView choiceDecisionText = (TextView) rowView.findViewById( R.id.choice_description );
+		TextView choiceDecisionText = (TextView) rowView.findViewById( R.id.sub_text );
 		choiceDecisionText.setText( mValues.get( position ).getChoiceDescription() );
 
 		return rowView;

@@ -61,7 +61,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Steven Gerdes
  * 
  */
-public class SectionModifyChoicesView extends Activity implements SectionView, AddChoiceDialogListener
+public class SectionModifyChoicesView extends Activity implements UpdatableView, AddChoiceDialogListener
 {
 	/**
 	 * The section presenter that gives this view its correctly formatted
@@ -85,13 +85,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 	}
 
 	@Override
-	public Context getContext()
-	{
-		return this;
-	}
-
-	@Override
-	public void updateSectionView()
+	public void updateView()
 	{
 		updateCurrentChoices();
 		updatePossibleChoices();
@@ -126,7 +120,7 @@ public class SectionModifyChoicesView extends Activity implements SectionView, A
 				SectionTitle selectedSection = (SectionTitle) parent.getItemAtPosition( position );
 
 				Bundle choicesBundle = new Bundle();
-				choicesBundle.putString( AppConstants.SECTION_TITLE, selectedSection.getTitle() );
+				choicesBundle.putString( AppConstants.TITLE, selectedSection.getTitle() );
 				choicesBundle.putInt( AppConstants.SECTION_ID, selectedSection.getId() );
 
 				SectionChoiceDialogFragment dialog = new SectionChoiceDialogFragment();

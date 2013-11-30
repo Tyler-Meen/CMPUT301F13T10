@@ -32,14 +32,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmput301f13t10.model.AdventureModel;
-
 import cs.ualberta.cmput301f13t10.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -70,7 +70,7 @@ public class AdventureArrayAdapter extends ArrayAdapter<AdventureModel>
 	 */
 	public AdventureArrayAdapter( Context context, ArrayList<AdventureModel> adventure )
 	{
-		super( context, R.layout.list_view_row, adventure );
+		super( context, R.layout.list_item_main_text, adventure );
 		mContext = context;
 		mAdventure = adventure;
 	}
@@ -79,9 +79,25 @@ public class AdventureArrayAdapter extends ArrayAdapter<AdventureModel>
 	public View getView( int position, View convertView, ViewGroup parent )
 	{
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-		View rowView = inflater.inflate( R.layout.list_view_row, parent, false );
-		TextView textView = (TextView) rowView.findViewById( R.id.adventure_name );
+		View rowView = inflater.inflate( R.layout.list_item_main_text_delete_button, parent, false );
+		TextView textView = (TextView) rowView.findViewById( R.id.main_text );
 		textView.setText( mAdventure.get( position ).getTitle() );
+		
+		
+		
+		ImageButton cancelButton = (ImageButton) rowView.findViewById( R.id.delete_button );
+		cancelButton.setFocusable( false );
+		cancelButton.setTag( mAdventure.get( position ) );
+		cancelButton.setOnClickListener( new OnClickListener()
+		{
+			@Override
+			public void onClick( View view )
+			{
+				( (LibraryEditView) mContext ).deletePrompt( view );
+			}
+
+		} );
+
 		return rowView;
 	}
 

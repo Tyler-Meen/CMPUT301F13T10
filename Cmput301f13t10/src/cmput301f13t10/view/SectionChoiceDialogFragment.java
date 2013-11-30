@@ -29,7 +29,7 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10.view;
 
 import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.view.DeleteSectionDialogFragment.DeleteSectionDialogListener;
+import cmput301f13t10.view.DeletePromptDialogFragment.DeleteSectionDialogListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -134,7 +134,7 @@ public class SectionChoiceDialogFragment extends DialogFragment
 		mSectionTitle = (EditText) view.findViewById( R.id.choice_title_text );
 		mChoiceDescription = (EditText) view.findViewById( R.id.choice_description_text );
 
-		String sectionTitle = getArguments().getString( AppConstants.SECTION_TITLE );
+		String sectionTitle = getArguments().getString( AppConstants.TITLE );
 		if( sectionTitle != null )
 		{
 			mSectionTitle.setText( sectionTitle );

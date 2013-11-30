@@ -68,7 +68,7 @@ public class SimpleSectionArrayAdapter extends ArrayAdapter<SectionTitle>
 	 */
 	public SimpleSectionArrayAdapter( Context context, List<SectionTitle> values )
 	{
-		super( context, R.layout.section_adapter, values );
+		super( context, R.layout.list_item_main_text_delete_button, values );
 		mContext = context;
 		mValues = values;
 	}
@@ -77,10 +77,10 @@ public class SimpleSectionArrayAdapter extends ArrayAdapter<SectionTitle>
 	public View getView( int position, View convertView, ViewGroup parent )
 	{
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-		View rowView = inflater.inflate( R.layout.available_section_list_item, parent, false );
+		View rowView = inflater.inflate( R.layout.list_item_main_text, parent, false );
 
 		// Set the text view to have the section's title
-		TextView sectionTitleText = (TextView) rowView.findViewById( R.id.section_title );
+		TextView sectionTitleText = (TextView) rowView.findViewById( R.id.main_text );
 		sectionTitleText.setText( mValues.get( position ).getTitle() );
 
 		return rowView;

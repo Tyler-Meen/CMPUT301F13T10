@@ -121,7 +121,7 @@ public class DatabaseInteractor implements AdventureInteractor
 	@Override
 	public void deleteAdventure( AdventureModel adventure )
 	{
-		ESDeleteCommand deleteCommand = new ESDeleteCommand( adventure.getLocalId(), null );
+		ESDeleteCommand deleteCommand = new ESDeleteCommand( adventure.getRemoteId(), null );
 		deleteCommand.execute( null, null );
 	}
 

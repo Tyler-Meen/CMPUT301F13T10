@@ -93,7 +93,7 @@ public class ContinueDialogFragment extends DialogFragment
 	{
 
 		String[] choices = getArguments().getStringArray( AppConstants.CHOICES_BUNDLE );
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>( view.getContext(), R.layout.choice_list_item, choices );
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>( view.getContext(), R.layout.list_item_main_text, choices );
 
 		view.setAdapter( adapter );
 	}

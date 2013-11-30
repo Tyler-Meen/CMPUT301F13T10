@@ -43,7 +43,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Braeden Soetaert
  * 
  */
-public class DeleteSectionDialogFragment extends DialogFragment
+public class DeletePromptDialogFragment extends DialogFragment
 {
 
 	/**
@@ -101,17 +101,16 @@ public class DeleteSectionDialogFragment extends DialogFragment
 	{
 		// Build the dialog and set up the button click handlers
 		AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
-		String sectionTitle = getArguments().getString( AppConstants.SECTION_TITLE );
-		String titleString = "Section: " + sectionTitle;
+		String sectionTitle = getArguments().getString( AppConstants.TITLE );
 
-		builder.setTitle( titleString ).setMessage( R.string.delete_section_prompt )
+		builder.setTitle( sectionTitle ).setMessage( R.string.delete_prompt )
 				.setPositiveButton( R.string.accept, new DialogInterface.OnClickListener()
 				{
 					public void onClick( DialogInterface dialog, int id )
 					{
 						// Send the positive button event back to the host
 						// activity
-						mListener.onDeleteConfirm( DeleteSectionDialogFragment.this );
+						mListener.onDeleteConfirm( DeletePromptDialogFragment.this );
 					}
 				} ).setNegativeButton( R.string.cancel, new DialogInterface.OnClickListener()
 				{
@@ -119,7 +118,7 @@ public class DeleteSectionDialogFragment extends DialogFragment
 					{
 						// Send the negative button event back to the host
 						// activity
-						mListener.onDeleteCancel( DeleteSectionDialogFragment.this );
+						mListener.onDeleteCancel( DeletePromptDialogFragment.this );
 					}
 				} );
 		return builder.create();

@@ -29,37 +29,25 @@
 package cmput301f13t10.view;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import cmput301f13t10.model.AdventureCache;
-import cmput301f13t10.model.AdventureInteractor;
 import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.Callback;
-import cmput301f13t10.model.DatabaseInteractor;
-import cmput301f13t10.model.FileInteractor;
-import cmput301f13t10.model.InvalidSearchTypeException;
 import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Logger;
-import cmput301f13t10.presenter.Searcher;
+import cmput301f13t10.presenter.LibraryPresenter;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -69,19 +57,12 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Aly-Khan Jamal
  * @author Braeden Soetaert
  */
-public class LibraryEditView extends Activity implements Serializable, SearchView.OnQueryTextListener
+public class LibraryEditView extends Activity implements Serializable, UpdatableView, SearchView.OnQueryTextListener, DeletePromptDialogFragment.DeleteSectionDialogListener
 {
 
-	/**
-	 * A list of adventures to display
-	 */
-	ArrayList<AdventureModel> mAdventure = new ArrayList<AdventureModel>();
 
-	/**
-	 * The cache of adventures from which to pull adventures.
-	 */
-	AdventureCache cache;
-
+	private LibraryPresenter mPresenter;
+	
 	/**
 	 * The list view that will display all of the adventures
 	 */
@@ -90,31 +71,30 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	/**
 	 * The adventure that was selected by the user.
 	 */
-	int AdventureId;
+	private int AdventureId;
 
 	/**
 	 * The create adventure button.
 	 */
 	private Button btnCreateAdventure;
+	
+	/**
+	 * The item that gets searched
+	 */
 	private MenuItem mSearchItem;
-
-	private AdventureInteractor mAdventureInteractor;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
-		// AdventureModel fake = new AdventureModel("test");
-		cache = AdventureCache.getAdventureCache();
 
-		mAdventure = new ArrayList<AdventureModel>();
-
+		mPresenter = new LibraryPresenter(this);
+		
 		super.onCreate( savedInstanceState );
 
 		setContentView( R.layout.library_edit );
 
-		// adventure = cache.getAllAdventuresSynchrounous();
-
-		populateList();
+		mPresenter.populateList();
+		updateView();
 		addListenerOnButton();
 
 		adventureListView.setOnItemClickListener( new OnItemClickListener()
@@ -142,67 +122,33 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	protected void onResume()
 	{
 		super.onResume();
-		mAdventure = cache.getAllAdventuresSynchrounous();
-		populateList();
+		mPresenter.loadData();
+		mPresenter.populateList();
+		updateView();
 	}
 
 	@Override
 	public void onPause()
 	{
 		super.onPause();
-		FileOutputStream fileOutputStream = null;
 		try
 		{
-			fileOutputStream = openFileOutput( AppConstants.FILE_NAME, 0 );
+			mPresenter.saveData( openFileOutput( AppConstants.FILE_NAME, 0 ) );
 		}
 		catch( FileNotFoundException e )
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventuresSynchrounous(), fileOutputStream );
-	}
-
-	/**
-	 * Populate the list of adventures with the adventures in adventure
-	 */
-	private void populateList()
-	{
-		Callback getAdventureCallback = new Callback()
-		{
-			@Override
-			public void callBack( Object adventureList )
-			{
-				try
-				{
-					mAdventure = (ArrayList<AdventureModel>) adventureList;
-					updateList();
-				}
-				catch( ClassCastException e )
-				{
-					Logger.log( "bad!", e );
-				}
-			}
-
-		};
-		mAdventure.clear();
-		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
-		updateList();
 
 	}
 
-	private void updateList()
+	@Override
+	public void updateView()
 	{
-		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
-		{
-			if( !libContains( adv ) )
-				mAdventure.add( adv );
-		}
-
+		mPresenter.updateAdventures();
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
-		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, mAdventure );
-		adventureListView.setAdapter( adapter );
+		adventureListView.setAdapter( new AdventureArrayAdapter( this, mPresenter.getAdventures() ) );
 	}
 
 	/**
@@ -237,16 +183,8 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	@Override
 	public boolean onQueryTextChange( String searchText )
 	{
-		try
-		{
-			mAdventure = Searcher.searchBy( mAdventure, searchText, Searcher.sTITLE );
-		}
-		catch( InvalidSearchTypeException e )
-		{
-			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			mAdventure = cache.getAllAdventuresSynchrounous();
-		}
-		populateList();
+		mPresenter.sortLibraryUsing( searchText );
+		mPresenter.populateList();
 		return true;
 	}
 
@@ -281,20 +219,33 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		} );
 		return super.onCreateOptionsMenu( menu );
 	}
-
-	private boolean libContains( AdventureModel adv )
-	{
-		for( AdventureModel thisAdv : mAdventure )
-		{
-			if( thisAdv.getLocalId() == adv.getLocalId() )
-				return true;
-		}
-		return false;
-	}
-
 	public void onUploadClick( View v )
 	{
 
+	}
+
+	public void deletePrompt( View view )
+	{
+		Bundle choicesBundle = new Bundle();
+		AdventureModel adventure = (AdventureModel) view.getTag();
+		choicesBundle.putString( AppConstants.TITLE, adventure.getTitle() );
+		choicesBundle.putInt( AppConstants.ADVENTURE_ID, adventure.getLocalId() );
+		DeletePromptDialogFragment dialog = new DeletePromptDialogFragment();
+		dialog.setArguments( choicesBundle );
+		dialog.show( getFragmentManager(), "" );
+	}
+
+	@Override
+	public void onDeleteConfirm( DialogFragment dialog )
+	{
+		mPresenter.deleteAdventure( dialog.getArguments().getInt( AppConstants.ADVENTURE_ID ) );
+		updateView();
+	}
+
+	@Override
+	public void onDeleteCancel( DialogFragment dialog )
+	{
+		// Do nothing
 	}
 
 }

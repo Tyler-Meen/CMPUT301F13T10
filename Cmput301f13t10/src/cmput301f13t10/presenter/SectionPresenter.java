@@ -36,7 +36,7 @@ import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.view.SectionEditView;
-import cmput301f13t10.view.SectionView;
+import cmput301f13t10.view.UpdatableView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,7 +54,7 @@ public class SectionPresenter
 	/**
 	 * The view that created the presenter
 	 */
-	private SectionView mView;
+	private UpdatableView mView;
 	/**
 	 * The current section that the reader is viewing
 	 */
@@ -70,7 +70,7 @@ public class SectionPresenter
 	 * @param view
 	 *            The view that created this presenter
 	 */
-	public SectionPresenter( SectionView view )
+	public SectionPresenter( UpdatableView view )
 	{
 		mView = view;
 	}
@@ -85,7 +85,7 @@ public class SectionPresenter
 	{
 		mCurrentSection = section;
 		mCurrentAdventure.setSection( mCurrentSection );
-		mView.updateSectionView();
+		mView.updateView();
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class SectionPresenter
 	public void UpdateSectionTitle( String sectionName )
 	{
 		mCurrentSection.setName( sectionName );
-		mView.updateSectionView();
+		mView.updateView();
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class SectionPresenter
 		}
 
 		mCurrentSection.addChoice( new SectionChoice( new SectionTitle( section.getName(), section.getId() ), decisionText ) );
-		mView.updateSectionView();
+		mView.updateView();
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class SectionPresenter
 	public void removeSectionChoice( SectionChoice choiceToRemove )
 	{
 		mCurrentSection.removeChoice( choiceToRemove );
-		mView.updateSectionView();
+		mView.updateView();
 	}
 
 	public void setNextSectionByIndex( int index )

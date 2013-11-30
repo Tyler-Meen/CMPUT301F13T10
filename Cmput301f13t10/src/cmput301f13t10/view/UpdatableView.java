@@ -37,17 +37,11 @@ import android.content.Context;
  * @author Steven Gerdes
  * 
  */
-public interface SectionView
+public interface UpdatableView
 {
 	/**
 	 * Update the section view with new data.
 	 */
-	public void updateSectionView();
+	public void updateView();
 
-	/**
-	 * Get the context of the section view
-	 * 
-	 * @return The context of the section view.
-	 */
-	public Context getContext();
 }

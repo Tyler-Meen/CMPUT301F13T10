@@ -15,7 +15,7 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="Continue">Continue</string>
     <string name="choice_description">Enter new choice description </string>
     <string name="choice_description_hint">Choice Description</string>
-    <string name="delete_section_prompt">Are you sure you wish to delete this section?</string>
+    <string name="delete_prompt">Are you sure you wish to delete this?</string>
     <string name="edit">Edit</string>
     <string name="hello_world">Hello world!</string>
     <string name="help">Help</string>

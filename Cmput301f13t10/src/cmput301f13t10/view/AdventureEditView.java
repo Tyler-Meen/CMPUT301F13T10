@@ -60,7 +60,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Braeden Soetaert
  * 
  */
-public class AdventureEditView extends Activity implements DeleteSectionDialogFragment.DeleteSectionDialogListener
+public class AdventureEditView extends Activity implements DeletePromptDialogFragment.DeleteSectionDialogListener
 {
 	/**
 	 * The title of the adventure to be displayed.
@@ -143,7 +143,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	/**
 	 * Load all sections from the presenter into the list view display.
 	 */
-	private void mLoadSections()
+	private void loadSections()
 	{
 		mSectionTitles = mPresenter.getSectionTitles();
 		SectionArrayAdapter adapter = new SectionArrayAdapter( this, mSectionTitles );
@@ -195,7 +195,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	{
 		super.onResume();
 		mSectionTitles = mPresenter.getSectionTitles();
-		mLoadSections();
+		loadSections();
 	}
 
 	/**
@@ -209,10 +209,10 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	{
 		Bundle choicesBundle = new Bundle();
 		SectionTitle section = (SectionTitle) view.getTag();
-		choicesBundle.putString( AppConstants.SECTION_TITLE, section.getTitle() );
+		choicesBundle.putString( AppConstants.TITLE, section.getTitle() );
 		choicesBundle.putInt( AppConstants.SECTION_ID, section.getId() );
 
-		DeleteSectionDialogFragment dialog = new DeleteSectionDialogFragment();
+		DeletePromptDialogFragment dialog = new DeletePromptDialogFragment();
 		dialog.setArguments( choicesBundle );
 		dialog.show( getFragmentManager(), "" );
 	}
@@ -228,7 +228,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	public void onDeleteConfirm( DialogFragment dialog )
 	{
 		mPresenter.deleteSection( dialog.getArguments().getInt( AppConstants.SECTION_ID ) );
-		mLoadSections();
+		loadSections();
 	}
 
 	/**
@@ -320,7 +320,7 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 			@Override
 			public void callBack( Object arg )
 			{
-				mLoadSections();
+				loadSections();
 			}
 
 		};

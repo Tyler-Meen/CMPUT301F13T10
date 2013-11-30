@@ -5,14 +5,14 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/section_title"
+        android:id="@+id/main_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/section_title"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/choice_description"
+        android:id="@+id/sub_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/choice_description_hint" />

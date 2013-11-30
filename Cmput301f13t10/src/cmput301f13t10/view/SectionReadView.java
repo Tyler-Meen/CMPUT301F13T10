@@ -52,7 +52,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Brendan Cowan
  * 
  */
-public class SectionReadView extends Activity implements SectionView, Serializable
+public class SectionReadView extends Activity implements UpdatableView, Serializable
 {
 	/**
 	 * The presenter for the view (as per MVP)
@@ -89,7 +89,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 	 * button at the bottom of the screen to a "return to main menu button" if
 	 * there are no more choices.
 	 */
-	public void updateSectionView()
+	public void updateView()
 	{
 		Button continueButton = (Button) findViewById( R.id.continue_button );
 
@@ -124,7 +124,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 			vg.removeAllViews();
 			for( Media m : medias )
 			{
-				View view = m.toView( this.getContext() );
+				View view = m.toView( this );
 				view.setFocusable( false );
 				view.setBackgroundColor( Color.TRANSPARENT );
 				vg.addView( view );
@@ -150,12 +150,6 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 	public void changeToRandomSection()
 	{
 		mPresenter.setRandomAdventure();
-	}
-
-	@Override
-	public Context getContext()
-	{
-		return this;
 	}
 
 	/**
@@ -197,7 +191,7 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 		@Override
 		public void onClick( View v )
 		{
-			Intent intent = new Intent( getContext(), MainActivity.class );
+			Intent intent = new Intent( SectionReadView.this, MainActivity.class );
 			intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
 			intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
 			startActivity( intent );

@@ -69,7 +69,7 @@ import cs.ualberta.cmput301f13t10.R;
  * @author Aly-khan Jamal
  * 
  */
-public class SectionEditView extends FragmentActivity implements SectionView, ChangeImageSizeDialogListener
+public class SectionEditView extends FragmentActivity implements UpdatableView, ChangeImageSizeDialogListener
 {
 	/**
 	 * The presenter for the view to get data from.
@@ -122,7 +122,7 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 	}
 
 	@Override
-	public void updateSectionView()
+	public void updateView()
 	{
 		ActionBar actionBar = getActionBar();
 		EditText title = (EditText) actionBar.getCustomView().findViewById( R.id.section_edit_title );
@@ -139,12 +139,6 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 		getMenuInflater().inflate( R.menu.section_edit_menu, menu );
 
 		return super.onCreateOptionsMenu( menu );
-	}
-
-	@Override
-	public Context getContext()
-	{
-		return this;
 	}
 
 	/**
@@ -193,7 +187,7 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 			vg.removeAllViews();
 			for( int i = 0; i < medias.size(); i++ )
 			{
-				View view = medias.get( i ).toView( this.getContext() );
+				View view = medias.get( i ).toView( this );
 				view.setFocusable( true );
 				view.setId( i );
 

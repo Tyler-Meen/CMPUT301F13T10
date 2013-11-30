@@ -72,11 +72,16 @@ public class AppConstants
 	 * Tag. Indicates that this is an section id.
 	 */
 	public static final String SECTION_ID = "section_id";
+	
 
 	/**
-	 * Tag. Indicates that this is a section title.
+	 * Tag. Indicates that this is a title.
 	 */
-	public static final String SECTION_TITLE = "section_title";
+	public static final String TITLE = "object_title";
+	
+	/**
+	 * Tag. Indicates that this is a choice description
+	 */
 	public static final String CHOICE_DESCRIPTION = "choice_description";
 	/**
 	 * Tag. Input into factory to generate an id for a choice.
@@ -117,5 +122,6 @@ public class AppConstants
 	 * Name of the file where adventures are saved locally
 	 */
 	public static final String FILE_NAME = "Adventures.sav";
+
 
 }

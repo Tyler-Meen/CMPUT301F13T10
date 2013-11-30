@@ -71,7 +71,7 @@ public class SectionArrayAdapter extends ArrayAdapter<SectionTitle>
 	 */
 	public SectionArrayAdapter( Context context, List<SectionTitle> values )
 	{
-		super( context, R.layout.section_adapter, values );
+		super( context, R.layout.list_item_main_text_delete_button, values );
 		mContext = context;
 		mValues = values;
 	}
@@ -80,15 +80,15 @@ public class SectionArrayAdapter extends ArrayAdapter<SectionTitle>
 	public View getView( int position, View convertView, ViewGroup parent )
 	{
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-		View rowView = inflater.inflate( R.layout.section_adapter, parent, false );
+		View rowView = inflater.inflate( R.layout.list_item_main_text_delete_button, parent, false );
 
 		// Set the text view to have the section's title
-		TextView textView = (TextView) rowView.findViewById( R.id.section_title );
+		TextView textView = (TextView) rowView.findViewById( R.id.main_text );
 		textView.setText( mValues.get( position ).getTitle() );
 
 		// Set the image button up to delete sections if the section is not the
 		// start section.
-		ImageButton cancelButton = (ImageButton) rowView.findViewById( R.id.button_delete );
+		ImageButton cancelButton = (ImageButton) rowView.findViewById( R.id.delete_button );
 		if( mValues.get( position ).isStartSection() )
 		{
 			cancelButton.setVisibility( View.GONE );
