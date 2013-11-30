@@ -21,42 +21,57 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Command for getting all remote ids of adventures stored in the database
+ * @author Brendan Cowan
+ *
+ */
 public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 {
+	/**
+	 * the httpClient to be used in the request
+	 */
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
+	/**
+	 * The Gson constructor that this class will use
+	 */
 	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 
+	/**
+	 * The callback to call once this command has been completed
+	 */
 	private Callback mCallback;
+	
+	/**
+	 * The returned list of ids
+	 */
 	private ArrayList<Integer> mIds = new ArrayList<Integer>();
 
-	// public AdventureModel getAdventure() {
-
-	// }
-
+	/**
+	 * Constructor
+	 * @param callback The callback to call once this command has been executed
+	 */
 	public ESGetIdsCommand( Callback callback )
 	{
 		mCallback = callback;
 	}
 
-	// @Override
-	// public Object execute()
-	// {
-
-	// }
-
-	String getEntityContent( HttpResponse response ) throws IOException
+	/**
+	 * Get the Json string from the HttpResponse
+	 * @param response The response to decode
+	 * @return The Json string
+	 * @throws IOException If reading the response fails
+	 */
+	private String getEntityContent( HttpResponse response ) throws IOException
 	{
 		BufferedReader br = new BufferedReader( new InputStreamReader( ( response.getEntity().getContent() ) ) );
 		String output;
-		// System.err.println("Output from Server -> ");
 		String json = "";
 		while( ( output = br.readLine() ) != null )
 		{
-			// System.err.println(output);
 			json += output;
 		}
-		// System.err.println("JSON:"+json);
 		return json;
 	}
 
@@ -71,15 +86,11 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 			getRequest.addHeader( "Accept", "application/json" );
 			HttpResponse response = mHttpClient.execute( getRequest );
 
-			String status = response.getStatusLine().toString();
-
 			String json = getEntityContent( response );
 
-			// We have to tell GSON what type we expect
 			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<IdList>>()
 			{
 			}.getType();
-			// Now we expect to get an Ids response
 			ElasticSearchResponse<IdList> esResponse = null;
 			try
 			{
@@ -89,24 +100,19 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 			{
 				e.printStackTrace();
 			}
-			// We get the ids from it!
 			for( int i : esResponse.getSource().getIds() )
-				mIds.add( i );// new ArrayList<Integer>(esResponse.getSource());
+				mIds.add( i );
 
 		}
 		catch( ClientProtocolException e )
 		{
-
 			e.printStackTrace();
-
 		}
 		catch( IOException e )
 		{
-
 			e.printStackTrace();
 		}
 		return null;
-		// return ids;
 	}
 
 	@Override

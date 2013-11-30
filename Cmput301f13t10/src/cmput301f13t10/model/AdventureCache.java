@@ -37,7 +37,6 @@ import java.util.Map;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.view.MainActivity;
 
-
 /**
  * A store of adventures.
  * 
@@ -47,7 +46,7 @@ import cmput301f13t10.view.MainActivity;
  * 
  * @author Aly-khan Jamal
  */
-public class AdventureCache implements AdventureInteractor
+public class AdventureCache
 {
 	/**
 	 * The instance of the adventure cache.
@@ -60,15 +59,9 @@ public class AdventureCache implements AdventureInteractor
 	private Map<Integer, AdventureModel> adventures;
 
 	/**
-	 * The interactor that this cache looks to if it does not contain the
-	 * requested adventures
+	 * Constructor without dependency injection
 	 */
-	private AdventureInteractor mInteractor;
-
-	/**
-	 * Constructor with dependency injection
-	 */
-	public AdventureCache( AdventureInteractor interactor )
+	public AdventureCache()
 	{
 		adventures = new HashMap<Integer, AdventureModel>();
 		FileInputStream fileInputStream = null;
@@ -78,23 +71,11 @@ public class AdventureCache implements AdventureInteractor
 		}
 		catch( FileNotFoundException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ArrayList<AdventureModel> advList = FileInteractor.loadAdventures( fileInputStream );// new
-																								// HashMap<Integer,
-																								// AdventureModel>();
+		ArrayList<AdventureModel> advList = FileInteractor.loadAdventures( fileInputStream );
 		for( AdventureModel adv : advList )
 			adventures.put( adv.getLocalId(), adv );
-		mInteractor = interactor;
-	}
-
-	/**
-	 * Constructor without dependency injection
-	 */
-	public AdventureCache()
-	{
-		this( null );
 	}
 
 	/**
@@ -112,7 +93,6 @@ public class AdventureCache implements AdventureInteractor
 	/**
 	 * Add an adventure to the cache.
 	 */
-	@Override
 	public void addAdventure( AdventureModel adventure )
 	{
 		adventures.put( adventure.getLocalId(), adventure );
@@ -122,32 +102,16 @@ public class AdventureCache implements AdventureInteractor
 	 * @return the adventure with the given id or null if the key is not in the
 	 *         cache.
 	 */
-	public AdventureModel getAdventureByIdSynchrounous( int id )
+	public AdventureModel getAdventureById( int id )
 	{
 		return adventures.get( id );
 	}
 
 	/**
-	 * Returns a list of all adventures in the cache
-	 * 
-	 * @return a list of all adventures in the cache.
+	 * Return all adventures in the cache
+	 * @return An arraylist of all adventures in the cache
 	 */
-	@Override
-	public void getAllAdventures( Callback callback )
-	{
-		/*
-		 * ArrayList<AdventureModel> alladventures = new
-		 * ArrayList<AdventureModel>();
-		 * 
-		 * for( Integer key : adventures.keySet() ) { alladventures.add(
-		 * adventures.get( key ) ); }
-		 * 
-		 * return alladventures;
-		 */
-
-	}
-
-	public ArrayList<AdventureModel> getAllAdventuresSynchrounous()
+	public ArrayList<AdventureModel> getAllAdventures()
 	{
 		ArrayList<AdventureModel> alladventures = new ArrayList<AdventureModel>();
 
@@ -160,11 +124,21 @@ public class AdventureCache implements AdventureInteractor
 
 	}
 
+	/**
+	 * If the cache contains the adventure with the given local id
+	 * @param adventure The adventure to compare against
+	 * @return True if the cache contains the adventure. False otherwise.
+	 */
 	public boolean containsLocal( AdventureModel adventure )
 	{
 		return adventures.containsKey( adventure.getLocalId() );
 	}
 
+	/**
+	 * If the cache contains the adventure with the given remote id
+	 * @param adventure The adventure to compare against
+	 * @return True if the cache contains the adventure. False otherwise.
+	 */
 	public boolean containsRemote( AdventureModel adventure )
 	{
 		for( Integer id : adventures.keySet() )
@@ -176,17 +150,13 @@ public class AdventureCache implements AdventureInteractor
 		return false;
 	}
 
-	@Override
+	/**
+	 * Delete an adventure from the cache
+	 * @param adventure The adventure to remove
+	 */
 	public void deleteAdventure( AdventureModel adventure )
 	{
 		adventures.remove( adventure.getLocalId() );
-
-	}
-
-	@Override
-	public void getAdventureById( int id, Callback callback )
-	{
-		// TODO Auto-generated method stub
 
 	}
 }

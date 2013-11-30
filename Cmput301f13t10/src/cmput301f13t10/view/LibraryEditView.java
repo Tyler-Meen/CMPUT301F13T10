@@ -26,6 +26,7 @@
  of the authors and should not be interpreted as representing official policies, 
  either expressed or implied, of the FreeBSD Project.
  */
+
 package cmput301f13t10.view;
 
 import java.io.FileNotFoundException;
@@ -52,7 +53,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import cmput301f13t10.model.AdventureCache;
-import cmput301f13t10.model.AdventureInteractor;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.Callback;
 import cmput301f13t10.model.DatabaseInteractor;
@@ -99,8 +99,6 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	private Button btnCreateAdventure;
 	private MenuItem mSearchItem;
 
-	private AdventureInteractor mAdventureInteractor;
-
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
@@ -143,7 +141,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	protected void onResume()
 	{
 		super.onResume();
-		mAdventure = cache.getAllAdventuresSynchrounous();
+		mAdventure = cache.getAllAdventures();
 		populateList();
 	}
 
@@ -161,7 +159,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventuresSynchrounous(), fileOutputStream );
+		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
 	}
 
 	/**
@@ -195,7 +193,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 	private void updateList()
 	{
 		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventures() )
 		{
 			if( !libContains( adv ) )
 				mAdventure.add( adv );
@@ -245,7 +243,7 @@ public class LibraryEditView extends Activity implements Serializable, SearchVie
 		catch( InvalidSearchTypeException e )
 		{
 			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			mAdventure = cache.getAllAdventuresSynchrounous();
+			mAdventure = cache.getAllAdventures();
 		}
 		populateList();
 		return true;

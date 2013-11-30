@@ -22,17 +22,10 @@ public class CacheTest
 	 */
 	AdventureCache mCache;
 
-	/**
-	 * The interactor which the cache will look to if the requested adventure
-	 * does not exist in the cache
-	 */
-	StubAdventureInteractor mInteractor;
-
 	@Before
 	public void SetUp()
 	{
-		mInteractor = new StubAdventureInteractor();
-		mCache = new AdventureCache( mInteractor );
+		mCache = new AdventureCache();
 	}
 
 	/**
@@ -44,8 +37,7 @@ public class CacheTest
 	{
 		AdventureModel adventure = new AdventureModel();
 		mCache.addAdventure( adventure );
-		assertTrue( mCache.getAllAdventuresSynchrounous().contains( adventure ) );
-		assertTrue( mInteractor.getAddedAdventures().contains( adventure ) );
+		assertTrue( mCache.getAllAdventures().contains( adventure ) );
 	}
 
 	/**
@@ -58,8 +50,7 @@ public class CacheTest
 		AdventureModel adventure = new AdventureModel();
 		mCache.addAdventure( adventure );
 		mCache.deleteAdventure( adventure );
-		assertFalse( mCache.getAllAdventuresSynchrounous().contains( adventure ) );
-		assertFalse( mInteractor.getAddedAdventures().contains( adventure ) );
+		assertFalse( mCache.getAllAdventures().contains( adventure ) );
 	}
 
 	/**
@@ -72,7 +63,7 @@ public class CacheTest
 		AdventureModel adventure = new AdventureModel();
 		adventure.setTitle( "yeah" );
 		mCache.addAdventure( adventure );
-		AdventureModel loadedAdventure = mCache.getAdventureByIdSynchrounous( adventure.getLocalId() );
+		AdventureModel loadedAdventure = mCache.getAdventureById( adventure.getLocalId() );
 		assertEquals( loadedAdventure.getTitle(), "yeah" );
 	}
 
@@ -83,7 +74,7 @@ public class CacheTest
 	@Test
 	public void testGetAdventureNotInCache()
 	{
-		AdventureModel adventure = mCache.getAdventureByIdSynchrounous( 9999999 );
+		AdventureModel adventure = mCache.getAdventureById( 9999999 );
 		assertEquals( adventure.getTitle(), "Test" );
 	}
 

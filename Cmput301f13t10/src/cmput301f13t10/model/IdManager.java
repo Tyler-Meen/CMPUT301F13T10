@@ -58,9 +58,15 @@ public class IdManager
 		mReusableIds = new HashSet<Integer>();
 	}
 
+	/**
+	 * Set the ids in the id manager to be considered "used" (so that they won't
+	 * be used again until they are removed)
+	 * 
+	 * @param ids
+	 *            The ids to set as used
+	 */
 	public void setUsedIds( ArrayList<Integer> ids )
 	{
-		// mReusableIds.clear();
 		Integer max = mNextId;
 		for( Integer id : ids )
 		{
@@ -70,7 +76,6 @@ public class IdManager
 
 		for( Integer i = 0; i < ids.size(); i++ )
 		{
-			// if( !ids.contains( i ))
 			mReusableIds.add( i );
 		}
 		mNextId = max + 1;

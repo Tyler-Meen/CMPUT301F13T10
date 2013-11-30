@@ -89,7 +89,7 @@ public class AdventurePresenter
 	{
 		mView = view;
 		mCache = AdventureCache.getAdventureCache();
-		mModel = mCache.getAdventureByIdSynchrounous( id );
+		mModel = mCache.getAdventureById( id );
 	}
 
 	/**

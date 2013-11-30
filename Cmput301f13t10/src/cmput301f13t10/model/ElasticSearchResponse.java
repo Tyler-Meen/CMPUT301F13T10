@@ -1,3 +1,7 @@
+/*
+ * "Creative Commons https://github.com/rayzhangcl/ESDemo/blob/master/ESDemo/src/ca/ualberta/cs/CMPUT301/chenlei/ElasticSearchResponse.java" by rayzhangcl is licensed under CC0
+ */
+
 package cmput301f13t10.model;
 
 public class ElasticSearchResponse<T>

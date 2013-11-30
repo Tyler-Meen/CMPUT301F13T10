@@ -22,35 +22,44 @@ import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Logger;
 import cmput301f13t10.presenter.Media;
 
+/**
+ * Command to insert an adventure into the database
+ * @author Brendan Cowan
+ *
+ */
 public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 {
 
+	/**
+	 * the httpClient to be used in the request
+	 */
 	private HttpClient mHttpClient = new DefaultHttpClient();
 
+	/**
+	 * The Gson constructor that this class will use
+	 */
 	private Gson mGson = new GsonBuilder().registerTypeAdapter( Media.class, new MediaSerializer<Media>() ).create();
 
-
-	// public void insertAdventure( AdventureModel adventure ) throws
-	// IllegalStateException, IOException
-	// {
-
-	// }
-
+	/**
+	 * The adventure to insert into the database
+	 */
 	private AdventureModel mAdventure;
 
+	/**
+	 * The callback to call once the command has been executed
+	 */
 	private Callback mCallback;
 
+	/**
+	 * Constructor
+	 * @param adventure The adventure to add
+	 * @param callback The function to call once the command has completed
+	 */
 	public ESInsertCommand( AdventureModel adventure, Callback callback )
 	{
 		mAdventure = adventure;
 		mCallback = callback;
 	}
-
-	// @Override
-	// public Object execute()
-	//
-
-	// }
 
 	@Override
 	protected Void doInBackground( Void... params )
@@ -93,10 +102,9 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 		{
 			stringentity = new StringEntity( query );
 		}
-		catch( UnsupportedEncodingException e1 )
+		catch( UnsupportedEncodingException e )
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 
 		updateRequest.setHeader( "Accept", "application/json" );
@@ -108,29 +116,13 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 		}
 		catch( ClientProtocolException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch( IOException e )
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String status = response.getStatusLine().toString();
-
-		// String status = response.getStatusLine().toString();
-
-		// HttpEntity entity = response.getEntity();
-		// BufferedReader br = new BufferedReader( new InputStreamReader(
-		// entity.getContent() ) );
-		// String output;
-
-		/*
-		 * try {
-		 * 
-		 * EntityUtils.consume( entity ); } catch( IOException e ) { Logger.log(
-		 * "", e ); } httpPost.releaseConnection();
-		 */
+		
 		return null;
 	}
 

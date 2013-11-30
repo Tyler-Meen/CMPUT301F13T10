@@ -7,15 +7,30 @@ import org.apache.http.client.ClientProtocolException;
 
 import cmput301f13t10.presenter.AppConstants;
 
-public class DatabaseInteractor implements AdventureInteractor
+/**
+ * Singleton class that interacts with the online database. Can upload, download, and update adventures online.
+ * @author Brendan Cowan
+ *
+ */
+public class DatabaseInteractor
 {
 
+	/**
+	 * Static instance of the database interactor
+	 */
 	private static DatabaseInteractor mDatabaseInteractor = null;
 
+	/**
+	 * Constructor
+	 */
 	private DatabaseInteractor()
 	{
 	}
 
+	/**
+	 * Singleton getter of the constructor
+	 * @return the databaseInteractor
+	 */
 	public static DatabaseInteractor getDatabaseInteractor()
 	{
 		if( mDatabaseInteractor == null )
@@ -23,10 +38,13 @@ public class DatabaseInteractor implements AdventureInteractor
 		return mDatabaseInteractor;
 	}
 
-	@Override
+	/**
+	 * Add a new adventure to the database. If the adventure is already on the database (as indicated by the remoteId), it will be overwritten.
+	 * @param adventure The adventure to upload
+	 */
 	public void addAdventure( AdventureModel adventure )
 	{
-		// Make sure the remote id is up to date.
+		// Assign the adventure a remote id if it doesn't have one
 		if( adventure.getRemoteId() == -1 )
 		{
 			Callback callback = new Callback( adventure )
@@ -51,6 +69,7 @@ public class DatabaseInteractor implements AdventureInteractor
 				}
 
 			};
+			
 			ESGetIdsCommand getIds = new ESGetIdsCommand( callback );
 			getIds.execute( null, null );
 		}
@@ -61,6 +80,10 @@ public class DatabaseInteractor implements AdventureInteractor
 
 	}
 
+	/**
+	 * Delete an adventure from the database (if it exists), then reinsert it (i.e., update it).
+	 * @param adventure
+	 */
 	private void deleteThenInsert( AdventureModel adventure )
 	{
 		ESInsertCommand insert = new ESInsertCommand( adventure, null );
@@ -69,19 +92,21 @@ public class DatabaseInteractor implements AdventureInteractor
 		insert.execute();
 	}
 
-	@Override
+	/**
+	 * Return all adventures from the database
+	 * @param callback The callback to call when the function completes
+	 */
 	public void getAllAdventures( Callback callback )
 	{
-		ArrayList<AdventureModel> adventures = new ArrayList<AdventureModel>();
 
-		GetIdsCallback getIdsCallback = new GetIdsCallback( callback )
+		Callback getIdsCallback = new Callback( callback )
 		{
 			@Override
 			public void callBack( Object arg )
 			{
 				ArrayList<Integer> ids = (ArrayList<Integer>) arg;
 
-				GetCallback getCallback = new GetCallback( ids.size(), mCallback )
+				GetCallback getCallback = new GetCallback( ids.size(), (Callback)mCallbackArg )
 				{
 
 					ArrayList<AdventureModel> mAdventures = new ArrayList<AdventureModel>();
@@ -106,6 +131,7 @@ public class DatabaseInteractor implements AdventureInteractor
 
 				};
 
+				// For each of the ids that were found, get the adventures
 				for( int i : ids )
 				{
 					ESGetCommand getCommand = new ESGetCommand( i, getCallback );
@@ -114,56 +140,43 @@ public class DatabaseInteractor implements AdventureInteractor
 			}
 		};
 
+		// Get all the ids first, so we know what adventures are actually in the database
 		ESGetIdsCommand getIdsCommand = new ESGetIdsCommand( getIdsCallback );
 		getIdsCommand.execute( null, null );
 	}
 
-	@Override
+	/**
+	 * Remove an adventure from the database
+	 * @param adventure The adventure to delete
+	 */
 	public void deleteAdventure( AdventureModel adventure )
 	{
 		ESDeleteCommand deleteCommand = new ESDeleteCommand( adventure.getLocalId(), null );
 		deleteCommand.execute( null, null );
 	}
 
-	@Override
-	public ArrayList<AdventureModel> getAllAdventuresSynchrounous()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void getAdventureById( int id, Callback callback )
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public AdventureModel getAdventureByIdSynchrounous( int id )
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private abstract class GetIdsCallback extends Callback
-	{
-
-		protected Callback mCallback;
-
-		public GetIdsCallback( Callback callback )
-		{
-			mCallback = callback;
-		}
-
-	}
-
+	/**
+	 * A callback that takes two arguments
+	 * @author user
+	 *
+	 */
 	private abstract class GetCallback extends Callback
 	{
 
+		/**
+		 * the callback to call when this callback is done
+		 */
 		protected Callback mCallback;
+		/**
+		 * The number of ids to get adventures for
+		 */
 		protected int mNumber;
 
+		/**
+		 * Constructor
+		 * @param number The number of ids to get adventures for
+		 * @param callback the callback to call when this callback is done
+		 */
 		public GetCallback( int number, Callback callback )
 		{
 			mCallback = callback;

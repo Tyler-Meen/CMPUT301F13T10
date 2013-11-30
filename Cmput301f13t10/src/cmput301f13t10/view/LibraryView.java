@@ -183,7 +183,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	private void updateList()
 	{
 		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventuresSynchrounous() )
+		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventures() )
 		{
 			if( !libContains( adv ) )
 				adventure.add( adv );
@@ -214,7 +214,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		catch( InvalidSearchTypeException e )
 		{
 			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			adventure = cache.getAllAdventuresSynchrounous();
+			adventure = cache.getAllAdventures();
 		}
 		populateList();
 		return true;

@@ -88,6 +88,11 @@ public class IdFactory
 		return mIdFactory;
 	}
 
+	/**
+	 * Give out an IdManager
+	 * @param type The type of id manager to get
+	 * @return The id manager
+	 */
 	public static IdManager getIdManager( String type )
 	{
 		getIdFactory();
@@ -112,6 +117,10 @@ public class IdFactory
 
 	}
 
+	/**
+	 * Assign the given adventure (including its sections) a local id
+	 * @param adventure The adventure to assign ids to
+	 */
 	public void assignLocalId( AdventureModel adventure )
 	{
 		for( SectionModel section : adventure.getSections() )
