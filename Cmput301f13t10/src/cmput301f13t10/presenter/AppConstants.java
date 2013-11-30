@@ -35,6 +35,7 @@ package cmput301f13t10.presenter;
  * 
  * @author Braeden Soetaert
  * 
+ * @author Aly-khan Jamal
  */
 public class AppConstants
 {
@@ -75,7 +76,12 @@ public class AppConstants
 	
 
 	/**
-	 * Tag. Indicates that this is a title.
+	 * Tag. Indicates that this is an annotation id.
+	 */
+	public static final String ANNOTATION_ID = "annotation_id";
+	
+	/**
+	 * Tag. Indicates that this is a section title.
 	 */
 	public static final String TITLE = "object_title";
 	
@@ -103,6 +109,11 @@ public class AppConstants
 	 */
 	public static final String GENERATE_MEDIA_ID = "media_id";
 
+	/**
+	 * Tag. Input into factory to generate an id for a media.
+	 */
+	public static final String GENERATE_ANNOTATION_ID = "annotation_id";
+	
 	/**
 	 * The URL of the elasticsearch page
 	 */

@@ -81,6 +81,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs.ualberta.cmput301f13t10.view.MainActivity" />
         </activity>
+        <activity
+            android:name="cmput301f13t10.view.AnnotationEditView"
+            android:label="@string/annotation_view" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cs.ualberta.cmput301f13t10.view.SectionReadView" />
+        </activity>
     </application>
 
 </manifest>
