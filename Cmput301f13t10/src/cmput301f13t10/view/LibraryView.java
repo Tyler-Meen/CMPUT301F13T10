@@ -111,8 +111,8 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 				try
 				{
 					Random rand = new Random();
-					int choiceNumber = rand.nextInt( adventureListView.getLastVisiblePosition() );
-					AdventureId = ( (AdventureModel) adventureListView.getItemAtPosition( choiceNumber ) ).getLocalId();
+					int choiceNumber = rand.nextInt( adventure.size() );
+					AdventureId = adventure.get( choiceNumber ).getLocalId();
 					startSectionReadView();
 				}
 				catch( IllegalArgumentException e )

@@ -9,20 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
+    <ImageButton
         android:id="@+id/button_read"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_weight="0.5"
+        android:scaleType="fitCenter"
         android:onClick="readAdventures"
-        android:text="@string/read" />
+        android:src="@drawable/read_img"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/button_edit"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:scaleType="fitCenter"
         android:layout_gravity="center_horizontal"
         android:onClick="editAdventures"
-        android:text="@string/edit" />
-
+        android:src="@drawable/edit_img" />
 </LinearLayout>
