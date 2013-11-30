@@ -158,29 +158,21 @@ public class AdventureEditView extends Activity implements DeleteSectionDialogFr
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate( R.menu.adventure_edit_view, menu );
+		getMenuInflater().inflate( R.menu.help_menu, menu );
 
 		return super.onCreateOptionsMenu( menu );
 	}
 
-	@Override
-	public boolean onOptionsItemSelected( MenuItem item )
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help( MenuItem item )
 	{
-		// Handle presses on the action bar items
-		switch( item.getItemId() )
-		{
-		case R.id.action_settings:
-			// Intent intent = new Intent(this, SettingsView.class);
-			// startActivity(intent);
-			return true;
-		case R.id.action_help:
-			// Intent intent = new Intent(this, HelpView.class);
-			// startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected( item );
-		}
-
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 
 	@Override

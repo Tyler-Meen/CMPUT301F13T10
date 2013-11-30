@@ -39,6 +39,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -192,7 +193,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, adventure );
 		adventureListView.setAdapter( adapter );
 	}
-	
+
 	private boolean libContains( AdventureModel adv )
 	{
 		for( AdventureModel thisAdv : adventure )
@@ -233,6 +234,22 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
 		getMenuInflater().inflate( R.menu.library_view, menu );
+
+		MenuItem helpMenuItem = menu.add( "Help" );
+
+		helpMenuItem.setShowAsAction( MenuItem.SHOW_AS_ACTION_NEVER );
+		helpMenuItem.setOnMenuItemClickListener( new OnMenuItemClickListener()
+		{
+
+			@Override
+			public boolean onMenuItemClick( MenuItem arg0 )
+			{
+				help();
+				return true;
+			}
+
+		} );
+
 		mSearchItem = menu.findItem( R.id.action_search );
 		final SearchView searchView = (SearchView) MenuItemCompat.getActionView( mSearchItem );
 		searchView.setOnQueryTextListener( this );
@@ -249,6 +266,18 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 			}
 		} );
 		return super.onCreateOptionsMenu( menu );
+	}
+
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help()
+	{
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 
 }

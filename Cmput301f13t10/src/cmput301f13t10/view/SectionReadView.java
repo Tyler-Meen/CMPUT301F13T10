@@ -40,8 +40,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import cs.ualberta.cmput301f13t10.R;
@@ -203,6 +206,26 @@ public class SectionReadView extends Activity implements SectionView, Serializab
 			startActivity( intent );
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu( Menu menu )
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate( R.menu.help_menu, menu );
+		return true;
+	}
+
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help( MenuItem menu )
+	{
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 
 }

@@ -46,6 +46,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -138,7 +139,34 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate( R.menu.section_edit_menu, menu );
 
+		MenuItem helpMenuItem = menu.add( "Help" );
+
+		helpMenuItem.setShowAsAction( MenuItem.SHOW_AS_ACTION_NEVER );
+		helpMenuItem.setOnMenuItemClickListener( new OnMenuItemClickListener()
+		{
+
+			@Override
+			public boolean onMenuItemClick( MenuItem menu )
+			{
+				help();
+				return true;
+			}
+
+		} );
+
 		return super.onCreateOptionsMenu( menu );
+	}
+
+	/**
+	 * Starts up the help view on help button click.
+	 * 
+	 * @param view
+	 *            the view that was clicked
+	 */
+	public void help()
+	{
+		Intent intent = new Intent( this, HelpView.class );
+		startActivity( intent );
 	}
 
 	@Override
@@ -161,7 +189,7 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
 		startActivity( intent );
 	}
-	
+
 	public void addText()
 	{
 		mMedia.add( new TextMedia() );
@@ -208,7 +236,7 @@ public class SectionEditView extends FragmentActivity implements SectionView, Ch
 				{
 					isImageMedia = false;
 				}
-				
+
 				if( isImageMedia )
 				{
 					view.setOnLongClickListener( new OnLongClickListener()
