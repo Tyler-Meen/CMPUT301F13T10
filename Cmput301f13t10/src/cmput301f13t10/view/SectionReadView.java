@@ -112,6 +112,44 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 			continueButton.setText( "Continue" );
 		}
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu( Menu menu )
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate( R.menu.annotation_add, menu );
+
+		return super.onCreateOptionsMenu( menu );
+	}
+	
+	/**
+	 * This is the result of clicking on an option
+	 */
+	public boolean onOptionsItemSelected( MenuItem item )
+	{
+		switch( item.getItemId() )
+		{
+		case R.id.action_add_annotation:
+			startAnnotationActivity();
+			return true;
+		case android.R.id.home:
+			this.finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected( item );
+		}
+
+	}
+	/**
+	 * Starts AnnotationEditView activity
+	 */
+	public void startAnnotationActivity()
+	{
+		Intent intent = new Intent( this, AnnotationEditView.class );
+		intent.putExtra( AppConstants.ADVENTURE_ID, mPresenter.getAdventureId() );
+		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
+		startActivity( intent );
+	}
 
 	/**
 	 * Set the input view group to contain all media in the current section.
@@ -200,14 +238,6 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 			startActivity( intent );
 		}
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu( Menu menu )
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate( R.menu.help_menu, menu );
-		return true;
 	}
 
 	/**

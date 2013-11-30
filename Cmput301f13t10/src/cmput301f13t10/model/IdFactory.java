@@ -66,6 +66,10 @@ public class IdFactory
 	private static IdManager mMediaIdManager = null;
 
 	/**
+	 * manager used to generate ids for annotations
+	 */
+	private static IdManager mAnnotationIdManager = null;
+	/**
 	 * Singleton constructor.
 	 */
 	protected IdFactory()
@@ -74,6 +78,7 @@ public class IdFactory
 		mAdventureIdManager = new IdManager();
 		mChoiceIdManager = new IdManager();
 		mMediaIdManager = new IdManager();
+		mAnnotationIdManager = new IdManager();
 	}
 
 	/**
@@ -111,6 +116,10 @@ public class IdFactory
 		else if( type == AppConstants.GENERATE_MEDIA_ID )
 		{
 			return mMediaIdManager;
+		}
+		else if( type == AppConstants.GENERATE_ANNOTATION_ID )
+		{
+			return mAnnotationIdManager;
 		}
 
 		return null;

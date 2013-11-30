@@ -94,5 +94,9 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="saveLocal">Save Local</string>
     <string name="download">Downlaod</string>
     <string name="getOnline">Get online version</string>
+    <string name="insert_image">Insert Image</string>
+    <string name="done">Done</string>
+    <string name="annotation_view">Annotation View</string>
+    <string name="action_annotation">Edit Annotation</string>
 
 </resources>

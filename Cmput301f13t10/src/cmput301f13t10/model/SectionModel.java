@@ -43,6 +43,7 @@ import cmput301f13t10.presenter.SectionChoice;
  * choices that the reader can take to continue in the adventure.
  * 
  * @author Brendan Cowan
+ * @author Aly-khan Jamal
  * 
  */
 public class SectionModel extends Observable implements Serializable
@@ -63,6 +64,11 @@ public class SectionModel extends Observable implements Serializable
 	 * The id of the section.
 	 */
 	private int mId;
+	/**
+	 * Annotation contained within the section
+	 */
+	private AnnotationModel mAnnotation;
+
 
 	/**
 	 * Constructor
@@ -76,6 +82,7 @@ public class SectionModel extends Observable implements Serializable
 		mMedias = new ArrayList<Media>();
 		mChoices = new ArrayList<SectionChoice>();
 		mId = IdFactory.getIdManager( AppConstants.GENERATE_SECTION_ID ).getNewId();
+		mAnnotation = new AnnotationModel();
 	}
 
 	/**
@@ -208,6 +215,26 @@ public class SectionModel extends Observable implements Serializable
 	{
 		return mId;
 	}
+	
+	/**
+	 * Get the annotation of the section
+	 * 
+	 * @return The annotation of the section
+	 */
+	public AnnotationModel getAnnotation()
+	{
+		return mAnnotation;
+	}
+	
+	/**
+	 * Sets the annotation of the section
+	 * 
+	 * @param annotation
+	 */
+	public void setAnnotation (AnnotationModel annotation)
+	{
+		mAnnotation = annotation;
+	}
 
 	/**
 	 * Write the serializable object
@@ -220,6 +247,7 @@ public class SectionModel extends Observable implements Serializable
 		out.writeObject( mChoices );
 		out.writeObject( mMedias );
 		out.writeInt( mId );
+		out.writeObject(mAnnotation);
 	}
 
 	/**
@@ -243,5 +271,7 @@ public class SectionModel extends Observable implements Serializable
 		mChoices = (ArrayList<SectionChoice>) in.readObject();
 		mMedias = (ArrayList<Media>) in.readObject();
 		mId = in.readInt();
+		mAnnotation = (AnnotationModel) in.readObject();
+		
 	}
 }
