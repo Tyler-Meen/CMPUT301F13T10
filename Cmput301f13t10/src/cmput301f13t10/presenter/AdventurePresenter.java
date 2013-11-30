@@ -171,17 +171,6 @@ public class AdventurePresenter
 		DatabaseInteractor.getDatabaseInteractor().addAdventure( mModel );
 	}
 
-	public void deleteAdventure()
-	{
-		DatabaseInteractor.getDatabaseInteractor().deleteAdventure( mModel );
-	}
-
-	public void deleteLocalAdventure()
-	{
-		mModel.setSave( false );
-		AdventureCache.getAdventureCache().deleteAdventure( mModel );
-	}
-
 	public void saveLocalAdventure()
 	{
 		mModel.setSave( true );

@@ -284,22 +284,7 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 		mPresenter.commitAdventure();
 	}
 
-	public void onDeleteClick( View view )
-	{
-		mPresenter.deleteAdventure();
-	}
-
-	public void onDeleteLocalClick( View view )
-	{
-		mPresenter.deleteLocalAdventure();
-	}
-
 	public void onDownloadClick( View view )
-	{
-		mPresenter.saveLocalAdventure();
-	}
-
-	public void onSaveLocalClick( View view )
 	{
 		mPresenter.saveLocalAdventure();
 	}

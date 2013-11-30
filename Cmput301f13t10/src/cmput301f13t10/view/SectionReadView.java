@@ -31,12 +31,7 @@ package cmput301f13t10.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Logger;
-import cmput301f13t10.presenter.Media;
-import cmput301f13t10.presenter.SectionPresenter;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -44,9 +39,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Media;
+import cmput301f13t10.presenter.SectionPresenter;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
