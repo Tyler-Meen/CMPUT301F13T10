@@ -4,7 +4,7 @@
     <!--
 Please don't make redundant single word entries into the string resource. If at some point you need to change
 something that references a single word string just make a new one no point in having a million of the same strings
-also try to keep it alphabetical to help identify redundant strings and to find strings that need to be changed
+also try to keep it alphabetical to help identify redundant strings and to find strings that need to be changed
     -->
     <string name="app_name">Cmput301f13t10</string>
     <string name="adventure_title_hint">Enter an Adventure title</string>
@@ -37,7 +37,7 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="search">Search</string>
     <string name="settings">Settings</string>
     <string name="section_title">Section Title</string>
-    <string name="section_title_hint">Enter a Section title</string>
+    <string name="section_title_hint">Title of Section</string>
     <string name="title_activity_adventure_edit_view">Adventure Edit View</string>
     <string name="title_help_view">Help View</string>
     <string name="title_activity_modify_Section_Choices_view">modify section choices</string>
@@ -48,15 +48,15 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_Read3">3. Press on any adventure title in the list to read it or click the I\'m feeling lucky button to get a random adventure</string>
     <string name="h_Read4">4. The Adventure will open showing you text and images which you can read. Once you are done reading select the button at the bottom to continue.</string>
     <string name="h_Read5">5. A list of choices will be displayed. Pick the one that you think is the best by tapping the choices description or select the random choice button to be sent to a random choice</string>
-    <string name="h_Read6">6. Repeat step 4 until the button at the bottom says Main Menu. This means your story is done and you will be sent back to the library.</string>
+    <string name="h_Read6">6. Repeat step 4 until the button at the bottom says Main Menu. This means your story is done and you will be sent back to the main page.</string>
     <string name="h_EditAdventure">Editing/Creating an Adventure</string>
     <string name="h_EditAdventure1">1. From the main menu select the \"Edit\" button. This will take you to the Library of editable stories</string>
-    <string name="h_EditAdventure2">2. You will see all downloaded adventures. Select an adventures title to open it for edit or  \"New Adventure\" to create a new adventure</string>
+    <string name="h_EditAdventure2">2. You will see all adventures. Select an adventures title to open it for edit or  \"New Adventure\" to create a new adventure</string>
     <string name="h_EditAdventure3">3. The edit Adventure Page</string>
     <string name="h_EditAdventure3a">3. a) At the top of the page you can change the adventures title this will be seen by all who read the adventure</string>
     <string name="h_EditAdventure3b">3. b) In the box in the middle you can select an existing section to edit it. The section titled \"Start\" is special and place where the reader will start their adventure</string>
     <string name="h_EditAdventure3c">3. c) At the bottom you can press the button to add a new section.</string>
-    <string name="h_EditSection">The edit Section Page</string>
+    <string name="h_EditSection">The Edit Section Page</string>
     <string name="h_EditSection1">1. At the top left is the editable section title. This will not be seen by the reader and is used only for the editor to differentiate stories</string>
     <string name="h_EditSection2">2. INSERT TEXT adds a text box to the section</string>
     <string name="h_EditSection3">3. INSERT IMAGE lets you add an image to the section. </string>
@@ -72,22 +72,24 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditChoices3b">3. b) The section title is only viewable by the editor.</string>
     <string name="h_EditChoices3c">3. c) The choices description is the reader visible text they will see when trying to decide which chocie to take</string>
     <string name="h_Upload">Uploading an Adventure</string>
+    <string name="h_Upload">Uploading an Adventure</string>
+    <string name="h_Upload">Uploading an Adventure</string>
     <string name="h_Definitions">Application Definitions</string>
-    <string name="h_Definitions1">Adventure: A choose your own Adventure story that can consist of Sections. A user can read or edit an Adventure.</string>
-    <string name="h_Definitions2">Annotation: Content (either text or an image) added by a User to add to an existing Media in a Section they are reading.</string>
-    <string name="h_Definitions3">Browse: To look through a list of adventures or sections.</string>
-    <string name="h_Definitions4">Cache Story: Save an adventure in memory that can be loaded later, such as when the phone goes offline, or when the phone has been restarted.</string>
-    <string name="h_Definitions5">Choice: A point in an Adventure that a User must make a decision that will change what the user will experience next. This is done by change sections</string>
-    <string name="h_Definitions6">Choice Description: Each decision that a user can make at the end of a section is labeled with a Choice Description. When a user clicks on the button corresponding the a choice description, they will move forward to the section corresponding to that choice description. Each choice description has one section, but a section can be linked to by many choice descriptions. In other words, this is "what the user does next". Downloaded: See "cache".</string>
-    <string name="h_Definitions7">Edit: This mode allows Users to become Writers.</string>
-    <string name="h_Definitions8">Library: A collection of all Adventures currently in the system.</string>
-    <string name="h_Definitions9">Media: Text, image, video, or music that make up a Section in an Adventure.</string>
-    <string name="h_Definitions10">Publish: To upload an adventure onto the online repository.</string>
-    <string name="h_Definitions11">Read: This mode allows Users to browse Adventures and to choose one to enjoy. The User will start in the start Section and at the end of each section make a choice to move onto a new section.</string>
-    <string name="h_Definitions12">Search: Allows a User to search through available Adventures looking for titles that contain a certain word or phrase.</string>
-    <string name="h_Definitions13">Section: A self contained part of an Adventure, it ends with a choice that will take the User to another Section. In the user requirements this is referred to as a fragment. The word fragment isn\'t used due to possible confusion with android fragments.</string>
-    <string name="h_Definitions14">User: A person who uses the app to read Adventures.</string>
-    <string name="h_Definitions15">Writer: A user that is editing an Adventure to add a Section, or a Section to add Media. Writers can also add new Adventures.</string>
+    <string name="h_Definitions1">Adventure:\n\tA choose your own Adventure story that can consist of Sections. A user can read or edit an Adventure.</string>
+    <string name="h_Definitions2">Annotation:\n\tContent (either text or an image) added by a User to add to an existing Media in a Section they are reading.</string>
+    <string name="h_Definitions3">Browse:\n\tTo look through a list of adventures or sections.</string>
+    <string name="h_Definitions4">Cache\n\tStory: Save an adventure in memory that can be loaded later, such as when the phone goes offline, or when the phone has been restarted.</string>
+    <string name="h_Definitions5">Choice:\n\tA point in an Adventure that a User must make a decision that will change what the user will experience next. This is done by change sections</string>
+    <string name="h_Definitions6">Choice Description:\n\tEach decision that a user can make at the end of a section is labeled with a Choice Description. When a user clicks on the button corresponding the a choice description, they will move forward to the section corresponding to that choice description. Each choice description has one section, but a section can be linked to by many choice descriptions. In other words, this is "what the user does next". Downloaded: See "cache".</string>
+    <string name="h_Definitions7">Edit:\n\tThis mode allows Users to become Writers.</string>
+    <string name="h_Definitions8">Library:\n\tA collection of all Adventures currently in the system.</string>
+    <string name="h_Definitions9">Media:\n\tText or image that make up a Section in an Adventure.</string>
+    <string name="h_Definitions10">Publish:\n\tTo upload an adventure onto the online repository.</string>
+    <string name="h_Definitions11">Read:\n\tThis mode allows Users to browse Adventures and to choose one to enjoy. The User will start in the start Section and at the end of each section make a choice to move onto a new section.</string>
+    <string name="h_Definitions12">Search:\n\tAllows a User to search through available Adventures looking for titles that contain a certain word or phrase.</string>
+    <string name="h_Definitions13">Section:\n\tA self contained part of an Adventure, it ends with a choice that will take the User to another Section. In the user requirements this is referred to as a fragment. The word fragment isn\'t used due to possible confusion with android fragments.</string>
+    <string name="h_Definitions14">User:\n\tA person who uses the app to read Adventures.</string>
+    <string name="h_Definitions15">Writer:\n\tA user that is editing an Adventure to add a Section, or a Section to add Media. Writers can also add new Adventures.</string>
     <string name="upload">Upload</string>
     <string name="delete">Delete</string>
     <string name="deleteLocal">Delete Local</string>

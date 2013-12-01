@@ -11,6 +11,13 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import cmput301f13t10.model.HelpItem;
 
+/**
+ * This class adapts an Array of Help items into a list for an expandable list
+ * view
+ * 
+ * @author Steven Gerdes
+ * 
+ */
 public class ExpandableHelpListAdapter extends BaseExpandableListAdapter
 {
 	Context mContext;
@@ -43,14 +50,14 @@ public class ExpandableHelpListAdapter extends BaseExpandableListAdapter
 	@Override
 	public View getChildView( int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent )
 	{
-			if( !mTopHelpList.get( groupPosition ).hasSubItems() )
-				return null;
-			TextView leafHelpText = new TextView( mContext );
-			leafHelpText.setText( mTopHelpList.get( groupPosition ).getSubHelpItem( childPosition ).getHelpText() );
-			leafHelpText.setPadding( 50, 5, 5, 5 );
-			leafHelpText.setTextSize( 20 );
-			leafHelpText.setTypeface( null, Typeface.NORMAL );
-			return leafHelpText;
+		if( !mTopHelpList.get( groupPosition ).hasSubItems() )
+			return null;
+		TextView leafHelpText = new TextView( mContext );
+		leafHelpText.setText( mTopHelpList.get( groupPosition ).getSubHelpItem( childPosition ).getHelpText() );
+		leafHelpText.setPadding( 50, 5, 5, 5 );
+		leafHelpText.setTextSize( 20 );
+		leafHelpText.setTypeface( null, Typeface.NORMAL );
+		return leafHelpText;
 	}
 
 	@Override
@@ -92,23 +99,5 @@ public class ExpandableHelpListAdapter extends BaseExpandableListAdapter
 	public boolean isChildSelectable( int groupPosition, int childPosition )
 	{
 		return true;
-	}
-
-	public class CustExpListview extends ExpandableListView
-	{
-
-		int intGroupPosition, intChildPosition, intGroupid;
-
-		public CustExpListview( Context context )
-		{
-			super( context );
-		}
-
-		protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
-		{
-			widthMeasureSpec = MeasureSpec.makeMeasureSpec( 960, MeasureSpec.AT_MOST );
-			heightMeasureSpec = MeasureSpec.makeMeasureSpec( 600, MeasureSpec.AT_MOST );
-			super.onMeasure( widthMeasureSpec, heightMeasureSpec );
-		}
 	}
 }

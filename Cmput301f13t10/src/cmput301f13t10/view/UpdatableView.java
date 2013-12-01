@@ -28,8 +28,6 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.view;
 
-import android.content.Context;
-
 /**
  * Interface for section views. Can update the view, and get the context of the
  * view.
