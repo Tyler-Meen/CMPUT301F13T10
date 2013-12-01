@@ -141,42 +141,16 @@ public class AnnotationPresenter
 
 	public void storeImage( AnnotationEditView view, Intent data )
 	{
-		Bitmap tempBitmap = null;
-
-		if( data.getData() != null )
+		ImageMedia newImageMedia = ImageCreator.storeImage( view, data );
+		if( newImageMedia != null)
 		{
-			try
-			{
-				// TODO Decouple the editView from the data.
-				InputStream stream = view.getContentResolver().openInputStream( data.getData() );
-
-				tempBitmap = BitmapFactory.decodeStream( stream );
-				stream.close();
-			}
-			catch( Exception e )
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			tempBitmap = (Bitmap) data.getExtras().get( "data" );
-		}
-		if( tempBitmap != null )
-		{
-			tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 670, 670, true );
-
-			ImageMedia newImageMedia = new ImageMedia();
-			newImageMedia.setImageBitmap( tempBitmap );
 			mCurrentAnnotation.add( newImageMedia );
 		}
-
-		// tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 150, 150, true );
 	}
 	
 	/**
 	 * This takes a new bitmap and the position of the media in the current
-	 * sections media list and sets the new bitmap
+	 * annotations media list and sets the new bitmap
 	 * 
 	 * @param newBitmap
 	 *            New bitmap to get set
@@ -185,7 +159,7 @@ public class AnnotationPresenter
 	 */
 	public void resizeBitmap( Bitmap newBitmap, int mediaPos )
 	{
-		( (ImageMedia) mCurrentAnnotation.getMedia().get( mediaPos ) ).setImageBitmap( newBitmap );
+		ImageCreator.resizeBitmap( newBitmap, mediaPos, mCurrentAnnotation.getMedia() );
 	}
 	
 	/**
