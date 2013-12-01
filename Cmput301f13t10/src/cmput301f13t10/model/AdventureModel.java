@@ -53,6 +53,8 @@ import com.google.gson.Gson;
 public class AdventureModel implements Serializable
 {
 
+	private SectionArray mSectionArray = new SectionArray();
+
 	/**
 	 * The local id of the adventure
 	 */
@@ -67,11 +69,6 @@ public class AdventureModel implements Serializable
 	 * The adventure's title
 	 */
 	private String mTitle;
-
-	/**
-	 * Sections contained within the adventure
-	 */
-	private ArrayList<SectionModel> mSections;
 
 	/**
 	 * A flag to indicate if the adventure is wanted to save
@@ -98,8 +95,8 @@ public class AdventureModel implements Serializable
 		mRemoteId = -1;
 		mTitle = title;
 		SectionModel startSection = new SectionModel( AppConstants.START );
-		mSections = new ArrayList<SectionModel>();
-		mSections.add( startSection );
+		mSectionArray.setSections( new ArrayList<SectionModel>() );
+		mSectionArray.getSections().add( startSection );
 		mToSave = false;
 	}
 
@@ -111,13 +108,7 @@ public class AdventureModel implements Serializable
 	 */
 	public void deleteSection( Integer sectionId )
 	{
-		for( int i = 0; i < mSections.size(); i++ )
-		{
-			if( mSections.get( i ).getId() == sectionId )
-			{
-				mSections.remove( i );
-			}
-		}
+		mSectionArray.deleteSection( sectionId );
 	}
 
 	/**
@@ -191,7 +182,7 @@ public class AdventureModel implements Serializable
 	 */
 	public void setSections( ArrayList<SectionModel> sections )
 	{
-		mSections = sections;
+		mSectionArray.setSections( sections );
 	}
 
 	/**
@@ -203,14 +194,7 @@ public class AdventureModel implements Serializable
 	 */
 	public void setSection( SectionModel section )
 	{
-		try
-		{
-			mSections.set( indexOf( section ), section );
-		}
-		catch( SectionNotFoundException e )
-		{
-			mSections.add( section );
-		}
+		mSectionArray.setSection( section );
 
 	}
 
@@ -223,14 +207,7 @@ public class AdventureModel implements Serializable
 	 */
 	public SectionModel getSection( Integer sectionId )
 	{
-		try
-		{
-			return mSections.get( indexOf( sectionId ) );
-		}
-		catch( SectionNotFoundException e )
-		{
-			return null;
-		}
+		return mSectionArray.getSection( sectionId );
 	}
 
 	/**
@@ -244,29 +221,7 @@ public class AdventureModel implements Serializable
 	 */
 	public int indexOf( SectionModel section ) throws SectionNotFoundException
 	{
-		int id = section.getId();
-		return indexOf( id );
-	}
-
-	/**
-	 * Get the index of a given section in the adventures list of sections
-	 * 
-	 * @param id
-	 *            The id of the section to find
-	 * @return The index of the section
-	 * @throws SectionNotFoundException
-	 *             if the section does not exist.
-	 */
-	private int indexOf( int id ) throws SectionNotFoundException
-	{
-		int i = 0;
-		for( SectionModel checkSection : mSections )
-		{
-			if( checkSection.getId() == id )
-				return i;
-			i++;
-		}
-		throw new SectionNotFoundException();
+		return mSectionArray.indexOf( section );
 	}
 
 	/**
@@ -277,10 +232,7 @@ public class AdventureModel implements Serializable
 	 */
 	public void addSection( SectionModel section )
 	{
-		mSections.add( section );
-		Gson gson = new Gson();
-		String stuff = gson.toJson( this );
-		Log.d( "debug", gson.toJson( this ) );
+		mSectionArray.addSection( section, this );
 	}
 
 	/**
@@ -290,7 +242,7 @@ public class AdventureModel implements Serializable
 	 */
 	public SectionModel getStartSection()
 	{
-		return mSections.get( 0 );
+		return mSectionArray.getStartSection();
 	}
 
 	/**
@@ -303,7 +255,7 @@ public class AdventureModel implements Serializable
 	{
 		// TODO make it so it keeps track of current section and returns it
 		// currently it returns start section
-		return getStartSection();
+		return mSectionArray.getStartSection();
 	}
 
 	/**
@@ -313,7 +265,7 @@ public class AdventureModel implements Serializable
 	 */
 	public ArrayList<SectionModel> getSections()
 	{
-		return mSections;
+		return mSectionArray.getSections();
 	}
 
 	/**
@@ -327,7 +279,7 @@ public class AdventureModel implements Serializable
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
 	{
 		out.writeObject( mTitle );
-		out.writeObject( mSections );
+		out.writeObject( mSectionArray.getSections() );
 		out.writeInt( mRemoteId );
 		out.writeInt( mLocalId );
 		out.writeBoolean( mToSave );
@@ -345,7 +297,7 @@ public class AdventureModel implements Serializable
 	private void readObject( java.io.ObjectInputStream in ) throws IOException, ClassNotFoundException
 	{
 		mTitle = (String) in.readObject();
-		mSections = (ArrayList<SectionModel>) in.readObject();
+		mSectionArray.setSections( (ArrayList<SectionModel>) in.readObject() );
 		mRemoteId = in.readInt();
 		mLocalId = in.readInt();
 		mToSave = in.readBoolean();

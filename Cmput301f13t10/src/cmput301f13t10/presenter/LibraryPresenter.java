@@ -14,38 +14,28 @@ import cmput301f13t10.view.UpdatableView;
 
 public class LibraryPresenter
 {
-	/**
-	 * The cache of adventures from which to pull adventures.
-	 */
-	private AdventureCache mCache;
-	private ArrayList<AdventureModel> mAdventureList;
+	private LibraryModel mLibraryModel;
 	private UpdatableView mView;
 	
 	public LibraryPresenter( UpdatableView view )
 	{
-		mAdventureList = new ArrayList<AdventureModel>();
-		mCache = AdventureCache.getAdventureCache();
+		mLibraryModel = new LibraryModel();
 		mView = view;
 	}
 
 	public void loadData()
 	{
-		mAdventureList = mCache.getAllAdventures();
+		mLibraryModel.loadData();
 	}
 
 	public void saveData(FileOutputStream fileOutputStream)
 	{
-		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
+		mLibraryModel.saveData( fileOutputStream );
 	}
 
 	public void updateAdventures()
 	{
-		// we should always see local adventures
-		for( AdventureModel adv : AdventureCache.getAdventureCache().getAllAdventures() )
-		{
-			if( !libContains( adv ) )
-				mAdventureList.add( adv );
-		}
+		mLibraryModel.updateAdventures();
 	}
 
 	public void populateList()
@@ -57,7 +47,7 @@ public class LibraryPresenter
 			{
 				try
 				{
-					mAdventureList = (ArrayList<AdventureModel>) adventureList;
+					mLibraryModel.setAdventureList( (ArrayList<AdventureModel>) adventureList );
 					mView.updateView();
 				}
 				catch( ClassCastException e )
@@ -66,52 +56,24 @@ public class LibraryPresenter
 				}
 			}
 		};
-		mAdventureList.clear();
+		mLibraryModel.getAdventureList().clear();
 		DatabaseInteractor.getDatabaseInteractor().getAllAdventures( getAdventureCallback );
 		
 	}
 
 	public ArrayList<AdventureModel> getAdventures()
 	{
-		return mAdventureList;
+		return mLibraryModel.getAdventureList();
 	}
 	
-	private boolean libContains( AdventureModel adv )
-	{
-		for( AdventureModel thisAdv : mAdventureList )
-		{
-			if( thisAdv.getLocalId() == adv.getLocalId() )
-				return true;
-		}
-		return false;
-	}
-
 	public void sortLibraryUsing( String searchText )
 	{
-		try
-		{
-			mAdventureList = Searcher.searchBy( mAdventureList, searchText, Searcher.sTITLE );
-		}
-		catch( InvalidSearchTypeException e )
-		{
-			Log.v( "Library Search Error", Searcher.sTITLE + " not a valid search type" );
-			mAdventureList = mCache.getAllAdventures();
-		}
+		mLibraryModel.sortLibraryUsing( searchText );
 	}
 
 	public void deleteAdventure( int localId )
 	{		
-		for( int i = 0; i < mAdventureList.size(); i++ )
-		{	
-			if( mAdventureList.get( i ).getLocalId() == localId )
-			{
-				mAdventureList.get( i ).setSave( false );
-				AdventureCache.getAdventureCache().deleteAdventure( mAdventureList.get( i ) );
-				DatabaseInteractor.getDatabaseInteractor().deleteAdventure( mAdventureList.get( i ) );
-				mAdventureList.remove( i );
-				break;
-			}
-		}
+		mLibraryModel.deleteAdventure( localId );
 	}
 
 	

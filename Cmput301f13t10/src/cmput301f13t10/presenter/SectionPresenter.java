@@ -35,6 +35,7 @@ import java.util.Random;
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.SectionModel;
+import cmput301f13t10.view.AnnotationEditView;
 import cmput301f13t10.view.SectionEditView;
 import cmput301f13t10.view.UpdatableView;
 import android.content.Intent;
@@ -203,35 +204,11 @@ public class SectionPresenter
 	 * @param data
 	 *            The data taken from the camera
 	 */
-	public void storeImage( SectionEditView editView, Intent data )
+	public void storeImage( SectionEditView view, Intent data )
 	{
-		Bitmap tempBitmap = null;
-
-		if( data.getData() != null )
+		ImageMedia newImageMedia = ImageCreator.storeImage( view, data );
+		if( newImageMedia != null )
 		{
-			try
-			{
-				// TODO Decouple the editView from the data.
-				InputStream stream = editView.getContentResolver().openInputStream( data.getData() );
-
-				tempBitmap = BitmapFactory.decodeStream( stream );
-				stream.close();
-			}
-			catch( Exception e )
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			tempBitmap = (Bitmap) data.getExtras().get( "data" );
-		}
-		if( tempBitmap != null )
-		{
-			tempBitmap = Bitmap.createScaledBitmap( tempBitmap, 670, 670, true );
-
-			ImageMedia newImageMedia = new ImageMedia();
-			newImageMedia.setImageBitmap( tempBitmap );
 			mCurrentSection.add( newImageMedia );
 		}
 	}
@@ -247,7 +224,7 @@ public class SectionPresenter
 	 */
 	public void resizeBitmap( Bitmap newBitmap, int mediaPos )
 	{
-		( (ImageMedia) mCurrentSection.getMedia().get( mediaPos ) ).setImageBitmap( newBitmap );
+		ImageCreator.resizeBitmap( newBitmap, mediaPos, mCurrentSection.getMedia() );
 	}
 
 	public ArrayList<Media> getMedia()
