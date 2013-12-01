@@ -72,8 +72,6 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditChoices3b">3. b) The section title is only viewable by the editor.</string>
     <string name="h_EditChoices3c">3. c) The choices description is the reader visible text they will see when trying to decide which chocie to take</string>
     <string name="h_Upload">Uploading an Adventure</string>
-    <string name="h_Upload">Uploading an Adventure</string>
-    <string name="h_Upload">Uploading an Adventure</string>
     <string name="h_Definitions">Application Definitions</string>
     <string name="h_Definitions1">Adventure:\n\tA choose your own Adventure story that can consist of Sections. A user can read or edit an Adventure.</string>
     <string name="h_Definitions2">Annotation:\n\tContent (either text or an image) added by a User to add to an existing Media in a Section they are reading.</string>

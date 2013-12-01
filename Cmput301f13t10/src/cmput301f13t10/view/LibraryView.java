@@ -190,7 +190,8 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 		}
 
 		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
-		ArrayAdapter<AdventureModel> adapter = new AdventureArrayAdapter( this, adventure );
+		ArrayAdapter<AdventureModel> adapter = new ArrayAdapter<AdventureModel>( this, R.layout.list_item_main_text);//new AdventureArrayAdapter( this, adventure );
+		adapter.addAll( adventure );
 		adventureListView.setAdapter( adapter );
 	}
 

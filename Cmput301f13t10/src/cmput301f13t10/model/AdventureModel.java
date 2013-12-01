@@ -323,5 +323,11 @@ public class AdventureModel implements Serializable
 	{
 		mToSave = save;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return mTitle;
+	}
 
 }
