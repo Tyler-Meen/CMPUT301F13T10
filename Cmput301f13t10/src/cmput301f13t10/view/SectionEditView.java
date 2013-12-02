@@ -235,34 +235,7 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 				view.setFocusable( true );
 				view.setId( i );
 
-				boolean isImageMedia = true;
-
-				try
-				{
-					@SuppressWarnings("unused")
-					ImageMedia typeCheck = (ImageMedia) medias.get( i );
-				}
-				catch( ClassCastException e )
-				{
-					isImageMedia = false;
-				}
-
-				if( isImageMedia )
-				{
-					view.setOnLongClickListener( new OnLongClickListener()
-					{
-
-						@Override
-						public boolean onLongClick( View v )
-						{
-							ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
-							dialog.setMediaIndex( v.getId() );
-							dialog.show( getSupportFragmentManager(), "ImageResize" );
-							return true;
-						}
-
-					} );
-				}
+				setMediaListener( medias, i );
 
 				vg.addView( view );
 			}
@@ -270,6 +243,43 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 		catch( NullPointerException e )
 		{
 			Logger.log( "No current section", e );
+		}
+	}
+
+	/**
+	 * Set up a long click listener for resizing an image if it is an image media.
+	 * 
+	 * @param medias The list of all media.
+	 * @param i The index of the media to try setting a listener on.
+	 */
+	private void setMediaListener( ArrayList<Media> medias, int i )
+	{
+		View view = medias.get( i ).toView( this );
+		boolean isImageMedia = true;
+		
+		try
+		{
+			@SuppressWarnings("unused")
+			ImageMedia typeCheck = (ImageMedia) medias.get( i );
+		}
+		catch( ClassCastException e )
+		{
+			isImageMedia = false;
+		}
+		
+		if( isImageMedia )
+		{
+			view.setOnLongClickListener( new OnLongClickListener()
+			{
+				@Override
+				public boolean onLongClick( View v )
+				{
+					ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
+					dialog.setMediaIndex( v.getId() );
+					dialog.show( getSupportFragmentManager(), "ImageResize" );
+					return true;
+				}
+			} );
 		}
 	}
 
