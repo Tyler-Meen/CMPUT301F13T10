@@ -198,4 +198,9 @@ public class AdventurePresenter
 		getCommand.execute( null, null );
 
 	}
+
+	public boolean isAdventureOnline()
+	{
+		return mModel.getRemoteId() != -1;
+	}
 }

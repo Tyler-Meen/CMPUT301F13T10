@@ -44,6 +44,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import cmput301f13t10.model.Callback;
@@ -84,6 +85,7 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 		setContentView( R.layout.adventure_edit_view );
 		mSetupActionBar();
 		Intent intent = getIntent();
+
 		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
 			mPresenter = new AdventurePresenter( this, intent.getIntExtra( AppConstants.ADVENTURE_ID, -1 ) );
 		else
@@ -95,6 +97,12 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 		mDisplayTitle = mPresenter.getAdventureTitle();
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.adventure_edit_title );
 		title.setText( mDisplayTitle );
+
+		if( !mPresenter.isAdventureOnline() )
+		{
+			Button getOnlineVersionButton = (Button) findViewById( R.id.GetOnlineVersionButton );
+			getOnlineVersionButton.setVisibility( Button.INVISIBLE );
+		}
 	}
 
 	/**

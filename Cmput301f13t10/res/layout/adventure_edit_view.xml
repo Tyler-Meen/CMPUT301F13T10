@@ -36,14 +36,6 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/GetOnlineVersionButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onGetOnline"
-        android:text="@string/getOnline" >
-    </Button>
-
-    <Button
         android:id="@+id/TempDownloadButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -57,6 +49,14 @@
         android:layout_height="wrap_content"
         android:onClick="onUploadClick"
         android:text="@string/upload" >
+    </Button>
+
+    <Button
+        android:id="@+id/GetOnlineVersionButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onGetOnline"
+        android:text="@string/getOnline" >
     </Button>
 
 </LinearLayout>
