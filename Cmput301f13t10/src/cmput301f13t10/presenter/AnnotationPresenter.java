@@ -41,6 +41,7 @@ import android.view.ViewGroup;
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.AnnotationModel;
+import cmput301f13t10.model.DatabaseInteractor;
 import cmput301f13t10.model.SectionModel;
 import cmput301f13t10.view.AnnotationEditView;
 
@@ -169,6 +170,11 @@ public class AnnotationPresenter
 	public ArrayList<Media> getMedia()
 	{
 		return mCurrentAnnotation.getMedia();
+	}
+	
+	public void uploadAnnotation()
+	{
+		DatabaseInteractor.getDatabaseInteractor().addAdventure( mCurrentAdventure );
 	}
 	
 }

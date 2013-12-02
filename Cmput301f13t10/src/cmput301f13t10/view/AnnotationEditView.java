@@ -102,6 +102,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
         	
         	public void onClick(View view)
         	{
+        		mPresenter.uploadAnnotation();
                 setResult(RESULT_OK);
                 finish();
             }

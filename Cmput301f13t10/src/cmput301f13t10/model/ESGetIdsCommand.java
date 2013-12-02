@@ -3,6 +3,7 @@ package cmput301f13t10.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
@@ -101,7 +104,14 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 				e.printStackTrace();
 			}
 			for( int i : esResponse.getSource().getIds() )
-				mIds.add( i );
+			{
+				if( mIds.contains( i )) {
+					deleteId(i); // Workaround for when the database gets too many of one id.
+				}
+				else {
+					mIds.add( i );
+				}
+			}
 
 		}
 		catch( ClientProtocolException e )
@@ -113,6 +123,39 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * Delete an id from the database
+	 * @param id the id to remove
+	 */
+	private void deleteId( int id ) {
+		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
+		String query = "{\"script\" : \"ctx._source.mIds.remove(" + id + ")\"}";
+		StringEntity stringentity = null;
+		try
+		{
+			stringentity = new StringEntity( query );
+		}
+		catch( UnsupportedEncodingException e )
+		{
+			e.printStackTrace();
+		}
+		updateRequest.setHeader( "Accept", "application/json" );
+
+		updateRequest.setEntity( stringentity );
+		try
+		{
+			mHttpClient.execute( updateRequest );
+		}
+		catch( ClientProtocolException e )
+		{
+			e.printStackTrace();
+		}
+		catch( IOException e )
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

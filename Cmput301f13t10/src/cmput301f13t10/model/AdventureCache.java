@@ -141,6 +141,8 @@ public class AdventureCache
 	 */
 	public boolean containsRemote( AdventureModel adventure )
 	{
+		if( adventure == null )
+			return false;
 		for( Integer id : adventures.keySet() )
 		{
 			if( adventures.get( id ).getRemoteId() == adventure.getRemoteId() )

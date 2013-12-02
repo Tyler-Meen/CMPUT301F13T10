@@ -117,7 +117,7 @@ public class DatabaseInteractor
 					{
 						AdventureModel adventure = (AdventureModel) arg;
 						mCount++;
-						if( !AdventureCache.getAdventureCache().containsRemote( adventure ) )
+						if( adventure != null && !AdventureCache.getAdventureCache().containsRemote( adventure ) )
 						{
 							IdFactory.getIdFactory().assignLocalId( adventure );
 							AdventureCache.getAdventureCache().addAdventure( adventure );
