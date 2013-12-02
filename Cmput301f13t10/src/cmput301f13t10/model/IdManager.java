@@ -36,6 +36,7 @@ import java.util.Set;
  * Manages the creation and deletion of ids
  * 
  * @author Brendan Cowan
+ * @author Braeden Soetaert
  * 
  */
 public class IdManager
@@ -67,18 +68,30 @@ public class IdManager
 	 */
 	public void setUsedIds( ArrayList<Integer> ids )
 	{
-		Integer max = mNextId;
-		for( Integer id : ids )
-		{
-			if( id > max )
-				max = id;
-		}
-
+		Integer max = max( ids );
 		for( Integer i = 0; i < ids.size(); i++ )
 		{
 			mReusableIds.add( i );
 		}
 		mNextId = max + 1;
+	}
+
+	/**
+	 * Return the max id in the list of ids.
+	 * @param ids the list of ids to find the max of,
+	 * @return
+	 */
+	private Integer max( ArrayList<Integer> ids )
+	{
+		Integer max = mNextId;
+		for( Integer id : ids )
+		{
+			if( id > max )
+			{
+				max = id;
+			}
+		}
+		return max;
 	}
 
 	/**
