@@ -86,6 +86,8 @@ public class MainActivity extends Activity
 		mContext = this;
 
 		setContentView( R.layout.activity_main );
+		
+		AdventureCache.getAdventureCache().initialize( this );
 
 	}
 

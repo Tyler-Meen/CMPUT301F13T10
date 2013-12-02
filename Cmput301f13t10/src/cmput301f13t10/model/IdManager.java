@@ -104,7 +104,8 @@ public class IdManager
 		if( mReusableIds.isEmpty() )
 			return mNextId++;
 
-		Integer[] asArray = (Integer[]) mReusableIds.toArray();
+		Integer[] asArray = {};
+		asArray = mReusableIds.toArray(asArray);
 		Integer ret = asArray[asArray.length - 1];
 		mReusableIds.remove( ret );
 		return ret;

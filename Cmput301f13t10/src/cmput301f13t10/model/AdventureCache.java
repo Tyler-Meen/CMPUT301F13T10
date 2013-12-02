@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Context;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.view.MainActivity;
 
@@ -59,23 +60,11 @@ public class AdventureCache
 	private Map<Integer, AdventureModel> adventures;
 
 	/**
-	 * Constructor without dependency injection
+	 * Constructor
 	 */
 	public AdventureCache()
 	{
 		adventures = new HashMap<Integer, AdventureModel>();
-		FileInputStream fileInputStream = null;
-		try
-		{
-			fileInputStream = MainActivity.getContext().openFileInput( AppConstants.FILE_NAME );
-		}
-		catch( FileNotFoundException e )
-		{
-			e.printStackTrace();
-		}
-		ArrayList<AdventureModel> advList = FileInteractor.loadAdventures( fileInputStream );
-		for( AdventureModel adv : advList )
-			adventures.put( adv.getLocalId(), adv );
 	}
 
 	/**
@@ -88,6 +77,21 @@ public class AdventureCache
 		if( ac == null )
 			ac = new AdventureCache();
 		return ac;
+	}
+	
+	public void initialize( Context context ) {
+		FileInputStream fileInputStream = null;
+		try
+		{
+			fileInputStream = context.openFileInput( AppConstants.FILE_NAME );
+		}
+		catch( FileNotFoundException e )
+		{
+			e.printStackTrace();
+		}
+		ArrayList<AdventureModel> advList = FileInteractor.loadAdventures( fileInputStream );
+		for( AdventureModel adv : advList )
+			adventures.put( adv.getLocalId(), adv );
 	}
 
 	/**

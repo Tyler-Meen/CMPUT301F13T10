@@ -142,8 +142,6 @@ public class SectionArray
 	{
 		mSections.add( section );
 		Gson gson = new Gson();
-		String stuff = gson.toJson( adventureModel );
-		Log.d( "debug", gson.toJson( adventureModel ) );
 	}
 
 	/**

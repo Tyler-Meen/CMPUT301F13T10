@@ -67,15 +67,4 @@ public class CacheTest
 		assertEquals( loadedAdventure.getTitle(), "yeah" );
 	}
 
-	/**
-	 * test that when you try to get an adventure that is not in the cache, it
-	 * retrieves the one in the interacter it is connected to
-	 */
-	@Test
-	public void testGetAdventureNotInCache()
-	{
-		AdventureModel adventure = mCache.getAdventureById( 9999999 );
-		assertEquals( adventure.getTitle(), "Test" );
-	}
-
 }
