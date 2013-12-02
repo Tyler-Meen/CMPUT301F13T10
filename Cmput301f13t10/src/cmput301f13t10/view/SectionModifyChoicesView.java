@@ -75,14 +75,26 @@ public class SectionModifyChoicesView extends Activity implements UpdatableView,
 	{
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.section_modify_choice_view );
-		mPresenter = new SectionPresenter( this );
+		setupPresenter();
 		setUpActionBar();
+	}
+
+	/**
+	 * Sets up the presenter with proper adventure and section.
+	 */
+	private void setupPresenter()
+	{
+		mPresenter = new SectionPresenter( this );
 		Intent intent = getIntent();
 		int defaultVal = -1;
 		if( intent.hasExtra( AppConstants.ADVENTURE_ID ) )
+		{
 			mPresenter.setCurrentAdventure( intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal ) );
+		}
 		if( intent.hasExtra( AppConstants.SECTION_ID ) )
+		{
 			mPresenter.setCurrentSectionById( intent.getIntExtra( AppConstants.SECTION_ID, defaultVal ) );
+		}
 	}
 
 	@Override
