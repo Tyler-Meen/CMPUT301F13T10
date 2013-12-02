@@ -48,8 +48,9 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_Read2">2. The Library will show you all adventures on your phone and if you have internet connection all of the adventures online.</string>
     <string name="h_Read3">3. Press on any adventure title in the list to read it or click the I\'m feeling lucky button to get a random adventure</string>
     <string name="h_Read4">4. The Adventure will open showing you text and images which you can read. Once you are done reading select the button at the bottom to continue.</string>
-    <string name="h_Read5">5. A list of choices will be displayed. Pick the one that you think is the best by tapping the choices description or select the random choice button to be sent to a random choice</string>
-    <string name="h_Read6">6. Repeat step 4 until the button at the bottom says Main Menu. This means your story is done and you will be sent back to the main page.</string>
+    <string name="h_Read5">5. A list of choices will be displayed. Pick the one that you think is the best by tapping the choices description</string>
+    <string name="h_Read6">6. If the editor enabled it the random choice buttion will send you to a random section</string>
+    <string name="h_Read7">7. Repeat step 4 until the button at the bottom says Main Menu. This means your story is done and you will be sent back to the main page.</string>
     <string name="h_EditAdventure">Editing/Creating an Adventure</string>
     <string name="h_EditAdventure1">1. From the main menu select the \"Edit\" button. This will take you to the Library of editable stories</string>
     <string name="h_EditAdventure2">2. You will see all adventures. Select an adventures title to open it for edit or  \"New Adventure\" to create a new adventure</string>
@@ -58,9 +59,10 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditAdventure3a">3. a) At the top of the page you can change the adventures title this will be seen by all who read the adventure</string>
     <string name="h_EditAdventure3b">3. b) In the box in the middle you can select an existing section to edit it. The section titled \"Start\" is special and place where the reader will start their adventure</string>
     <string name="h_EditAdventure3c">3. c) At the of the existing sections box you can press the button to add a new section.</string>
-    <string name="h_EditAdventure3d">3. d) Click on the save to phone button to save it localy</string>
-    <string name="h_EditAdventure3e">3. e) Click on the save to database button to save it to the database</string>
-    <string name="h_EditAdventure3f">3. f) Clicking Overwite from database will overwrite the adventure in memory with the one on the database. This button only exists if there is one on the database</string>
+    <string name="h_EditAdventure3d">3. d) Click on allow random choice selection to enable a button from the reader which allows them to randomly pick a choice as opposed to selecting one</string>
+    <string name="h_EditAdventure3e">3. e) Click on the save to phone button to save it localy</string>
+    <string name="h_EditAdventure3f">3. f) Click on the save to database button to save it to the database</string>
+    <string name="h_EditAdventure3g">3. g) Clicking Overwite from database will overwrite the adventure in memory with the one on the database. This button only exists if there is one on the database</string>
     <string name="h_EditSection">The Edit Section Page</string>
     <string name="h_EditSection1">1. At the top left is the editable section title. This will not be seen by the reader and is used only for the editor to differentiate stories</string>
     <string name="h_EditSection2">2. INSERT TEXT adds a text box to the section</string>

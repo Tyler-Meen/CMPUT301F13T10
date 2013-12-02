@@ -28,6 +28,7 @@ public class HelpView extends Activity
 		readAdventure.add( new HelpItem( getString(R.string.h_Read4), null ) );
 		readAdventure.add( new HelpItem( getString(R.string.h_Read5), null ) );
 		readAdventure.add( new HelpItem( getString(R.string.h_Read6), null ) );
+		readAdventure.add( new HelpItem( getString(R.string.h_Read7), null ) );
 		ArrayList<HelpItem>	editAdventure = new ArrayList<HelpItem>();
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure1), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure2), null ) );
@@ -39,6 +40,7 @@ public class HelpView extends Activity
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3d), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3e), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3f), null ) );
+		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3g), null ) );
 		ArrayList<HelpItem> editSection = new ArrayList<HelpItem>();
 		editSection.add( new HelpItem( getString(R.string.h_EditSection1), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection2), null ) );
