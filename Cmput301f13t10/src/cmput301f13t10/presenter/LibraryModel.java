@@ -146,12 +146,26 @@ public class LibraryModel
 
 	public void setCurrentAdventure( int localId )
 	{
-		mCurrentAdventureId = mAdventureList.get( localId ).getLocalId();;
+		for( int i = 0; i < mAdventureList.size(); i++ )
+		{
+			if( mAdventureList.get( i ).getLocalId() == localId )
+			{
+				mCurrentAdventureId = mAdventureList.get( i ).getLocalId();
+				break;
+			}
+		}
 	}
 
 	public AdventureModel getCurrentAdventure()
 	{
-		return mAdventureList.get( mCurrentAdventureId );
+		for( int i = 0; i < mAdventureList.size(); i++ )
+		{
+			if( mAdventureList.get( i ).getLocalId() == mCurrentAdventureId )
+			{
+				return mAdventureList.get( mCurrentAdventureId );
+			}
+		}
+		return null;
 	}
 
 	public int getCurrentAdventureId()
