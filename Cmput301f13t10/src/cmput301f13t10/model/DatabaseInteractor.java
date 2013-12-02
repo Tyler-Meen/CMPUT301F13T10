@@ -87,7 +87,7 @@ public class DatabaseInteractor
 	private void deleteThenInsert( AdventureModel adventure )
 	{
 		ESInsertCommand insert = new ESInsertCommand( adventure, null );
-		ESDeleteCommand delete = new ESDeleteCommand( adventure.getLocalId(), null );
+		ESDeleteCommand delete = new ESDeleteCommand( adventure.getRemoteId(), null );
 		delete.execute();
 		insert.execute();
 	}
