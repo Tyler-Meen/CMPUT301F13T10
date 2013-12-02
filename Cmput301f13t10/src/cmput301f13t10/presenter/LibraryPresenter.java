@@ -11,6 +11,7 @@ import cmput301f13t10.model.Callback;
 import cmput301f13t10.model.DatabaseInteractor;
 import cmput301f13t10.model.FileInteractor;
 import cmput301f13t10.model.InvalidSearchTypeException;
+import cmput301f13t10.model.LibraryModel;
 import cmput301f13t10.view.UpdatableView;
 
 public class LibraryPresenter
