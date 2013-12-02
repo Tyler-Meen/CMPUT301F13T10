@@ -65,8 +65,8 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 	{
 		super.onCreate( savedInstanceState );
 
-		setupPresenter();
 		setContentView( R.layout.section_read_view );
+		setupPresenter();
 
 	}
 
