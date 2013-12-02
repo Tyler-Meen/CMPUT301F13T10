@@ -239,45 +239,55 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 			vg.removeAllViews();
 			for( int i = 0; i < medias.size(); i++ )
 			{
+				
 				View view = medias.get( i ).toView( this.getContext() );
 				view.setFocusable( true );
 				view.setId( i );
-
-				boolean isImageMedia = true;
-
-				try
-				{
-					@SuppressWarnings("unused")
-					ImageMedia typeCheck = (ImageMedia) medias.get( i );
-				}
-				catch( ClassCastException e )
-				{
-					isImageMedia = false;
-				}
+				setMediaListener( medias, i );
 				
-				if( isImageMedia )
-				{
-					view.setOnLongClickListener( new OnLongClickListener()
-					{
-
-						@Override
-						public boolean onLongClick( View v )
-						{
-							ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
-							dialog.setMediaIndex( v.getId() );
-							dialog.show( getSupportFragmentManager(), "ImageResize" );
-							return true;
-						}
-
-					} );
-				}
-
 				vg.addView( view );
 			}
 		}
 		catch( NullPointerException e )
 		{
 			Logger.log( "No current section", e );
+		}
+	}
+
+	/**
+	 * Set up a long click listener for resizing an image if it is an image media.
+	 * 
+	 * @param medias The list of all media.
+	 * @param i The index of the media to try setting a listener on.
+	 */
+	private void setMediaListener( ArrayList<Media> medias, int i )
+	{
+		View view = medias.get( i ).toView( this.getContext() );
+		boolean isImageMedia = true;
+		
+		try
+		{
+			@SuppressWarnings("unused")
+			ImageMedia typeCheck = (ImageMedia) medias.get( i );
+		}
+		catch( ClassCastException e )
+		{
+			isImageMedia = false;
+		}
+		
+		if( isImageMedia )
+		{
+			view.setOnLongClickListener( new OnLongClickListener()
+			{
+				@Override
+				public boolean onLongClick( View v )
+				{
+					ChangeImageSizeDialogFragment dialog = new ChangeImageSizeDialogFragment();
+					dialog.setMediaIndex( v.getId() );
+					dialog.show( getSupportFragmentManager(), "ImageResize" );
+					return true;
+				}
+			} );
 		}
 	}
 	
