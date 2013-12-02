@@ -77,7 +77,15 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	 * The list view that will display all of the adventures
 	 */
 	private ListView adventureListView;
+	
+	/**
+	 * The current string entered into the search bar.
+	 */
+	private String mSearchString = "";
 
+	/**
+	 * The item that gets searched
+	 */
 	private MenuItem mSearchItem;
 
 	@Override
@@ -144,7 +152,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	@Override
 	public boolean onQueryTextChange( String searchText )
 	{
-		mPresenter.sortLibraryUsing( searchText );
+		mSearchString = searchText;
 		updateView();
 		return true;
 	}
@@ -213,6 +221,7 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 	public void updateView()
 	{
 		mPresenter.updateAdventures();
+		mPresenter.sortLibraryUsing( mSearchString );
 
 		adventureListView = (ListView) findViewById( R.id.adventure_read_list );
 		ArrayAdapter<AdventureModel> adapter = new ArrayAdapter<AdventureModel>( this, R.layout.list_item_main_text );

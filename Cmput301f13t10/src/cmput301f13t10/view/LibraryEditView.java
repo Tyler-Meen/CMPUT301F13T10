@@ -89,6 +89,11 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	private Button btnCreateAdventure;
 	
 	/**
+	 * The current string in the search bar
+	 */
+	private String mSearchString = "";
+	
+	/**
 	 * The item that gets searched
 	 */
 	private MenuItem mSearchItem;
@@ -156,6 +161,7 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	public void updateView()
 	{
 		mPresenter.updateAdventures();
+		mPresenter.sortLibraryUsing( mSearchString );
 
 		adventureListView = (ListView) findViewById( R.id.adventure_edit_list );
 		adventureListView.setAdapter( new AdventureArrayAdapter( this, mPresenter.getAdventures() ) );
@@ -193,7 +199,6 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	@Override
 	public boolean onQueryTextChange( String searchText )
 	{
-		mPresenter.sortLibraryUsing( searchText );
 		updateView();
 		return true;
 	}

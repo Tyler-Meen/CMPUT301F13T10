@@ -29,15 +29,10 @@
 package cmput301f13t10.model;
 
 import java.io.IOException;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Observer;
 
-import android.util.Log;
 import cmput301f13t10.presenter.AppConstants;
-
-import com.google.gson.Gson;
 
 /**
  * Contains information about an adventure that the user can read, navigate
@@ -50,7 +45,7 @@ import com.google.gson.Gson;
  * @author Braeden Soetaert
  * 
  */
-public class AdventureModel implements Serializable
+public class AdventureModel implements Serializable, Comparable<AdventureModel>
 {
 
 	private SectionArray mSectionArray = new SectionArray();
@@ -342,6 +337,12 @@ public class AdventureModel implements Serializable
 	public void setRandom( boolean randomEnabled )
 	{
 		mIsRandomAvailable = randomEnabled;
+	}
+
+	@Override
+	public int compareTo( AdventureModel other )
+	{
+		return mTitle.compareTo( other.getTitle() );
 	}
 
 }

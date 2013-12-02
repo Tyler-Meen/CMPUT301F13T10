@@ -30,6 +30,7 @@
 package cmput301f13t10.presenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -74,7 +75,8 @@ public class Searcher
 	public static ArrayList<AdventureModel> searchBy( List<AdventureModel> adventures, String query, String searchType ) throws InvalidSearchTypeException
 	{
 
-		ArrayList<AdventureModel> returnAdventures = new ArrayList<AdventureModel>();
+		ArrayList<AdventureModel> criteriaAdventures = new ArrayList<AdventureModel>();
+		ArrayList<AdventureModel> nonCriteriaAdventures = new ArrayList<AdventureModel>();
 
 		if( searchType != sTITLE )
 			throw new InvalidSearchTypeException( searchType + " is not a valid searchType for searchBy()" );
@@ -85,12 +87,22 @@ public class Searcher
 			AdventureModel currentAdventure = i.next();
 			String value = getSearchValue( searchType, currentAdventure );
 			if( value.toLowerCase( Locale.CANADA ).contains( query.toLowerCase() ) )
-				returnAdventures.add( 0, currentAdventure );
+				criteriaAdventures.add( currentAdventure );
 			else
-				returnAdventures.add( currentAdventure );
+				nonCriteriaAdventures.add( currentAdventure );
+		}
+		
+		Collections.sort( criteriaAdventures );
+		Collections.sort(  nonCriteriaAdventures );
+		
+		
+		for( ListIterator<AdventureModel> i = nonCriteriaAdventures.listIterator(); i.hasNext(); )
+		{
+			AdventureModel currentAdventure = i.next();
+			criteriaAdventures.add( currentAdventure );
 		}
 
-		return returnAdventures;
+		return criteriaAdventures;
 	}
 
 	/**

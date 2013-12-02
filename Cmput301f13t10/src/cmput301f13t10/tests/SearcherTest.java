@@ -115,6 +115,28 @@ public class SearcherTest
 		assertTrue( mResults.get( 1 ).equals( mFullMatch ) || mResults.get( 1 ).equals( mPartMatch ) );
 		assertTrue( mResults.contains( mNoMatch ) );
 	}
+	
+	/**
+	 * When there is a blank search, the search results should come back in alphabetical order
+	 */
+	@Test
+	public void testBlankSearch() {
+		try
+		{
+			mResults = Searcher.searchBy( mAdventures, "", Searcher.sTITLE );
+		}
+		catch( InvalidSearchTypeException e )
+		{
+			mThrown = e;
+		}
+
+		org.junit.Assert.assertNull( mThrown );
+		assertTrue( mResults.get( 0 ).equals( mPartMatch ) );
+		assertTrue( mResults.get( 1 ).equals( mFullMatch ) );
+		assertTrue( mResults.get( 2 ).equals( mNoMatch ) );
+		
+		
+	}
 
 	/**
 	 * testBadSearchType Can the searcher give a valid error if the search type
@@ -132,6 +154,55 @@ public class SearcherTest
 			mThrown = e;
 		}
 		org.junit.Assert.assertNotNull( mThrown );
+	}
+
+	/**
+	 * test that the searcher can handle single character searches.
+	 */
+	@Test
+	public void testOneLetterNames()
+	{
+		ArrayList<AdventureModel> advs = new ArrayList<AdventureModel>();
+
+		AdventureModel a = new AdventureModel( "a" );
+		AdventureModel b = new AdventureModel( "b" );
+		AdventureModel c = new AdventureModel( "c" );
+		AdventureModel six = new AdventureModel( "6" );
+		AdventureModel space = new AdventureModel( " " );
+
+		List<AdventureModel> searchA = new ArrayList<AdventureModel>();
+		List<AdventureModel> searchB = new ArrayList<AdventureModel>();
+		List<AdventureModel> searchC = new ArrayList<AdventureModel>();
+		List<AdventureModel> searchSix = new ArrayList<AdventureModel>();
+		List<AdventureModel> searchSpace = new ArrayList<AdventureModel>();
+
+		advs.add( a );
+		advs.add( b );
+		advs.add( c );
+		advs.add( six );
+		advs.add( space );
+
+		try
+		{
+			searchA = Searcher.searchBy( advs, "a", Searcher.sTITLE );
+			searchB = Searcher.searchBy( advs, "b", Searcher.sTITLE );
+			searchC = Searcher.searchBy( advs, "c", Searcher.sTITLE );
+			searchSix = Searcher.searchBy( advs, "6", Searcher.sTITLE );
+			searchSpace = Searcher.searchBy( advs, " ", Searcher.sTITLE );
+		}
+		catch( InvalidSearchTypeException e )
+		{
+			mThrown = e;
+		}
+
+		org.junit.Assert.assertNull( mThrown );
+
+		assertTrue( searchA.get( 0 ).equals( a ) );
+		assertTrue( searchB.get( 0 ).equals( b ) );
+		assertTrue( searchC.get( 0 ).equals( c ) );
+		assertTrue( searchSix.get( 0 ).equals( six ) );
+		assertTrue( searchSpace.get( 0 ).equals( space ) );
+
 	}
 
 }
