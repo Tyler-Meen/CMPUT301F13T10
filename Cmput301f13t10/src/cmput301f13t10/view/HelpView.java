@@ -31,10 +31,14 @@ public class HelpView extends Activity
 		ArrayList<HelpItem>	editAdventure = new ArrayList<HelpItem>();
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure1), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure2), null ) );
+		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure2a), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3a), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3b), null ) );
 		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3c), null ) );
+		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3d), null ) );
+		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3e), null ) );
+		editAdventure.add( new HelpItem( getString(R.string.h_EditAdventure3f), null ) );
 		ArrayList<HelpItem> editSection = new ArrayList<HelpItem>();
 		editSection.add( new HelpItem( getString(R.string.h_EditSection1), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection2), null ) );
@@ -50,8 +54,6 @@ public class HelpView extends Activity
 		editChoices.add( new HelpItem( getString(R.string.h_EditChoices3a), null ) );
 		editChoices.add( new HelpItem( getString(R.string.h_EditChoices3b), null ) );
 		editChoices.add( new HelpItem( getString(R.string.h_EditChoices3c), null ) );
-		ArrayList<HelpItem> upload = new ArrayList<HelpItem>();
-//		upload.add( new HelpItem( getString(R.string.h_Upload1), null ) );
 		ArrayList<HelpItem> definitions = new ArrayList<HelpItem>();
 		definitions.add( new HelpItem( getString(R.string.h_Definitions1), null ) );
 		definitions.add( new HelpItem( getString(R.string.h_Definitions2), null ) );
@@ -73,7 +75,6 @@ public class HelpView extends Activity
 		topList.add( new HelpItem( getString(R.string.h_EditAdventure), editAdventure ) );
 		topList.add( new HelpItem( getString(R.string.h_EditSection), editSection ) );
 		topList.add( new HelpItem( getString(R.string.h_EditChoices), editChoices ) );
-		topList.add( new HelpItem( getString(R.string.h_Upload), upload ) );
 		topList.add( new HelpItem( getString(R.string.h_Definitions), definitions ) );
 		
 		LinearLayout mainView = (LinearLayout) findViewById( R.id.main_help_view );

@@ -52,10 +52,14 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditAdventure">Editing/Creating an Adventure</string>
     <string name="h_EditAdventure1">1. From the main menu select the \"Edit\" button. This will take you to the Library of editable stories</string>
     <string name="h_EditAdventure2">2. You will see all adventures. Select an adventures title to open it for edit or  \"New Adventure\" to create a new adventure</string>
+    <string name="h_EditAdventure2a"> 2. a) You can click on the x by the adventure name to delete it from the phone and the database</string>
     <string name="h_EditAdventure3">3. The edit Adventure Page</string>
     <string name="h_EditAdventure3a">3. a) At the top of the page you can change the adventures title this will be seen by all who read the adventure</string>
     <string name="h_EditAdventure3b">3. b) In the box in the middle you can select an existing section to edit it. The section titled \"Start\" is special and place where the reader will start their adventure</string>
-    <string name="h_EditAdventure3c">3. c) At the bottom you can press the button to add a new section.</string>
+    <string name="h_EditAdventure3c">3. c) At the of the existing sections box you can press the button to add a new section.</string>
+    <string name="h_EditAdventure3d">3. d) Click on the save to phone button to save it localy</string>
+    <string name="h_EditAdventure3e">3. e) Click on the save to database button to save it to the database</string>
+    <string name="h_EditAdventure3f">3. f) Clicking Overwite from database will overwrite the adventure in memory with the one on the database. This button only exists if there is one on the database</string>
     <string name="h_EditSection">The Edit Section Page</string>
     <string name="h_EditSection1">1. At the top left is the editable section title. This will not be seen by the reader and is used only for the editor to differentiate stories</string>
     <string name="h_EditSection2">2. INSERT TEXT adds a text box to the section</string>
@@ -71,7 +75,6 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditChoices3a">3. a) This will create a new blank section that can be edited later</string>
     <string name="h_EditChoices3b">3. b) The section title is only viewable by the editor.</string>
     <string name="h_EditChoices3c">3. c) The choices description is the reader visible text they will see when trying to decide which chocie to take</string>
-    <string name="h_Upload">Uploading an Adventure</string>
     <string name="h_Definitions">Application Definitions</string>
     <string name="h_Definitions1">Adventure:\n\tA choose your own Adventure story that can consist of Sections. A user can read or edit an Adventure.</string>
     <string name="h_Definitions2">Annotation:\n\tContent (either text or an image) added by a User to add to an existing Media in a Section they are reading.</string>
