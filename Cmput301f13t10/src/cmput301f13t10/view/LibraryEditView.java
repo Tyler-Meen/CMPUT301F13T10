@@ -193,7 +193,7 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	public boolean onQueryTextChange( String searchText )
 	{
 		mPresenter.sortLibraryUsing( searchText );
-		mPresenter.populateList();
+		updateView();
 		return true;
 	}
 

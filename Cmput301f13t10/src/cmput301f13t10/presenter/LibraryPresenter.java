@@ -37,7 +37,6 @@ public class LibraryPresenter
 	{
 		mLibraryModel.updateAdventures();
 	}
-
 	public void populateList()
 	{
 		Callback getAdventureCallback = new Callback()
