@@ -203,4 +203,14 @@ public class AdventurePresenter
 	{
 		return mModel.getRemoteId() != -1;
 	}
+
+	public boolean isRandomEnabled()
+	{
+		return mModel.getRandomSet();
+	}
+
+	public void setRandomEnabled( boolean checked )
+	{
+		mModel.setRandom( checked );
+	}
 }

@@ -73,7 +73,10 @@ public class ContinueDialogFragment extends DialogFragment
 		cancelBtn.setOnClickListener( new CancelButtonListener() );
 		
 		Button randomBtn = (Button) view.findViewById( R.id.random_choice_button );
-		randomBtn.setOnClickListener( new RandomButtonListener() );
+		if( mView.isRandomSet() )
+			randomBtn.setOnClickListener( new RandomButtonListener() );
+		else
+			randomBtn.setVisibility( Button.INVISIBLE );
 		
 		ListView listView = (ListView) view.findViewById( android.R.id.list );
 		listView.setOnItemClickListener( new ListItemListener() );

@@ -303,4 +303,9 @@ public class SectionPresenter
 		Random rand = new Random();
 		setNextSectionByIndex( rand.nextInt( mCurrentSection.getChoices().size() ) );
 	}
+
+	public boolean isRandomSet()
+	{
+		return mCurrentAdventure.getRandomSet();
+	}
 }

@@ -11,6 +11,7 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="add_choice_prompt">Enter choice information</string>
     <string name="action_add_image_media">insert image</string>
     <string name="accept">Accept</string>
+    <string name="allow_rand_choice">Allow random choice selection</string>
     <string name="cancel">Cancel</string>
     <string name="Continue">Continue</string>
     <string name="choice_description">Enter new choice description </string>

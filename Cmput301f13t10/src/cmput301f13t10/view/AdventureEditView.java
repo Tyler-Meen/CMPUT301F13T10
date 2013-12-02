@@ -42,9 +42,11 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import cmput301f13t10.model.Callback;
@@ -98,6 +100,16 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 		EditText title = (EditText) getActionBar().getCustomView().findViewById( R.id.adventure_edit_title );
 		title.setText( mDisplayTitle );
 
+		CheckBox randomEnabled = (CheckBox) findViewById( R.id.allow_rand_choices );
+		randomEnabled.setChecked( mPresenter.isRandomEnabled() );
+		randomEnabled.setOnClickListener( new OnClickListener()
+		{
+			@Override
+			public void onClick( View randomCheckBox )
+			{
+					mPresenter.setRandomEnabled(((CheckBox) randomCheckBox).isChecked());
+			}
+		} );
 		if( !mPresenter.isAdventureOnline() )
 		{
 			Button getOnlineVersionButton = (Button) findViewById( R.id.GetOnlineVersionButton );

@@ -75,6 +75,7 @@ public class AdventureModel implements Serializable
 	 */
 	private Boolean mToSave;
 
+	private boolean mIsRandomAvailable;
 	/**
 	 * Constructor
 	 */
@@ -97,6 +98,7 @@ public class AdventureModel implements Serializable
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSectionArray.setSections( new ArrayList<SectionModel>() );
 		mSectionArray.getSections().add( startSection );
+		mIsRandomAvailable= false; 
 		mToSave = false;
 	}
 
@@ -328,6 +330,16 @@ public class AdventureModel implements Serializable
 	public String toString()
 	{
 		return mTitle;
+	}
+
+	public boolean getRandomSet()
+	{
+		return mIsRandomAvailable;
+	}
+
+	public void setRandom( boolean randomEnabled )
+	{
+		mIsRandomAvailable = randomEnabled;
 	}
 
 }

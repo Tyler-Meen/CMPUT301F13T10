@@ -35,6 +35,12 @@
         </ListView>
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/allow_rand_choices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allow_rand_choice" />
+
     <Button
         android:id="@+id/TempDownloadButton"
         android:layout_width="fill_parent"

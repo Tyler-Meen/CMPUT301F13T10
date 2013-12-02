@@ -248,4 +248,9 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 		startActivity( intent );
 	}
 
+	public boolean isRandomSet()
+	{
+		return mPresenter.isRandomSet();
+	}
+
 }
