@@ -12,11 +12,20 @@
         android:id="@+id/sectionListBorder"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
         android:background="#0000ff"
         android:orientation="vertical"
-        android:padding="@dimen/borderThickness"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1" >
+        android:padding="@dimen/borderThickness" >
+
+        <Button
+            android:id="@+id/AddNoteButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/borderThickness"
+            android:background="#ffffff"
+            android:onClick="launchSectionEditView"
+            android:text="@string/new_section" />
 
         <ListView
             android:id="@+id/adventure_edit_list"
@@ -33,29 +42,21 @@
         android:onClick="onGetOnline"
         android:text="@string/getOnline" >
     </Button>
-    
+
     <Button
         android:id="@+id/TempDownloadButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="onUploadClick"
-        android:text="@string/download" >
+        android:text="@string/save_to_phone" >
     </Button>
-    
+
     <Button
         android:id="@+id/TempUploadButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="onUploadClick"
         android:text="@string/upload" >
-    </Button>
-    
-    <Button
-        android:id="@+id/AddNoteButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="launchSectionEditView"
-        android:text="@string/new_section" >
     </Button>
 
 </LinearLayout>
