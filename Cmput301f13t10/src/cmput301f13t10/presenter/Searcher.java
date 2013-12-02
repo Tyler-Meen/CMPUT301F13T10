@@ -82,10 +82,8 @@ public class Searcher
 		for( ListIterator<AdventureModel> i = adventures.listIterator(); i.hasNext(); )
 		{
 
-			String value = "";
 			AdventureModel currentAdventure = i.next();
-			if( searchType == sTITLE )
-				value = currentAdventure.getTitle();
+			String value = getSearchValue( searchType, currentAdventure );
 			if( value.toLowerCase( Locale.CANADA ).contains( query.toLowerCase() ) )
 				returnAdventures.add( 0, currentAdventure );
 			else
@@ -93,5 +91,22 @@ public class Searcher
 		}
 
 		return returnAdventures;
+	}
+
+	/**
+	 * Get the value from the adventure for the search type.
+	 * 
+	 * @param searchType The type of search being done.
+	 * @param adventure The adventure to get a value from.
+	 * @return The value that is being searched on.
+	 */
+	private static String getSearchValue( String searchType, AdventureModel adventure )
+	{
+		String value = "";
+		if( searchType == sTITLE )
+		{
+			value = adventure.getTitle();
+		}
+		return value;
 	}
 }

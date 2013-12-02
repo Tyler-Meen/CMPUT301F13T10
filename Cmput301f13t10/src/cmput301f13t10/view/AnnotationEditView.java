@@ -59,6 +59,7 @@ import android.widget.LinearLayout;
  * This is the view of an annotation it can have images added to it.
  * 
  * @author Aly-khan Jamal
+ * @author Braeden Soetaert
  * 
  */
 public class AnnotationEditView extends FragmentActivity implements ChangeImageSizeDialogListener
@@ -81,18 +82,13 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		mPresenter = new AnnotationPresenter( this );
 		
 		setContentView( R.layout.annotation_edit_view );
+		Integer sectionId = getSectionId();
 		int defaultVal = -1;
 		Integer annotationId;
-		Integer sectionId;
 		Integer adventureId;
 		Intent intent = getIntent();
 		
 		adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
-		if( intent.hasExtra( AppConstants.SECTION_ID ) )
-			sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
-		else
-			sectionId = null;
-		
 		mPresenter.setCurrentAdventure( adventureId, sectionId );
 		
 		Button confirmButton = (Button) findViewById(R.id.done);
@@ -110,6 +106,26 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
         });       
 		
 		loadMedia();
+	}
+
+	/**
+	 * Gets the section id from the intent or null if there isn't one.
+	 * @return The section id that was passed or null if no id was passed.
+	 */
+	private Integer getSectionId()
+	{
+		int defaultVal = -1;
+		Integer sectionId;
+		Intent intent = getIntent();
+		if( intent.hasExtra( AppConstants.SECTION_ID ) )
+		{
+			sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
+		}
+		else
+		{
+			sectionId = null;
+		}
+		return sectionId;
 	}
 	
 	@Override
@@ -290,22 +306,38 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	@Override
 	public void onImageResize( android.support.v4.app.DialogFragment dialog )
 	{
+		int mediaSize = mediaSize( dialog );
 		ChangeImageSizeDialogFragment imageResizeFragment = (ChangeImageSizeDialogFragment) dialog;
 		int mediaIndex = imageResizeFragment.getMediaIndex();
 		Bitmap oldBitmap = ( (ImageMedia) mMedia.get( mediaIndex ) ).getImageBitmap();
-		int mediaSize = imageResizeFragment.getNewMediaSize();
-
-		if( mediaSize < imageResizeFragment.getMinSize() )
-			mediaSize = imageResizeFragment.getMinSize();
-		else if( mediaSize > imageResizeFragment.getMaxSize() )
-			mediaSize = imageResizeFragment.getMaxSize();
-
 		Bitmap newBitmap = Bitmap.createScaledBitmap( oldBitmap, mediaSize, mediaSize, true );
 
 		mPresenter.resizeBitmap( newBitmap, mediaIndex );
 
 		loadMedia();
 
+	}
+
+	/**
+	 * Get the media size from the dialog. If the new media size is too small or
+	 * too big set it to the min and max size respectively
+	 * 
+	 * @param dialog The dialog to get the new image size from.
+	 * @return The size of the image media.
+	 */
+	private int mediaSize( android.support.v4.app.DialogFragment dialog )
+	{
+		ChangeImageSizeDialogFragment imageResizeFragment = (ChangeImageSizeDialogFragment) dialog;
+		int mediaSize = imageResizeFragment.getNewMediaSize();
+		if( mediaSize < imageResizeFragment.getMinSize() )
+		{
+			mediaSize = imageResizeFragment.getMinSize();
+		}
+		else if( mediaSize > imageResizeFragment.getMaxSize() )
+		{
+			mediaSize = imageResizeFragment.getMaxSize();
+		}
+		return mediaSize;
 	}
 
 	@Override

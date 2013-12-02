@@ -65,23 +65,21 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 	{
 		super.onCreate( savedInstanceState );
 
-		mPresenter = new SectionPresenter( this );
-
+		setupPresenter();
 		setContentView( R.layout.section_read_view );
 
-		try
-		{
-			Intent intent = getIntent();
-			Bundle intentBundle = intent.getBundleExtra( AppConstants.CURRENT_ADVENTURE );
-			int adventure = intentBundle.getInt( AppConstants.CURRENT_ADVENTURE );
-			mPresenter.setCurrentAdventure( adventure );
-		}
-		catch( Exception e )
-		{
-			Logger.log( "Invalid AdventureReadView instantiation bundle", e );
-			return;
-		}
+	}
 
+	/**
+	 * Set up the preseneter with the proper adventure.
+	 */
+	private void setupPresenter()
+	{
+		mPresenter = new SectionPresenter( this );
+		Intent intent = getIntent();
+		Bundle intentBundle = intent.getBundleExtra( AppConstants.CURRENT_ADVENTURE );
+		int adventure = intentBundle.getInt( AppConstants.CURRENT_ADVENTURE );
+		mPresenter.setCurrentAdventure( adventure );
 	}
 
 	/**

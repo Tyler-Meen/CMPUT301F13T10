@@ -96,17 +96,12 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 
 		setContentView( R.layout.section_edit_view );
 		setUpActionBar();
+		Integer sectionId = getSectionId();
 		int defaultVal = -1;
 		Integer adventureId;
-		Integer sectionId;
 		Intent intent = getIntent();
 
 		adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
-		if( intent.hasExtra( AppConstants.SECTION_ID ) )
-			sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
-		else
-			sectionId = null;
-
 		mPresenter.setCurrentAdventure( adventureId );
 		mPresenter.setCurrentSectionById( sectionId );
 		intent.putExtra( AppConstants.SECTION_ID, mPresenter.getSectionId() );
@@ -120,6 +115,27 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 			title.setBackgroundColor( Color.TRANSPARENT );
 		}
 		loadMedia();
+	}
+
+	/**
+	 * Gets the section id from the intent or null if there isn't one.
+	 * 
+	 * @return The section id that was passed or null if no id was passed.
+	 */
+	private Integer getSectionId()
+	{
+		int defaultVal = -1;
+		Integer sectionId;
+		Intent intent = getIntent();
+		if( intent.hasExtra( AppConstants.SECTION_ID ) )
+		{
+			sectionId = intent.getIntExtra( AppConstants.SECTION_ID, defaultVal );
+		}
+		else
+		{
+			sectionId = null;
+		}
+		return sectionId;
 	}
 
 	@Override
@@ -156,6 +172,7 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 
 		return super.onCreateOptionsMenu( menu );
 	}
+
 	/**
 	 * Starts up the help view on help button click.
 	 * 
@@ -345,22 +362,42 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 	@Override
 	public void onImageResize( android.support.v4.app.DialogFragment dialog )
 	{
+		int mediaSize = mediaSize( dialog );
 		ChangeImageSizeDialogFragment imageResizeFragment = (ChangeImageSizeDialogFragment) dialog;
 		int mediaIndex = imageResizeFragment.getMediaIndex();
 		Bitmap oldBitmap = ( (ImageMedia) mMedia.get( mediaIndex ) ).getImageBitmap();
-		int mediaSize = imageResizeFragment.getNewMediaSize();
-
-		if( mediaSize < imageResizeFragment.getMinSize() )
-			mediaSize = imageResizeFragment.getMinSize();
-		else if( mediaSize > imageResizeFragment.getMaxSize() )
-			mediaSize = imageResizeFragment.getMaxSize();
-
 		Bitmap newBitmap = Bitmap.createScaledBitmap( oldBitmap, mediaSize, mediaSize, true );
 
 		mPresenter.resizeBitmap( newBitmap, mediaIndex );
 
 		loadMedia();
 
+	}
+
+	/**
+	 * Get the media size from the dialog. If the new media size is too small or
+	 * too big set it to the min and max size respectively
+	 * 
+	 * @param dialog
+	 *            The dialog to get the new image size from.
+	 * @return The size of the image media.
+	 */
+	private int mediaSize( android.support.v4.app.DialogFragment dialog )
+	{
+		ChangeImageSizeDialogFragment imageResizeFragment = (ChangeImageSizeDialogFragment) dialog;
+		int mediaSize = imageResizeFragment.getNewMediaSize();
+		if( mediaSize < imageResizeFragment.getMinSize() )
+		{
+			mediaSize = imageResizeFragment.getMinSize();
+		}
+		else
+		{
+			if( mediaSize > imageResizeFragment.getMaxSize() )
+			{
+				mediaSize = imageResizeFragment.getMaxSize();
+			}
+		}
+		return mediaSize;
 	}
 
 	@Override
