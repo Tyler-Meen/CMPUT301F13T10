@@ -47,6 +47,7 @@ public class HelpView extends Activity
 		editSection.add( new HelpItem( getString(R.string.h_EditSection3), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection3a), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection3b), null ) );
+		editSection.add( new HelpItem( getString(R.string.h_EditSection3c), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection4), null ) );
 		editSection.add( new HelpItem( getString(R.string.h_EditSection5), null ) );
 		ArrayList<HelpItem> editChoices = new ArrayList<HelpItem>();

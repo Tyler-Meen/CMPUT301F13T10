@@ -34,6 +34,7 @@ import java.io.ObjectStreamException;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -99,6 +100,7 @@ public class TextMedia implements Media
 		LayoutParams params = new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1 );
 		addText.setLayoutParams( params );
 		addText.setText( getText() );
+		addText.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_MULTI_LINE );
 		addText.addTextChangedListener( new TextWatcher()
 		{
 			public void afterTextChanged( Editable s )

@@ -69,6 +69,7 @@ also try to keep it alphabetical to help identify redundant strings and to find 
     <string name="h_EditSection3">3. INSERT IMAGE lets you add an image to the section. </string>
     <string name="h_EditSection3a">3. a) Once the insert image button has been pressed your camera app will open</string>
     <string name="h_EditSection3b">3. b) After taking a picture you can choose to keep it and it will be inserted or retake it</string>
+    <string name="h_EditSection3c">3. C) Any image in the section can be resized by long clicking it, inputing a number and pressing okay</string>
     <string name="h_EditSection4">4. The middle is where the sections content will be displayed</string>
     <string name="h_EditSection5">5. The modify choices button will allow you to edit the choices that are linked to by this section</string>
     <string name="h_EditChoices">The Edit Choices Page</string>
