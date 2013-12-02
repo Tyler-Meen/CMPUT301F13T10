@@ -28,15 +28,11 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.model;
 
-
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 import android.util.Log;
-
-import java.io.FileOutputStream;
-import java.io.Serializable;
-
 import cmput301f13t10.presenter.Searcher;
 
 /**
@@ -50,7 +46,7 @@ public class LibraryModel
 	private AdventureCache mCache;
 	private ArrayList<AdventureModel> mAdventureList;
 	private int mCurrentAdventureId;
-	
+
 	public LibraryModel()
 	{
 		mAdventureList = new ArrayList<AdventureModel>();
@@ -137,7 +133,7 @@ public class LibraryModel
 	public void setRandomCurrentAdventure()
 	{
 		Random rand = new Random();
-		setCurrentAdventure(rand.nextInt( mAdventureList.size() ));
+		setCurrentAdventure( rand.nextInt( mAdventureList.size() ) );
 	}
 
 	public void setCurrentAdventure( int localId )

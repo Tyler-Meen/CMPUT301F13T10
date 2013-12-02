@@ -10,15 +10,20 @@ import java.util.ArrayList;
 
 /**
  * Helper class used to assist with saving and loading from file
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class FileInteractor
 {
 	/**
-	 * Save the given adventures to file. This method overwrites what is in the file with the new data.
-	 * @param adventures The list of adventures to save to file
-	 * @param fileOutputStream The file output stream for the data
+	 * Save the given adventures to file. This method overwrites what is in the
+	 * file with the new data.
+	 * 
+	 * @param adventures
+	 *            The list of adventures to save to file
+	 * @param fileOutputStream
+	 *            The file output stream for the data
 	 */
 	public static void saveAdventures( ArrayList<AdventureModel> adventures, FileOutputStream fileOutputStream )
 	{
@@ -52,7 +57,9 @@ public class FileInteractor
 
 	/**
 	 * Load the adventures from the given file
-	 * @param fileInputStream The input stream to read from
+	 * 
+	 * @param fileInputStream
+	 *            The input stream to read from
 	 * @return A list of all adventures in file
 	 */
 	public static ArrayList<AdventureModel> loadAdventures( FileInputStream fileInputStream )

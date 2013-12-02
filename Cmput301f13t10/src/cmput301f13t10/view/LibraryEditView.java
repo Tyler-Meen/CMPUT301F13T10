@@ -31,7 +31,6 @@ package cmput301f13t10.view;
 
 import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -48,14 +47,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
-import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.Callback;
-import cmput301f13t10.model.DatabaseInteractor;
-import cmput301f13t10.model.FileInteractor;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.LibraryPresenter;
-import cmput301f13t10.presenter.Logger;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -199,6 +193,7 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	@Override
 	public boolean onQueryTextChange( String searchText )
 	{
+		mSearchString = searchText;
 		updateView();
 		return true;
 	}

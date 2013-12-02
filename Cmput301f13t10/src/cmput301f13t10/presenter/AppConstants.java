@@ -73,18 +73,17 @@ public class AppConstants
 	 * Tag. Indicates that this is an section id.
 	 */
 	public static final String SECTION_ID = "section_id";
-	
 
 	/**
 	 * Tag. Indicates that this is an annotation id.
 	 */
 	public static final String ANNOTATION_ID = "annotation_id";
-	
+
 	/**
 	 * Tag. Indicates that this is a section title.
 	 */
 	public static final String TITLE = "object_title";
-	
+
 	/**
 	 * Tag. Indicates that this is a choice description
 	 */
@@ -113,7 +112,7 @@ public class AppConstants
 	 * Tag. Input into factory to generate an id for a media.
 	 */
 	public static final String GENERATE_ANNOTATION_ID = "annotation_id";
-	
+
 	/**
 	 * The URL of the elasticsearch page
 	 */
@@ -133,6 +132,5 @@ public class AppConstants
 	 * Name of the file where adventures are saved locally
 	 */
 	public static final String FILE_NAME = "Adventures.sav";
-
 
 }

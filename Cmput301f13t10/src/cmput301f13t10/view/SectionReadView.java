@@ -108,7 +108,7 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 			continueButton.setText( "Continue" );
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
@@ -117,7 +117,7 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 
 		return super.onCreateOptionsMenu( menu );
 	}
-	
+
 	/**
 	 * This is the result of clicking on an option
 	 */
@@ -136,6 +136,7 @@ public class SectionReadView extends Activity implements UpdatableView, Serializ
 		}
 
 	}
+
 	/**
 	 * Starts AnnotationEditView activity
 	 */

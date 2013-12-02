@@ -1,4 +1,3 @@
-
 /*
  Copyright (c) 2013, Brendan Cowan, Tyler Meen, Steven Gerdes, Braeden Soetaert, Aly-khan Jamal
  All rights reserved.

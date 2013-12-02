@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cmput301f13t10.model.IdFactory;
 import cmput301f13t10.model.IdManager;
 
 /**

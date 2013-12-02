@@ -28,11 +28,11 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.tests;
 
+import android.content.Context;
+import android.view.View;
 import cmput301f13t10.model.IdFactory;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Media;
-import android.content.Context;
-import android.view.View;
 
 /**
  * A simple media used in the tests

@@ -28,19 +28,16 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.presenter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.SectionModel;
-import cmput301f13t10.view.AnnotationEditView;
 import cmput301f13t10.view.SectionEditView;
 import cmput301f13t10.view.UpdatableView;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 /**
  * Presenter for the Adventure group of classes, as per the MVP pattern.

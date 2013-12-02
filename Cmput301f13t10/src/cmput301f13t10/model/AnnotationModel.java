@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Media;
 
@@ -51,7 +52,7 @@ public class AnnotationModel implements Serializable
 	 * The id of the section.
 	 */
 	private int mId;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -60,7 +61,7 @@ public class AnnotationModel implements Serializable
 		mMedias = new ArrayList<Media>();
 		mId = IdFactory.getIdManager( AppConstants.GENERATE_ANNOTATION_ID ).getNewId();
 	}
-	
+
 	/**
 	 * Insert a media at the end of the list of media.
 	 * 
@@ -71,7 +72,7 @@ public class AnnotationModel implements Serializable
 	{
 		mMedias.add( m );
 	}
-	
+
 	/**
 	 * Remove a media from the list of media.
 	 * 
@@ -82,7 +83,7 @@ public class AnnotationModel implements Serializable
 	{
 		mMedias.remove( index );
 	}
-	
+
 	/**
 	 * Get the list of media contained within this annotation.
 	 * 
@@ -92,7 +93,7 @@ public class AnnotationModel implements Serializable
 	{
 		return mMedias;
 	}
-	
+
 	/**
 	 * Get the id of the annotation
 	 * 
@@ -102,10 +103,12 @@ public class AnnotationModel implements Serializable
 	{
 		return mId;
 	}
-	
+
 	/**
 	 * Write the serializable object
-	 * @param out The objectOutputStream to write the output stream
+	 * 
+	 * @param out
+	 *            The objectOutputStream to write the output stream
 	 * @throws IOException
 	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
@@ -116,7 +119,9 @@ public class AnnotationModel implements Serializable
 
 	/**
 	 * Read the serializable object
-	 * @param in The inputStream to read the object from
+	 * 
+	 * @param in
+	 *            The inputStream to read the object from
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */

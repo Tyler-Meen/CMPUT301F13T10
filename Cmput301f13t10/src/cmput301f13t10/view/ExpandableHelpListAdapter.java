@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 import cmput301f13t10.model.HelpItem;
 

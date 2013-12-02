@@ -30,15 +30,6 @@ package cmput301f13t10.view;
 
 import java.util.ArrayList;
 
-import cs.ualberta.cmput301f13t10.R;
-
-import cmput301f13t10.presenter.AnnotationPresenter;
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.ImageMedia;
-import cmput301f13t10.presenter.Logger;
-import cmput301f13t10.presenter.Media;
-import cmput301f13t10.presenter.TextMedia;
-import cmput301f13t10.view.ChangeImageSizeDialogFragment.ChangeImageSizeDialogListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -48,12 +39,20 @@ import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import cmput301f13t10.presenter.AnnotationPresenter;
+import cmput301f13t10.presenter.AppConstants;
+import cmput301f13t10.presenter.ImageMedia;
+import cmput301f13t10.presenter.Logger;
+import cmput301f13t10.presenter.Media;
+import cmput301f13t10.presenter.TextMedia;
+import cmput301f13t10.view.ChangeImageSizeDialogFragment.ChangeImageSizeDialogListener;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * This is the view of an annotation it can have images added to it.
@@ -68,7 +67,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	 * The presenter for the view to get data from.
 	 */
 	private AnnotationPresenter mPresenter;
-	
+
 	/**
 	 * The list of all media in the annotation.
 	 */
@@ -78,38 +77,39 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	protected void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate( savedInstanceState );
-		
+
 		mPresenter = new AnnotationPresenter( this );
-		
+
 		setContentView( R.layout.annotation_edit_view );
 		Integer sectionId = getSectionId();
 		int defaultVal = -1;
 		Integer annotationId;
 		Integer adventureId;
 		Intent intent = getIntent();
-		
+
 		adventureId = intent.getIntExtra( AppConstants.ADVENTURE_ID, defaultVal );
 		mPresenter.setCurrentAdventure( adventureId, sectionId );
-		
-		Button confirmButton = (Button) findViewById(R.id.done);
-	
-		confirmButton.setOnClickListener(new View.OnClickListener()
+
+		Button confirmButton = (Button) findViewById( R.id.done );
+
+		confirmButton.setOnClickListener( new View.OnClickListener()
 		{
-        	
-        	public void onClick(View view)
-        	{
-        		mPresenter.uploadAnnotation();
-                setResult(RESULT_OK);
-                finish();
-            }
-        	
-        });       
-		
+
+			public void onClick( View view )
+			{
+				mPresenter.uploadAnnotation();
+				setResult( RESULT_OK );
+				finish();
+			}
+
+		} );
+
 		loadMedia();
 	}
 
 	/**
 	 * Gets the section id from the intent or null if there isn't one.
+	 * 
 	 * @return The section id that was passed or null if no id was passed.
 	 */
 	private Integer getSectionId()
@@ -127,7 +127,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		}
 		return sectionId;
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu( Menu menu )
 	{
@@ -151,7 +151,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 
 		return super.onCreateOptionsMenu( menu );
 	}
-	
+
 	/**
 	 * Starts up the help view on help button click.
 	 * 
@@ -163,17 +163,17 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		Intent intent = new Intent( this, HelpView.class );
 		startActivity( intent );
 	}
-	
+
 	/**
 	 * Update the annotation view with new data.
 	 */
 	public void updateAnnotationView()
 	{
 		LinearLayout scrollBox = (LinearLayout) findViewById( R.id.annotList );
-		//mPresenter.setCurrentAnnotationView( scrollBox, true );
+		// mPresenter.setCurrentAnnotationView( scrollBox, true );
 		setCurrentAnnotationView( scrollBox );
 	}
-	
+
 	/**
 	 * Get the context of the annotation view
 	 * 
@@ -183,7 +183,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	{
 		return this;
 	}
-	
+
 	/**
 	 * This is the result of clicking on an option or the home button
 	 */
@@ -204,7 +204,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 			return super.onOptionsItemSelected( item );
 		}
 	}
-	
+
 	/**
 	 * Create a new text media and update the display.
 	 * 
@@ -214,7 +214,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		mMedia.add( new TextMedia() );
 		loadMedia();
 	}
-	
+
 	/**
 	 * Load all media and update the display.
 	 */
@@ -224,7 +224,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		LinearLayout linearLayout = (LinearLayout) findViewById( R.id.annotList );
 		setCurrentAnnotationView( linearLayout );
 	}
-	
+
 	/**
 	 * Set the input view group to contain all media in the current section.
 	 * 
@@ -239,12 +239,12 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 			vg.removeAllViews();
 			for( int i = 0; i < medias.size(); i++ )
 			{
-				
+
 				View view = medias.get( i ).toView( this.getContext() );
 				view.setFocusable( true );
 				view.setId( i );
 				setMediaListener( medias, i, view );
-				
+
 				vg.addView( view );
 			}
 		}
@@ -255,16 +255,20 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	}
 
 	/**
-	 * Set up a long click listener for resizing an image if it is an image media.
+	 * Set up a long click listener for resizing an image if it is an image
+	 * media.
 	 * 
-	 * @param medias The list of all media.
-	 * @param i The index of the media to try setting a listener on.
-	 * @param view The view associated with the image media.
+	 * @param medias
+	 *            The list of all media.
+	 * @param i
+	 *            The index of the media to try setting a listener on.
+	 * @param view
+	 *            The view associated with the image media.
 	 */
 	private void setMediaListener( ArrayList<Media> medias, int i, View view )
 	{
 		boolean isImageMedia = true;
-		
+
 		try
 		{
 			@SuppressWarnings("unused")
@@ -274,7 +278,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		{
 			isImageMedia = false;
 		}
-		
+
 		if( isImageMedia )
 		{
 			view.setOnLongClickListener( new OnLongClickListener()
@@ -290,7 +294,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 			} );
 		}
 	}
-	
+
 	/**
 	 * Opens the camera.
 	 */
@@ -299,7 +303,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 		Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
 		startActivityForResult( intent, 0 );
 	}
-	
+
 	/**
 	 * receives the result from the camera, and passes the result to the
 	 * presenter to add the image to the model.
@@ -312,7 +316,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 			loadMedia();
 		}
 	}
-	
+
 	@Override
 	public void onImageResize( android.support.v4.app.DialogFragment dialog )
 	{
@@ -332,7 +336,8 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	 * Get the media size from the dialog. If the new media size is too small or
 	 * too big set it to the min and max size respectively
 	 * 
-	 * @param dialog The dialog to get the new image size from.
+	 * @param dialog
+	 *            The dialog to get the new image size from.
 	 * @return The size of the image media.
 	 */
 	private int mediaSize( android.support.v4.app.DialogFragment dialog )
@@ -355,5 +360,5 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	{
 		// do nothing
 	}
-	
+
 }

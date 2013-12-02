@@ -30,29 +30,24 @@ package cmput301f13t10.view;
 
 import java.util.ArrayList;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.SectionChoice;
 import cmput301f13t10.presenter.SectionPresenter;
 import cmput301f13t10.presenter.SectionTitle;
 import cmput301f13t10.view.SectionChoiceDialogFragment.AddChoiceDialogListener;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import cs.ualberta.cmput301f13t10.R;
 
 /**

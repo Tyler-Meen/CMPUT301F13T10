@@ -28,12 +28,6 @@
  */
 package cmput301f13t10.view;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import cmput301f13t10.model.AdventureCache;
-import cmput301f13t10.model.FileInteractor;
-import cmput301f13t10.presenter.AppConstants;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +35,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.MenuItem.OnMenuItemClickListener;
+import cmput301f13t10.model.AdventureCache;
 import cs.ualberta.cmput301f13t10.R;
 
 /**
@@ -86,7 +80,7 @@ public class MainActivity extends Activity
 		mContext = this;
 
 		setContentView( R.layout.activity_main );
-		
+
 		AdventureCache.getAdventureCache().initialize( this );
 
 	}

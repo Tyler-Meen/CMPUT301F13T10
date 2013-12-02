@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -26,8 +25,9 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * Command for getting all remote ids of adventures stored in the database
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 {
@@ -45,7 +45,7 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 	 * The callback to call once this command has been completed
 	 */
 	private Callback mCallback;
-	
+
 	/**
 	 * The returned list of ids
 	 */
@@ -53,7 +53,9 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Constructor
-	 * @param callback The callback to call once this command has been executed
+	 * 
+	 * @param callback
+	 *            The callback to call once this command has been executed
 	 */
 	public ESGetIdsCommand( Callback callback )
 	{
@@ -62,9 +64,12 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Get the Json string from the HttpResponse
-	 * @param response The response to decode
+	 * 
+	 * @param response
+	 *            The response to decode
 	 * @return The Json string
-	 * @throws IOException If reading the response fails
+	 * @throws IOException
+	 *             If reading the response fails
 	 */
 	private String getEntityContent( HttpResponse response ) throws IOException
 	{
@@ -105,10 +110,13 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 			}
 			for( int i : esResponse.getSource().getIds() )
 			{
-				if( mIds.contains( i )) {
-					deleteId(i); // Workaround for when the database gets too many of one id.
+				if( mIds.contains( i ) )
+				{
+					deleteId( i ); // Workaround for when the database gets too
+									// many of one id.
 				}
-				else {
+				else
+				{
 					mIds.add( i );
 				}
 			}
@@ -124,12 +132,15 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Delete an id from the database
-	 * @param id the id to remove
+	 * 
+	 * @param id
+	 *            the id to remove
 	 */
-	private void deleteId( int id ) {
+	private void deleteId( int id )
+	{
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
 		String query = "{\"script\" : \"ctx._source.mIds.remove(tag)\", \"params\":{\"tag\":\"" + id + "\"}";
 		StringEntity stringentity = null;

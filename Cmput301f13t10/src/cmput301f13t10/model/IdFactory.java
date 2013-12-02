@@ -28,8 +28,6 @@
  */
 package cmput301f13t10.model;
 
-import java.util.ArrayList;
-
 import cmput301f13t10.presenter.AppConstants;
 
 /**
@@ -69,6 +67,7 @@ public class IdFactory
 	 * manager used to generate ids for annotations
 	 */
 	private static IdManager mAnnotationIdManager = null;
+
 	/**
 	 * Singleton constructor.
 	 */
@@ -95,7 +94,9 @@ public class IdFactory
 
 	/**
 	 * Give out an IdManager
-	 * @param type The type of id manager to get
+	 * 
+	 * @param type
+	 *            The type of id manager to get
 	 * @return The id manager
 	 */
 	public static IdManager getIdManager( String type )
@@ -128,7 +129,9 @@ public class IdFactory
 
 	/**
 	 * Assign the given adventure (including its sections) a local id
-	 * @param adventure The adventure to assign ids to
+	 * 
+	 * @param adventure
+	 *            The adventure to assign ids to
 	 */
 	public void assignLocalId( AdventureModel adventure )
 	{

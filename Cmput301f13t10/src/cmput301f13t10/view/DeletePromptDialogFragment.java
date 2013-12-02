@@ -28,13 +28,13 @@
  */
 package cmput301f13t10.view;
 
-import cmput301f13t10.presenter.AppConstants;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import cmput301f13t10.presenter.AppConstants;
 import cs.ualberta.cmput301f13t10.R;
 
 /**

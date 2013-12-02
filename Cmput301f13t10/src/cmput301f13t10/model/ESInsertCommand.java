@@ -1,11 +1,8 @@
 package cmput301f13t10.model;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -14,18 +11,18 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.Logger;
 import cmput301f13t10.presenter.Media;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Command to insert an adventure into the database
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 {
@@ -52,8 +49,11 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Constructor
-	 * @param adventure The adventure to add
-	 * @param callback The function to call once the command has completed
+	 * 
+	 * @param adventure
+	 *            The adventure to add
+	 * @param callback
+	 *            The function to call once the command has completed
 	 */
 	public ESInsertCommand( AdventureModel adventure, Callback callback )
 	{
@@ -122,7 +122,7 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 		{
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 

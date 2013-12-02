@@ -29,7 +29,6 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10.model;
 
 import java.io.IOException;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -68,7 +67,6 @@ public class SectionModel extends Observable implements Serializable
 	 * Annotation contained within the section
 	 */
 	private AnnotationModel mAnnotation;
-
 
 	/**
 	 * Constructor
@@ -215,7 +213,7 @@ public class SectionModel extends Observable implements Serializable
 	{
 		return mId;
 	}
-	
+
 	/**
 	 * Get the annotation of the section
 	 * 
@@ -225,20 +223,22 @@ public class SectionModel extends Observable implements Serializable
 	{
 		return mAnnotation;
 	}
-	
+
 	/**
 	 * Sets the annotation of the section
 	 * 
 	 * @param annotation
 	 */
-	public void setAnnotation (AnnotationModel annotation)
+	public void setAnnotation( AnnotationModel annotation )
 	{
 		mAnnotation = annotation;
 	}
 
 	/**
 	 * Write the serializable object
-	 * @param out The objectOutputStream to write the output stream
+	 * 
+	 * @param out
+	 *            The objectOutputStream to write the output stream
 	 * @throws IOException
 	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
@@ -247,12 +247,14 @@ public class SectionModel extends Observable implements Serializable
 		out.writeObject( mChoices );
 		out.writeObject( mMedias );
 		out.writeInt( mId );
-		out.writeObject(mAnnotation);
+		out.writeObject( mAnnotation );
 	}
 
 	/**
 	 * Set the id of the section
-	 * @param id The id to set
+	 * 
+	 * @param id
+	 *            The id to set
 	 */
 	public void setId( int id )
 	{
@@ -261,7 +263,9 @@ public class SectionModel extends Observable implements Serializable
 
 	/**
 	 * Read the serializable object
-	 * @param in The inputStream to read the object from
+	 * 
+	 * @param in
+	 *            The inputStream to read the object from
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
@@ -272,6 +276,6 @@ public class SectionModel extends Observable implements Serializable
 		mMedias = (ArrayList<Media>) in.readObject();
 		mId = in.readInt();
 		mAnnotation = (AnnotationModel) in.readObject();
-		
+
 	}
 }

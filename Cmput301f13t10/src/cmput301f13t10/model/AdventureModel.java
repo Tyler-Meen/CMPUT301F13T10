@@ -71,6 +71,7 @@ public class AdventureModel implements Serializable, Comparable<AdventureModel>
 	private Boolean mToSave;
 
 	private boolean mIsRandomAvailable;
+
 	/**
 	 * Constructor
 	 */
@@ -93,7 +94,7 @@ public class AdventureModel implements Serializable, Comparable<AdventureModel>
 		SectionModel startSection = new SectionModel( AppConstants.START );
 		mSectionArray.setSections( new ArrayList<SectionModel>() );
 		mSectionArray.getSections().add( startSection );
-		mIsRandomAvailable= false; 
+		mIsRandomAvailable = false;
 		mToSave = false;
 	}
 
@@ -322,7 +323,7 @@ public class AdventureModel implements Serializable, Comparable<AdventureModel>
 	{
 		mToSave = save;
 	}
-	
+
 	@Override
 	public String toString()
 	{

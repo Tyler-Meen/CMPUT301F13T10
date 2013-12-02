@@ -31,11 +31,10 @@ package cmput301f13t10.presenter;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 
-import cmput301f13t10.model.IdFactory;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.VideoView;
+import cmput301f13t10.model.IdFactory;
 
 /**
  * Media for sound that can be added and listened to in a section of an

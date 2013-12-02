@@ -1,16 +1,13 @@
 package cmput301f13t10.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.apache.http.client.ClientProtocolException;
-
-import cmput301f13t10.presenter.AppConstants;
-
 /**
- * Singleton class that interacts with the online database. Can upload, download, and update adventures online.
+ * Singleton class that interacts with the online database. Can upload,
+ * download, and update adventures online.
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class DatabaseInteractor
 {
@@ -29,6 +26,7 @@ public class DatabaseInteractor
 
 	/**
 	 * Singleton getter of the constructor
+	 * 
 	 * @return the databaseInteractor
 	 */
 	public static DatabaseInteractor getDatabaseInteractor()
@@ -39,8 +37,11 @@ public class DatabaseInteractor
 	}
 
 	/**
-	 * Add a new adventure to the database. If the adventure is already on the database (as indicated by the remoteId), it will be overwritten.
-	 * @param adventure The adventure to upload
+	 * Add a new adventure to the database. If the adventure is already on the
+	 * database (as indicated by the remoteId), it will be overwritten.
+	 * 
+	 * @param adventure
+	 *            The adventure to upload
 	 */
 	public void addAdventure( AdventureModel adventure )
 	{
@@ -69,7 +70,7 @@ public class DatabaseInteractor
 				}
 
 			};
-			
+
 			ESGetIdsCommand getIds = new ESGetIdsCommand( callback );
 			getIds.execute( null, null );
 		}
@@ -81,7 +82,9 @@ public class DatabaseInteractor
 	}
 
 	/**
-	 * Delete an adventure from the database (if it exists), then reinsert it (i.e., update it).
+	 * Delete an adventure from the database (if it exists), then reinsert it
+	 * (i.e., update it).
+	 * 
 	 * @param adventure
 	 */
 	private void deleteThenInsert( AdventureModel adventure )
@@ -94,7 +97,9 @@ public class DatabaseInteractor
 
 	/**
 	 * Return all adventures from the database
-	 * @param callback The callback to call when the function completes
+	 * 
+	 * @param callback
+	 *            The callback to call when the function completes
 	 */
 	public void getAllAdventures( Callback callback )
 	{
@@ -106,7 +111,7 @@ public class DatabaseInteractor
 			{
 				ArrayList<Integer> ids = (ArrayList<Integer>) arg;
 
-				GetCallback getCallback = new GetCallback( ids.size(), (Callback)mCallbackArg )
+				GetCallback getCallback = new GetCallback( ids.size(), (Callback) mCallbackArg )
 				{
 
 					ArrayList<AdventureModel> mAdventures = new ArrayList<AdventureModel>();
@@ -140,14 +145,17 @@ public class DatabaseInteractor
 			}
 		};
 
-		// Get all the ids first, so we know what adventures are actually in the database
+		// Get all the ids first, so we know what adventures are actually in the
+		// database
 		ESGetIdsCommand getIdsCommand = new ESGetIdsCommand( getIdsCallback );
 		getIdsCommand.execute( null, null );
 	}
 
 	/**
 	 * Remove an adventure from the database
-	 * @param adventure The adventure to delete
+	 * 
+	 * @param adventure
+	 *            The adventure to delete
 	 */
 	public void deleteAdventure( AdventureModel adventure )
 	{
@@ -157,8 +165,9 @@ public class DatabaseInteractor
 
 	/**
 	 * A callback that takes two arguments
+	 * 
 	 * @author user
-	 *
+	 * 
 	 */
 	private abstract class GetCallback extends Callback
 	{
@@ -174,8 +183,11 @@ public class DatabaseInteractor
 
 		/**
 		 * Constructor
-		 * @param number The number of ids to get adventures for
-		 * @param callback the callback to call when this callback is done
+		 * 
+		 * @param number
+		 *            The number of ids to get adventures for
+		 * @param callback
+		 *            the callback to call when this callback is done
 		 */
 		public GetCallback( int number, Callback callback )
 		{

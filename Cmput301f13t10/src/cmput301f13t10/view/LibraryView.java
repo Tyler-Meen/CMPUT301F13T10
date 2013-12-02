@@ -29,14 +29,11 @@
 package cmput301f13t10.view;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -47,15 +44,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
-import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.Callback;
-import cmput301f13t10.model.DatabaseInteractor;
-import cmput301f13t10.model.InvalidSearchTypeException;
 import cmput301f13t10.presenter.AppConstants;
 import cmput301f13t10.presenter.LibraryPresenter;
-import cmput301f13t10.presenter.Logger;
-import cmput301f13t10.presenter.Searcher;
 import cs.ualberta.cmput301f13t10.R;
 
 /**

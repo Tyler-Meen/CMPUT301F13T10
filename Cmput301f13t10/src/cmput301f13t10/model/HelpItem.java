@@ -6,18 +6,18 @@ public class HelpItem
 {
 	private String mHelpText;
 	private ArrayList<HelpItem> mSubHelpItems;
-	
+
 	public HelpItem( String text, ArrayList<HelpItem> subItems )
 	{
 		mHelpText = text;
 		mSubHelpItems = subItems;
 	}
-	
+
 	public String getHelpText()
 	{
 		return mHelpText;
 	}
-	
+
 	public ArrayList<HelpItem> getSubHelpItems()
 	{
 		return mSubHelpItems;

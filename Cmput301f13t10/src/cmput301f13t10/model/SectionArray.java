@@ -30,8 +30,6 @@ package cmput301f13t10.model;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 /**

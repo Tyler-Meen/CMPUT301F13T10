@@ -30,7 +30,6 @@ package cmput301f13t10.presenter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectStreamException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -117,7 +116,9 @@ public class ImageMedia implements Media
 
 	/**
 	 * Write the serializable object
-	 * @param out The output stream to write the object to
+	 * 
+	 * @param out
+	 *            The output stream to write the object to
 	 * @throws IOException
 	 */
 	private void writeObject( java.io.ObjectOutputStream out ) throws IOException
@@ -128,7 +129,9 @@ public class ImageMedia implements Media
 
 	/**
 	 * Read the serializable object
-	 * @param in The input stream to read the object from
+	 * 
+	 * @param in
+	 *            The input stream to read the object from
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
@@ -141,7 +144,9 @@ public class ImageMedia implements Media
 
 	/**
 	 * Convert the bitmap image into a base 64 string
-	 * @param image The image to convert
+	 * 
+	 * @param image
+	 *            The image to convert
 	 * @return The base 64 string representation of the string
 	 */
 	private String toBase64( Bitmap image )
@@ -156,7 +161,9 @@ public class ImageMedia implements Media
 
 	/**
 	 * Convert the Base 64 string into a bitmap image
-	 * @param base64String The string to convert
+	 * 
+	 * @param base64String
+	 *            The string to convert
 	 * @return The converted Bitmap image
 	 */
 	private Bitmap toBitmap( String base64String )

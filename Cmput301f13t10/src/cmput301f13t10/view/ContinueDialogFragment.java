@@ -28,8 +28,6 @@
  */
 package cmput301f13t10.view;
 
-import cmput301f13t10.presenter.AppConstants;
-import cs.ualberta.cmput301f13t10.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -40,6 +38,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import cmput301f13t10.presenter.AppConstants;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * A dialog box that contains a list of choices for the user to pick when
@@ -71,13 +71,13 @@ public class ContinueDialogFragment extends DialogFragment
 
 		Button cancelBtn = (Button) view.findViewById( R.id.cancel_continue_button );
 		cancelBtn.setOnClickListener( new CancelButtonListener() );
-		
+
 		Button randomBtn = (Button) view.findViewById( R.id.random_choice_button );
 		if( mView.isRandomSet() )
 			randomBtn.setOnClickListener( new RandomButtonListener() );
 		else
 			randomBtn.setVisibility( Button.INVISIBLE );
-		
+
 		ListView listView = (ListView) view.findViewById( android.R.id.list );
 		listView.setOnItemClickListener( new ListItemListener() );
 
@@ -134,16 +134,16 @@ public class ContinueDialogFragment extends DialogFragment
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @author Steven Gerdes
-	 *
+	 * 
 	 */
 	private class RandomButtonListener implements View.OnClickListener
 	{
 		@Override
-		public void onClick( View v)
+		public void onClick( View v )
 		{
 			mView.changeToRandomSection();
 			dismiss();

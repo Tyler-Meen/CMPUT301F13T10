@@ -91,11 +91,10 @@ public class Searcher
 			else
 				nonCriteriaAdventures.add( currentAdventure );
 		}
-		
+
 		Collections.sort( criteriaAdventures );
-		Collections.sort(  nonCriteriaAdventures );
-		
-		
+		Collections.sort( nonCriteriaAdventures );
+
 		for( ListIterator<AdventureModel> i = nonCriteriaAdventures.listIterator(); i.hasNext(); )
 		{
 			AdventureModel currentAdventure = i.next();
@@ -108,8 +107,10 @@ public class Searcher
 	/**
 	 * Get the value from the adventure for the search type.
 	 * 
-	 * @param searchType The type of search being done.
-	 * @param adventure The adventure to get a value from.
+	 * @param searchType
+	 *            The type of search being done.
+	 * @param adventure
+	 *            The adventure to get a value from.
 	 * @return The value that is being searched on.
 	 */
 	private static String getSearchValue( String searchType, AdventureModel adventure )

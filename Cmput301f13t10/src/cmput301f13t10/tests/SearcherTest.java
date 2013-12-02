@@ -30,7 +30,6 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -115,12 +114,14 @@ public class SearcherTest
 		assertTrue( mResults.get( 1 ).equals( mFullMatch ) || mResults.get( 1 ).equals( mPartMatch ) );
 		assertTrue( mResults.contains( mNoMatch ) );
 	}
-	
+
 	/**
-	 * When there is a blank search, the search results should come back in alphabetical order
+	 * When there is a blank search, the search results should come back in
+	 * alphabetical order
 	 */
 	@Test
-	public void testBlankSearch() {
+	public void testBlankSearch()
+	{
 		try
 		{
 			mResults = Searcher.searchBy( mAdventures, "", Searcher.sTITLE );
@@ -134,8 +135,7 @@ public class SearcherTest
 		assertTrue( mResults.get( 0 ).equals( mPartMatch ) );
 		assertTrue( mResults.get( 1 ).equals( mFullMatch ) );
 		assertTrue( mResults.get( 2 ).equals( mNoMatch ) );
-		
-		
+
 	}
 
 	/**

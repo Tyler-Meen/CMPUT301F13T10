@@ -30,14 +30,13 @@ package cmput301f13t10.view;
 
 import java.util.List;
 
-import cmput301f13t10.presenter.SectionChoice;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import cmput301f13t10.presenter.SectionChoice;
 import cs.ualberta.cmput301f13t10.R;
 
 /**

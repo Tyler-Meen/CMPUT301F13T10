@@ -107,7 +107,7 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 			@Override
 			public void onClick( View randomCheckBox )
 			{
-					mPresenter.setRandomEnabled(((CheckBox) randomCheckBox).isChecked());
+				mPresenter.setRandomEnabled( ( (CheckBox) randomCheckBox ).isChecked() );
 			}
 		} );
 		if( !mPresenter.isAdventureOnline() )

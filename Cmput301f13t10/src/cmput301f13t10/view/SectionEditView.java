@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -45,8 +44,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -235,7 +234,7 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 				view.setFocusable( true );
 				view.setId( i );
 
-				setMediaListener( medias, i, view);
+				setMediaListener( medias, i, view );
 
 				vg.addView( view );
 			}
@@ -247,16 +246,20 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 	}
 
 	/**
-	 * Set up a long click listener for resizing an image if it is an image media.
+	 * Set up a long click listener for resizing an image if it is an image
+	 * media.
 	 * 
-	 * @param medias The list of all media.
-	 * @param i The index of the media to try setting a listener on.
-	 * @param view The view associated with the image media.
+	 * @param medias
+	 *            The list of all media.
+	 * @param i
+	 *            The index of the media to try setting a listener on.
+	 * @param view
+	 *            The view associated with the image media.
 	 */
 	private void setMediaListener( ArrayList<Media> medias, int i, View view )
 	{
 		boolean isImageMedia = true;
-		
+
 		try
 		{
 			@SuppressWarnings("unused")
@@ -266,7 +269,7 @@ public class SectionEditView extends FragmentActivity implements UpdatableView, 
 		{
 			isImageMedia = false;
 		}
-		
+
 		if( isImageMedia )
 		{
 			view.setOnLongClickListener( new OnLongClickListener()

@@ -28,16 +28,10 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.presenter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.view.View;
-import android.view.ViewGroup;
-
 import cmput301f13t10.model.AdventureCache;
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.AnnotationModel;
@@ -70,7 +64,7 @@ public class AnnotationPresenter
 	 * The current adventure that the reader is viewing
 	 */
 	private AdventureModel mCurrentAdventure;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -81,7 +75,7 @@ public class AnnotationPresenter
 	{
 		mView = view;
 	}
-	
+
 	/**
 	 * Set the current annotation that the user is viewing
 	 * 
@@ -94,7 +88,7 @@ public class AnnotationPresenter
 		mCurrentSection.setAnnotation( mCurrentAnnotation );
 		mView.updateAnnotationView();
 	}
-	
+
 	/**
 	 * Get the id of the current annotation
 	 * 
@@ -104,7 +98,7 @@ public class AnnotationPresenter
 	{
 		return mCurrentAnnotation.getId();
 	}
-	
+
 	/**
 	 * Set the current Adventure that the user is viewing
 	 * 
@@ -115,9 +109,9 @@ public class AnnotationPresenter
 	{
 		mCurrentAdventure = AdventureCache.getAdventureCache().getAdventureById( adventure );
 		setCurrentSection( mCurrentAdventure.getSection( sectionId ) );
-		
+
 	}
-	
+
 	/**
 	 * Set the current Section that the user is viewing
 	 * 
@@ -129,7 +123,7 @@ public class AnnotationPresenter
 		mCurrentSection = section;
 		setCurrentAnnotation( mCurrentSection.getAnnotation() );
 	}
-	
+
 	/**
 	 * Takes a bitmap (which is store in the intent) and adds it as a Media to
 	 * the current section.
@@ -143,12 +137,12 @@ public class AnnotationPresenter
 	public void storeImage( AnnotationEditView view, Intent data )
 	{
 		ImageMedia newImageMedia = ImageCreator.storeImage( view, data );
-		if( newImageMedia != null)
+		if( newImageMedia != null )
 		{
 			mCurrentAnnotation.add( newImageMedia );
 		}
 	}
-	
+
 	/**
 	 * This takes a new bitmap and the position of the media in the current
 	 * annotations media list and sets the new bitmap
@@ -162,19 +156,19 @@ public class AnnotationPresenter
 	{
 		ImageCreator.resizeBitmap( newBitmap, mediaPos, mCurrentAnnotation.getMedia() );
 	}
-	
+
 	/**
 	 * Get the media that's in the annotation
-	 *
+	 * 
 	 */
 	public ArrayList<Media> getMedia()
 	{
 		return mCurrentAnnotation.getMedia();
 	}
-	
+
 	public void uploadAnnotation()
 	{
 		DatabaseInteractor.getDatabaseInteractor().addAdventure( mCurrentAdventure );
 	}
-	
+
 }

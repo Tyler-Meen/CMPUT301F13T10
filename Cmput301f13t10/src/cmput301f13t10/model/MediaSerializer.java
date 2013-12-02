@@ -18,7 +18,7 @@ import com.google.gson.JsonSerializer;
  * 
  * @author Maciek Makowski
  * @author Brendan Cowan
- *
+ * 
  * @param <Media>
  */
 public class MediaSerializer<Media> implements JsonSerializer<Media>, JsonDeserializer<Media>
@@ -28,9 +28,9 @@ public class MediaSerializer<Media> implements JsonSerializer<Media>, JsonDeseri
 	public Media deserialize( JsonElement json, Type typeOfT, JsonDeserializationContext context ) throws JsonParseException
 	{
 		JsonObject jsonObject = (JsonObject) json;
-		JsonElement typeName = getElementFromObject(jsonObject, "type");
-		JsonElement data = getElementFromObject(jsonObject, "data");
-		Type type = typeFromElement(typeName);
+		JsonElement typeName = getElementFromObject( jsonObject, "type" );
+		JsonElement data = getElementFromObject( jsonObject, "data" );
+		Type type = typeFromElement( typeName );
 		return context.deserialize( data, type );
 	}
 
@@ -42,29 +42,40 @@ public class MediaSerializer<Media> implements JsonSerializer<Media>, JsonDeseri
 		jsonObject.add( "data", context.serialize( src ) );
 		return jsonObject;
 	}
-	
+
 	/**
 	 * Turn a parameter from a json object into a json element
-	 * @param jsonObject The json object from which to grab the element
-	 * @param name The name of the parameter to pull
+	 * 
+	 * @param jsonObject
+	 *            The json object from which to grab the element
+	 * @param name
+	 *            The name of the parameter to pull
 	 * @return The Converted Json Element
 	 */
-	private JsonElement getElementFromObject( JsonObject jsonObject, String name ) {
+	private JsonElement getElementFromObject( JsonObject jsonObject, String name )
+	{
 		JsonElement elem = jsonObject.get( name );
-		if( elem == null ) throw new JsonParseException("no '" + name + "' member found in what was expected to be an interface wrapper");
+		if( elem == null )
+			throw new JsonParseException( "no '" + name + "' member found in what was expected to be an interface wrapper" );
 		return elem;
 	}
-	
+
 	/**
 	 * Turn a JsonElement into a Type
-	 * @param elem the JsonElement to convert
+	 * 
+	 * @param elem
+	 *            the JsonElement to convert
 	 * @return The converted type
 	 */
-	private Type typeFromElement( JsonElement elem ) {
-		try {
+	private Type typeFromElement( JsonElement elem )
+	{
+		try
+		{
 			return Class.forName( elem.getAsString() );
-		} catch (ClassNotFoundException e) {
-			throw new JsonParseException(e);
+		}
+		catch( ClassNotFoundException e )
+		{
+			throw new JsonParseException( e );
 		}
 	}
 

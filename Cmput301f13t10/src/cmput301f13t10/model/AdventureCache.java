@@ -36,7 +36,6 @@ import java.util.Map;
 
 import android.content.Context;
 import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.view.MainActivity;
 
 /**
  * A store of adventures.
@@ -78,8 +77,9 @@ public class AdventureCache
 			ac = new AdventureCache();
 		return ac;
 	}
-	
-	public void initialize( Context context ) {
+
+	public void initialize( Context context )
+	{
 		FileInputStream fileInputStream = null;
 		try
 		{
@@ -113,6 +113,7 @@ public class AdventureCache
 
 	/**
 	 * Return all adventures in the cache
+	 * 
 	 * @return An arraylist of all adventures in the cache
 	 */
 	public ArrayList<AdventureModel> getAllAdventures()
@@ -130,7 +131,9 @@ public class AdventureCache
 
 	/**
 	 * If the cache contains the adventure with the given local id
-	 * @param adventure The adventure to compare against
+	 * 
+	 * @param adventure
+	 *            The adventure to compare against
 	 * @return True if the cache contains the adventure. False otherwise.
 	 */
 	public boolean containsLocal( AdventureModel adventure )
@@ -140,7 +143,9 @@ public class AdventureCache
 
 	/**
 	 * If the cache contains the adventure with the given remote id
-	 * @param adventure The adventure to compare against
+	 * 
+	 * @param adventure
+	 *            The adventure to compare against
 	 * @return True if the cache contains the adventure. False otherwise.
 	 */
 	public boolean containsRemote( AdventureModel adventure )
@@ -158,7 +163,9 @@ public class AdventureCache
 
 	/**
 	 * Delete an adventure from the cache
-	 * @param adventure The adventure to remove
+	 * 
+	 * @param adventure
+	 *            The adventure to remove
 	 */
 	public void deleteAdventure( AdventureModel adventure )
 	{

@@ -28,7 +28,9 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 

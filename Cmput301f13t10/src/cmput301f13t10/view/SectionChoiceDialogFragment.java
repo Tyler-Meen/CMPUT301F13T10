@@ -28,9 +28,6 @@ either expressed or implied, of the FreeBSD Project.
  */
 package cmput301f13t10.view;
 
-import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.view.DeletePromptDialogFragment.DeleteSectionDialogListener;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,7 +37,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import cmput301f13t10.presenter.AppConstants;
 import cs.ualberta.cmput301f13t10.R;
 
 /**

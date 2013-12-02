@@ -13,7 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 import cmput301f13t10.presenter.AppConstants;
-import cmput301f13t10.presenter.Logger;
 import cmput301f13t10.presenter.Media;
 
 import com.google.gson.Gson;
@@ -22,8 +21,9 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * Command for retrieving a given adventure from the database
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class ESGetCommand extends AsyncTask<Void, Void, Void>
 {
@@ -42,12 +42,12 @@ public class ESGetCommand extends AsyncTask<Void, Void, Void>
 	 * The remote id of the adventure to get
 	 */
 	private int mId;
-	
+
 	/**
 	 * The callback to call after the command has been executed
 	 */
 	private Callback mCallback;
-	
+
 	/**
 	 * The adventure that has been retrieved
 	 */
@@ -55,8 +55,11 @@ public class ESGetCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Constructor
-	 * @param id The remote id of the adventure to get
-	 * @param callback The callback to call after the command has been executed
+	 * 
+	 * @param id
+	 *            The remote id of the adventure to get
+	 * @param callback
+	 *            The callback to call after the command has been executed
 	 */
 	public ESGetCommand( int id, Callback callback )
 	{
@@ -66,9 +69,12 @@ public class ESGetCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Get the Json string from the HttpResponse
-	 * @param response The response to decode
+	 * 
+	 * @param response
+	 *            The response to decode
 	 * @return The Json string
-	 * @throws IOException If reading the response fails
+	 * @throws IOException
+	 *             If reading the response fails
 	 */
 	private String getEntityContent( HttpResponse response ) throws IOException
 	{

@@ -23,8 +23,9 @@ import com.google.gson.GsonBuilder;
 
 /**
  * A command to delete an adventure from the database
+ * 
  * @author Brendan Cowan
- *
+ * 
  */
 public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 {
@@ -42,7 +43,7 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 	 * The remote adventure Id that the command will delete
 	 */
 	private int mId;
-	
+
 	/**
 	 * Callback to be called after the command has been completed
 	 */
@@ -50,8 +51,11 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 
 	/**
 	 * Constructor
-	 * @param id The remote id of the adventure to delete
-	 * @param callback The callback to call after the command has been executed
+	 * 
+	 * @param id
+	 *            The remote id of the adventure to delete
+	 * @param callback
+	 *            The callback to call after the command has been executed
 	 */
 	public ESDeleteCommand( int id, Callback callback )
 	{
@@ -99,7 +103,8 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 
 		try
 		{
-			while( ( output = br.readLine() ) != null ); // just keep reading until we're done
+			while( ( output = br.readLine() ) != null )
+				; // just keep reading until we're done
 		}
 		catch( IOException e )
 		{

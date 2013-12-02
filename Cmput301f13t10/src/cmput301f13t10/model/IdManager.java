@@ -78,7 +78,9 @@ public class IdManager
 
 	/**
 	 * Return the max id in the list of ids.
-	 * @param ids the list of ids to find the max of,
+	 * 
+	 * @param ids
+	 *            the list of ids to find the max of,
 	 * @return
 	 */
 	private Integer max( ArrayList<Integer> ids )
@@ -105,7 +107,7 @@ public class IdManager
 			return mNextId++;
 
 		Integer[] asArray = {};
-		asArray = mReusableIds.toArray(asArray);
+		asArray = mReusableIds.toArray( asArray );
 		Integer ret = asArray[asArray.length - 1];
 		mReusableIds.remove( ret );
 		return ret;

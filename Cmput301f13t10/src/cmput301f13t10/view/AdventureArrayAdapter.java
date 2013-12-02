@@ -29,18 +29,17 @@
 package cmput301f13t10.view;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cmput301f13t10.model.AdventureModel;
-import cs.ualberta.cmput301f13t10.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import cmput301f13t10.model.AdventureModel;
+import cs.ualberta.cmput301f13t10.R;
 
 /**
  * Adapter for the library
@@ -82,9 +81,7 @@ public class AdventureArrayAdapter extends ArrayAdapter<AdventureModel>
 		View rowView = inflater.inflate( R.layout.list_item_main_text_delete_button, parent, false );
 		TextView textView = (TextView) rowView.findViewById( R.id.main_text );
 		textView.setText( mAdventure.get( position ).getTitle() );
-		
-		
-		
+
 		ImageButton cancelButton = (ImageButton) rowView.findViewById( R.id.delete_button );
 		cancelButton.setFocusable( false );
 		cancelButton.setTag( mAdventure.get( position ) );
