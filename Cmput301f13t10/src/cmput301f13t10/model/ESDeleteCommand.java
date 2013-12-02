@@ -108,7 +108,7 @@ public class ESDeleteCommand extends AsyncTask<Void, Void, Void>
 
 		// then delete the id
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
-		String query = "{\"script\" : \"ctx._source.mIds.remove(" + mId + ")\"}";
+		String query = "{\"script\" : \"ctx._source.mIds.remove(tag)\", \"params\":{\"tag\":\"" + mId + "\"} }";
 		StringEntity stringentity = null;
 		try
 		{

@@ -131,7 +131,7 @@ public class ESGetIdsCommand extends AsyncTask<Void, Void, Void>
 	 */
 	private void deleteId( int id ) {
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
-		String query = "{\"script\" : \"ctx._source.mIds.remove(" + id + ")\"}";
+		String query = "{\"script\" : \"ctx._source.mIds.remove(tag)\", \"params\":{\"tag\":\"" + id + "\"}";
 		StringEntity stringentity = null;
 		try
 		{

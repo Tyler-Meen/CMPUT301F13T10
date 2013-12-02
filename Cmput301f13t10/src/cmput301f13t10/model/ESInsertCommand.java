@@ -96,7 +96,7 @@ public class ESInsertCommand extends AsyncTask<Void, Void, Void>
 
 		// second one for the id
 		HttpPost updateRequest = new HttpPost( AppConstants.ES_URL + AppConstants.ES_IDS + "/_update" );
-		String query = "{\"script\" : \"ctx._source.mIds += " + mAdventure.getRemoteId() + "\"}";
+		String query = "{\"script\" : \"ctx._source.mIds += tag\", \"params\": { \"tag\":\"" + mAdventure.getRemoteId() + "\" } }";
 		StringEntity stringentity = null;
 		try
 		{
