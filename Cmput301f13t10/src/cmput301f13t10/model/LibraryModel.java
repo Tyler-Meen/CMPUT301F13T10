@@ -26,22 +26,18 @@ The views and conclusions contained in the software and documentation are those
 of the authors and should not be interpreted as representing official policies, 
 either expressed or implied, of the FreeBSD Project.
  */
-package cmput301f13t10.presenter;
+package cmput301f13t10.model;
 
-import cmput301f13t10.model.AdventureCache;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import cmput301f13t10.model.AdventureModel;
-import cmput301f13t10.model.DatabaseInteractor;
-import cmput301f13t10.model.InvalidSearchTypeException;
 import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
-import cmput301f13t10.model.FileInteractor;
+import cmput301f13t10.presenter.Searcher;
 
 /**
  * Data associated with the library's in the app.
