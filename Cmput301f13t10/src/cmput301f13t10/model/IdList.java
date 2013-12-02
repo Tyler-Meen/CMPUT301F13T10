@@ -1,5 +1,7 @@
 package cmput301f13t10.model;
 
+import java.util.ArrayList;
+
 /**
  * A list of ids.
  * @author Brendan Cowan
@@ -16,9 +18,12 @@ public class IdList
 	 * Constructor
 	 * @param ids the ids to put into the list
 	 */
-	public IdList( int[] ids )
+	public IdList( String[] ids )
 	{
-		mIds = ids;
+		for( int i = 0; i < ids.length; i++ )
+		{
+			mIds[i] = Integer.valueOf( ids[i] );
+		}
 	}
 
 	/**

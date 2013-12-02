@@ -132,10 +132,6 @@ public class IdFactory
 	 */
 	public void assignLocalId( AdventureModel adventure )
 	{
-		for( SectionModel section : adventure.getSections() )
-		{
-			section.setId( mSectionIdManager.getNewId() );
-		}
 		adventure.setLocalId( mAdventureIdManager.getNewId() );
 
 	}
