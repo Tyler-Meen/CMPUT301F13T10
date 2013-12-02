@@ -29,12 +29,18 @@ either expressed or implied, of the FreeBSD Project.
 package cmput301f13t10.presenter;
 
 import cmput301f13t10.model.AdventureCache;
+
 import java.util.ArrayList;
+import java.util.Random;
+
 import cmput301f13t10.model.AdventureModel;
 import cmput301f13t10.model.DatabaseInteractor;
 import cmput301f13t10.model.InvalidSearchTypeException;
 import android.util.Log;
+
 import java.io.FileOutputStream;
+import java.io.Serializable;
+
 import cmput301f13t10.model.FileInteractor;
 
 /**
@@ -47,7 +53,8 @@ public class LibraryModel
 {
 	private AdventureCache mCache;
 	private ArrayList<AdventureModel> mAdventureList;
-
+	private int mCurrentAdventureId;
+	
 	public LibraryModel()
 	{
 		mAdventureList = new ArrayList<AdventureModel>();
@@ -129,5 +136,26 @@ public class LibraryModel
 	public void saveData( FileOutputStream fileOutputStream )
 	{
 		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
+	}
+
+	public void setRandomCurrentAdventure()
+	{
+		Random rand = new Random();
+		setCurrentAdventure(rand.nextInt( mAdventureList.size() ));
+	}
+
+	public void setCurrentAdventure( int localId )
+	{
+		mCurrentAdventureId = mAdventureList.get( localId ).getLocalId();;
+	}
+
+	public AdventureModel getCurrentAdventure()
+	{
+		return mAdventureList.get( mCurrentAdventureId );
+	}
+
+	public int getCurrentAdventureId()
+	{
+		return mCurrentAdventureId;
 	}
 }

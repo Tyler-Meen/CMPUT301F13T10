@@ -1,6 +1,7 @@
 package cmput301f13t10.presenter;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.util.Log;
@@ -73,6 +74,26 @@ public class LibraryPresenter
 	public void deleteAdventure( int localId )
 	{		
 		mLibraryModel.deleteAdventure( localId );
+	}
+
+	public void setRandomCurrentAdventure()
+	{
+		mLibraryModel.setRandomCurrentAdventure();
+	}
+
+	public void setCurrentAdventure( int localId )
+	{
+		mLibraryModel.setCurrentAdventure( localId );
+	}
+
+	public AdventureModel getCurrentAdventure()
+	{
+		return mLibraryModel.getCurrentAdventure();
+	}
+
+	public int getCurrentAdventureId()
+	{
+		return mLibraryModel.getCurrentAdventureId();
 	}
 
 	

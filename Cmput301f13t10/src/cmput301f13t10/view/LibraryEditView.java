@@ -68,7 +68,9 @@ import cs.ualberta.cmput301f13t10.R;
 public class LibraryEditView extends Activity implements Serializable, UpdatableView, SearchView.OnQueryTextListener, DeletePromptDialogFragment.DeleteSectionDialogListener
 {
 
-
+	/**
+	 * The presenter of the LibraryModel
+	 */
 	private LibraryPresenter mPresenter;
 	
 	/**
@@ -94,10 +96,9 @@ public class LibraryEditView extends Activity implements Serializable, Updatable
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
 	{
+		super.onCreate( savedInstanceState );
 
 		mPresenter = new LibraryPresenter(this);
-		
-		super.onCreate( savedInstanceState );
 
 		setContentView( R.layout.library_edit );
 
