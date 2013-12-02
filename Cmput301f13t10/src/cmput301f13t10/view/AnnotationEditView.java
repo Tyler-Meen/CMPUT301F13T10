@@ -243,7 +243,7 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 				View view = medias.get( i ).toView( this.getContext() );
 				view.setFocusable( true );
 				view.setId( i );
-				setMediaListener( medias, i );
+				setMediaListener( medias, i, view );
 				
 				vg.addView( view );
 			}
@@ -259,10 +259,10 @@ public class AnnotationEditView extends FragmentActivity implements ChangeImageS
 	 * 
 	 * @param medias The list of all media.
 	 * @param i The index of the media to try setting a listener on.
+	 * @param view The view associated with the image media.
 	 */
-	private void setMediaListener( ArrayList<Media> medias, int i )
+	private void setMediaListener( ArrayList<Media> medias, int i, View view )
 	{
-		View view = medias.get( i ).toView( this.getContext() );
 		boolean isImageMedia = true;
 		
 		try
