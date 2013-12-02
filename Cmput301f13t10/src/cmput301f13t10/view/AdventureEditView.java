@@ -172,6 +172,9 @@ public class AdventureEditView extends Activity implements DeletePromptDialogFra
 		listView.setAdapter( adapter );
 
 		listView.setOnItemClickListener( mSectionClickedHandler );
+		
+		CheckBox randomEnabled = (CheckBox) findViewById( R.id.allow_rand_choices );
+		randomEnabled.setChecked( mPresenter.isRandomEnabled() );
 	}
 
 	@Override
