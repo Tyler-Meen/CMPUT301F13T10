@@ -285,6 +285,7 @@ public class AdventureModel implements Serializable
 		out.writeInt( mRemoteId );
 		out.writeInt( mLocalId );
 		out.writeBoolean( mToSave );
+		out.writeBoolean( mIsRandomAvailable );
 	}
 
 	/**
@@ -303,6 +304,7 @@ public class AdventureModel implements Serializable
 		mRemoteId = in.readInt();
 		mLocalId = in.readInt();
 		mToSave = in.readBoolean();
+		mIsRandomAvailable = in.readBoolean();
 	}
 
 	/**
