@@ -100,8 +100,8 @@ public class LibraryView extends Activity implements Serializable, SearchView.On
 			{
 				try
 				{
-					mPresenter.setRandomCurrentAdventure();
-					startSectionReadView();
+					if( mPresenter.setRandomCurrentAdventure() )
+						startSectionReadView();
 				}
 				catch( IllegalArgumentException e )
 				{

@@ -73,9 +73,9 @@ public class LibraryPresenter
 		mLibraryModel.deleteAdventure( localId );
 	}
 
-	public void setRandomCurrentAdventure()
+	public boolean setRandomCurrentAdventure()
 	{
-		mLibraryModel.setRandomCurrentAdventure();
+		return mLibraryModel.setRandomCurrentAdventure();
 	}
 
 	public void setCurrentAdventure( int localId )

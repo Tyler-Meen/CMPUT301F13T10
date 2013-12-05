@@ -130,22 +130,31 @@ public class LibraryModel
 		FileInteractor.saveAdventures( AdventureCache.getAdventureCache().getAllAdventures(), fileOutputStream );
 	}
 
-	public void setRandomCurrentAdventure()
+	public boolean setRandomCurrentAdventure()
 	{
+		if( mAdventureList.isEmpty() )
+			return false;
 		Random rand = new Random();
-		setCurrentAdventure( rand.nextInt( mAdventureList.size() ) );
+		setCurrentAdventureByIndex( rand.nextInt( mAdventureList.size() ) );
+		return true;
 	}
 
-	public void setCurrentAdventure( int localId )
+	private void setCurrentAdventureByIndex( int index )
+	{
+		mCurrentAdventureId = mAdventureList.get( index ).getLocalId();
+	}
+
+	public boolean setCurrentAdventure( int localId )
 	{
 		for( int i = 0; i < mAdventureList.size(); i++ )
 		{
 			if( mAdventureList.get( i ).getLocalId() == localId )
 			{
 				mCurrentAdventureId = mAdventureList.get( i ).getLocalId();
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public AdventureModel getCurrentAdventure()
